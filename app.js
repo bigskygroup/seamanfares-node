@@ -5,6 +5,7 @@ const logger = require('morgan');
 const createError = require('http-errors');
 const indexRouter = require('./src/server/routes/index');
 const usersRouter = require('./src/server/routes/users');
+var port = process.env.PORT || '3070'
 
 // app.use(logger('dev'));
 app.use(express.json());
@@ -34,6 +35,6 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-
+app.listen(port, console.log(`app is listening on ${port}`))
 
 module.exports = app;
