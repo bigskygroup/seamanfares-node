@@ -10,19 +10,19 @@ const usersRouter = require('./src/server/routes/users');
 var port = process.env.PORT || '3070'
 
 // app.use(logger('dev'));
-app.use(helmet({
-	dnsPrefetchControl: false,
-	hsts: false,
-}))
-app.use(helmet.contentSecurityPolicy({
-	directives: {
-		scriptSrc: ["'self'", 'www.google-analytics.com', 'ajax.googleapis.com', 'www.googletagmanager.com' ]
-	}
-}))
+// app.use(helmet({
+// 	dnsPrefetchControl: false,
+// 	hsts: false,
+// }))
+// app.use(helmet.contentSecurityPolicy({
+// 	directives: {
+// 		scriptSrc: ["'self'", 'www.google-analytics.com', 'ajax.googleapis.com', 'www.googletagmanager.com' ]
+// 	}
+// }))
+app.use("/public", express.static(path.join(__dirname , "public") ))
 app.use(favicon(path.join(__dirname, 'public', "images", 'favicon.ico')))
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, 'public')));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
