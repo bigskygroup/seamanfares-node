@@ -2,26 +2,38 @@ const express = require('express')
 const app = express()
 const path = require('path');
 const logger = require('morgan');
+const helmet = require('helmet')
+const favicon = require('serve-favicon');
 const createError = require('http-errors');
 const indexRouter = require('./src/server/routes/index');
 const usersRouter = require('./src/server/routes/users');
 var port = process.env.PORT || '3070'
 
 // app.use(logger('dev'));
+app.use(helmet({
+	dnsPrefetchControl: false,
+	hsts: false,
+}))
+app.use(helmet.contentSecurityPolicy({
+	directives: {
+		scriptSrc: ["'self'", 'www.google-analytics.com', 'ajax.googleapis.com', 'www.googletagmanager.com' ]
+	}
+}))
+app.use(favicon(path.join(__dirname, 'public', "images", 'favicon.ico')))
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
-
-// view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+
+//routes
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  next(createError(404));
+	next(createError(404));
 });
 
 // error handler
@@ -35,6 +47,13 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-app.listen(port, console.log(`app is listening on ${port}`))
 
+
+
+
+
+
+
+
+app.listen(port, console.log(`skytours-node app is listening on ${port}`))
 module.exports = app;
