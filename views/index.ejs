@@ -1,15 +1,9 @@
  <%- include('include/head') %>
- 	<div class="container">
-  <div class="row">
-    <div class="col-sm">
-      One of three columns
-    </div>
-    <div class="col-sm">
-      One of three columns
-    </div>
-    <div class="col-sm">
-      One of three columns
-    </div>
-  </div>
-</div>
-  <%- include('include/footer') %>
+
+<div style="margin:100px auto">welcome to <%=title%></div>
+
+<% if(react) {%>
+  <%-react %>
+<% } %>
+
+<%- include('include/footer') %>
