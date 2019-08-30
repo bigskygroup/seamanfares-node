@@ -1,5 +1,0 @@
-# dependencies
-/node_modules
-/build
-/build/!index.ejs
-src/client/node_modules
