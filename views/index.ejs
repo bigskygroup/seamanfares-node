@@ -1,9 +1,12 @@
- <%- include('include/head') %>
+<%- include('include/head') %>
+<script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+<script type="text/javascript" src="https://unpkg.com/@babel/standalone@7.5.5/babel.min.js"></script>
 
 <div style="margin:100px auto">welcome to <%=title%></div>
-
-<% if(react) {%>
-  <%-react %>
-<% } %>
+<div id="header">
+	<% if(react) {%> <%-react %> <% } %>
+</div>
+<script type="text/babel" src="/public/react/index.js"></script>
 
 <%- include('include/footer') %>
