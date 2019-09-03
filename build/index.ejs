@@ -13,8 +13,8 @@
 	<body>
 		<noscript>You need to enable JavaScript to run this app.</noscript>
 		<div id="root">
-				<%if(react){%> <%-react%> <%}%>
-				</div>
+			<%if(react){%> <%-react%> <%}%>
+		</div>
 		<div id="footer-ssr"><%- include('footer') %></div>
 		<script>
 			!(function(l) {
@@ -96,6 +96,7 @@
 				a()
 			})([])</script
 		><script src="/static/js/2.655a356b.chunk.js"></script
-		><script src="/static/js/main.9aa58994.chunk.js"></script>
-	<%if(custom){%> <%- custom %> <%}%> </body>
+		><script src="/static/js/main.712cac11.chunk.js"></script
+		><% custom ? custom : '' %>
+	</body>
 </html>

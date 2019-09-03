@@ -13,7 +13,7 @@ require("babel-register")({
 
 
 
-const Component = require("../../client/component.js")
+const Component = require("../../client/index.js")
 
 /* GET users listing. */
 app.get("/en/about.htm", (req, res) => {

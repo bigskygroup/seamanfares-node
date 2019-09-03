@@ -9,15 +9,22 @@ require("babel-register")({
 	presets: ["react"]
 })
 
-const Component = require("../../client/component.js")
+const Component = require("../../client/index.js")
 
-app.get("/", (req, res, next) => {
+app.get( "*" ,(req, res, next) => {
+	let lang = ""
+	if(/[A-Za-z]{2}\/{0,1}/.test(req.params["0"])) {
+		lang = req.params["0"].match(/\w{2}/)[0]
+	}
 	const reactHTML = ReactDOMServer.renderToString(Component())
 	res.render("index", {
-		react: "reactHTML",
+		react: reactHTML,
+		lang: lang , 
 		//if there is a variable defined in ejs, it must be supplied, although with null:
 		custom: null
 	})
+	
+	next()
 })
 
 module.exports = app

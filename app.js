@@ -11,7 +11,7 @@ const indexRouter = require("./src/server/routes/index")
 const staticRouter = require("./src/server/routes/static")
 var port = process.env.PORT || "3070"
 
-// app.use(logger('dev'));
+
 // app.use(helmet({
 // 	dnsPrefetchControl: false,
 // 	hsts: false,
@@ -21,19 +21,18 @@ var port = process.env.PORT || "3070"
 // 		scriptSrc: ["'self'", 'www.google-analytics.com', 'ajax.googleapis.com', 'www.googletagmanager.com' ]
 // 	}
 // }))
-// app.use(express.json())
-// app.use(express.urlencoded({ extended: false }))
-// app.use("/build", express.static(path.join(__dirname , "build") ))
+
 app.use(express.static(path.join(__dirname, "build")))
-// app.use("/public", express.static(path.join(__dirname , "public") ))
 app.use(favicon(path.join(__dirname, "build", "favicon.ico")))
+
+// logger defined after static to avoid static files logged:
+// app.use(logger('dev'));
 
 //template engine set-up
 app.set("views", path.join(__dirname, "build"))
 app.set("view engine", "ejs")
 
-// need to run block below, first time only. to create index/ejs inside "build"
-
+// need to run this block first time only. to create index.ejs inside "build"
 const buidDirectoryFiles = fs.readdirSync("build", "utf8")
 if (!buidDirectoryFiles.includes("index.ejs")) {
 	fs.readFile(path.join("build", "index.html"), "utf8", (err, data) => {
@@ -47,7 +46,7 @@ if (!buidDirectoryFiles.includes("index.ejs")) {
 				`
 			)
 			.replace(`<div id="footer-ssr">`, `<div id="footer-ssr"><%- include('footer') %>`)
-			.replace(`</body>`, `<%if(custom){%> <%- custom %> <%}%> </body>`)
+			.replace(`</body>`, `<% custom ? custom : '' %> </body>`)
 
 		fs.writeFile(path.join("build", "index.ejs"), content, err => {
 			if (err) console.log(err)
@@ -64,8 +63,8 @@ if (!buidDirectoryFiles.includes("index.ejs")) {
 }
 
 //routes
-app.use("/", staticRouter)
-app.use("/", indexRouter)
+// app.use("/", staticRouter)
+app.use(["/", /{A-Za-z}{2}/], indexRouter)
 
 // catch 404 and forward to error handler
 // app.use(function(req, res, next) {
