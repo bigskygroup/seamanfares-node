@@ -1,0 +1,25 @@
+ const STATIC_PAGES = [
+    'about',
+    'airhelp_plus',
+    'airlinelist',
+    'privacy',
+    'baggage_laws',
+    'bancprotect',
+    'canxprotect',
+    'children_traveling_alone',
+    'contact',
+    'cookies_policy',
+    'fraud',
+    'gdpr',
+    'luggage_fees',
+    'luggage_allowance',
+    'mealrq',
+    'missed',
+    'seating',
+    'sitemap',
+    'standard',
+    'gold',
+    'terms',
+    'rules'
+]
+module.exports = {STATIC_PAGES}

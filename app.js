@@ -1,14 +1,14 @@
 const express = require("express")
 const app = express()
-const React = require("react")
-const ReactDOMServer = require("react-dom/server")
 const path = require("path")
-const logger = require("morgan")
-const helmet = require("helmet")
+const fs = require("fs")
+const util = require("util")
+// const logger = require("morgan")
+// const helmet = require("helmet")
 const favicon = require("serve-favicon")
 const createError = require("http-errors")
 const indexRouter = require("./src/server/routes/index")
-const usersRouter = require("./src/server/routes/users")
+const staticRouter = require("./src/server/routes/static")
 var port = process.env.PORT || "3070"
 
 // app.use(logger('dev'));
@@ -26,14 +26,46 @@ var port = process.env.PORT || "3070"
 // app.use("/build", express.static(path.join(__dirname , "build") ))
 app.use(express.static(path.join(__dirname, "build")))
 // app.use("/public", express.static(path.join(__dirname , "public") ))
-app.use(favicon(path.join(__dirname, "public", "images", "favicon.ico")))
+app.use(favicon(path.join(__dirname, "build", "favicon.ico")))
 
-app.set("views", path.join(__dirname, "views"))
+//template engine set-up
+app.set("views", path.join(__dirname, "build"))
 app.set("view engine", "ejs")
 
+// need to run block below, first time only. to create index/ejs inside "build"
+
+const buidDirectoryFiles = fs.readdirSync("build", "utf8")
+if (!buidDirectoryFiles.includes("index.ejs")) {
+	fs.readFile(path.join("build", "index.html"), "utf8", (err, data) => {
+		if (err) console.log("Error reading /build/index.html: " + err)
+		let content = data
+		content = content
+			.replace(
+				`<div id="root">`,
+				`<div id="root">
+				<%if(react){%> <%-react%> <%}%>
+				`
+			)
+			.replace(`<div id="footer-ssr">`, `<div id="footer-ssr"><%- include('footer') %>`)
+			.replace(`</body>`, `<%if(custom){%> <%- custom %> <%}%> </body>`)
+
+		fs.writeFile(path.join("build", "index.ejs"), content, err => {
+			if (err) console.log(err)
+			//must automatically rename index.html so it wouldn't conflict with routing at "/"
+			fs.rename(
+				path.join("build", "index.html"),
+				path.join("build", "indexDotHTML already used for indexDotEJS"),
+				err => {
+					if (err) console.log(err)
+				}
+			)
+		})
+	})
+}
+
 //routes
+app.use("/", staticRouter)
 app.use("/", indexRouter)
-app.use("/users", usersRouter)
 
 // catch 404 and forward to error handler
 // app.use(function(req, res, next) {
@@ -51,5 +83,5 @@ app.use(function(err, req, res, next) {
 	res.render("error")
 })
 
-app.listen(port, console.log(`skytours-node app is listening on ${port}`))
+app.listen(port, console.log(`skytours-node app is listening on ${port} at ${new Date().toLocaleString()}`))
 module.exports = app

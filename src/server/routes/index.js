@@ -11,26 +11,13 @@ require("babel-register")({
 
 const Component = require("../../client/component.js")
 
-app.get("/", function(req, res, next) {
+app.get("/", (req, res, next) => {
 	const reactHTML = ReactDOMServer.renderToString(Component())
-	console.log(reactHTML)
-	res.render(path.join(__dirname, "..", "..", "..", "build", "index.ejs"), {
-		title: "Express",
-		react: reactHTML
+	res.render("index", {
+		react: "reactHTML",
+		//if there is a variable defined in ejs, it must be supplied, although with null:
+		custom: null
 	})
 })
 
-// app.get("/", (req, res) => {
-// 	res.sendFile(path.join(__dirname, "..", "..", "..", "build", "index.html"))
-// })
-
 module.exports = app
-
-/*
-sky-tours.com >> React app  ???
-
-static pages: about us
-
-
-
-*/

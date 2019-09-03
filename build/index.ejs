@@ -6,15 +6,16 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no" />
 		<meta name="theme-color" content="#000000" />
 		<link rel="manifest" href="/manifest.json" />
-		<title><%= title %></title>
+		<title>Sky-tours</title>
 		<link href="/static/css/2.7d71889c.chunk.css" rel="stylesheet" />
-		<link href="/static/css/main.10a72509.chunk.css" rel="stylesheet" />
+		<link href="/static/css/main.da31aa5c.chunk.css" rel="stylesheet" />
 	</head>
 	<body>
 		<noscript>You need to enable JavaScript to run this app.</noscript>
 		<div id="root">
-			<%if(react){%> <%-react%> <%}%>
-		</div>
+				<%if(react){%> <%-react%> <%}%>
+				</div>
+		<div id="footer-ssr"><%- include('footer') %></div>
 		<script>
 			!(function(l) {
 				function e(e) {
@@ -94,7 +95,7 @@
 				var s = n
 				a()
 			})([])</script
-		><script src="/static/js/2.cbe2947c.chunk.js"></script
-		><script src="/static/js/main.1f0f458f.chunk.js"></script>
-	</body>
+		><script src="/static/js/2.655a356b.chunk.js"></script
+		><script src="/static/js/main.9aa58994.chunk.js"></script>
+	<%if(custom){%> <%- custom %> <%}%> </body>
 </html>

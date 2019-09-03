@@ -1,3 +1,5 @@
 # dependencies
 /node_modules
-/build/!index.ejs
+/build/locales
+/build/images
+
