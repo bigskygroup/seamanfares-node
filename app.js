@@ -41,8 +41,7 @@ if (!buidDirectoryFiles.includes("index.ejs")) {
 		content = content
 			.replace(
 				`<div id="root">`,
-				`<div id="root">
-				<%if(react){%> <%-react%> <%}%>
+				`<div id="root" <%- minHeight  ? 'style="min-height:' + minHeight + ' " ' :  '' %> >
 				`
 			)
 			.replace(`<div id="footer-ssr">`, `<div id="footer-ssr"><%- include('footer') %>`)
