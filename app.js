@@ -1,16 +1,13 @@
 const express = require("express")
 const app = express()
-const path = require("path")
+const { join } = require("path")
 const fs = require("fs")
-const util = require("util")
 // const logger = require("morgan")
 // const helmet = require("helmet")
 const favicon = require("serve-favicon")
 const createError = require("http-errors")
-const indexRouter = require("./src/server/routes/index")
-const staticRouter = require("./src/server/routes/static")
+const { createIndexEJS } = require("./functions")
 var port = process.env.PORT || "3070"
-
 
 // app.use(helmet({
 // 	dnsPrefetchControl: false,
@@ -22,48 +19,21 @@ var port = process.env.PORT || "3070"
 // 	}
 // }))
 
-app.use(express.static(path.join(__dirname, "build")))
-app.use(favicon(path.join(__dirname, "build", "favicon.ico")))
+app.use(express.static(join(__dirname, "build")))
+app.use(favicon(join(__dirname, "build", "favicon.ico")))
 
 // logger defined after static to avoid static files logged:
 // app.use(logger('dev'));
 
 //template engine set-up
-app.set("views", path.join(__dirname, "build"))
+app.set("views", join(__dirname, "build"))
 app.set("view engine", "ejs")
 
-// need to run this block first time only. to create index.ejs inside "build"
-const buidDirectoryFiles = fs.readdirSync("build", "utf8")
-if (!buidDirectoryFiles.includes("index.ejs")) {
-	fs.readFile(path.join("build", "index.html"), "utf8", (err, data) => {
-		if (err) console.log("Error reading /build/index.html: " + err)
-		let content = data
-		content = content
-			.replace(
-				`<div id="root">`,
-				`<div id="root" <%- minHeight  ? 'style="min-height:' + minHeight + ' " ' :  '' %> >
-				`
-			)
-			.replace(`<div id="footer-ssr">`, `<div id="footer-ssr"><%- include('footer') %>`)
-			.replace(`</body>`, `<% custom ? custom : '' %> </body>`)
-
-		fs.writeFile(path.join("build", "index.ejs"), content, err => {
-			if (err) console.log(err)
-			//must automatically rename index.html so it wouldn't conflict with routing at "/"
-			fs.rename(
-				path.join("build", "index.html"),
-				path.join("build", "indexDotHTML already used for indexDotEJS"),
-				err => {
-					if (err) console.log(err)
-				}
-			)
-		})
-	})
-}
+// createIndexEJS(join(__dirname, "build"))
 
 //routes
-// app.use("/", staticRouter)
-app.use(["/", /{A-Za-z}{2}/], indexRouter)
+app.use(/^\/{0,1}[A-Za-z]{2}\/[A-Za-z]{2,22}\.htm\/{0,1}$/ , require("./src/server/static"))
+app.use(["/", /[A-Za-z]{2}/], require("./src/server/index"))
 
 // catch 404 and forward to error handler
 // app.use(function(req, res, next) {
