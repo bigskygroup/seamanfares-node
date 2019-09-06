@@ -41,4 +41,10 @@ f.createIndexEJS = folder => {
 f.readContent = location => util.promisify(fs.readFile)(location, "utf8")
 f.readFolderFiles = location => util.promisify(fs.readdir)(location, "utf8")
 
+f.extractToRegex = arr => {
+	return key => {
+		return arr.map(item=> new RegExp(`^\/[A-Za-z]{2}\/${item[key].trim()}-[^<>\.]*.html\/{0,1}$` , "i"))
+	}
+} 
+
 module.exports = f
