@@ -5,7 +5,6 @@ const fs = require("fs")
 // const logger = require("morgan")
 // const helmet = require("helmet")
 const favicon = require("serve-favicon")
-const createError = require("http-errors")
 const { createIndexEJS } = require("./functions")
 var port = process.env.PORT || "3070"
 
@@ -32,23 +31,14 @@ app.set("view engine", "ejs")
 // createIndexEJS(join(__dirname, "build"))
 
 //routes
-app.use(/^\/{0,1}[A-Za-z]{2}\/[A-Za-z]{2,22}\.htm\/{0,1}$/ , require("./src/server/static"))
-app.use(["/", /[A-Za-z]{2}/], require("./src/server/index"))
 
-// catch 404 and forward to error handler
-// app.use(function(req, res, next) {
-// 	next(createError(404))
-// })
+app.use(/^\/[A-Za-z]{2}\/[A-Za-z_]{2,22}\.htm\/{0,1}$/, require("./src/server/static"))
+app.use([/^\/$/, /^\/[A-Za-z]{2}\/{0,1}$/], require("./src/server/index"))
 
-// error handler
-app.use(function(err, req, res, next) {
-	// set locals, only providing error in development
-	res.locals.message = err.message
-	res.locals.error = req.app.get("env") === "development" ? err : {}
-
-	// render the error page
-	res.status(err.status || 500)
-	res.render("error")
+//handeling wrong requests at the end
+app.use((req, res) => {
+	res.status(404)
+	res.send("<h1 style='width:50%; margin: 20px 20px;'>No page found for your request! </h1>")
 })
 
 app.listen(port, console.log(`skytours-node app is listening on ${port} at ${new Date().toLocaleString()}`))

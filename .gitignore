@@ -1,4 +1,8 @@
 # dependencies
 /node_modules
 /build/locales/**
+/data/bigfile.js
+/data/airport/**
+/data/cities.js
+
 

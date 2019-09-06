@@ -39,5 +39,6 @@ f.createIndexEJS = folder => {
 
 //pass paths as if you are in root folder
 f.readContent = location => util.promisify(fs.readFile)(location, "utf8")
+f.readFolderFiles = location => util.promisify(fs.readdir)(location, "utf8")
 
 module.exports = f
