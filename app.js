@@ -32,9 +32,9 @@ app.set("view engine", "ejs")
 // createIndexEJS(join(__dirname, "build"))
 
 const airportsArray = extractToRegex(airports)
-console.log(airportsArray("code")[0])
+
 //routes
-app.use(airportsArray("code"), (req,res) => res.send("bcn"))
+app.use(airportsArray("code"), require("./src/server/seo") )
 app.use(/^\/[A-Za-z]{2}\/[A-Za-z_]{2,22}\.htm\/{0,1}$/, require("./src/server/static"))
 app.use([/^\/$/, /^\/[A-Za-z]{2}\/{0,1}$/], require("./src/server/index"))
 
