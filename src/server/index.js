@@ -11,9 +11,8 @@ const app = express.Router()
 
 // const Component = require("../../client/index.js")
 
-app.get("*", (req, res, next) => {
+app.get("*", (req, res, next) => { 
 	let lang = ""
-
 	if (/^\/{0,1}[A-Za-z]{2}\/{0,1}$/.test(req.params["0"])) {
 		lang = req.params["0"].match(/\w{2}/)[0]
 	}
