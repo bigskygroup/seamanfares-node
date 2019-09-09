@@ -2,14 +2,15 @@
   <div class="container">
     <div class="row">
       <div class="col-md-3 col-sm-6 col-12">
-        <h4 class="ellipsis">Quick Links</h4>
+
+        <h4 class="ellipsis"><%= t("QUICK_LINKS") %></h4>
         <div class="margin-t10 padding0">
           <a
             class="font14"
             target="_blank"
             rel="noopener noreferrer"
             href="/<%= lang ? lang : 'en' %>/privacy.htm">
-            Privacy Policy
+            <%= t("PRIVACY") %>
           </a>
         </div>
         <div class="margin-t10 padding0">
@@ -18,7 +19,7 @@
             target="_blank"
             rel="noopener noreferrer"
             href="/<%= lang ? lang : 'en' %>/cookies_policy.htm">
-            Cookies Policy
+            <%= t("COOKIES_POLICY_TEXT_LINK") %>
           </a>
         </div>
         <div class="margin-t10 padding0">
@@ -27,7 +28,7 @@
             target="_blank"
             rel="noopener noreferrer"
             href="/<%= lang ? lang : 'en' %>/terms.htm">
-            Terms and Conditions
+            <%= t("TERMS_CONDITIONS") %>
           </a>
         </div>
         <div class="margin-t10 padding0">
@@ -36,7 +37,7 @@
             target="_blank"
             rel="noopener noreferrer"
             href="/<%= lang ? lang : 'en' %>/about.htm">
-            About Us
+            <%= t("ABOUT_US") %>
           </a>
         </div>
         <div class="margin-t10 padding0">
@@ -45,7 +46,7 @@
             target="_blank"
             rel="noopener noreferrer"
             href="/<%= lang ? lang : 'en' %>/gdpr.htm">
-            Data Protection Policy
+            <%= t("DATA_PROTECTION_LINK") %>
           </a>
         </div>
         <div class="margin-t10 padding0">
@@ -63,7 +64,7 @@
             target="_blank"
             rel="noopener noreferrer"
             href="https://blog.sky-tours.com/">
-            Blog
+            <%= t("SKYTOURS_BLOG") %>
           </a>
         </div>
         <div class="margin-t10 padding0">
@@ -72,7 +73,7 @@
             target="_blank"
             rel="noopener noreferrer"
             href="https://support.sky-tours.com/">
-            FAQ
+            <%= t("FAQ") %>
           </a>
         </div>
       </div>
@@ -84,7 +85,7 @@
             target="_blank"
             rel="noopener noreferrer"
             href="/<%= lang ? lang : 'en' %>/rules.htm">
-            Airlines Tariff Rules and Regulations
+            <%= t("RULES_REGULATIONS") %>
           </a>
         </div>
         <div class="margin-t10 padding0">
@@ -93,7 +94,7 @@
             target="_blank"
             rel="noopener noreferrer"
             href="/<%= lang ? lang : 'en' %>/canxprotect.htm">
-            Cancellation Protection
+            <%= t("CANCELLATION") %>
           </a>
         </div>
         <div class="margin-t10 padding0">
@@ -102,7 +103,7 @@
             target="_blank"
             rel="noopener noreferrer"
             href="https://support.sky-tours.com/en/kb/articles/46">
-            Visas, Passports and Travel Documents
+            <%= t("TRAVEL_DOCS") %>
           </a>
         </div>
         <div class="margin-t10 padding0">
@@ -111,7 +112,7 @@
             target="_blank"
             rel="noopener noreferrer"
             href="https://support.sky-tours.com/en/kb/articles/37">
-            Status of My Booking
+            <%= t("STATUS_BOOKING") %>
           </a>
         </div>
         <div class="margin-t10 padding0">
@@ -120,13 +121,13 @@
             target="_blank"
             rel="noopener noreferrer"
             href="/<%= lang ? lang : 'en' %>/luggage_allowance.htm">
-            Baggage allowance
+            <%= t("BAGGAGE_ALLOWANCE") %>
           </a>
         </div>
       </div>
       <div class="padding-l0 col-md-3 col-sm-6 col-12">
         <div class="col-md col-12">
-          <h4>Our Partners</h4>
+          <h4><%= t("OUR_PARTNERS") %></h4>
           <a
             target="_blank"
             href="http://www.tripadvisor.com/pages/terms.html">
@@ -137,7 +138,8 @@
           </a>
         </div>
         <div class="col-md col-12">
-          <h4 class="mb-1">Secure Payment Partners</h4>
+
+          <h4 class="mb-1"><%= t("PAY_PARTNERS") %></h4>
           <a  href="JavaScript:Void(0)" >
             <img
               src="/images/footer/payment-partners.png"
@@ -149,7 +151,7 @@
       <div class="col-md-3 col-sm-6 col-12">
         <div class="row padding-lr10">
           <a
-            href="https://www.facebook.com/flyskytours"
+            href="<%= t('FACEBOOK_URL') %>"
             class="float-left margin-b10 margin-r10 padding5"
             target="_blank"
             rel="noopener noreferrer">
@@ -171,13 +173,7 @@
           </a>
         </div>
         <p class="font14">
-          Sky-tours.com is not the largest travel portal on the Internet, but we
-          strive to be the best one. We find it very important not only to offer
-          great rates and low prices but as well perfect customer-friendly
-          support. We are always reachable by phone, chat, email or via our
-          online support system! ..... and what we find most important: The
-          price you see in the beginning, you also pay at the end! No surprises,
-          No surc...{" "}
+          <%= t("ABOUT_US_TEXT") %>
           <a href="/<%= lang ? lang : 'en' %>/about.htm"> &gt;&gt; </a>
         </p>
       </div>
@@ -187,7 +183,7 @@
         <hr />
         <p class=" font14" style="color: rgb(190, 227, 248);">
           © 1996-<span id="thisYear"><script>document.querySelector("span#thisYear").innerText = new Date().getFullYear()
-        </script></span>, Skytours ™ Big Sky Group, All Rights reserved
+        </script></span>, Skytours ™ Big Sky Group, <%= t("WORLDWIDE_ALL") %>
         </p>
       </div>
     </div>
