@@ -37,13 +37,27 @@ f.createIndexEJS = folder => {
 	}
 }
 
+f.memoize = function(fn) {
+	if (!fn._cache) fn._cache = {}
+
+	return function(arg) {
+		const key = [...arguments].join("_")
+		fn._cache[key] = fn._cache[key] || fn.apply(undefined, arguments)
+		return fn._cache[key]
+	}
+}
+
 //pass paths as if you are in root folder
 f.readContent = location => util.promisify(fs.readFile)(location, "utf8")
 f.readFolderFiles = location => util.promisify(fs.readdir)(location, "utf8")
 
-f.extractToRegex = arr =>  key => {
-		return arr.map(item=> new RegExp(`^\/[A-Za-z]{2}\/${item[key].trim()}-[^<>\.]*.html\/{0,1}$` , "i"))
-	}
+//returns a memoized object of all the translated fields
+f.getTranslation = f.memoize((location = join("build", "locales", "lang", "en" + ".json")) => {
+	return f.readContent(location).then(res => JSON.parse(res))
+})
 
+f.extractToRegex = arr => key => {
+	return arr.map(item => new RegExp(`^\/[A-Za-z]{2}\/${item[key].trim()}-[^<>\.]*.html\/{0,1}$`, "i"))
+}
 
 module.exports = f

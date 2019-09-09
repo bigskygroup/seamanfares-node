@@ -3,7 +3,7 @@
 const express = require("express")
 const app = express.Router()
 const { join } = require("path")
-const { readContent } = require("../../functions") //pass paths as if you are in root folder
+const { readContent, getTranslation } = require("../../functions") //pass paths as if you are in root folder
 const airports = require("../../data/cities-condensed") //returns an array
 const countries = require("../../data/countries")
 
@@ -30,15 +30,17 @@ app.get("*", async (req, res, next) => {
 			string += arr[1].replace(/###TO_CITY###/g, `${name}, (${cc}) ${code}`)
 			return string
 		})
-		.then(content =>
+		.then(async content => {
+			const footerTitles = await getTranslation(join("build", "locales", "lang", lang + ".json"))
 			res.render("index", {
 				minHeight: "0",
 				lang: lang,
 				//if there is a variable defined in ejs, it must be supplied, although with null:
 				static: content,
-				custom: null
+				custom: null,
+				t: word => footerTitles[word],
 			})
-		)
+		})
 		.catch(err => next())
 })
 

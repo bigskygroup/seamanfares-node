@@ -5,7 +5,7 @@ const fs = require("fs")
 // const logger = require("morgan")
 // const helmet = require("helmet")
 const favicon = require("serve-favicon")
-const { createIndexEJS, extractToRegex } = require("./functions")
+const { createIndexEJS, extractToRegex, memoize } = require("./functions")
 const airports = require("./data/cities-condensed")
 var port = process.env.PORT || "3070"
 
@@ -31,7 +31,7 @@ app.set("view engine", "ejs")
 
 // createIndexEJS(join(__dirname, "build"))
 
-const airportsArray = extractToRegex(airports)
+const airportsArray = memoize(extractToRegex(airports))
 
 //routes
 app.use(airportsArray("code"), require("./src/server/seo-city"))
