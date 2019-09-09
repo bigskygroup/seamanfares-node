@@ -11,10 +11,15 @@ app.get("*", async (req, res, next) => {
 	const parseUrl = req.baseUrl.split("/") //e.g  [ '', 'en', 'about.htm' ]
 	const lang = parseUrl[1]
 	const airportCode = parseUrl[2].split("-")[0]
+	const receivedName = parseUrl[2].split("-")[1].match(/[^\.]+/)[0]
 
 	//code: BCN  //name: Barcelona
 	const { code, name, cc } = airports.find(item => new RegExp(airportCode, "i").test(item.code))
 	const { name: country } = countries.find(item => item.code === cc)
+
+	if (name.toLowerCase().trim() !== receivedName.toLowerCase().trim()) {
+		res.redirect(`/${lang}/${code.toLowerCase().trim()}-${name.toLowerCase().trim()}.html`)
+	}
 
 	readContent(join("build", "locales", "lang", lang + ".json"))
 		.then(json => JSON.parse(json))

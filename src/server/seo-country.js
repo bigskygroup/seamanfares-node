@@ -12,7 +12,12 @@ app.get("*", async (req, res, next) => {
 	const parseUrl = req.baseUrl.split("/") //e.g  [ '', 'en', 'es-spain.html' ]
 	const lang = parseUrl[1] //en
 	const countryCode = parseUrl[2].split("-")[0] //es
+	const receivedCountry = parseUrl[2].split("-")[1].match(/[^\.]+/)[0]
 	const { name: country } = countries.find(item => item.code === countryCode.toUpperCase()) //Spain
+
+if (country.toLowerCase().trim() !== receivedCountry.toLowerCase().trim()) {
+		res.redirect(`/${lang}/${countryCode.toLowerCase().trim()}-${country.toLowerCase().trim()}.html`)
+	}
 
 	readContent(join("build", "locales", "lang", lang + ".json"))
 		.then(json => JSON.parse(json))
