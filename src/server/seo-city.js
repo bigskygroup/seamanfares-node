@@ -36,7 +36,7 @@ app.get("*", async (req, res, next) => {
 			let string = ""
 			string += `<h1>${arr[0]} ${name}, ${country} (${cc}) ${code}</h1>`
 			string += arr[1].replace(/###TO_CITY###/g, `${name}, (${cc}) ${code}`)
-			return string
+			return `<div>${string}</div>`
 		})
 		.then(async content => {
 			const footerTitles = await getTranslation(join("build", "locales", "lang", lang + ".json"))
