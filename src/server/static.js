@@ -6,6 +6,7 @@ const fs = require("fs")
 const { join } = require("path")
 const { readContent, getTranslation } = require("../../functions") //pass paths as if you are in root folder
 
+
 app.get("*", (req, res, next) => {
 	const parseUrl = req.baseUrl.split("/") //e.g  [ '', 'en', 'about.htm' ]
 	const lang = parseUrl[1]

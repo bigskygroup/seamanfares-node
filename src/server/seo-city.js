@@ -11,14 +11,22 @@ app.get("*", async (req, res, next) => {
 	const parseUrl = req.baseUrl.split("/") //e.g  [ '', 'en', 'about.htm' ]
 	const lang = parseUrl[1]
 	const airportCode = parseUrl[2].split("-")[0]
-	const receivedName = parseUrl[2].split("-")[1].match(/[^\.]+/)[0]
+	let receivedName = parseUrl[2].match(/-([^<>\.]*).html\/{0,1}/i)[1]
 
 	//code: BCN  //name: Barcelona
 	const { code, name, cc } = airports.find(item => new RegExp(airportCode, "i").test(item.code))
+	let nameInUrl = name
+	if (/\s|,/gi.test(nameInUrl)) {
+		nameInUrl = nameInUrl.replace(/,/g, "").replace(/\s/g, "-")
+	}
+	if (/\s|,/gi.test(receivedName)) {
+		receivedName = receivedName.replace(/,/g, "").replace(/\s/g, "-")
+	}
 	const { name: country } = countries.find(item => item.code === cc)
 
-	if (name.toLowerCase().trim() !== receivedName.toLowerCase().trim()) {
-		res.redirect(`/${lang}/${code.toLowerCase().trim()}-${name.toLowerCase().trim()}.html`)
+	if (nameInUrl.toLowerCase().trim() !== receivedName.toLowerCase().trim()) {
+		res.redirect(`/${lang}/${code.toLowerCase().trim()}-${nameInUrl.toLowerCase().trim()}.html`)
+		return
 	}
 
 	readContent(join("build", "locales", "lang", lang + ".json"))
@@ -38,7 +46,7 @@ app.get("*", async (req, res, next) => {
 				//if there is a variable defined in ejs, it must be supplied, although with null:
 				static: content,
 				custom: null,
-				t: word => footerTitles[word],
+				t: word => footerTitles[word]
 			})
 		})
 		.catch(err => next())

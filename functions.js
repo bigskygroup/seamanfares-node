@@ -50,11 +50,11 @@ f.memoize = function(fn) {
 //pass paths as if you are in root folder
 f.readContent = location => util.promisify(fs.readFile)(location, "utf8")
 f.readFolderFiles = location => util.promisify(fs.readdir)(location, "utf8")
-
-//returns a memoized object of all the translated fields
-f.getTranslation = f.memoize((location = join("build", "locales", "lang", "en" + ".json")) => {
+f.readTranslation = (location = join("build", "locales", "lang", "en" + ".json")) => {
 	return f.readContent(location).then(res => JSON.parse(res))
-})
+}
+//returns a memoized object of all the translated fields
+f.getTranslation = f.memoize(f.readTranslation)
 
 f.extractToRegex = arr => key => {
 	return arr.map(item => new RegExp(`^\/[A-Za-z]{2}\/${item[key].trim()}-[^<>\.]*.html\/{0,1}$`, "i"))
