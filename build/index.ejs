@@ -31,6 +31,7 @@
 
 </style>
 
+
 	</head>
 	<body>
 		<noscript>You need to enable JavaScript to run this app.</noscript>
@@ -240,5 +241,13 @@
 			})([])</script
 		><script src="/static/js/6.2a289541.chunk.js"></script
 		><script src="/static/js/main.ba3fb352.chunk.js"></script>
-	<%- custom ? custom : '' %> </body>
+	<%- custom ? custom : '' %> 
+
+<script>
+	if(/^\/[A-Za-z]{0,2}\/{0,1}$/.test(window.location.pathname)) {
+	document.querySelector("#content-ssr").style.display = "none"
+}
+
+</script>
+</body>
 </html>
