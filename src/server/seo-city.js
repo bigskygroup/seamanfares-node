@@ -17,10 +17,10 @@ app.get("*", async (req, res, next) => {
 	const { code, name, cc } = airports.find(item => new RegExp(airportCode, "i").test(item.code))
 	let nameInUrl = name
 	if (/\s|,/gi.test(nameInUrl)) {
-		nameInUrl = nameInUrl.replace(/,/g, "").replace(/\s/g, "-")
+		nameInUrl = nameInUrl.replace(/,/g, "").replace(/\s/g, "-").replace(/-{2,}/g, "-")
 	}
 	if (/\s|,/gi.test(receivedName)) {
-		receivedName = receivedName.replace(/,/g, "").replace(/\s/g, "-")
+		receivedName = receivedName.replace(/,/g, "").replace(/\s/g, "-").replace(/-{2,}/g, "-")
 	}
 	const { name: country } = countries.find(item => item.code === cc)
 
