@@ -22,7 +22,11 @@ app.get("*", (req, res, next) => {
 				//if there is a variable defined in ejs, it must be supplied, although with null:
 				static: content,
 				t: word => footerTitles[word],
-				custom: null
+				custom: `<script>
+													const style = document.querySelector("#content-ssr").style
+													style.paddingTop = "50px"
+													style.paddingBottom = "50px"
+											</script>`
 			})
 		})
 		.catch(err => next())
