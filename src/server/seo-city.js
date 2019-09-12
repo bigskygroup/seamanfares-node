@@ -57,6 +57,8 @@ app.get("*", async (req, res, next) => {
 													style.backgroundImage = "linear-gradient(#f7f7f7, #e6e6e6)"
 													style.paddingBottom = "50px"
 													style.paddingTop = "50px"
+
+													
 											</script>`
 			})
 		})
