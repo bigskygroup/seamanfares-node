@@ -21,6 +21,17 @@ f.createIndexEJS = folder => {
 				.replace(`<div id="content-ssr">`, `<div id="content-ssr"><%- static ? static : '' %>`)
 				.replace(`<div id="footer-ssr">`, `<div id="footer-ssr"><%- include('footer') %>`)
 				.replace(`</body>`, `<%- custom ? custom : '' %> </body>`)
+				.replace(
+					`<title></title>`,
+					`<title><%-$._SKY_TOURS%></title>
+    <meta name="description" content="<%-$._DESCRIPTION%>" />
+    <meta name="keywords" content="<%-$._KEYWORDS%>" />
+    <meta property="og:title" content="<%-$.OG_TITLE%>" />
+    <meta property="og:image" content="<%-$.OG_IMAGE%>" />
+    <meta property="og:description" content="<%-$.OG_DESCRIPTION%>" />
+    <meta property="og:url" content="<%-$.OG_URL%>" />
+    <meta property="og:type" content="website" />`
+				)
 
 			fs.writeFile(path.join(folder, "index.ejs"), content, err => {
 				if (err) console.log(err)
