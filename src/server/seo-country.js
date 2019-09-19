@@ -3,7 +3,7 @@
 const express = require("express")
 const app = express.Router()
 const { join } = require("path")
-const { readContent, getTranslation } = require("../../functions") //pass paths as if you are in root folder
+const { readContent, getTranslation, removeHTMLTags } = require("../../functions") //pass paths as if you are in root folder
 const airports = require("../../data/cities-condensed") //returns an array
 const countries = require("../../data/countries")
 
@@ -33,12 +33,18 @@ app.get("*", async (req, res, next) => {
 		return
 	}
 
+	let metaTitle, metaKeyword
+
 	readContent(join("build", "locales", "lang", lang + ".json"))
 		.then(json => JSON.parse(json))
-		.then(object => [object["CHEAP_FLIGHTS_TO"], object["SEO_COUNTRY_CONTENT"]])
+		.then(object => {
+			metaKeyword = object["KEYWORDS_LATEST_BOOKING"]
+			return [object["CHEAP_FLIGHTS_TO"], object["SEO_COUNTRY_CONTENT"]]
+		})
 		.then(arr => {
 			let string = ""
-			string += `<h1>${arr[0]} ${country}</h1>`
+			metaTitle = `${arr[0]} ${country}`
+			string += `<h1>${metaTitle}</h1>`
 			string += arr[1].replace(/###TO_COUNTRY###/g, country)
 			return `<div>${string}</div>`
 		})
@@ -55,7 +61,16 @@ app.get("*", async (req, res, next) => {
 													style.paddingBottom = "50px"
 													style.paddingTop = "50px"
 											</script>`,
-				t: word => footerTitles[word]
+				t: word => footerTitles[word],
+				$: {
+					_SKY_TOURS: `${metaTitle} | Sky-tours.com`,
+					OG_TITLE: `${metaTitle} | Sky-tours.com`,
+					_DESCRIPTION: removeHTMLTags(content),
+					OG_DESCRIPTION: removeHTMLTags(content),
+					OG_IMAGE: "/images/st-logo.png",
+					OG_URL: "https://www.sky-tours.com/",
+					_KEYWORDS: `${metaKeyword}, ${country}`
+				}
 			})
 		})
 		.catch(err => next())

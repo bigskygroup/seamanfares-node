@@ -34,8 +34,9 @@ app.set("view engine", "ejs")
 const airportsArray = memoize(extractToRegex(airports))
 
 //routes
-app.use(airportsArray("code"), require("./src/server/seo-city"))
-app.use(airportsArray("cc"), require("./src/server/seo-country"))
+app.use(airportsArray("code" , 1), require("./src/server/seo-city-2"))
+app.use(airportsArray("code" , 2), require("./src/server/seo-city"))
+app.use(airportsArray("cc", 2), require("./src/server/seo-country"))
 app.use(/^\/[A-Za-z]{2}\/[A-Za-z_]{2,22}\.htm\/{0,1}$/, require("./src/server/static"))
 
 app.get("/advertising.html", (req, res) => res.render("pages/advertising.ejs"))

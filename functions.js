@@ -67,8 +67,16 @@ f.readTranslation = (location = join("build", "locales", "lang", "en" + ".json")
 //returns a memoized object of all the translated fields
 f.getTranslation = f.memoize(f.readTranslation)
 
-f.extractToRegex = arr => key => {
-	return arr.map(item => new RegExp(`^\/[A-Za-z]{2}\/${item[key].trim()}-[^<>\.]*.html\/{0,1}$`, "i"))
+f.extractToRegex = arr => (key, type) => {
+	return type === 1
+		? arr.map(
+				item => new RegExp(`^\/[A-Za-z]{2}-${item[key].trim()}-[A-Za-z]{3}-[^<>\.]*.html\/{0,1}$`, "i")
+		  )
+		: arr.map(item => new RegExp(`^\/[A-Za-z]{2}\/${item[key].trim()}-[^<>\.]*.html\/{0,1}$`, "i"))
 }
+
+
+
+f.removeHTMLTags = str => str.replace(/<[^>]+>/gi, "")
 
 module.exports = f

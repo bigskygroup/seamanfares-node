@@ -1,4 +1,4 @@
-// pages like https://www.sky-tours.com/en/bcn-barcelona.html
+// pages like https://www.sky-tours.com/en-tbs-dxb-tbilisi-dubai.html
 
 const express = require("express")
 const app = express.Router()
@@ -8,30 +8,31 @@ const airports = require("../../data/cities-condensed") //returns an array
 const countries = require("../../data/countries")
 
 app.get("*", async (req, res, next) => {
-	const parseUrl = req.baseUrl.split("/") //e.g  [ '', 'en', 'about.htm' ]
-	const lang = parseUrl[1]
-	const airportCode = parseUrl[2].split("-")[0]
-	let receivedName = parseUrl[2].match(/-([^<>\.]*).html\/{0,1}/i)[1]
+	const parseUrl = req.baseUrl.split("-") //e.g  [ '/en', 'tbs', 'dxb', 'tbilisi', 'dubai.html' ]
+	const lang = parseUrl[0].match(/\w+/)[0]
+	const airportCode1 = parseUrl[1]
+	const airportCode2 = parseUrl[2]
 
 	//code: BCN  //name: Barcelona
-	const { code, name, cc } = airports.find(item => new RegExp(airportCode, "i").test(item.code))
-	let nameInUrl = name
-	if (/\s|,/gi.test(nameInUrl)) {
-		nameInUrl = nameInUrl
-			.replace(/,/g, "")
-			.replace(/\s/g, "-")
-			.replace(/-{2,}/g, "-")
-	}
-	if (/\s|,/gi.test(receivedName)) {
-		receivedName = receivedName
-			.replace(/,/g, "")
-			.replace(/\s/g, "-")
-			.replace(/-{2,}/g, "-")
-	}
-	const { name: country } = countries.find(item => item.code === cc)
+	const { code: code1, name: name1, cc: cc1 } = airports.find(item =>
+		new RegExp(airportCode1, "i").test(item.code)
+	)
+	const { code: code2, name: name2, cc: cc2 } = airports.find(item =>
+		new RegExp(airportCode2, "i").test(item.code)
+	)
 
-	if (nameInUrl.toLowerCase().trim() !== receivedName.toLowerCase().trim()) {
-		res.redirect(`/${lang}/${code.toLowerCase().trim()}-${nameInUrl.toLowerCase().trim()}.html`)
+	const { name: country1 } = countries.find(item => item.code === cc1)
+	const { name: country2 } = countries.find(item => item.code === cc2)
+	const url = `/${lang}-${code1.toLowerCase()}-${code2.toLowerCase()}-${name1
+		.toLowerCase()
+		.replace(/,/g, "")
+		.replace(/\s/g, "-")}-${name2
+		.toLowerCase()
+		.replace(/,/g, "")
+		.replace(/\s/g, "-")}.html`
+
+	if (req.baseUrl !== url) {
+		res.redirect(url)
 		return
 	}
 
@@ -41,13 +42,15 @@ app.get("*", async (req, res, next) => {
 		.then(json => JSON.parse(json))
 		.then(object => {
 			metaKeyword = object["KEYWORDS_LATEST_BOOKING"]
-			return [object["CHEAP_FLIGHTS_TO"], object["SEO_CITY_CONTENT"]]
+			return [object["CHEAP_FLIGHTS_FROM"], object["SEO_CITY_CITY_CONTENT"]]
 		})
 		.then(arr => {
 			let string = ""
-			metaTitle = `${arr[0]} ${name}, ${country} (${cc}) ${code}`
+			metaTitle = `${arr[0]} ${name1} to ${name2}, ${country2} (${cc2}) ${code2}`
 			string += `<h1>${metaTitle}</h1>`
-			string += arr[1].replace(/###TO_CITY###/g, `${name}, (${cc}) ${code}`)
+			string += arr[1]
+				.replace(/###TO_CITY###/g, `${name2}, (${cc2}) ${code2}`)
+				.replace(/###FROM_CITY###/g, `${name1}, (${cc1}) ${code1}`)
 			return `<div>${string}</div>`
 		})
 		.then(async content => {
@@ -62,7 +65,7 @@ app.get("*", async (req, res, next) => {
 													const style = document.querySelector("#content-ssr").style 
 													style.backgroundImage = "linear-gradient(#f7f7f7, #e6e6e6)"
 													style.paddingBottom = "50px"
-													style.paddingTop = "50px"						
+													style.paddingTop = "50px"		
 											</script>`,
 				$: {
 					_SKY_TOURS: `${metaTitle} | Sky-tours.com`,
@@ -71,7 +74,7 @@ app.get("*", async (req, res, next) => {
 					OG_DESCRIPTION: removeHTMLTags(content),
 					OG_IMAGE: "/images/st-logo.png",
 					OG_URL: "https://www.sky-tours.com/",
-					_KEYWORDS: `${metaKeyword}, ${name}, ${country}, ${cc}, ${code}`,
+					_KEYWORDS: `${metaKeyword}, ${name1}, ${country1}, ${cc1}, ${code1} ${name2}, ${country2}, ${cc2}, ${code2}`
 				}
 			})
 		})
