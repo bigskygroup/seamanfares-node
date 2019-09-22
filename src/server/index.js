@@ -1,7 +1,7 @@
 const { join } = require("path")
 const express = require("express")
 const app = express.Router()
-const { readContent, getTranslation } = require("../../functions") //pass paths as if you are in 
+const { getTranslation } = require("../../functions") //pass paths as if you are in 
 
 app.get("*", (req, res, next) => {
 	const lang = req.baseUrl.split("/")[1] || "en"

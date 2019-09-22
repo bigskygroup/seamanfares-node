@@ -35,7 +35,7 @@ app.get("*", async (req, res, next) => {
 
 	let metaTitle, metaKeyword
 
-	readContent(join("build", "locales", "lang", lang + ".json"))
+	readContent(join("build", "locales", "lang", lang + ".json") , "utf8")
 		.then(json => JSON.parse(json))
 		.then(object => {
 			metaKeyword = object["KEYWORDS_LATEST_BOOKING"]

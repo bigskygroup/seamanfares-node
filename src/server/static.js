@@ -11,7 +11,7 @@ app.get("*", (req, res, next) => {
 	const lang = parseUrl[1]
 	const page = parseUrl[2]
 
-	readContent(join("build", "locales", "info", lang, page))
+	readContent(join("build", "locales", "info", lang, page) ,"utf8")
 		.then(async content => {
 			const trans = await getTranslation(join("build", "locales", "lang", lang + ".json"))
 			res.render("index", {

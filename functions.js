@@ -59,10 +59,11 @@ f.memoize = function(fn) {
 }
 
 //pass paths as if you are in root folder
-f.readContent = location => util.promisify(fs.readFile)(location, "utf8")
+// f.readContent = location => util.promisify(fs.readFile)(location, "utf8")
+f.readContent =  util.promisify(fs.readFile)
 f.readFolderFiles = location => util.promisify(fs.readdir)(location, "utf8")
 f.readTranslation = (location = join("build", "locales", "lang", "en" + ".json")) => {
-	return f.readContent(location).then(res => JSON.parse(res))
+	return f.readContent(location, "utf8").then(res => JSON.parse(res))
 }
 //returns a memoized object of all the translated fields
 f.getTranslation = f.memoize(f.readTranslation)
