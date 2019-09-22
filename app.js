@@ -30,7 +30,7 @@ app.use(favicon(join(__dirname, "build", "favicon.ico")))
 app.set("views", join(__dirname, "build"))
 app.set("view engine", "ejs")
 
-// createIndexEJS(join(__dirname, "build"))
+createIndexEJS(join(__dirname, "build"))
 
 const airportsArray = memoize(extractToRegex(airports))
 
