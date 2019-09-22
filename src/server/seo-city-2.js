@@ -60,7 +60,9 @@ app.get("*", async (req, res, next) => {
 
 			//creating the links for airports in the same country
 			const getOtherCities = memoize(ccArg => airports.filter(item => item.cc === ccArg && item.name_city))
-			const randomize = array => array.sort((a, b) => 0.5 - Math.random())
+			const randomize = array => {
+				return array.length < 12 ? array : array.sort((a, b) => 0.5 - Math.random())
+			}
 			const pick = array => array.slice(0, 12)
 			const otherCitiesFn = pipe(
 				getOtherCities,

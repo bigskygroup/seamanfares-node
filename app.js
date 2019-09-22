@@ -5,7 +5,8 @@ const fs = require("fs")
 // const logger = require("morgan")
 // const helmet = require("helmet")
 const favicon = require("serve-favicon")
-const { createIndexEJS, extractToRegex, memoize } = require("./functions")
+const { createIndexEJS, extractToRegex } = require("./functions")
+const { memoize }= require("f-tools")
 const airports = require("./data/cities-condensed")
 var port = process.env.PORT || "3070"
 
@@ -51,6 +52,7 @@ const routeToIndex = [
 app.use( routeToIndex, require("./src/server/index"))
 
 app.get("/book" , require("./src/server/index"))
+
 
 //handeling wrong requests at the end
 app.use((req, res) => {

@@ -1,6 +1,7 @@
 const fs = require("fs")
 const path = require("path")
 const util = require("util")
+const { memoize } = require("f-tools")
 
 // f object will hold the functions and export them:
 const f = {}
@@ -48,35 +49,21 @@ f.createIndexEJS = folder => {
 	}
 }
 
-f.memoize = function(fn) {
-	if (!fn._cache) fn._cache = {}
-
-	return function(arg) {
-		const key = [...arguments].join("_")
-		fn._cache[key] = fn._cache[key] || fn.apply(undefined, arguments)
-		return fn._cache[key]
-	}
-}
-
 //pass paths as if you are in root folder
 // f.readContent = location => util.promisify(fs.readFile)(location, "utf8")
-f.readContent =  util.promisify(fs.readFile)
+f.readContent = util.promisify(fs.readFile)
 f.readFolderFiles = location => util.promisify(fs.readdir)(location, "utf8")
 f.readTranslation = (location = join("build", "locales", "lang", "en" + ".json")) => {
 	return f.readContent(location, "utf8").then(res => JSON.parse(res))
 }
 //returns a memoized object of all the translated fields
-f.getTranslation = f.memoize(f.readTranslation)
+f.getTranslation = memoize(f.readTranslation)
 
 f.extractToRegex = arr => (key, type) => {
 	return type === 1
-		? arr.map(
-				item => new RegExp(`^\/[A-Za-z]{2}-${item[key].trim()}-[A-Za-z]{3}-[^<>\.]*.html\/{0,1}$`, "i")
-		  )
+		? arr.map(item => new RegExp(`^\/[A-Za-z]{2}-${item[key].trim()}-[A-Za-z]{3}-[^<>\.]*.html\/{0,1}$`, "i"))
 		: arr.map(item => new RegExp(`^\/[A-Za-z]{2}\/${item[key].trim()}-[^<>\.]*.html\/{0,1}$`, "i"))
 }
-
-
 
 f.removeHTMLTags = str => str.replace(/<[^>]+>/gi, "")
 
