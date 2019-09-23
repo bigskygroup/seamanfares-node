@@ -2,7 +2,7 @@
 const express = require("express")
 const app = express.Router()
 const { join } = require("path")
-const { readContent, getTranslation, removeHTMLTags } = require("../../functions") //pass paths as if you are in root folder
+const { getTranslation, removeHTMLTags , t } = require("../../functions") //pass paths as if you are in root folder
 const { pipe, memoize } = require("f-tools")
 const airports = require("../../data/cities-condensed") //returns an array
 const countries = require("../../data/countries")
@@ -39,8 +39,7 @@ app.get("*", async (req, res, next) => {
 	let metaTitle, metaKeyword
 	// console.log(code1, name1, cc1, country1) //BCN Barcelona ES Spain
 	// console.log(code2, name2, cc2, country2)
-	readContent(join("build", "locales", "lang", lang + ".json"), "utf8")
-		.then(json => JSON.parse(json))
+	getTranslation(join("build", "locales", "lang", lang + ".json"))
 		.then(object => {
 			metaKeyword = object["KEYWORDS_LATEST_BOOKING"]
 			return [
@@ -89,13 +88,14 @@ app.get("*", async (req, res, next) => {
 			return `<div>${string}<br><h2>${arr[2]} <b>${country2}</b></h2>${container}</div>`
 		})
 		.then(async content => {
-			const footerTitles = await getTranslation(join("build", "locales", "lang", lang + ".json"))
+			const titles = await getTranslation(join("build", "locales", "lang", lang + ".json"))
+			const fallBack = await getTranslation(join("build", "locales", "lang", "en" + ".json"))
 			res.render("index", {
 				minHeight: "0",
 				lang: lang,
 				//if there is a variable defined in ejs, it must be supplied, although with null:
 				static: content,
-				t: word => footerTitles[word],
+				t: word => t(word, titles, fallBack),
 				custom: `
 											<script> 
 													const style = document.querySelector("#content-ssr").style 
@@ -119,10 +119,6 @@ app.get("*", async (req, res, next) => {
 		.catch(err => next())
 })
 
-// app.get("*", async (re, res) => {
-// const content = await readContent(join("build", "locales", "lang", "en" + ".json") , "utf8")
 
-// 	res.send(content)
-// })
 
 module.exports = app

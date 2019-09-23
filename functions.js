@@ -6,6 +6,9 @@ const { memoize } = require("f-tools")
 // f object will hold the functions and export them:
 const f = {}
 
+// right-to-left languages
+f.rtlLangs = ["ae", "eg", "ir", "jo", "lb", "sa"]
+
 f.createIndexEJS = folder => {
 	// need to run this block first time only. to create index.ejs inside "build"
 	const buidDirectoryFiles = fs.readdirSync(folder, "utf8")
@@ -50,13 +53,13 @@ f.createIndexEJS = folder => {
 }
 
 //pass paths as if you are in root folder
-// f.readContent = location => util.promisify(fs.readFile)(location, "utf8")
-f.readContent = util.promisify(fs.readFile)
+f.readContent = memoize(util.promisify(fs.readFile))
 f.readFolderFiles = location => util.promisify(fs.readdir)(location, "utf8")
 f.readTranslation = (location = join("build", "locales", "lang", "en" + ".json")) => {
 	return f.readContent(location, "utf8").then(res => JSON.parse(res))
 }
 //returns a memoized object of all the translated fields
+// use only for json files
 f.getTranslation = memoize(f.readTranslation)
 
 f.extractToRegex = arr => (key, type) => {
@@ -66,5 +69,14 @@ f.extractToRegex = arr => (key, type) => {
 }
 
 f.removeHTMLTags = str => str.replace(/<[^>]+>/gi, "")
+
+//takes 2 translation objects and returns one value or the other:
+f.t = (word, translationJSON, defualtTranslation) => {
+	if (translationJSON[word.trim()] && translationJSON[word.trim()] != "null") {
+		return translationJSON[word.trim()]
+	} else {
+		return defualtTranslation[word.trim()]
+	}
+}
 
 module.exports = f

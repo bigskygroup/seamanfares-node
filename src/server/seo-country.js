@@ -3,7 +3,7 @@
 const express = require("express")
 const app = express.Router()
 const { join } = require("path")
-const { readContent, getTranslation, removeHTMLTags } = require("../../functions") //pass paths as if you are in root folder
+const { getTranslation, removeHTMLTags, t } = require("../../functions") //pass paths as if you are in root folder
 const airports = require("../../data/cities-condensed") //returns an array
 const countries = require("../../data/countries")
 
@@ -35,8 +35,7 @@ app.get("*", async (req, res, next) => {
 
 	let metaTitle, metaKeyword
 
-	readContent(join("build", "locales", "lang", lang + ".json") , "utf8")
-		.then(json => JSON.parse(json))
+	getTranslation(join("build", "locales", "lang", lang + ".json"))
 		.then(object => {
 			metaKeyword = object["KEYWORDS_LATEST_BOOKING"]
 			return [object["CHEAP_FLIGHTS_TO"], object["SEO_COUNTRY_CONTENT"]]
@@ -49,7 +48,8 @@ app.get("*", async (req, res, next) => {
 			return `<div>${string}</div>`
 		})
 		.then(async content => {
-			const footerTitles = await getTranslation(join("build", "locales", "lang", lang + ".json"))
+			const titles = await getTranslation(join("build", "locales", "lang", lang + ".json"))
+			const fallBack = await getTranslation(join("build", "locales", "lang", "en" + ".json"))
 			res.render("index", {
 				minHeight: "0",
 				lang: lang,
@@ -61,7 +61,7 @@ app.get("*", async (req, res, next) => {
 													style.paddingBottom = "50px"
 													style.paddingTop = "50px"
 											</script>`,
-				t: word => footerTitles[word],
+			t: word => t(word, titles, fallBack),
 				$: {
 					_SKY_TOURS: `${metaTitle} | Sky-tours.com`,
 					OG_TITLE: `${metaTitle} | Sky-tours.com`,

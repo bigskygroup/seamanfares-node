@@ -4,7 +4,7 @@
 const express = require("express")
 const app = express.Router()
 const { join } = require("path")
-const { readContent, getTranslation, removeHTMLTags } = require("../../functions") //pass paths as if you are in root folder
+const {  getTranslation, removeHTMLTags , t} = require("../../functions") //pass paths as if you are in root folder
 const airports = require("../../data/cities-condensed") //returns an array
 const countries = require("../../data/countries")
 
@@ -39,8 +39,7 @@ app.get("*", async (req, res, next) => {
 
 	let metaTitle, metaKeyword
 
-	readContent(join("build", "locales", "lang", lang + ".json") , "utf8")
-		.then(json => JSON.parse(json))
+	getTranslation(join("build", "locales", "lang", lang + ".json"))
 		.then(object => {
 			metaKeyword = object["KEYWORDS_LATEST_BOOKING"]
 			return [object["CHEAP_FLIGHTS_TO"], object["SEO_CITY_CONTENT"]]
@@ -53,13 +52,14 @@ app.get("*", async (req, res, next) => {
 			return `<div>${string}</div>`
 		})
 		.then(async content => {
-			const footerTitles = await getTranslation(join("build", "locales", "lang", lang + ".json"))
+			const titles = await getTranslation(join("build", "locales", "lang", lang + ".json"))
+			const fallBack = await getTranslation(join("build", "locales", "lang", "en" + ".json"))
 			res.render("index", {
 				minHeight: "0",
 				lang: lang,
 				//if there is a variable defined in ejs, it must be supplied, although with null:
 				static: content,
-				t: word => footerTitles[word],
+				t: word => t(word, titles, fallBack),
 				custom: `<script> 
 													const style = document.querySelector("#content-ssr").style 
 													style.backgroundImage = "linear-gradient(#f7f7f7, #e6e6e6)"
