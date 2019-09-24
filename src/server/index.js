@@ -1,7 +1,7 @@
 const { join } = require("path")
 const express = require("express")
 const app = express.Router()
-const { getTranslation, t } = require("../../functions") //pass paths as if you are in
+const { getTranslation, t , rtlLangs} = require("../../functions") //pass paths as if you are in
 
 app.get("*", (req, res, next) => {
 	const lang = req.baseUrl.split("/")[1] || "en"
@@ -18,7 +18,12 @@ app.get("*", (req, res, next) => {
 
 				//if there is a variable defined in ejs, it must be supplied, although with null:
 				static: null,
-				custom: null,
+				custom: `
+<script>
+${rtlLangs.includes(lang) ? `changeElementStyle("#footer-ssr")("rtl")` : null}
+
+</script>
+				`,
 				$: {
 					_SKY_TOURS: `${titles["TITLE_INDEX"]} | Sky-tours.com`,
 					OG_TITLE: `${titles["TITLE_INDEX"]} | Sky-tours.com`,

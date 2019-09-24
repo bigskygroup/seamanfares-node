@@ -24,7 +24,10 @@ f.createIndexEJS = folder => {
 				)
 				.replace(`<div id="content-ssr">`, `<div id="content-ssr"><%- static ? static : '' %>`)
 				.replace(`<div id="footer-ssr">`, `<div id="footer-ssr"><%- include('footer') %>`)
-				.replace(`</body>`, `<%- custom ? custom : '' %> </body>`)
+				.replace(
+					`</body>`, `<script src="/script/general.js"></script>
+					<%- custom ? custom : '' %> </body>`
+				)
 				.replace(
 					`<title></title>`,
 					`<title><%-$._SKY_TOURS%></title>

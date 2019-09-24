@@ -4,7 +4,7 @@ const express = require("express")
 const app = express.Router()
 const fs = require("fs")
 const { join } = require("path")
-const { readContent, getTranslation, t } = require("../../functions") //pass paths as if you are in root folder
+const { readContent, getTranslation, t, rtlLangs } = require("../../functions") //pass paths as if you are in root folder
 
 app.get("*", (req, res, next) => {
 	const parseUrl = req.baseUrl.split("/") //e.g  [ '', 'en', 'about.htm' ]
@@ -21,11 +21,13 @@ app.get("*", (req, res, next) => {
 				lang: lang,
 				//if there is a variable defined in ejs, it must be supplied, although with null:
 				static: `<div>${content}</div>`,
-				t: word => titles[word],
+				t: word => t(word, titles, fallBack),
 				custom: `<script>
 													const style = document.querySelector("#content-ssr").style
 													style.paddingTop = "50px"
 													style.paddingBottom = "50px"
+													${rtlLangs.includes(lang) ? `changeElementStyle("#footer-ssr")("rtl")` : null}
+													${rtlLangs.includes(lang) ? `changeElementStyle("#content-ssr")("rtl")` : null}
 											</script>`,
 
 				$: {
