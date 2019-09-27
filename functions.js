@@ -7,7 +7,7 @@ const { memoize } = require("f-tools")
 const f = {}
 
 // right-to-left languages
-f.rtlLangs = ["ae", "eg", "ir", "jo", "lb", "sa"]
+f.rtlLangs = ["ae", "eg", "ir", "jo", "lb", "sa" , "bh", "kw", "om", "qr"]
 
 f.createIndexEJS = folder => {
 	// need to run this block first time only. to create index.ejs inside "build"

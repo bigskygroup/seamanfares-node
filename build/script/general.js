@@ -1,4 +1,4 @@
-const rtlLangs = ["ae", "eg", "ir", "jo", "lb", "sa"]
+const rtlLangs = ["ae", "eg", "ir", "jo", "lb", "sa" , "bh", "kw", "om", "qr"]
 
 // applies a style to all the children of the target
 function changeElementStyle(target) {
@@ -6,7 +6,7 @@ function changeElementStyle(target) {
 	var element = Array.from(document.querySelectorAll(target)).concat(
 		Array.from(document.querySelectorAll(target + " * "))
 	)
-	if (element.length === 0) return false
+	if (element.length === 0) return function() { return false }
 	return function(newStyle = {} , exception =  []) { 
 		// newStyle is an css styling object
 		// exception is the DOM element that will be exempted from applying the newStyle
