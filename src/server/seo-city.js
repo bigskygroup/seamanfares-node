@@ -109,7 +109,8 @@ app.get("*", async (req, res, next) => {
 					OG_DESCRIPTION: removeHTMLTags(content),
 					OG_IMAGE: "/images/st-logo.png",
 					OG_URL: "https://www.sky-tours.com/",
-					_KEYWORDS: `${metaKeyword}, ${name}, ${country}, ${cc}, ${code}`
+					_KEYWORDS: `${metaKeyword}, ${name}, ${country}, ${cc}, ${code}`,
+					CANONICAL: `https://${req.get('host')}/${lang}/${code.toLowerCase().trim()}-${nameInUrl.toLowerCase().trim()}.html`
 				}
 			})
 		})

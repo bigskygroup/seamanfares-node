@@ -33,7 +33,8 @@ ${rtlLangs.includes(lang) ? `changeElementStyle("#footer-ssr")("rtl")` : null}
 						"Cheap airline tickets. Only here you'll get the cheapest airline ticket deals available. We search all airlines for cheap flights and show you  the most discounted airfares. Get your cheapest ticket here - with price guarantee!",
 					OG_IMAGE: "/images/st-logo.png",
 					OG_URL: "https://www.sky-tours.com/",
-					_KEYWORDS: titles["KEYWORDS_LATEST_BOOKING"]
+					_KEYWORDS: titles["KEYWORDS_LATEST_BOOKING"],
+						CANONICAL: `https://${req.baseUrl}`
 				}
 			})
 		})

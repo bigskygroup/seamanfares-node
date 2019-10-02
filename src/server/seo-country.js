@@ -69,7 +69,7 @@ app.get("*", async (req, res, next) => {
 				randomize,
 				pick
 			)
-console.log(req.get('host'))
+
 			// an array of objects from airports selected by country code like ES
 			const otherCitiesArray = otherCitiesFn(country)
 
@@ -116,7 +116,7 @@ console.log(req.get('host'))
 					OG_IMAGE: "/images/st-logo.png",
 					OG_URL: "https://www.sky-tours.com/",
 					_KEYWORDS: `${metaKeyword}, ${country}`,
-					CANONICAL: `${req.get('host')}/${lang}/${countryCode.toLowerCase().trim()}-${countryInUrl.toLowerCase().trim()}.html`
+					CANONICAL: `https://${req.get('host')}/${lang}/${countryCode.toLowerCase().trim()}-${countryInUrl.toLowerCase().trim()}.html`
 				}
 			})
 		})
