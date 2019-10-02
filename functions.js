@@ -37,7 +37,9 @@ f.createIndexEJS = folder => {
     <meta property="og:image" content="<%-$.OG_IMAGE%>" />
     <meta property="og:description" content="<%-$.OG_DESCRIPTION%>" />
     <meta property="og:url" content="<%-$.OG_URL%>" />
-    <meta property="og:type" content="website" />`
+    <meta property="og:type" content="website" />
+		<link rel="canonical" href="<%-$.CANONICAL%>" />
+    `
 				)
 
 			fs.writeFile(path.join(folder, "index.ejs"), content, err => {

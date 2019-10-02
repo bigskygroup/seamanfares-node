@@ -4,6 +4,7 @@ const express = require("express")
 const app = express.Router()
 const { join } = require("path")
 const { getTranslation, removeHTMLTags, t, rtlLangs } = require("../../functions") //pass paths as if you are in root folder
+const { pipe, memoize } = require("f-tools")
 const airports = require("../../data/cities-condensed") //returns an array
 const countries = require("../../data/countries")
 
@@ -38,14 +39,57 @@ app.get("*", async (req, res, next) => {
 	getTranslation(join("build", "locales", "lang", lang + ".json"))
 		.then(object => {
 			metaKeyword = object["KEYWORDS_LATEST_BOOKING"]
-			return [object["CHEAP_FLIGHTS_TO"], object["SEO_COUNTRY_CONTENT"]]
+			return [
+				object["CHEAP_FLIGHTS_TO"],
+				object["SEO_COUNTRY_CONTENT"],
+				object["FLIGHTS_TO_CITIES"],
+				object["FLIGHTS_TO"]
+			]
 		})
 		.then(arr => {
 			let string = ""
 			metaTitle = `${arr[0]} ${country}`
 			string += `<h1>${metaTitle}</h1>`
 			string += arr[1].replace(/###TO_COUNTRY###/g, country)
-			return `<div>${string}</div>`
+			string = `<div>${string}</div>`
+
+			//creating the links for airports in the same country
+			const getCity = memoize(country =>
+				countries.find(item => item.name.toLowerCase() === country.toLowerCase())
+			)
+
+			const getOtherCities = memoize(city => airports.filter(item => item.cc === city.code && item.name_city))
+			const randomize = array => {
+				return array.length < 12 ? array : array.sort((a, b) => 0.5 - Math.random())
+			}
+			const pick = array => array.slice(0, 12)
+			const otherCitiesFn = pipe(
+				getCity,
+				getOtherCities,
+				randomize,
+				pick
+			)
+console.log(req.get('host'))
+			// an array of objects from airports selected by country code like ES
+			const otherCitiesArray = otherCitiesFn(country)
+
+			const map = array => {
+				if (!array.length) return ""
+				let string = ""
+				const rows = array.forEach(
+					item =>
+						(string += `<p><a href="/${lang}/${item.code.toLowerCase()}-${item.name.toLowerCase()}.html">${
+							arr[3]
+						} ${item.name}</a></p>`)
+				)
+				return `<div class="col-12 col-sm-6">${string}</div>`
+			}
+			const col1 = map(otherCitiesArray.slice(0, 6))
+			const col2 = map(otherCitiesArray.slice(6, 12))
+
+			const container = `<div class="container"><div class="row">${col1}${col2}</div></div>`
+
+			return `<div>${string}<br><h2>${arr[2]} <b>${country}</b></h2>${container}</div>`
 		})
 		.then(async content => {
 			const titles = await getTranslation(join("build", "locales", "lang", lang + ".json"))
@@ -63,7 +107,7 @@ app.get("*", async (req, res, next) => {
 													${rtlLangs.includes(lang) ? `changeElementStyle("#footer-ssr")("rtl")` : null}
 													${rtlLangs.includes(lang) ? `changeElementStyle("#content-ssr")("rtl")` : null}
 											</script>`,
-			t: word => t(word, titles, fallBack),
+				t: word => t(word, titles, fallBack),
 				$: {
 					_SKY_TOURS: `${metaTitle} | Sky-tours.com`,
 					OG_TITLE: `${metaTitle} | Sky-tours.com`,
@@ -71,7 +115,8 @@ app.get("*", async (req, res, next) => {
 					OG_DESCRIPTION: removeHTMLTags(content),
 					OG_IMAGE: "/images/st-logo.png",
 					OG_URL: "https://www.sky-tours.com/",
-					_KEYWORDS: `${metaKeyword}, ${country}`
+					_KEYWORDS: `${metaKeyword}, ${country}`,
+					CANONICAL: `${req.get('host')}/${lang}/${countryCode.toLowerCase().trim()}-${countryInUrl.toLowerCase().trim()}.html`
 				}
 			})
 		})
