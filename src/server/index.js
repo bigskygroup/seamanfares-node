@@ -2,6 +2,10 @@ const { join } = require("path")
 const express = require("express")
 const app = express.Router()
 const { getTranslation, t , rtlLangs} = require("../../functions") //pass paths as if you are in
+const indexSSR =  require("../client/index")
+
+
+
 
 app.get("*", (req, res, next) => {
 	const lang = req.baseUrl.split("/")[1] || "en"
@@ -21,7 +25,11 @@ app.get("*", (req, res, next) => {
 				custom: `
 <script>
 ${rtlLangs.includes(lang) ? `changeElementStyle("#footer-ssr")("rtl")` : null}
+const ssr = document.querySelector("#content-ssr")
+const newDiv = document.createElement("div")
 
+document.body.insertBefore(newDiv, ssr)
+newDiv.innerHTML = ${indexSSR}
 </script>
 				`,
 				$: {

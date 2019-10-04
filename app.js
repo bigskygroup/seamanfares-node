@@ -47,7 +47,7 @@ app.get(["/book", "/confirmation"] , require("./src/server/index"))
 const routeToIndex = [
 /^\/[A-Za-z]{2}\/confirmation/,
 /^\/[A-Za-z]{2}\/search\/{0,1}/,
-/^\/[A-Za-z]{2}\/{0,1}$/, /^\/$/]
+/^\/[A-Za-z]{2}\/{0,1}$/ , /^\/[A-Za-z]{2}\/404$/,/^\/$/  ]
 
 app.use( routeToIndex, require("./src/server/index"))
 
@@ -55,12 +55,7 @@ app.get("/book" , require("./src/server/index"))
 
 
 //handeling wrong requests at the end
-app.use((req, res) => {
-
-	console.log(req.originalUrl)
-	res.status(404)
-	res.send("<h1 style='width:50%; margin: 20px 20px;'>No page found for your request! </h1>")
-})
+app.use( require("./src/server/404"))
 const date =  new Date().toLocaleString()
 app.listen(port, console.log(`skytours-node app is listening on ${port} at ${date}`))
 module.exports = app
