@@ -16,7 +16,7 @@ app.get("*", (req, res, next) => {
 			const fallBack = await getTranslation(join("build", "locales", "lang", "en" + ".json"))
 			res.render("index", {
 				// react: reactHTML,
-				minHeight: "700px",
+				minHeight: null,
 				lang: lang,
 				t: word => t(word, titles, fallBack),
 
