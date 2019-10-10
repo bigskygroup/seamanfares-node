@@ -20,7 +20,7 @@ app.get("*", (req, res, next) => {
 				minHeight: "0",
 				lang: lang,
 				//if there is a variable defined in ejs, it must be supplied, although with null:
-				static: `<div class="static"><div>${content}</div></div>`,
+				static: `<div ><div class="static">${content}</div></div>`,
 				t: word => t(word, titles, fallBack),
 				custom: `<script>
 													const style = document.querySelector("#content-ssr .static").style

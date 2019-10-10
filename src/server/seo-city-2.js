@@ -85,7 +85,7 @@ app.get("*", async (req, res, next) => {
 
 			const container = `<div class="container"><div class="row">${col1}${col2}</div></div>`
 
-			return `<div>${string}<br><h2>${arr[2]} <b>${country2}</b></h2>${container}</div>`
+			return `<div class="static"><div>${string}<br><h2>${arr[2]} <b>${country2}</b></h2>${container}</div></div>`
 		})
 		.then(async content => {
 			const titles = await getTranslation(join("build", "locales", "lang", lang + ".json"))
@@ -98,7 +98,7 @@ app.get("*", async (req, res, next) => {
 				t: word => t(word, titles, fallBack),
 				custom: `
 						<script> 
-								const style = document.querySelector("#content-ssr").style 
+								const style = document.querySelector("#content-ssr .static").style 
 								style.backgroundImage = "linear-gradient(#f7f7f7, #e6e6e6)"
 								style.paddingBottom = "50px"
 								style.paddingTop = "50px"				
