@@ -9,7 +9,6 @@ const indexSSR =  require("../client/index")
 
 app.get("*", (req, res, next) => {
 	const lang = req.baseUrl.split("/")[1] || "en"
-console.log(/^\/{0,1}[A-Za-z]{0,2}\/{0,1}$/gi.test("${req.baseUrl}"))
 	getTranslation(join("build", "locales", "lang", lang + ".json"))
 		.then(async titles => {
 			// const reactHTML = ReactDOMServer.renderToString(Component())
@@ -21,17 +20,10 @@ console.log(/^\/{0,1}[A-Za-z]{0,2}\/{0,1}$/gi.test("${req.baseUrl}"))
 				t: word => t(word, titles, fallBack),
 
 				//if there is a variable defined in ejs, it must be supplied, although with null:
-				static: null,
+				static: indexSSR ,
 				custom: `
 <script>
 ${rtlLangs.includes(lang) ? `changeElementStyle("#footer-ssr")("rtl")` : null}
-${/^\/{0,1}[A-Za-z]{0,2}\/{0,1}$/gi.test(req.baseUrl)  ? ` 
-const ssr = document.querySelector("#content-ssr")
-const newDiv = document.createElement("div")
-
-document.body.insertBefore(newDiv, ssr)
-newDiv.innerHTML = ${indexSSR}
-` : null }
 	
 </script>
 				`,
