@@ -37,7 +37,7 @@ ${rtlLangs.includes(lang) ? `changeElementStyle("#footer-ssr")("rtl")` : null}
 					OG_IMAGE: "/images/st-logo.png",
 					OG_URL: "https://www.sky-tours.com/",
 					_KEYWORDS: titles["KEYWORDS_LATEST_BOOKING"],
-						CANONICAL: `https://${req.baseUrl}`
+						CANONICAL: `https://${req.get('host')}${req.baseUrl}`
 				}
 			})
 		})
