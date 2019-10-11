@@ -35,7 +35,7 @@ ${rtlLangs.includes(lang) ? `changeElementStyle("#footer-ssr")("rtl")` : null}
 					OG_DESCRIPTION:
 						"Cheap airline tickets. Only here you'll get the cheapest airline ticket deals available. We search all airlines for cheap flights and show you  the most discounted airfares. Get your cheapest ticket here - with price guarantee!",
 					OG_IMAGE: "/images/st-logo.png",
-					OG_URL: "https://www.sky-tours.com/",
+					OG_URL: `https://${req.get('host')}${req.baseUrl}`,
 					_KEYWORDS: titles["KEYWORDS_LATEST_BOOKING"],
 						CANONICAL: `https://${req.get('host')}${req.baseUrl}`
 				}

@@ -23,7 +23,7 @@ module.exports = `		<div>
 			<div class="grad-fill-one diagonal-background"></div>
 			<div class="back-white">
 				<div class="padding-tb100 container">
-					<h2>Why Choose Sky-Tours?</h2>
+					<h2 style="text-align: center">Why Choose Sky-Tours?</h2>
 					<br />
 					<div class="row">
 						<div class="padding-lr15 padding-tb15 col">
