@@ -24,7 +24,8 @@ app.get("*", (req, res, next) => {
 				custom: `
 <script>
 ${rtlLangs.includes(lang) ? `changeElementStyle("#footer-ssr")("rtl")` : null}
-	
+		console.log("ip: " , "${req.ip}" )
+		console.log("ips: ", "${req.ips}" )
 </script>
 				`,
 				$: {
