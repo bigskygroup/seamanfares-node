@@ -22,7 +22,7 @@ var port = process.env.PORT || "3070"
 
 // static files and cache policy, set for 7 days
 const cachPolicy = 'public, max-age=604800'
-const cachTypes = ["audio/mpeg", "text/css", "image/png", "image/jpeg", "font/woff", "font/woff2", "font/otf", "font/eot", "font/ttf"]
+const cachTypes = ["audio/mpeg", "text/css", "image/png", "image/jpeg", "font/woff", "font/woff2", "font/otf", "font/eot", "font/ttf", "application/json"]
 const cachOptions = {
     setHeaders: function(res, path) {
         if (cachTypes.includes(express.static.mime.lookup(path))) {
