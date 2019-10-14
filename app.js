@@ -20,7 +20,20 @@ var port = process.env.PORT || "3070"
 // 	}
 // }))
 
-app.use(express.static(join(__dirname, "build")))
+// static files and cache policy, set for 7 days
+const cachPolicy = 'public, max-age=604800'
+const cachTypes = ["audio/mpeg", "text/css", "image/png", "image/jpeg", "font/woff", "font/woff2", "font/otf", "font/eot", "font/ttf"]
+const cachOptions = {
+    setHeaders: function(res, path) {
+        if (cachTypes.includes(express.static.mime.lookup(path))) {
+            // Custom Cache-Control for above files
+            res.setHeader('Cache-Control', cachPolicy)
+        }
+    }
+}
+
+
+app.use(express.static(join(__dirname, "build"), cachOptions))
 app.use(favicon(join(__dirname, "build", "favicon.ico")))
 
 // logger defined after static to avoid static files logged:
