@@ -1,11 +1,9 @@
 const { join } = require("path")
 const express = require("express")
 const app = express.Router()
-const { getTranslation, t , rtlLangs} = require("../../functions") //pass paths as if you are in
-const indexSSR =  require("../client/index")
-
-
-
+const { getTranslation, t, rtlLangs } = require("../../functions") //pass paths as if you are in
+const indexSSR = require("../client/index")
+const iplocate = require("node-iplocate")
 
 app.get("*", (req, res, next) => {
 	const lang = req.baseUrl.split("/")[1] || "en"
@@ -13,6 +11,7 @@ app.get("*", (req, res, next) => {
 		.then(async titles => {
 			// const reactHTML = ReactDOMServer.renderToString(Component())
 			const fallBack = await getTranslation(join("build", "locales", "lang", "en" + ".json"))
+			const detectLocation = await iplocate(req.ip)
 			res.render("index", {
 				// react: reactHTML,
 				minHeight: null,
@@ -20,12 +19,11 @@ app.get("*", (req, res, next) => {
 				t: word => t(word, titles, fallBack),
 
 				//if there is a variable defined in ejs, it must be supplied, although with null:
-				static: indexSSR ,
+				static: indexSSR,
 				custom: `
 <script>
 ${rtlLangs.includes(lang) ? `changeElementStyle("#footer-ssr")("rtl")` : null}
-		console.log("ip: " , "${req.ip}" )
-		console.log("ips: ", "${req.ips}" )
+
 </script>
 				`,
 				$: {
@@ -36,9 +34,10 @@ ${rtlLangs.includes(lang) ? `changeElementStyle("#footer-ssr")("rtl")` : null}
 					OG_DESCRIPTION:
 						"Cheap airline tickets. Only here you'll get the cheapest airline ticket deals available. We search all airlines for cheap flights and show you  the most discounted airfares. Get your cheapest ticket here - with price guarantee!",
 					OG_IMAGE: "/images/st-logo.png",
-					OG_URL: `https://${req.get('host')}${req.baseUrl}`,
+					OG_URL: `https://${req.get("host")}${req.baseUrl}`,
 					_KEYWORDS: titles["KEYWORDS_LATEST_BOOKING"],
-						CANONICAL: `https://${req.get('host')}${req.baseUrl}`
+					CANONICAL: `https://${req.get("host")}${req.baseUrl}`,
+					data_location: JSON.stringify(detectLocation)
 				}
 			})
 		})

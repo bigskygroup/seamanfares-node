@@ -14,9 +14,11 @@
     "ejs": "~2.6.1",
     "express": "~4.16.1",
     "f-tools": "^1.2.0",
-    "helmet": "^3.20.0",
+    "helmet": "^3.21.1",
     "http-errors": "~1.6.3",
+    "ipapi.co": "^0.3.0",
     "morgan": "~1.9.1",
+    "node-iplocate": "^1.0.1",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "serve-favicon": "^2.5.0"

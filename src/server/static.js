@@ -5,6 +5,7 @@ const app = express.Router()
 const fs = require("fs")
 const { join } = require("path")
 const { readContent, getTranslation, t, rtlLangs } = require("../../functions") //pass paths as if you are in root folder
+const iplocate = require("node-iplocate")
 
 app.get("*", (req, res, next) => {
 	const parseUrl = req.baseUrl.split("/") //e.g  [ '', 'en', 'about.htm' ]
@@ -15,6 +16,7 @@ app.get("*", (req, res, next) => {
 		.then(async content => {
 			const titles = await getTranslation(join("build", "locales", "lang", lang + ".json"))
 			const fallBack = await getTranslation(join("build", "locales", "lang", "en" + ".json"))
+			const detectLocation = await iplocate(req.ip)
 			res.render("index", {
 				// react: reactHTML,
 				minHeight: "0",
@@ -38,9 +40,10 @@ app.get("*", (req, res, next) => {
 					OG_DESCRIPTION:
 						"Cheap airline tickets. Only here you'll get the cheapest airline ticket deals available. We search all airlines for cheap flights and show you  the most discounted airfares. Get your cheapest ticket here - with price guarantee!",
 					OG_IMAGE: "/images/st-logo.png",
-					OG_URL: `https://${req.get('host')}${req.baseUrl}`,
+					OG_URL: `https://${req.get("host")}${req.baseUrl}`,
 					_KEYWORDS: titles["KEYWORDS_LATEST_BOOKING"],
-					CANONICAL: `https://${req.get('host')}${req.baseUrl}`
+					CANONICAL: `https://${req.get("host")}${req.baseUrl}`,
+					data_location: JSON.stringify(detectLocation)
 				}
 			})
 		})

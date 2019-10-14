@@ -2,10 +2,11 @@
 const express = require("express")
 const app = express.Router()
 const { join } = require("path")
-const { getTranslation, removeHTMLTags , t , rtlLangs} = require("../../functions") //pass paths as if you are in root folder
+const { getTranslation, removeHTMLTags, t, rtlLangs } = require("../../functions") //pass paths as if you are in root folder
 const { pipe, memoize } = require("f-tools")
 const airports = require("../../data/cities-condensed") //returns an array
 const countries = require("../../data/countries")
+const iplocate = require("node-iplocate")
 
 app.get("*", async (req, res, next) => {
 	const parseUrl = req.baseUrl.split("-") //e.g  [ '/en', 'tbs', 'dxb', 'tbilisi', 'dubai.html' ]
@@ -85,11 +86,14 @@ app.get("*", async (req, res, next) => {
 
 			const container = `<div class="container"><div class="row">${col1}${col2}</div></div>`
 
-			return `<div class="static"><div>${string}<br><h2>${arr[2]} <b>${country2}</b></h2>${container}</div></div>`
+			return `<div class="static"><div>${string}<br><h2>${
+				arr[2]
+			} <b>${country2}</b></h2>${container}</div></div>`
 		})
 		.then(async content => {
 			const titles = await getTranslation(join("build", "locales", "lang", lang + ".json"))
 			const fallBack = await getTranslation(join("build", "locales", "lang", "en" + ".json"))
+			const detectLocation = await iplocate(req.ip)
 			res.render("index", {
 				minHeight: "0",
 				lang: lang,
@@ -114,15 +118,14 @@ app.get("*", async (req, res, next) => {
 					_DESCRIPTION: removeHTMLTags(content),
 					OG_DESCRIPTION: removeHTMLTags(content),
 					OG_IMAGE: "/images/st-logo.png",
-					OG_URL: `https://${req.get('host')}${url}`,
+					OG_URL: `https://${req.get("host")}${url}`,
 					_KEYWORDS: `${metaKeyword}, ${name1}, ${country1}, ${cc1}, ${code1} ${name2}, ${country2}, ${cc2}, ${code2}`,
-					CANONICAL: `https://${req.get('host')}${url}`
+					CANONICAL: `https://${req.get("host")}${url}`,
+					data_location: JSON.stringify(detectLocation)
 				}
 			})
 		})
 		.catch(err => next())
 })
-
-
 
 module.exports = app

@@ -39,6 +39,7 @@ f.createIndexEJS = folder => {
     <meta property="og:url" content="<%-$.OG_URL%>" />
     <meta property="og:type" content="website" />
 		<link rel="canonical" href="<%-$.CANONICAL%>" />
+		<div id="userLocation" data-location=<%-$.data_location%> ></div>
     `
 				)
 
