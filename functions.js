@@ -86,6 +86,7 @@ f.t = (word, translationJSON, defualtTranslation) => {
 }
 
 f.ipFields = ({ ip , city, country, country_code , continent, latitude, longitude, time_zone} )=> {
+	console.log("---------", city)
 	return {
 		ip: ip || "",
 		city: city || "",

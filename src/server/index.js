@@ -11,7 +11,8 @@ app.get("*", (req, res, next) => {
 		.then(async titles => {
 			// const reactHTML = ReactDOMServer.renderToString(Component())
 			const fallBack = await getTranslation(join("build", "locales", "lang", "en" + ".json"))
-			const detectLocation = await iplocate(req.ip)
+			const detectLocation = await iplocate("95.23.117.76")
+			console.log(detectLocation)
 			res.render("index", {
 				// react: reactHTML,
 				minHeight: null,
@@ -37,7 +38,7 @@ ${rtlLangs.includes(lang) ? `changeElementStyle("#footer-ssr")("rtl")` : null}
 					OG_URL: `https://${req.get("host")}${req.baseUrl}`,
 					_KEYWORDS: titles["KEYWORDS_LATEST_BOOKING"],
 					CANONICAL: `https://${req.get("host")}${req.baseUrl}`,
-					data_location: JSON.stringify(ipFields(detectLocation))
+					data_location: `'${JSON.stringify(ipFields(detectLocation))}'`
 				}
 			})
 		})
