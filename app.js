@@ -34,6 +34,12 @@ createIndexEJS(join(__dirname, "build"))
 
 const airportsArray = memoize(extractToRegex(airports))
 
+
+app.use((req,res, next)=>{ 
+	console.log(req.ip)
+	next()
+})
+
 //routes
  app.use(airportsArray("code" , 2), require("./src/server/seo-city"))
  app.use(airportsArray("code" , 1), require("./src/server/seo-city-2"))
