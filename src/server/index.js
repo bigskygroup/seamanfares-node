@@ -11,7 +11,7 @@ app.get("*", (req, res, next) => {
 		.then(async titles => {
 			// const reactHTML = ReactDOMServer.renderToString(Component())
 			const fallBack = await getTranslation(join("build", "locales", "lang", "en" + ".json"))
-			const detectLocation = await iplocate("95.23.117.76")
+			const detectLocation = await iplocate(req.ip)
 			console.log(detectLocation)
 			res.render("index", {
 				// react: reactHTML,
