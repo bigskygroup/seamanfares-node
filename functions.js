@@ -85,4 +85,17 @@ f.t = (word, translationJSON, defualtTranslation) => {
 	}
 }
 
+f.ipFields = ({ ip , city, country, country_code , continent, latitude, longitude, time_zone} )=> {
+	return {
+		ip: ip || "",
+		city: city || "",
+		country : country || "",
+		country_code : country_code || "",
+		continent : continent || "" ,
+		latitude : latitude || "",
+		longitude : longitude || "" ,
+		time_zone : time_zone || ""
+	}
+}
+
 module.exports = f

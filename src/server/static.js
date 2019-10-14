@@ -4,7 +4,7 @@ const express = require("express")
 const app = express.Router()
 const fs = require("fs")
 const { join } = require("path")
-const { readContent, getTranslation, t, rtlLangs } = require("../../functions") //pass paths as if you are in root folder
+const { readContent, getTranslation, t, rtlLangs, ipFields } = require("../../functions") //pass paths as if you are in root folder
 const iplocate = require("node-iplocate")
 
 app.get("*", (req, res, next) => {
@@ -43,7 +43,7 @@ app.get("*", (req, res, next) => {
 					OG_URL: `https://${req.get("host")}${req.baseUrl}`,
 					_KEYWORDS: titles["KEYWORDS_LATEST_BOOKING"],
 					CANONICAL: `https://${req.get("host")}${req.baseUrl}`,
-					data_location: JSON.stringify(detectLocation)
+					data_location: JSON.stringify(ipFields(detectLocation))
 				}
 			})
 		})

@@ -3,7 +3,7 @@
 const express = require("express")
 const app = express.Router()
 const { join } = require("path")
-const { getTranslation, removeHTMLTags, t, rtlLangs } = require("../../functions") //pass paths as if you are in root folder
+const { getTranslation, removeHTMLTags, t, rtlLangs , ipFields} = require("../../functions") //pass paths as if you are in root folder
 const { pipe, memoize } = require("f-tools")
 const airports = require("../../data/cities-condensed") //returns an array
 const countries = require("../../data/countries")
@@ -119,7 +119,7 @@ app.get("*", async (req, res, next) => {
 					CANONICAL: `https://${req.get(
 						"host"
 					)}/${lang}/${code.toLowerCase().trim()}-${nameInUrl.toLowerCase().trim()}.html`,
-					data_location: JSON.stringify(detectLocation)
+					data_location: JSON.stringify(ipFields(detectLocation))
 				}
 			})
 		})

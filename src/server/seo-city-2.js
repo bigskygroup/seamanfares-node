@@ -2,7 +2,7 @@
 const express = require("express")
 const app = express.Router()
 const { join } = require("path")
-const { getTranslation, removeHTMLTags, t, rtlLangs } = require("../../functions") //pass paths as if you are in root folder
+const { getTranslation, removeHTMLTags, t, rtlLangs, ipFields } = require("../../functions") //pass paths as if you are in root folder
 const { pipe, memoize } = require("f-tools")
 const airports = require("../../data/cities-condensed") //returns an array
 const countries = require("../../data/countries")
@@ -121,7 +121,7 @@ app.get("*", async (req, res, next) => {
 					OG_URL: `https://${req.get("host")}${url}`,
 					_KEYWORDS: `${metaKeyword}, ${name1}, ${country1}, ${cc1}, ${code1} ${name2}, ${country2}, ${cc2}, ${code2}`,
 					CANONICAL: `https://${req.get("host")}${url}`,
-					data_location: JSON.stringify(detectLocation)
+					data_location: JSON.stringify(ipFields(detectLocation))
 				}
 			})
 		})

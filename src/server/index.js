@@ -1,7 +1,7 @@
 const { join } = require("path")
 const express = require("express")
 const app = express.Router()
-const { getTranslation, t, rtlLangs } = require("../../functions") //pass paths as if you are in
+const { getTranslation, t, rtlLangs, ipFields } = require("../../functions") //pass paths as if you are in
 const indexSSR = require("../client/index")
 const iplocate = require("node-iplocate")
 
@@ -37,7 +37,7 @@ ${rtlLangs.includes(lang) ? `changeElementStyle("#footer-ssr")("rtl")` : null}
 					OG_URL: `https://${req.get("host")}${req.baseUrl}`,
 					_KEYWORDS: titles["KEYWORDS_LATEST_BOOKING"],
 					CANONICAL: `https://${req.get("host")}${req.baseUrl}`,
-					data_location: JSON.stringify(detectLocation)
+					data_location: JSON.stringify(ipFields(detectLocation))
 				}
 			})
 		})
