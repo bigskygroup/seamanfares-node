@@ -84,17 +84,21 @@ f.t = (word, translationJSON, defualtTranslation) => {
 		return defualtTranslation[word.trim()]
 	}
 }
+f.removeQuote = str => typeof str === "string" ? str.replace(/'/g, " ") : str
 
-f.ipFields = ({ ip , city, country, country_code , continent, latitude, longitude, time_zone} )=> {
+f.ipFields = function ({ ip , city, country, country_code , continent, latitude, longitude, time_zone, subdivision, subdivision2 } )  {
+	const r = f.removeQuote
 	return {
-		ip: ip || "",
-		city: city || "",
-		country : country || "",
-		country_code : country_code || "",
-		continent : continent || "" ,
+		ip: r(ip) || "",
+		city: r(city) || "",
+		country : r(country) || "",
+		country_code : r(country_code) || "",
+		continent : r(continent) || "" ,
 		latitude : latitude || "",
 		longitude : longitude || "" ,
-		time_zone : time_zone || ""
+		time_zone : r(time_zone) || "",
+		subdivision: r(subdivision) || "",
+		subdivision2: r(subdivision2) || ""
 	}
 }
 
