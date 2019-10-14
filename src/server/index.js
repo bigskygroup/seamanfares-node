@@ -12,7 +12,6 @@ app.get("*", (req, res, next) => {
 			// const reactHTML = ReactDOMServer.renderToString(Component())
 			const fallBack = await getTranslation(join("build", "locales", "lang", "en" + ".json"))
 			const detectLocation = await iplocate(req.ip)
-			console.log(detectLocation)
 			res.render("index", {
 				// react: reactHTML,
 				minHeight: null,
