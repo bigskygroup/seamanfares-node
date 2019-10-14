@@ -29,10 +29,11 @@ app.use(favicon(join(__dirname, "build", "favicon.ico")))
 //template engine set-up
 app.set("views", join(__dirname, "build"))
 app.set("view engine", "ejs")
-
+app.set('trust proxy', true)
 createIndexEJS(join(__dirname, "build"))
 
 const airportsArray = memoize(extractToRegex(airports))
+
 
 //routes
  app.use(airportsArray("code" , 2), require("./src/server/seo-city"))
