@@ -4,8 +4,8 @@ const express = require("express")
 const app = express.Router()
 const fs = require("fs")
 const { join } = require("path")
-const { readContent, getTranslation, t, rtlLangs, ipFields } = require("../../functions") //pass paths as if you are in root folder
-const iplocate = require("node-iplocate")
+const { readContent, getTranslation, t, rtlLangs, ipFields, iplocate } = require("../../functions") //pass paths as if you are in root folder
+
 
 app.get("*", (req, res, next) => {
 	const parseUrl = req.baseUrl.split("/") //e.g  [ '', 'en', 'about.htm' ]

@@ -2,6 +2,7 @@ const fs = require("fs")
 const path = require("path")
 const util = require("util")
 const { memoize } = require("f-tools")
+const iplocate = require("node-iplocate")
 
 // f object will hold the functions and export them:
 const f = {}
@@ -101,5 +102,7 @@ f.ipFields = function ({ ip , city, country, country_code , continent, latitude,
 		subdivision2: r(subdivision2) || ""
 	}
 }
+
+f.iplocate = memoize(iplocate)
 
 module.exports = f

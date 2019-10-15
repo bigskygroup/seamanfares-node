@@ -1,9 +1,9 @@
 const { join } = require("path")
 const express = require("express")
 const app = express.Router()
-const { getTranslation, t, rtlLangs, ipFields } = require("../../functions") //pass paths as if you are in
+const { getTranslation, t, rtlLangs, ipFields, iplocate } = require("../../functions") //pass paths as if you are in
 const indexSSR = require("../client/index")
-const iplocate = require("node-iplocate")
+
 
 app.get("*", (req, res, next) => {
 	const lang = req.baseUrl.split("/")[1] || "en"
