@@ -72,9 +72,14 @@ module.exports = `		<div>
 								/>
 							</div>
 							<div class="buttons-section margin-b20">
+							<a href="https://www.trustpilot.com/review/www.sky-tours.com" target="_blank" style="color: transparent">
 								<button type="button" class="m-2 secondary highlight btn btn-primary">
 									VIEW</button
-								><button type="button" class="m-2 btn btn-danger">ADD A REVIEW</button>
+								>
+								</a>
+								<a href="https://www.trustpilot.com/evaluate/www.sky-tours.com" target="_blank" style="color: transparent">
+								<button type="button" class="m-2 btn btn-danger">ADD A REVIEW</button>
+								</a>
 							</div>
 						</div>
 						<div class="col-lg-6 col-12">
