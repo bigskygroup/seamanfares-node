@@ -2,12 +2,10 @@ const { join } = require("path")
 const express = require("express")
 const app = express.Router()
 const { getTranslation, t, rtlLangs, ipFields, iplocate } = require("../../functions") //pass paths as if you are in
-const indexSSR = require("../client/index")
-
 
 app.get("*", (req, res, next) => {
-	const splitedUrl = req.baseUrl.split("/")
-	const lang = splitedUrl[1] || "en"
+	const splitedUrl = req.path.split("/")
+	const lang = splitedUrl[2] || "en"
 	getTranslation(join("build", "locales", "lang", lang + ".json"))
 		.then(async titles => {
 			// const reactHTML = ReactDOMServer.renderToString(Component())
@@ -20,7 +18,7 @@ app.get("*", (req, res, next) => {
 				t: word => t(word, titles, fallBack),
 
 				//if there is a variable defined in ejs, it must be supplied, although with null:
-				static: splitedUrl.length < 3 ? indexSSR : null,
+				static: null,
 				custom: `
 <script>
 ${rtlLangs.includes(lang) ? `changeElementStyle("#footer-ssr")("rtl")` : null}
@@ -46,14 +44,3 @@ ${rtlLangs.includes(lang) ? `changeElementStyle("#footer-ssr")("rtl")` : null}
 })
 
 module.exports = app
-
-// root folder
-// const babel = require("babel-register")
-// const React = require("react")
-// const ReactDOMServer = require("react-dom/server")
-
-// require("babel-register")({
-// 	presets: ["react"]
-// })
-
-// const Component = require("../../client/index.js")
