@@ -1,6 +1,7 @@
 const fs = require("fs")
 const path = require("path")
 const util = require("util")
+const ejs = require("ejs")
 const { memoize } = require("f-tools")
 const iplocate = require("node-iplocate")
 
@@ -104,5 +105,7 @@ f.ipFields = function ({ ip , city, country, country_code , continent, latitude,
 }
 
 f.iplocate = memoize(iplocate)
+
+f.ejs = memoize(ejs.compile)
 
 module.exports = f
