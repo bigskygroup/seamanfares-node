@@ -26,12 +26,7 @@ module.exports = `		<div>
 					<h2 style="text-align: center">Why Choose Sky-Tours?</h2>
 					<br />
 					<div class="row">
-						<div class="padding-lr15 padding-tb15 col">
-							<img style="display: block; margin: 0 auto" src="/images/icons/icon1.png"  />
-							<div class="font14 text-light-gray maxw200 margin-lr-auto">
-								we check our prices daily to ensure we offer the best value
-							</div>
-						</div>
+						
 						<div class="padding-lr15 padding-tb15 col">
 							<img style="display: block; margin: 0 auto" src="/images/icons/icon2.png"  />
 							<div class="font14 text-light-gray maxw200 margin-lr-auto">
