@@ -51,7 +51,7 @@ const airportsArray = memoize(extractToRegex(airports))
 //routes
 app.get("/viewtrip/*" , require("./src/server/confirmationEmail"))
 app.get("/confirmation*", require("./src/server/confirmation"))
-app.get("/book" , require("./src/server/index"))
+// app.get("/book" , require("./src/server/index"))
 app.get("/advertising.html", (req, res) => res.render("pages/advertising.ejs"))
 
  app.use(airportsArray("code" , 2), require("./src/server/seo-city"))
