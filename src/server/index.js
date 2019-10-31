@@ -6,7 +6,7 @@ const indexSSR = require("../client/index")
 
 app.get("*", (req, res, next) => {
 	const splitedUrl = req.baseUrl.split("/")
-	const lang = splitedUrl[1].length === 2 ? splitedUrl[1] : "en"
+	const lang = splitedUrl[1] && splitedUrl[1].length === 2 ? splitedUrl[1] : "en"
 
 	getTranslation(join("build", "locales", "lang", lang + ".json"))
 		.then(async titles => {
