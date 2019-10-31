@@ -5,6 +5,7 @@ const fs = require("fs")
 // const logger = require("morgan")
 // const helmet = require("helmet")
 const graphqlHTTP = require('express-graphql')
+var cors = require('cors')
 const favicon = require("serve-favicon")
 const { createIndexEJS, extractToRegex } = require("./functions")
 const { memoize }= require("f-tools")
@@ -33,7 +34,7 @@ const cachOptions = {
     }
 }
 
-
+app.use(cors())
 app.use(express.static(join(__dirname, "build"), cachOptions))
 app.use(favicon(join(__dirname, "build", "favicon.ico")))
 
