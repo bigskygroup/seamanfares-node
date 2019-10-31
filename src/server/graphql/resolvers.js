@@ -27,7 +27,7 @@ function sendIpRequest(ip) {
 		lastIpReqTime = Date.now()
 		return ipProvider1(ip)
 	} else {
-		// console.log("ipProvider2 called")
+		// console.log("ipProvider2 called") //
 		return ipProvider2(ip)
 	}
 }
