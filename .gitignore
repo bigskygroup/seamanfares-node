@@ -3,5 +3,6 @@
 /build/locales/**
 /data/bigfile.js
 /data/cities.js
+/data/ip/**
 
 

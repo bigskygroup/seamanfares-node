@@ -1,15 +1,17 @@
 const fs = require("fs")
+const fsPromise = require("fs").promises
 const path = require("path")
 const util = require("util")
 const ejs = require("ejs")
 const { memoize } = require("f-tools")
 const iplocate = require("node-iplocate")
+const fetch = require("node-fetch")
 
 // f object will hold the functions and export them:
 const f = {}
 
 // right-to-left languages
-f.rtlLangs = ["ae", "eg", "ir", "jo", "lb", "sa" , "bh", "kw", "om", "qr"]
+f.rtlLangs = ["ae", "eg", "ir", "jo", "lb", "sa", "bh", "kw", "om", "qr"]
 
 f.createIndexEJS = folder => {
 	// need to run this block first time only. to create index.ejs inside "build"
@@ -27,7 +29,8 @@ f.createIndexEJS = folder => {
 				.replace(`<div id="content-ssr">`, `<div id="content-ssr"><%- static ? static : '' %>`)
 				.replace(`<div id="footer-ssr">`, `<div id="footer-ssr"><%- include('footer') %>`)
 				.replace(
-					`</body>`, `<script src="/script/general.js"></script>
+					`</body>`,
+					`<script src="/script/general.js"></script>
 					<%- custom ? custom : '' %> </body>`
 				)
 				.replace(
@@ -62,6 +65,9 @@ f.createIndexEJS = folder => {
 
 //pass paths as if you are in root folder
 f.readContent = memoize(util.promisify(fs.readFile))
+f.readJson = destination => {
+	return util.promisify(fs.readFile)(destination, "utf8").then(res => JSON.parse(res)).catch(err=> null)
+}
 f.readFolderFiles = location => util.promisify(fs.readdir)(location, "utf8")
 f.readTranslation = (location = join("build", "locales", "lang", "en" + ".json")) => {
 	return f.readContent(location, "utf8").then(res => JSON.parse(res))
@@ -86,25 +92,94 @@ f.t = (word, translationJSON, defualtTranslation) => {
 		return defualtTranslation[word.trim()]
 	}
 }
-f.removeQuote = str => typeof str === "string" ? str.replace(/'/g, " ") : str
+f.removeQuote = str => (typeof str === "string" ? str.replace(/'/g, " ") : str)
 
-f.ipFields = function ({ ip , city, country, country_code , continent, latitude, longitude, time_zone, subdivision, subdivision2 } )  {
+f.ipFields = function({
+	ip,
+	city,
+	country,
+	country_code,
+	continent,
+	latitude,
+	longitude,
+	time_zone,
+	subdivision,
+	subdivision2
+}) {
 	const r = f.removeQuote
 	return {
 		ip: r(ip) || "",
 		city: r(city) || "",
-		country : r(country) || "",
-		country_code : r(country_code) || "",
-		continent : r(continent) || "" ,
-		latitude : latitude || "",
-		longitude : longitude || "" ,
-		time_zone : r(time_zone) || "",
+		country: r(country) || "",
+		country_code: r(country_code) || "",
+		continent: r(continent) || "",
+		latitude: latitude || "",
+		longitude: longitude || "",
+		time_zone: r(time_zone) || "",
 		subdivision: r(subdivision) || "",
 		subdivision2: r(subdivision2) || ""
 	}
 }
 
 f.iplocate = memoize(iplocate)
+
+//ipinfodb.com
+f.ipProvider1 = ip => {
+	if (typeof ip !== "string") ip = ip.toString()
+	const request = `http://api.ipinfodb.com/v3/ip-city/?key=690109629d12af0cb4e7829d39ec444fdebc77eb646a89b009c7243ad83ce61d&format=json&ip=${ip}`
+	return fetch(request)
+		.then(res => res.json())
+		.then(res => {
+			const r = f.removeQuote
+			const response = {
+				ip: r(res.ipAddress) || "",
+				city: r(res.cityName) || "",
+				country: r(res.countryName) || "",
+				latitude: res.latitude.toString() || "",
+				longitude: res.longitude.toString() || "",
+				city2: r(res.regionName) || ""
+			}
+			f.ipJsonCreator(path.join("data", "ip"), response)
+			return response
+		})
+		.catch(err =>  response)
+}
+
+f.ipProvider2 = ip => {
+	if (typeof ip !== "string") ip = ip.toString()
+
+	return iplocate(ip)
+		.then(res => {
+			const r = f.removeQuote
+			const response = {
+				ip: r(res.ip) || "",
+				city: r(res.city) || "",
+				country: r(res.country) || "",
+				latitude: res.latitude.toString() || "",
+				longitude: res.longitude.toString() || "",
+				city2: r(res.subdivision) || ""
+			}
+			f.ipJsonCreator(path.join("data", "ip"), response)
+			return response
+		})
+		.catch(err => response)
+}
+
+f.ipJsonCreator = (folder, response = {}) => {
+	if (!response.ip) return
+	const newEntry = {}
+	newEntry[response.ip] = response
+	const fileName = response.ip.match(/^\d+/g)[0]
+	const pathToDestination = path.join(folder, fileName + ".json")
+
+
+	fsPromise
+		.readFile(pathToDestination, { flag: "a+", encoding: "utf8" })
+		.then(res => (res.length ? JSON.parse(res) : {}))
+		.then(res => Object.assign({}, res, newEntry))
+		.then(res => fsPromise.writeFile(pathToDestination, JSON.stringify(res), "utf8"))
+		.catch(err => console.log(err))
+}
 
 f.ejs = memoize(ejs.compile)
 

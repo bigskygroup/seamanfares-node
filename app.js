@@ -4,6 +4,7 @@ const { join } = require("path")
 const fs = require("fs")
 // const logger = require("morgan")
 // const helmet = require("helmet")
+const graphqlHTTP = require('express-graphql')
 const favicon = require("serve-favicon")
 const { createIndexEJS, extractToRegex } = require("./functions")
 const { memoize }= require("f-tools")
@@ -49,6 +50,11 @@ const airportsArray = memoize(extractToRegex(airports))
 
 
 //routes
+app.use("/graphql", graphqlHTTP({
+    schema: require("./src/server/graphql/schema"),
+    rootValue: require("./src/server/graphql/resolvers"),
+    graphiql: true
+}))
 app.get("/viewtrip/*" , require("./src/server/confirmationEmail"))
 app.get("/confirmation*", require("./src/server/confirmation"))
 app.get("/book" , require("./src/server/index"))
