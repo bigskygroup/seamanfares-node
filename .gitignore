@@ -1,6 +1,6 @@
 # dependencies
 /node_modules
-
+/data/ip/**
 !/build/locales/lang/en.json
 /build/locales/
 /data/bigfile.js

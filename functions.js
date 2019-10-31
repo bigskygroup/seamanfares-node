@@ -166,7 +166,8 @@ f.ipProvider2 = ip => {
 }
 
 f.ipJsonCreator = (folder, response = {}) => {
-	if (!response.ip) return
+	//don't write invalid data
+	if (!response.ip || !response.city) return
 	const newEntry = {}
 	newEntry[response.ip] = response
 	const fileName = response.ip.match(/^\d+/g)[0]
