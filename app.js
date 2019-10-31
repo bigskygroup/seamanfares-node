@@ -57,7 +57,6 @@ app.use("/graphql", graphqlHTTP({
 }))
 app.get("/viewtrip/*" , require("./src/server/confirmationEmail"))
 app.get("/confirmation*", require("./src/server/confirmation"))
-app.get("/book" , require("./src/server/index"))
 app.get("/advertising.html", (req, res) => res.render("pages/advertising.ejs"))
 
  app.use(airportsArray("code" , 2), require("./src/server/seo-city"))
@@ -70,7 +69,6 @@ app.use(/^\/[A-Za-z]{2}\/[A-Za-z_]{2,22}\.htm\/{0,1}$/, require("./src/server/st
 
 
 const routeToIndex = [
-// /^\/[A-Za-z]{2}\/confirmation/,
 "/book",
 /^\/[A-Za-z]{2}\/search\/{0,1}/,
 /^\/[A-Za-z]{2}\/{0,1}$/ , /^\/[A-Za-z]{2}\/404$/,/^\/$/  ]
