@@ -22,7 +22,7 @@ r.ip = async ({ ip, refetch }, options) => {
 }
 
 function sendIpRequest(ip) {
-	if (Date.now() - lastIpReqTime > 500) {
+	if (Date.now() - lastIpReqTime > 510) {
 		// console.log("ipProvider1 called")
 		lastIpReqTime = Date.now()
 		return ipProvider1(ip)
