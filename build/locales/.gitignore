@@ -1,4 +1,5 @@
-*
+/info/*
+!/info/ae
 !.gitignore
 !currency.xml
 !lang.xml
