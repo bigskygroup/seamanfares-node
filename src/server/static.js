@@ -6,7 +6,6 @@ const fs = require("fs")
 const { join } = require("path")
 const { readContent, getTranslation, t, rtlLangs, ipFields, iplocate } = require("../../functions") //pass paths as if you are in root folder
 
-
 app.get("*", (req, res, next) => {
 	const parseUrl = req.baseUrl.split("/") //e.g  [ '', 'en', 'about.htm' ]
 	const lang = parseUrl[1]
@@ -15,7 +14,8 @@ app.get("*", (req, res, next) => {
 	readContent(join("build", "locales", "info", lang, page), "utf8")
 		.then(async content => {
 			const titles = await getTranslation(join("build", "locales", "lang", lang + ".json"))
-			const fallBack = await getTranslation(join("build", "locales", "lang", "en" + ".json"))
+			const fallBack =
+				lang === "en" ? titles : await getTranslation(join("build", "locales", "lang", "en" + ".json"))
 			const detectLocation = await iplocate(req.ip)
 			res.render("index", {
 				// react: reactHTML,
@@ -33,7 +33,11 @@ app.get("*", (req, res, next) => {
 											</script>`,
 
 				$: {
-					_SKY_TOURS: `${titles[getTitle(page)]} | Sky-tours.com`,
+					_SKY_TOURS: `${
+						titles[getTitle(page)] && titles[getTitle(page)] !== "null"
+							? titles[getTitle(page)]
+							: null || (content.match(/<h1/i) && content.match(/<h1[^>]*>([^<]+)<\/h1>/i)[1]) || ""
+					} | Sky-tours.com`,
 					OG_TITLE: `${titles["TITLE_INDEX"]} | Sky-tours.com`,
 					_DESCRIPTION:
 						"Cheap airline tickets. Only here you'll get the cheapest airline ticket deals available. We search all airlines for cheap flights and show you  the most discounted airfares. Get your cheapest ticket here - with price guarantee!",
