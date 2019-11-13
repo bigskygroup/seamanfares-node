@@ -56,6 +56,7 @@ app.use("/graphql", graphqlHTTP({
     rootValue: require("./src/server/graphql/resolvers"),
     graphiql: true
 }))
+
 app.get("/viewtrip/*" , require("./src/server/confirmationEmail"))
 app.get("/confirmation*", require("./src/server/confirmation"))
 app.get("/advertising.html", (req, res) => res.render("pages/advertising.ejs"))
@@ -64,9 +65,8 @@ app.get("/advertising.html", (req, res) => res.render("pages/advertising.ejs"))
  app.use(airportsArray("code" , 1), require("./src/server/seo-city-2"))
 
 app.use(airportsArray("cc", 2), require("./src/server/seo-country"))
-app.use(/^\/[A-Za-z]{2}\/[A-Za-z_]{2,22}\.htm\/{0,1}$/, require("./src/server/static"))
 
-
+app.use(/^\/[A-Za-z]{2}\/[A-Za-z_]{2,35}\.htm\/{0,1}$/, require("./src/server/static"))
 
 
 const routeToIndex = [

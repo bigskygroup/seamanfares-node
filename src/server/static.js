@@ -36,7 +36,9 @@ app.get("*", (req, res, next) => {
 					_SKY_TOURS: `${
 						titles[getTitle(page)] && titles[getTitle(page)] !== "null"
 							? titles[getTitle(page)]
-							: null || (content.match(/<h1/i) && content.match(/<h1[^>]*>([^<]+)<\/h1>/i)[1]) || ""
+							: null || content.match(/<h1/i).length > 1
+							? content.match(/<h1[^>]*>([^<]+)<\/h1>/i)[1]
+							: null || ""
 					} | Sky-tours.com`,
 					OG_TITLE: `${titles["TITLE_INDEX"]} | Sky-tours.com`,
 					_DESCRIPTION:
@@ -73,6 +75,8 @@ function getTitle(page) {
 			return "CANCELLATION"
 		case "luggage_allowance":
 			return "BAGGAGE_ALLOWANCE"
+		default:
+			return null
 	}
 }
 
