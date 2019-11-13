@@ -12,7 +12,7 @@ app.get("*", (req, res, next) => {
 	const page = parseUrl[2]
 
 	readContent(join("build", "locales", "info", lang, page), "utf8")
-		.then(async content => {
+		.then(async content => { console.log(content.match(/<h1/i))
 			const titles = await getTranslation(join("build", "locales", "lang", lang + ".json"))
 			const fallBack =
 				lang === "en" ? titles : await getTranslation(join("build", "locales", "lang", "en" + ".json"))
@@ -36,7 +36,7 @@ app.get("*", (req, res, next) => {
 					_SKY_TOURS: `${
 						titles[getTitle(page)] && titles[getTitle(page)] !== "null"
 							? titles[getTitle(page)]
-							: null || content.match(/<h1/i).length > 1
+							: null || (content.match(/<h1/i) && content.match(/<h1/i).length > 1)
 							? content.match(/<h1[^>]*>([^<]+)<\/h1>/i)[1]
 							: null || ""
 					} | Sky-tours.com`,
@@ -53,7 +53,7 @@ app.get("*", (req, res, next) => {
 				}
 			})
 		})
-		.catch(err => next())
+		.catch(err =>console.log(err))
 })
 
 function getTitle(page) {
