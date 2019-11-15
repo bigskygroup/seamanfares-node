@@ -25,6 +25,7 @@
     "node-iplocate": "^1.0.1",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
+    "rotating-file-stream": "^1.4.6",
     "serve-favicon": "^2.5.0"
   },
   "devDependencies": {

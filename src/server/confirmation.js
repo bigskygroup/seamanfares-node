@@ -3,12 +3,13 @@ const express = require("express")
 const app = express.Router()
 const { getTranslation, t, rtlLangs, ipFields, iplocate } = require("../../functions") //pass paths as if you are in
 
-app.get("*", (req, res, next) => {
+app.get("*", (req, res, next) => { 
 	const splitedUrl = req.path.split("/")
 	const lang = splitedUrl[2] || "en"
 	getTranslation(join("build", "locales", "lang", lang + ".json"))
 		.then(async titles => {
-			// const reactHTML = ReactDOMServer.renderToString(Component())
+
+
 			const fallBack = await getTranslation(join("build", "locales", "lang", "en" + ".json"))
 			const detectLocation = await iplocate(req.ip)
 			res.render("index", {

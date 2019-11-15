@@ -12,7 +12,7 @@ app.get("*", (req, res, next) => {
 	const page = parseUrl[2]
 
 	readContent(join("build", "locales", "info", lang, page), "utf8")
-		.then(async content => { console.log(content.match(/<h1/i))
+		.then(async content => { 
 			const titles = await getTranslation(join("build", "locales", "lang", lang + ".json"))
 			const fallBack =
 				lang === "en" ? titles : await getTranslation(join("build", "locales", "lang", "en" + ".json"))
@@ -53,7 +53,7 @@ app.get("*", (req, res, next) => {
 				}
 			})
 		})
-		.catch(err =>console.log(err))
+		.catch(err =>next())
 })
 
 function getTitle(page) {

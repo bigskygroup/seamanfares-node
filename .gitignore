@@ -5,6 +5,8 @@
 !/build/locales/lang/en.json
 /data/bigfile.js
 /data/cities.js
+data/logs/*
+
 
 
 
