@@ -36,8 +36,7 @@ const cachTypes = [
 	"font/woff2",
 	"font/otf",
 	"font/eot",
-	"font/ttf",
-	"application/json"
+	"font/ttf"
 ]
 const cachOptions = {
 	setHeaders: function(res, path) {
