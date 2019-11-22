@@ -17,7 +17,7 @@ process.env.NODE_ENV = NODE_ENV
 
 //database connection
 mongoose
-	.connect(`mongodb://${dbName}:${dbPassword}@${dbAccessIP}:27017/${dbName}`, {
+	.connect(`mongodb://${dbName}:${dbPassword}@localhost:27017/${dbName}`, {
 		useNewUrlParser: true,
 		useUnifiedTopology: true
 	})
