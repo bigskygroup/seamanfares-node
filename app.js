@@ -16,24 +16,24 @@ const PORT = process.env.PORT || 3070
 process.env.NODE_ENV = NODE_ENV
 
 //database connection
-// mongoose
-// 	.connect(`mongodb://${dbName}:${dbPassword}@${dbAccessIP}:27017/${dbName}`, {
-// 		useNewUrlParser: true,
-// 		useUnifiedTopology: true
-// 	})
-// 	.then(res => {
-// 		console.log("connected to database",dbName )	
-// 	})
-// 	.catch(err =>
-// 		console.log(
-// 			"Your MongoDB setting in the app.js file is not correct. ",
-// 			err
-// 		)
-// 	)
-// const IP = require("./src/server/models/ip")
+mongoose
+	.connect(`mongodb://${dbName}:${dbPassword}@${dbAccessIP}:27017/${dbName}`, {
+		useNewUrlParser: true,
+		useUnifiedTopology: true
+	})
+	.then(res => {
+		console.log("connected to database",dbName )	
+	})
+	.catch(err =>
+		console.log(
+			"Your MongoDB setting in the app.js file is not correct. ",
+			err
+		)
+	)
+const IP = require("./src/server/models/ip")
 
-// const myIp = new IP({name: new Date().getSeconds().toString()})
-// myIp.save().then(res => console.log(res)).catch(err=> console.log(err))
+const myIp = new IP({name: new Date().getSeconds().toString()})
+myIp.save().then(res => console.log(res)).catch(err=> console.log(err))
 
 
 
@@ -143,5 +143,5 @@ app.use(routeToIndex, require("./src/server/index"))
 //handling wrong requests at the end
 app.use(require("./src/server/404"))
 const date = new Date().toLocaleString()
-app.listen( 3070 , console.log(`skytours-node app is listening on ${PORT} at ${date}`))
+app.listen( PORT , console.log(`skytours-node app is listening on ${PORT} at ${date}`))
 module.exports = app
