@@ -143,5 +143,5 @@ app.use(routeToIndex, require("./src/server/index"))
 //handling wrong requests at the end
 app.use(require("./src/server/404"))
 const date = new Date().toLocaleString()
-app.listen(PORT, console.log(`skytours-node app is listening on ${PORT} at ${date}`))
+app.listen( 3070 , console.log(`skytours-node app is listening on ${PORT} at ${date}`))
 module.exports = app
