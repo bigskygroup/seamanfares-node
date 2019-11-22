@@ -16,20 +16,27 @@ const PORT = process.env.PORT || "3070"
 process.env.NODE_ENV = NODE_ENV
 
 //database connection
-mongoose
-	.connect(`mongodb://${dbName}:${dbPassword}@${dbAccessIP}:27017/${dbName}`, {
-		useNewUrlParser: true,
-		useUnifiedTopology: true
-	})
-	.then(res => {
-		console.log("connected to database",dbName )	
-	})
-	.catch(err =>
-		console.log(
-			"Your MongoDB setting in the app.js file is not correct. ",
-			err
-		)
-	)
+// mongoose
+// 	.connect(`mongodb://${dbName}:${dbPassword}@${dbAccessIP}:27017/${dbName}`, {
+// 		useNewUrlParser: true,
+// 		useUnifiedTopology: true
+// 	})
+// 	.then(res => {
+// 		console.log("connected to database",dbName )	
+// 	})
+// 	.catch(err =>
+// 		console.log(
+// 			"Your MongoDB setting in the app.js file is not correct. ",
+// 			err
+// 		)
+// 	)
+// const IP = require("./src/server/models/ip")
+
+// const myIp = new IP({name: new Date().getSeconds().toString()})
+// myIp.save().then(res => console.log(res)).catch(err=> console.log(err))
+
+
+	
 
 // app.use(helmet({
 // 	dnsPrefetchControl: false,
@@ -114,10 +121,6 @@ app.use(routeToIndex, require("./src/server/index"))
 
 
 
-const IP = require("./src/server/models/ip")
-
-const myIp = new IP({name: new Date().getSeconds().toString()})
-myIp.save().then(res => console.log(res)).catch(err=> console.log(err))
 
 // var num = 0
 
