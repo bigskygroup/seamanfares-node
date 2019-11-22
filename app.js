@@ -111,7 +111,7 @@ app.use(routeToIndex, require("./src/server/index"))
 
 // console.log(5000)
 
-//handeling wrong requests at the end
+//handling wrong requests at the end
 app.use(require("./src/server/404"))
 const date = new Date().toLocaleString()
 app.listen(port, console.log(`skytours-node app is listening on ${port} at ${date}`))

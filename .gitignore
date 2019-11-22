@@ -6,6 +6,7 @@
 /data/bigfile.js
 /data/cities.js
 data/logs/*
+/config.js
 
 
 
