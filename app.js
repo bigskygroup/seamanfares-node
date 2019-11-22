@@ -11,32 +11,32 @@ const favicon = require("serve-favicon")
 const { createIndexEJS, extractToRegex } = require("./functions")
 const { memoize } = require("f-tools")
 const airports = require("./data/cities-condensed")
-const { dbName, dbPassword, dbAccessIP , NODE_ENV} = require("./config.js")
+const { dbName, dbPassword, dbAccessIP, NODE_ENV } = require("./config.js")
 const PORT = process.env.PORT || 3070
 process.env.NODE_ENV = NODE_ENV
 
 //database connection
 mongoose
-	.connect(`mongodb://${dbName}:${dbPassword}@localhost:27017/${dbName}`, {
-		useNewUrlParser: true,
-		useUnifiedTopology: true
-	})
-	.then(res => {
-		console.log("connected to database",dbName )	
-	})
-	.catch(err =>
-		console.log(
-			"Your MongoDB setting in the app.js file is not correct. ",
-			err
-		)
+	.connect(
+		`mongodb://${dbName}:${dbPassword}@${
+			NODE_ENV === "production" ? "localhost" : dbAccessIP
+		}:27017/${dbName}`,
+		{
+			useNewUrlParser: true,
+			useUnifiedTopology: true
+		}
 	)
+	.then(res => {
+		console.log("connected to database", dbName)
+	})
+	.catch(err => console.log("Your MongoDB setting in the app.js file is not correct. ", err))
 const IP = require("./src/server/models/ip")
 
-const myIp = new IP({name: new Date().getSeconds().toString()})
-myIp.save().then(res => console.log(res)).catch(err=> console.log(err))
-
-
-
+const myIp = new IP({ name: new Date().getSeconds().toString() })
+myIp
+	.save()
+	.then(res => console.log(res))
+	.catch(err => console.log(err))
 
 // app.use(helmet({
 // 	dnsPrefetchControl: false,
@@ -119,9 +119,6 @@ const routeToIndex = [
 
 app.use(routeToIndex, require("./src/server/index"))
 
-
-
-
 // var num = 0
 
 // const incomingLogs = fs.createReadStream("./logs.log")
@@ -143,5 +140,5 @@ app.use(routeToIndex, require("./src/server/index"))
 //handling wrong requests at the end
 app.use(require("./src/server/404"))
 const date = new Date().toLocaleString()
-app.listen( PORT , console.log(`skytours-node app is listening on ${PORT} at ${date}`))
+app.listen(PORT, console.log(`skytours-node app is listening on ${PORT} at ${date}`))
 module.exports = app
