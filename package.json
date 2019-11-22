@@ -20,6 +20,7 @@
     "helmet": "^3.21.1",
     "http-errors": "~1.6.3",
     "ipapi.co": "^0.3.0",
+    "mongoose": "^5.7.12",
     "morgan": "~1.9.1",
     "node-fetch": "^2.6.0",
     "node-iplocate": "^1.0.1",
