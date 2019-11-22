@@ -12,7 +12,7 @@ const { createIndexEJS, extractToRegex } = require("./functions")
 const { memoize } = require("f-tools")
 const airports = require("./data/cities-condensed")
 const { dbName, dbPassword, dbAccessIP , NODE_ENV} = require("./config.js")
-const PORT = process.env.PORT || "3070"
+const PORT = process.env.PORT || 3070
 process.env.NODE_ENV = NODE_ENV
 
 //database connection
@@ -36,7 +36,7 @@ process.env.NODE_ENV = NODE_ENV
 // myIp.save().then(res => console.log(res)).catch(err=> console.log(err))
 
 
-	
+
 
 // app.use(helmet({
 // 	dnsPrefetchControl: false,
