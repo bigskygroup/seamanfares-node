@@ -3,12 +3,14 @@ module.exports = {
     {
       name: "app",
       script: "app.js",
+      pid: "./data/logs/",
+      maxRestarts: 2,
 
       // exec_mode: "cluster",
       // instances: 2,
       autorestart: false,
-      watch: false,
-       ignore_watch : ["./node_modules", "./data/logs", "./data/logs/err.log","./data/logs/console.log"],
+      watch: true,
+       ignore_watch : ["./node_modules/**", "./data/logs", "./data/logs/err.log","./data/logs/console.log"],
       out_file: "./data/logs/console.log",
       error_file: "./data/logs/err.log",
       time: true,
