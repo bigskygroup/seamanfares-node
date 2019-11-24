@@ -32,11 +32,11 @@ mongoose
 	.catch(err => console.log("Your MongoDB setting in the app.js file is not correct. ", err))
 const IP = require("./src/server/models/ip")
 
-const myIp = new IP({ name: new Date().getSeconds().toString() })
-myIp
-	.save()
-	.then(res => console.log(res))
-	.catch(err => console.log(err))
+// const myIp = new IP({ name: new Date().getSeconds().toString() })
+// myIp
+// 	.save()
+// 	.then(res => console.log(res))
+// 	.catch(err => console.log(err))
 
 // app.use(helmet({
 // 	dnsPrefetchControl: false,
@@ -135,7 +135,8 @@ app.use(routeToIndex, require("./src/server/index"))
 // 	printLogs.write(transform(data), ()=> incomingLogs.write("") )
 // })
 
-// console.log(5000)
+console.log(1000)
+
 
 //handling wrong requests at the end
 app.use(require("./src/server/404"))

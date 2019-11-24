@@ -4,9 +4,16 @@ const Schema = mongoose.Schema
 
 const ipSchema = new Schema(
 	{
-		name: {
-			type: String
-		}
+		id: {
+			type: String,
+			required: true
+		},
+		latitude: String,	
+			longitude: String,	
+			city: String,	
+			city2: String,	
+			country: String,	
+			error: String	,
 	},
 	{ timestamps: true }
 )
