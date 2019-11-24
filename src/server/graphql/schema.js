@@ -1,8 +1,7 @@
 const { buildSchema } = require("graphql")
 
 
-module.exports = buildSchema(`
-		
+module.exports = buildSchema(`	
 		type IP {
 			ip: String!
 			latitude: String!	
@@ -21,7 +20,6 @@ module.exports = buildSchema(`
 		
 		type RootQuery {
 		ip(ip: String! , refetch: Boolean!) : IP!
-		consoleLogs
 
 		}
 				
