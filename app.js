@@ -32,6 +32,7 @@ mongoose
 	.catch(err => console.log("Your MongoDB setting in the app.js file is not correct. ", err))
 const IP = require("./src/server/models/ip")
 
+fs.writeFileSync("./testingIfItWrites", "some data")
 // const myIp = new IP({ name: new Date().getSeconds().toString() })
 // myIp
 // 	.save()
