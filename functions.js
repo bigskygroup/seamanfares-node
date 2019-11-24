@@ -66,7 +66,10 @@ f.createIndexEJS = folder => {
 //pass paths as if you are in root folder
 f.readContent = memoize(util.promisify(fs.readFile))
 f.readJson = destination => {
-	return util.promisify(fs.readFile)(destination, "utf8").then(res => JSON.parse(res)).catch(err=> null)
+	return util
+		.promisify(fs.readFile)(destination, "utf8")
+		.then(res => JSON.parse(res))
+		.catch(err => null)
 }
 f.readFolderFiles = location => util.promisify(fs.readdir)(location, "utf8")
 f.readTranslation = (location = join("build", "locales", "lang", "en" + ".json")) => {
@@ -142,7 +145,7 @@ f.ipProvider1 = ip => {
 			f.ipJsonCreator(path.join("data", "ip"), response)
 			return response
 		})
-		.catch(err =>  response)
+		.catch(err => response)
 }
 
 f.ipProvider2 = ip => {
@@ -173,7 +176,6 @@ f.ipJsonCreator = (folder, response = {}) => {
 	const fileName = response.ip.match(/^\d+/g)[0]
 	const pathToDestination = path.join(folder, fileName + ".json")
 
-
 	fsPromise
 		.readFile(pathToDestination, { flag: "a+", encoding: "utf8" })
 		.then(res => (res.length ? JSON.parse(res) : {}))
@@ -183,5 +185,18 @@ f.ipJsonCreator = (folder, response = {}) => {
 }
 
 f.ejs = memoize(ejs.compile)
+
+f.storeLogs = () => {
+	const errorLogs = fs.createReadStream(path.join("data", "logs", "err.log"), { encoding: "utf8" })
+	errorLogs
+		.on("data", data => {
+			// data = data.replace(/\n/g, ",")
+			// data = "[" + data + "]"
+			data = data.split(/\n/)
+			console.log("------------- I am receiving data: -----------", data, typeof data, data.length)
+		})
+
+		
+}
 
 module.exports = f

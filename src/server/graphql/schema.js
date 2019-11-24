@@ -12,9 +12,17 @@ module.exports = buildSchema(`
 			country: String!	
 			error: String	
 		}
+		type Console {
+			logs : [String]!
+		}
+		type Error {
+			logs : [String]!
+		}
 		
 		type RootQuery {
 		ip(ip: String! , refetch: Boolean!) : IP!
+		consoleLogs
+
 		}
 				
 		schema {

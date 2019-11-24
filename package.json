@@ -6,6 +6,7 @@
     "start": "pm2 start  ecosystem.config.js",
     "stop": "pm2 stop ecosystem.config.js",
     "delete": "pm2 delete 0",
+    "status": "pm2 status",
     "dev": "nodemon app.js"
   },
   "dependencies": {

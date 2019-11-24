@@ -8,7 +8,7 @@ const mongoose = require("mongoose")
 const graphqlHTTP = require("express-graphql")
 var cors = require("cors")
 const favicon = require("serve-favicon")
-const { createIndexEJS, extractToRegex } = require("./functions")
+const { createIndexEJS, extractToRegex, storeLogs } = require("./functions")
 const { memoize } = require("f-tools")
 const airports = require("./data/cities-condensed")
 const { dbName, dbPassword, dbAccessIP, NODE_ENV } = require("./config.js")
@@ -37,6 +37,10 @@ const IP = require("./src/server/models/ip")
 // 	.save()
 // 	.then(res => console.log(res))
 // 	.catch(err => console.log(err))
+
+
+
+// console.log(pki)
 
 // app.use(helmet({
 // 	dnsPrefetchControl: false,
@@ -135,7 +139,6 @@ app.use(routeToIndex, require("./src/server/index"))
 // 	printLogs.write(transform(data), ()=> incomingLogs.write("") )
 // })
 
-console.log(2000)
 
 
 //handling wrong requests at the end

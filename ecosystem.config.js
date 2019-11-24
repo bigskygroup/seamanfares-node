@@ -6,14 +6,14 @@ module.exports = {
 
       // exec_mode: "cluster",
       // instances: 2,
-      autorestart: true,
+      autorestart: false,
       watch: true,
-       ignore_watch : ["node_modules","./data/logs", "./data/logs/err.json","./data/logs/console.json"],
+       ignore_watch : ["./node_modules","./data/logs", "./data/logs/err.log","./data/logs/console.log"],
       log_file: "./data/logs",
-      out_file: "./data/logs/console.json",
-      error_file: "./data/logs/err.json",
+      out_file: "./data/logs/console.log",
+      error_file: "./data/logs/err.log",
       time: true,
-      log_type:"json",
+      log_type:"format",
     }
   ]
 }
