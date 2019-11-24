@@ -135,7 +135,7 @@ app.use(routeToIndex, require("./src/server/index"))
 // 	printLogs.write(transform(data), ()=> incomingLogs.write("") )
 // })
 
-console.log(1000)
+console.log(2000)
 
 
 //handling wrong requests at the end
