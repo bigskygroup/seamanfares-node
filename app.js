@@ -3,7 +3,8 @@ const app = express()
 const { join } = require("path")
 const fs = require("fs")
 const mongoose = require("mongoose")
-// const logger = require("morgan")
+const logger = require("morgan")
+const rfs = require('rotating-file-stream')
 // const helmet = require("helmet")
 const graphqlHTTP = require("express-graphql")
 var cors = require("cors")
@@ -32,16 +33,11 @@ mongoose
 	.catch(err => console.log("Your MongoDB setting in the app.js file is not correct. ", err))
 const IP = require("./src/server/models/ip")
 
-
 // const myIp = new IP({ name: new Date().getSeconds().toString() })
 // myIp
 // 	.save()
 // 	.then(res => console.log(res))
 // 	.catch(err => console.log(err))
-
-
-
-// console.log(pki)
 
 // app.use(helmet({
 // 	dnsPrefetchControl: false,
@@ -83,7 +79,7 @@ app.use(express.static(join(__dirname, "build"), cachOptions))
 app.use(favicon(join(__dirname, "build", "favicon.ico")))
 
 // logger defined after static to avoid static files logged:
-// app.use(logger('dev'));
+app.use(logger("combined"))
 
 //template engine set-up
 app.set("views", join(__dirname, "build"))
@@ -124,24 +120,6 @@ const routeToIndex = [
 
 app.use(routeToIndex, require("./src/server/index"))
 
-// var num = 0
-
-// const incomingLogs = fs.createReadStream("./logs.log")
-// const incomingLogs = fs.createWriteStream("./logs.log")
-// const transform = string => {
-// 	num += 1
-// 	return `${num}####${string}####
-// `
-// }
-// const printLogs = fs.createWriteStream("./print.log", { flags: "a+", start: 0, encoding: "utf8" })
-
-// incomingLogs.on("data", data => {
-
-// 	printLogs.write(transform(data), ()=> incomingLogs.write("") )
-// })
-
-
-console.log(6666)
 //handling wrong requests at the end
 app.use(require("./src/server/404"))
 const date = new Date().toLocaleString()

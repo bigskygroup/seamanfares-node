@@ -188,15 +188,25 @@ f.ejs = memoize(ejs.compile)
 
 f.storeLogs = () => {
 	const errorLogs = fs.createReadStream(path.join("data", "logs", "err.log"), { encoding: "utf8" })
-	errorLogs
-		.on("data", data => {
-			// data = data.replace(/\n/g, ",")
-			// data = "[" + data + "]"
-			data = data.split(/\n/)
-			console.log("------------- I am receiving data: -----------", data, typeof data, data.length)
-		})
+	errorLogs.on("data", data => {
+		// data = data.replace(/\n/g, ",")
+		// data = "[" + data + "]"
+		data = data.split(/\n/)
+		console.log("------------- I am receiving data: -----------", data, typeof data, data.length)
+	})
+}
 
-		
+f.createStream = (path, type) => {
+	let stream
+
+	if (type === "read") stream = fs.createReadStream(path, { encoding: "utf8", highWaterMark: 128 * 1024 })
+	else if (type === "write") stream = fs.createWriteStream(path, { encoding: "utf8" })
+	return new Promise((resolve, reject) => {
+		let data = ""
+		stream.on("data", chunk => (data += chunk))
+		stream.on("end", () => resolve(data))
+		stream.on("error", err => reject(err))
+	})
 }
 
 module.exports = f

@@ -8,6 +8,7 @@
     "delete": "pm2 delete all",
     "status": "pm2 status",
     "dev": "nodemon app.js",
+    "logs": "pm2 logs",
     "forever": "forever app.js"
   },
   "dependencies": {

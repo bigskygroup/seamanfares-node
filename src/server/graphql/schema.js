@@ -20,7 +20,8 @@ module.exports = buildSchema(`
 		
 		type RootQuery {
 		ip(ip: String! , refetch: Boolean!) : IP!
-
+		printConsole(mode: String) : Console!
+		printErrors(mode: String) : Error!
 		}
 				
 		schema {

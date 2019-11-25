@@ -10,3 +10,141 @@
 2019-11-24T20:46:45: the options [pipe] is not supported
 2019-11-24T20:46:45: the options [reach] is not supported
 2019-11-24T20:46:45: (node:3308) ExperimentalWarning: The fs.promises API is experimental
+2019-11-24T20:47:07: the options [pipe] is not supported
+2019-11-24T20:47:07: the options [reach] is not supported
+2019-11-24T20:47:07: (node:5160) ExperimentalWarning: The fs.promises API is experimental
+2019-11-24T20:47:15: the options [pipe] is not supported
+2019-11-24T20:47:15: the options [reach] is not supported
+2019-11-24T20:47:15: (node:4680) ExperimentalWarning: The fs.promises API is experimental
+2019-11-24T20:47:33: the options [pipe] is not supported
+2019-11-24T20:47:33: the options [reach] is not supported
+2019-11-24T20:47:33: (node:12108) ExperimentalWarning: The fs.promises API is experimental
+2019-11-24T20:47:39: the options [pipe] is not supported
+2019-11-24T20:47:39: the options [reach] is not supported
+2019-11-24T20:47:39: (node:10792) ExperimentalWarning: The fs.promises API is experimental
+2019-11-24T20:47:57: the options [pipe] is not supported
+2019-11-24T20:47:57: the options [reach] is not supported
+2019-11-24T20:47:57: (node:2476) ExperimentalWarning: The fs.promises API is experimental
+2019-11-24T20:48:18: the options [pipe] is not supported
+2019-11-24T20:48:18: the options [reach] is not supported
+2019-11-24T20:48:19: (node:10260) ExperimentalWarning: The fs.promises API is experimental
+2019-11-24T20:54:16: the options [pipe] is not supported
+2019-11-24T20:54:16: the options [reach] is not supported
+2019-11-24T20:54:17: (node:6796) ExperimentalWarning: The fs.promises API is experimental
+2019-11-24T20:57:05: the options [pipe] is not supported
+2019-11-24T20:57:05: the options [reach] is not supported
+2019-11-24T20:57:05: (node:3128) ExperimentalWarning: The fs.promises API is experimental
+2019-11-24T20:57:49: the options [pipe] is not supported
+2019-11-24T20:57:49: the options [reach] is not supported
+2019-11-24T20:57:49: (node:688) ExperimentalWarning: The fs.promises API is experimental
+2019-11-24T21:02:24: the options [pipe] is not supported
+2019-11-24T21:02:24: the options [reach] is not supported
+2019-11-24T21:02:24: (node:10836) ExperimentalWarning: The fs.promises API is experimental
+2019-11-24T21:05:02: the options [pipe] is not supported
+2019-11-24T21:05:02: the options [reach] is not supported
+2019-11-24T21:05:02: (node:5728) ExperimentalWarning: The fs.promises API is experimental
+2019-11-24T21:06:21: the options [pipe] is not supported
+2019-11-24T21:06:21: the options [reach] is not supported
+2019-11-24T21:06:22: (node:7172) ExperimentalWarning: The fs.promises API is experimental
+2019-11-24T21:07:22: the options [pipe] is not supported
+2019-11-24T21:07:22: the options [reach] is not supported
+2019-11-24T21:07:23: (node:7244) ExperimentalWarning: The fs.promises API is experimental
+2019-11-24T21:07:37: the options [pipe] is not supported
+2019-11-24T21:07:37: the options [reach] is not supported
+2019-11-24T21:07:37: (node:10368) ExperimentalWarning: The fs.promises API is experimental
+2019-11-24T21:08:44: the options [pipe] is not supported
+2019-11-24T21:08:44: the options [reach] is not supported
+2019-11-24T21:08:44: (node:11256) ExperimentalWarning: The fs.promises API is experimental
+2019-11-24T21:09:21: the options [pipe] is not supported
+2019-11-24T21:09:21: the options [reach] is not supported
+2019-11-24T21:09:21: (node:5144) ExperimentalWarning: The fs.promises API is experimental
+2019-11-24T21:09:41: the options [pipe] is not supported
+2019-11-24T21:09:41: the options [reach] is not supported
+2019-11-24T21:09:41: (node:6084) ExperimentalWarning: The fs.promises API is experimental
+2019-11-24T21:09:57: the options [pipe] is not supported
+2019-11-24T21:09:57: the options [reach] is not supported
+2019-11-24T21:09:57: (node:4728) ExperimentalWarning: The fs.promises API is experimental
+2019-11-24T21:10:20: the options [pipe] is not supported
+2019-11-24T21:10:20: the options [reach] is not supported
+2019-11-24T21:10:21: (node:3324) ExperimentalWarning: The fs.promises API is experimental
+2019-11-24T21:18:21: the options [pipe] is not supported
+2019-11-24T21:18:21: the options [reach] is not supported
+2019-11-24T21:18:21: (node:11828) ExperimentalWarning: The fs.promises API is experimental
+2019-11-24T21:18:30: the options [pipe] is not supported
+2019-11-24T21:18:30: the options [reach] is not supported
+2019-11-24T21:18:31: TypeError: Cannot read property 'length' of undefined
+2019-11-24T21:18:31:     at Function.Module._resolveLookupPaths (internal/modules/cjs/loader.js:462:15)
+2019-11-24T21:18:31:     at Function.Module._resolveFilename (internal/modules/cjs/loader.js:629:20)
+2019-11-24T21:18:31:     at Module.Hook._require.Module.require (C:\code\sky-tour-project\sky-tours-node\node_modules\require-in-the-middle\index.js:51:29)
+2019-11-24T21:18:31:     at require (internal/modules/cjs/helpers.js:25:18)
+2019-11-24T21:18:31:     at Object.<anonymous> (C:\code\sky-tour-project\sky-tours-node\src\server\graphql\logResolver.js:1:12)
+2019-11-24T21:18:31:     at Module._compile (internal/modules/cjs/loader.js:776:30)
+2019-11-24T21:18:31:     at Object.Module._extensions..js (internal/modules/cjs/loader.js:787:10)
+2019-11-24T21:18:31:     at Module.load (internal/modules/cjs/loader.js:653:32)
+2019-11-24T21:18:31:     at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+2019-11-24T21:18:31:     at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+2019-11-24T21:18:31:     at Module.require (internal/modules/cjs/loader.js:690:17)
+2019-11-24T21:18:31:     at Module.Hook._require.Module.require (C:\code\sky-tour-project\sky-tours-node\node_modules\require-in-the-middle\index.js:70:39)
+2019-11-24T21:18:31:     at require (internal/modules/cjs/helpers.js:25:18)
+2019-11-24T21:18:31:     at Object.<anonymous> (C:\code\sky-tour-project\sky-tours-node\src\server\graphql\resolvers.js:2:21)
+2019-11-24T21:18:31:     at Module._compile (internal/modules/cjs/loader.js:776:30)
+2019-11-24T21:18:31:     at Object.Module._extensions..js (internal/modules/cjs/loader.js:787:10)
+2019-11-24T21:18:31:     at Module.load (internal/modules/cjs/loader.js:653:32)
+2019-11-24T21:18:31:     at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+2019-11-24T21:18:31:     at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+2019-11-24T21:18:31:     at Module.require (internal/modules/cjs/loader.js:690:17)
+2019-11-24T21:18:31:     at Module.Hook._require.Module.require (C:\code\sky-tour-project\sky-tours-node\node_modules\require-in-the-middle\index.js:70:39)
+2019-11-24T21:18:31:     at require (internal/modules/cjs/helpers.js:25:18)
+2019-11-24T21:18:31:     at Object.<anonymous> (C:\code\sky-tour-project\sky-tours-node\app.js:101:14)
+2019-11-24T21:18:31:     at Module._compile (internal/modules/cjs/loader.js:776:30)
+2019-11-24T21:18:31:     at Object.Module._extensions..js (internal/modules/cjs/loader.js:787:10)
+2019-11-24T21:18:31:     at Module.load (internal/modules/cjs/loader.js:653:32)
+2019-11-24T21:18:31:     at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+2019-11-24T21:18:31:     at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+2019-11-24T21:21:40: the options [pipe] is not supported
+2019-11-24T21:21:40: the options [reach] is not supported
+2019-11-24T21:21:40: (node:10516) ExperimentalWarning: The fs.promises API is experimental
+2019-11-24T21:22:30: the options [pipe] is not supported
+2019-11-24T21:22:30: the options [reach] is not supported
+2019-11-24T21:22:30: (node:4044) ExperimentalWarning: The fs.promises API is experimental
+2019-11-24T21:24:45: the options [pipe] is not supported
+2019-11-24T21:24:45: the options [reach] is not supported
+2019-11-24T21:24:45: C:\code\sky-tour-project\sky-tours-node\src\server\graphql\logResolver.js:9
+2019-11-24T21:24:45: 		return { logs: ["ddd", "rrrr"] }
+2019-11-24T21:24:45: 		^^^^^^
+2019-11-24T21:24:45: 
+2019-11-24T21:24:45: SyntaxError: Unexpected token return
+2019-11-24T21:24:45:     at Module._compile (internal/modules/cjs/loader.js:721:23)
+2019-11-24T21:24:45:     at Object.Module._extensions..js (internal/modules/cjs/loader.js:787:10)
+2019-11-24T21:24:45:     at Module.load (internal/modules/cjs/loader.js:653:32)
+2019-11-24T21:24:45:     at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+2019-11-24T21:24:45:     at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+2019-11-24T21:24:45:     at Module.require (internal/modules/cjs/loader.js:690:17)
+2019-11-24T21:24:45:     at Module.Hook._require.Module.require (C:\code\sky-tour-project\sky-tours-node\node_modules\require-in-the-middle\index.js:70:39)
+2019-11-24T21:24:45:     at require (internal/modules/cjs/helpers.js:25:18)
+2019-11-24T21:24:45:     at Object.<anonymous> (C:\code\sky-tour-project\sky-tours-node\src\server\graphql\resolvers.js:2:21)
+2019-11-24T21:24:45:     at Module._compile (internal/modules/cjs/loader.js:776:30)
+2019-11-24T21:24:45:     at Object.Module._extensions..js (internal/modules/cjs/loader.js:787:10)
+2019-11-24T21:24:45:     at Module.load (internal/modules/cjs/loader.js:653:32)
+2019-11-24T21:24:45:     at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+2019-11-24T21:24:45:     at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+2019-11-24T21:24:45:     at Module.require (internal/modules/cjs/loader.js:690:17)
+2019-11-24T21:24:45:     at Module.Hook._require.Module.require (C:\code\sky-tour-project\sky-tours-node\node_modules\require-in-the-middle\index.js:70:39)
+2019-11-24T21:24:45:     at require (internal/modules/cjs/helpers.js:25:18)
+2019-11-24T21:24:45:     at Object.<anonymous> (C:\code\sky-tour-project\sky-tours-node\app.js:101:14)
+2019-11-24T21:24:45:     at Module._compile (internal/modules/cjs/loader.js:776:30)
+2019-11-24T21:24:45:     at Object.Module._extensions..js (internal/modules/cjs/loader.js:787:10)
+2019-11-24T21:24:45:     at Module.load (internal/modules/cjs/loader.js:653:32)
+2019-11-24T21:24:45:     at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+2019-11-24T21:24:45:     at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+2019-11-24T21:24:45:     at Object.<anonymous> (C:\code\sky-tour-project\sky-tours-node\node_modules\pm2\lib\ProcessContainerFork.js:27:21)
+2019-11-24T21:24:45:     at Module._compile (internal/modules/cjs/loader.js:776:30)
+2019-11-24T21:24:45:     at Object.Module._extensions..js (internal/modules/cjs/loader.js:787:10)
+2019-11-24T21:24:45:     at Module.load (internal/modules/cjs/loader.js:653:32)
+2019-11-24T21:24:45:     at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+2019-11-24T21:26:41: the options [pipe] is not supported
+2019-11-24T21:26:41: the options [reach] is not supported
+2019-11-24T21:26:41: (node:10644) ExperimentalWarning: The fs.promises API is experimental
+2019-11-24T21:28:41: the options [pipe] is not supported
+2019-11-24T21:28:41: the options [reach] is not supported
+2019-11-24T21:28:41: (node:4680) ExperimentalWarning: The fs.promises API is experimental
