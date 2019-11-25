@@ -3,13 +3,13 @@ const app = express()
 const { join } = require("path")
 const fs = require("fs")
 const mongoose = require("mongoose")
-const logger = require("morgan")
-const rfs = require('rotating-file-stream')
+// const morgan = require("morgan")
+const rfs = require("rotating-file-stream")
 // const helmet = require("helmet")
 const graphqlHTTP = require("express-graphql")
 var cors = require("cors")
 const favicon = require("serve-favicon")
-const { createIndexEJS, extractToRegex, storeLogs } = require("./functions")
+const { cachTypes, createIndexEJS, extractToRegex, generateName, morgan } = require("./functions")
 const { memoize } = require("f-tools")
 const airports = require("./data/cities-condensed")
 const { dbName, dbPassword, dbAccessIP, NODE_ENV } = require("./config.js")
@@ -51,20 +51,6 @@ const IP = require("./src/server/models/ip")
 
 // static files and cache policy, set for 3 days
 const cachPolicy = "public, max-age=259200"
-const cachTypes = [
-	"audio/mpeg",
-	"text/css",
-	"image/png",
-	"image/gif",
-	"image/x-icon",
-	"image/svg+xml",
-	"image/jpeg",
-	"font/woff",
-	"font/woff2",
-	"font/otf",
-	"font/eot",
-	"font/ttf"
-]
 const cachOptions = {
 	setHeaders: function(res, path) {
 		if (cachTypes.includes(express.static.mime.lookup(path))) {
@@ -77,9 +63,6 @@ const cachOptions = {
 app.use(cors())
 app.use(express.static(join(__dirname, "build"), cachOptions))
 app.use(favicon(join(__dirname, "build", "favicon.ico")))
-
-// logger defined after static to avoid static files logged:
-app.use(logger("combined"))
 
 //template engine set-up
 app.set("views", join(__dirname, "build"))
@@ -98,6 +81,15 @@ app.use(
 		graphiql: true
 	})
 )
+
+// logger defined after static to avoid static files logged:
+const accessLogStream = rfs(generateName(), {
+	interval: "1d", // rotate daily
+	path: join(__dirname, "data", "logs", "morgan")
+})
+app.use(morgan("jsonLogs", { stream: accessLogStream }))
+
+// console.log(typeof morgan)
 
 app.get("/viewtrip/*", require("./src/server/confirmationEmail"))
 app.get("/confirmation*", require("./src/server/confirmation"))

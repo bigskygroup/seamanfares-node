@@ -3,15 +3,30 @@ const fsPromise = require("fs").promises
 const path = require("path")
 const util = require("util")
 const ejs = require("ejs")
-const { memoize } = require("f-tools")
+const { memoize, curry } = require("f-tools")
 const iplocate = require("node-iplocate")
 const fetch = require("node-fetch")
+const morgan = require("morgan")
 
 // f object will hold the functions and export them:
 const f = {}
 
 // right-to-left languages
 f.rtlLangs = ["ae", "eg", "ir", "jo", "lb", "sa", "bh", "kw", "om", "qr"]
+f.cachTypes = [
+	"audio/mpeg",
+	"text/css",
+	"image/png",
+	"image/gif",
+	"image/x-icon",
+	"image/svg+xml",
+	"image/jpeg",
+	"font/woff",
+	"font/woff2",
+	"font/otf",
+	"font/eot",
+	"font/ttf"
+]
 
 f.createIndexEJS = folder => {
 	// need to run this block first time only. to create index.ejs inside "build"
@@ -186,16 +201,6 @@ f.ipJsonCreator = (folder, response = {}) => {
 
 f.ejs = memoize(ejs.compile)
 
-f.storeLogs = () => {
-	const errorLogs = fs.createReadStream(path.join("data", "logs", "err.log"), { encoding: "utf8" })
-	errorLogs.on("data", data => {
-		// data = data.replace(/\n/g, ",")
-		// data = "[" + data + "]"
-		data = data.split(/\n/)
-		console.log("------------- I am receiving data: -----------", data, typeof data, data.length)
-	})
-}
-
 f.createStream = (path, type) => {
 	let stream
 
@@ -208,5 +213,28 @@ f.createStream = (path, type) => {
 		stream.on("error", err => reject(err))
 	})
 }
+f.generateName = () => {
+	return new Date()
+		.toLocaleDateString()
+		.replace(/\//g, "-")
+		.concat(".log")
+}
+
+ morgan.token("jsonLogs", function(tokens, req, res) {
+	const log = JSON.stringify({
+		method: tokens.method(req, res),
+		url: tokens.url(req, res),
+		status: tokens.status(req, res),
+		resContentLength: tokens.res(req, res, "content-length"),
+		responseTime: tokens["response-time"](req, res) + " ms",
+		userAgent: tokens["user-agent"](req, res),
+		ip: tokens["remote-addr"](req, res),
+		date:  tokens.date(req, res, "iso"),
+		remoteUser: tokens["remote-user"](req, res),
+
+	})
+	return log
+})
+ f.morgan = morgan
 
 module.exports = f
