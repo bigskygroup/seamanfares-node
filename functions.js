@@ -231,7 +231,6 @@ f.generateName = () => {
 		ip: tokens["remote-addr"](req, res),
 		date:  tokens.date(req, res, "iso"),
 		remoteUser: tokens["remote-user"](req, res),
-
 	})
 	return log
 })

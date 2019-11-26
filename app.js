@@ -3,7 +3,6 @@ const app = express()
 const { join } = require("path")
 const fs = require("fs")
 const mongoose = require("mongoose")
-// const morgan = require("morgan")
 const rfs = require("rotating-file-stream")
 // const helmet = require("helmet")
 const graphqlHTTP = require("express-graphql")
@@ -89,7 +88,6 @@ const accessLogStream = rfs(generateName(), {
 })
 app.use(morgan("jsonLogs", { stream: accessLogStream }))
 
-// console.log(typeof morgan)
 
 app.get("/viewtrip/*", require("./src/server/confirmationEmail"))
 app.get("/confirmation*", require("./src/server/confirmation"))

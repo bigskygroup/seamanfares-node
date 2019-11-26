@@ -17,11 +17,17 @@ module.exports = buildSchema(`
 		type Error {
 			logs : [String]!
 		}
+		type Logs {
+			logs : [String]!
+		}
 		
 		type RootQuery {
 		ip(ip: String! , refetch: Boolean!) : IP!
-		printConsole(mode: Int) : Console!
-		printErrors(mode: Int) : Error!
+		printConsole(count: Int) : Console!
+		printErrors(count: Int) : Error!
+		printLogs(count: Int, month: Int, day: Int, year: Int) : Logs!
+		# printLogsDates will return an array of strings in json format
+		printLogsDates(count: Int) : Logs!
 		}
 				
 		schema {
