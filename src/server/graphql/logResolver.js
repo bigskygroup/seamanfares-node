@@ -24,7 +24,7 @@ r.printLogs = async ({
 	day = new Date().getDate(),
 	year = new Date().getFullYear()
 }) => {
-	console.log(count, month, day, year)
+
 	const fileName = `${month}-${day}-${year}.log`
 	const content = await createStream(join("data", "logs", "morgan", fileName), "read")
 

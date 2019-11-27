@@ -157,7 +157,7 @@ f.ipProvider1 = ip => {
 				longitude: res.longitude.toString() || "",
 				city2: r(res.regionName) || ""
 			}
-			f.ipJsonCreator(path.join("data", "ip"), response)
+			// f.ipJsonCreator(path.join("data", "ip"), response)
 			return response
 		})
 		.catch(err => response)
@@ -177,7 +177,7 @@ f.ipProvider2 = ip => {
 				longitude: res.longitude.toString() || "",
 				city2: r(res.subdivision) || ""
 			}
-			f.ipJsonCreator(path.join("data", "ip"), response)
+			// f.ipJsonCreator(path.join("data", "ip"), response)
 			return response
 		})
 		.catch(err => response)

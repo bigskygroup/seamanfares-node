@@ -1,5 +1,6 @@
 const { ipProvider1, ipProvider2, readJson } = require("../../../functions")
 const { join } = require("path")
+const IP = require("../models/ip")
 
 const r = {}
 
@@ -7,18 +8,65 @@ const r = {}
 var lastIpReqTime = Date.now()
 
 r.ip = async ({ ip, refetch }, options) => {
-	if (refetch === false) {
-		const fileName = ip.match(/^\d+/g)[0]
+	const [part1, part2, part3, part4] = ip.match(/\d+/g)
+	return IP.find({ part1: part1 }).then(async res => {
+		if (!res.length) {
+			const result = await sendIpRequest(ip)
+			const newIP = new IP(ipConstructor(part1, part2, part3, part4, result))
+			return newIP.save().then(res => result)
+		} else {
+			if (!res[0].rest[part2]) {
+				const result = await sendIpRequest(ip)
+				const newRest = { ...res[0].rest, ...ipConstructor(null, part2, part3, part4, result) }
+				return IP.updateOne({ _id: res[0]._id }, { rest: newRest }).then(res => result)
+			} else {
+				if (!res[0].rest[part2][part3]) {
+					const result = await sendIpRequest(ip)
+					const newRest = Object.assign(res[0].rest[part2], ipConstructor(null, null, part3, part4, result))
+					return IP.updateOne({ _id: res[0]._id }, { rest: res[0].rest }).then(res => result)
+				} else {
+					if (!res[0].rest[part2][part3][part4]) {
+						const result = await sendIpRequest(ip)
+						const newRest = Object.assign(
+							res[0].rest[part2][part3],
+							ipConstructor(null, null, null, part4, result)
+						)
+						return IP.updateOne({ _id: res[0]._id }, { rest: res[0].rest }).then(res => result)
+					}
+					return res[0].rest[part2][part3][part4]
+				}
+			}
+		}
+	})
+}
 
-	return	readJson(join("data", "ip", fileName + ".json"))
-			.then(res => { 
-				if(!res) return sendIpRequest(ip)
-				return res[ip]	? res[ip] : sendIpRequest(ip)
-			}) 
-			.catch(err => console.log(err))
+function ipConstructor(part1, part2, part3, part4, result) {
+	if (part1 && part2 && part3 && part4) {
+		console.log("all parts exist")
+		const obj = {
+			part1: part1,
+			rest: {}
+		}
+		obj.rest[part2] = {}
+		obj.rest[part2][part3] = {}
+		obj.rest[part2][part3][part4] = result
+		return obj
+	} else if (part2 && part3 && part4) {
+		const obj = {}
+		obj[part2] = {}
+		obj[part2][part3] = {}
+		obj[part2][part3][part4] = result
+		return obj
+	} else if (part3 && part4) {
+		const obj = {}
+		obj[part3] = {}
+		obj[part3][part4] = result
+		return obj
+	} else if (part4) {
+		const obj = {}
+		obj[part4] = result
+		return obj
 	}
-	else return sendIpRequest(ip)
-
 }
 
 function sendIpRequest(ip) {
