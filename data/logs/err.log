@@ -148,3 +148,6 @@
 2019-11-24T21:28:41: the options [pipe] is not supported
 2019-11-24T21:28:41: the options [reach] is not supported
 2019-11-24T21:28:41: (node:4680) ExperimentalWarning: The fs.promises API is experimental
+2019-11-27T15:01:03: the options [pipe] is not supported
+2019-11-27T15:01:03: the options [reach] is not supported
+2019-11-27T15:01:04: (node:14168) ExperimentalWarning: The fs.promises API is experimental
