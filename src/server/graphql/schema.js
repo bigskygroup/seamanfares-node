@@ -10,6 +10,7 @@ module.exports = buildSchema(`
 			city: String!	
 			city2: String!	
 			country: String!	
+			countryCode: String!
 			error: String	
 		}
 		type Logs {

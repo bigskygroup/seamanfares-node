@@ -155,7 +155,8 @@ f.ipProvider1 = ip => {
 				country: r(res.countryName) || "",
 				latitude: res.latitude.toString() || "",
 				longitude: res.longitude.toString() || "",
-				city2: r(res.regionName) || ""
+				city2: r(res.regionName) || "",
+				countryCode: r(res.countryCode) || ""
 			}
 			// f.ipJsonCreator(path.join("data", "ip"), response)
 			return response
@@ -167,7 +168,7 @@ f.ipProvider2 = ip => {
 	if (typeof ip !== "string") ip = ip.toString()
 
 	return iplocate(ip)
-		.then(res => {
+		.then(res => { console.log(res)
 			const r = f.removeQuote
 			const response = {
 				ip: r(res.ip) || "",
@@ -175,7 +176,9 @@ f.ipProvider2 = ip => {
 				country: r(res.country) || "",
 				latitude: res.latitude.toString() || "",
 				longitude: res.longitude.toString() || "",
-				city2: r(res.subdivision) || ""
+				city2: r(res.subdivision) || "",
+				countryCode :r(res.country_code) || ""
+
 			}
 			// f.ipJsonCreator(path.join("data", "ip"), response)
 			return response
