@@ -28,25 +28,25 @@ module.exports = `		<div>
 					<div class="row">
 						
 						<div class="padding-lr15 padding-tb15 col">
-							<img style="display: block; margin: 0 auto" src="/images/icons/icon2.png"  />
+							<img style="display: block; margin: 0 auto" src="/images/icons/icon1.png"  />
 							<div class="font14 text-light-gray maxw200 margin-lr-auto">
 								compare and book 100s of airlines, 1000s of hotels and car hire worldwide
 							</div>
 						</div>
 						<div class="padding-lr15 padding-tb15 col">
-							<img style="display: block; margin: 0 auto" src="/images/icons/icon3.png"  />
+							<img style="display: block; margin: 0 auto" src="/images/icons/icon2.png"  />
 							<div class="font14 text-light-gray maxw200 margin-lr-auto">
 								tailor your trip in one visit to sky-tours.com, your one-stop travel shop
 							</div>
 						</div>
 						<div class="padding-lr15 padding-tb15 col">
-							<img style="display: block; margin: 0 auto" src="/images/icons/icon4.png"  />
+							<img style="display: block; margin: 0 auto" src="/images/icons/icon3.png"  />
 							<div class="font14 text-light-gray maxw200 margin-lr-auto">
 								our call centre provides full support before, during and after your trip
 							</div>
 						</div>
 						<div class="padding-lr15 padding-tb15 col">
-							<img style="display: block; margin: 0 auto" src="/images/icons/icon5.png"  />
+							<img style="display: block; margin: 0 auto" src="/images/icons/icon4.png"  />
 							<div class="font14 text-light-gray maxw200 margin-lr-auto">
 								millions of customers since 2002 can't be wrong
 							</div>
