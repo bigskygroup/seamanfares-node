@@ -23,6 +23,9 @@ module.exports = buildSchema(`
 			createdAt: Int 
 			updatedAt: Int
 		}
+		type Bool {
+			result: Boolean!
+		}
 		
 		type RootQuery {
 		ip(ip: String! , refetch: Boolean!) : IP!
@@ -31,6 +34,7 @@ module.exports = buildSchema(`
 		printLogs(count: Int, month: Int, day: Int, year: Int) : Logs!
 		# printLogsDates will return an array of strings in json format
 		printLogsDates(count: Int) : Logs!
+		isGodIP(ip:String!) : Bool!
 		}
 				
 		schema {

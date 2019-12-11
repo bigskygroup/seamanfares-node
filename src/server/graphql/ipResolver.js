@@ -40,6 +40,22 @@ r.ip = async ({ ip, refetch }, options) => {
 	})
 }
 
+r.isGodIP = ({ ip }) => {
+	const ipGods = [
+		"82.209.195.19",
+		"82.209.195.27",
+		"178.124.187.77",
+		"82.209.194.15",
+		"::1",
+		"127.0.0.1",
+		"178.124.172.174",
+		"139.162.234.140",
+		"90.74.0.167"
+	]
+	if (ipGods.includes(ip)) return {result :true}
+		else return {result :false}
+}
+
 function ipConstructor(part1, part2, part3, part4, result) {
 	if (part1 && part2 && part3 && part4) {
 		console.log("all parts exist")
