@@ -27,7 +27,13 @@ module.exports = buildSchema(`
 		type Bool {
 			result: Boolean!
 		}
+		type JSON {
+			id: ID
+			json: String
+			error: String
+		}
 		
+
 		type RootQuery {
 		ip(ip: String! , refetch: Boolean!) : IP!
 		printConsole(count: Int) : Logs!
@@ -37,8 +43,13 @@ module.exports = buildSchema(`
 		printLogsDates(count: Int) : Logs!
 		isGodIP(ip:String!) : Bool!
 		}
+
+		type RootMutation {
+			sendEmail(json: String! ) : JSON!
+		}
 				
 		schema {
 			query: RootQuery
+			mutation: RootMutation
 		}
 		`)
