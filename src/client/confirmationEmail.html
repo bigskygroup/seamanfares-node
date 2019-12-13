@@ -23,7 +23,16 @@
 
 	<div style="margin-bottom: .2em;">
 		<table>
-			<% full_name.forEach((item, i) => { %>
+			<% if(full_name.length === 0) { %>
+				<tr>
+				<td style="font-weight: bold;">
+				 Passenger(s):
+				</td>
+				<td><%- customer_name %></td>
+			</tr>	
+			<% } %>
+
+			<% if(full_name.length !== 0) full_name.forEach((item, i) => { %>
 			<tr>
 				<td style="font-weight: bold;">
 					<%- i === 0 ? "Passenger(s):" : ""%>
