@@ -12,15 +12,26 @@ r.sendEmail = async ({ json }) => {
 	// console.log(json)
 	// console.log(JSON.parse(json))
 	//incoming customer information, from react, after ticket purchase, for sending email and storing in db:
-	const { customer_email, customer_name, order, lname, gross_price, gross_curr } = JSON.parse(json)
+	const {
+		customer_email,
+		customer_name,
+		order,
+		lname,
+		gross_price,
+		gross_curr,
+		total_fare,
+		curr
+	} = JSON.parse(json)
 	const customerInformation = {
 		data: json, // where all the information is stored as json
 		customer_email: customer_email || "",
 		customer_name: customer_name || "",
-		order: order || "123",
+		order: order || "",
 		lname: lname || "",
 		gross_price: gross_price || "",
-		gross_curr: gross_curr || ""
+		gross_curr: gross_curr || "",
+		total_fare: total_fare || "",
+		curr: curr || ""
 	}
 
 	//error handling:
@@ -55,7 +66,9 @@ r.sendEmail = async ({ json }) => {
 async function sendEmail(obj) {
 	//console.log("obj:" , obj)
 	const nameFrom = "Sky-tours.com <support@sky-tours.com>"
-	const emailTo = obj.customer_email
+	// const emailTo = obj.customer_email
+	// ------------------------------------------------------Temporary personal email for testing:
+	const emailTo = "mehdi@sky-tours.com"
 	const emailCc = ""
 	const emailBcc = "tickets@sky-tours.com"
 	const emailSubject = `Confirmation for Order #${obj.order}`
@@ -76,7 +89,7 @@ async function sendEmail(obj) {
 		nameFrom: nameFrom,
 		emailTo: emailTo,
 		emailCc: emailCc,
-		emailBcc: emailBcc,
+		// emailBcc: emailBcc,              //--------------------------off for testing
 		emailSubject: emailSubject,
 		emailMessageTxt: emailMessageTxt,
 		emailMessageHtml: emailMessageHtml,
@@ -106,4 +119,3 @@ async function sendEmail(obj) {
 }
 
 module.exports = r
-

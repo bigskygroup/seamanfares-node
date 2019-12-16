@@ -24,15 +24,13 @@
 	<div style="margin-bottom: .2em;">
 		<table>
 			<% if(full_name.length === 0) { %>
-				<tr>
+			<tr>
 				<td style="font-weight: bold;">
-				 Passenger(s):
+					Passenger(s):
 				</td>
 				<td><%- customer_name %></td>
-			</tr>	
-			<% } %>
-
-			<% if(full_name.length !== 0) full_name.forEach((item, i) => { %>
+			</tr>
+			<% } %> <% if(full_name.length !== 0) full_name.forEach((item, i) => { %>
 			<tr>
 				<td style="font-weight: bold;">
 					<%- i === 0 ? "Passenger(s):" : ""%>
@@ -81,7 +79,7 @@
 		style="margin: 1em .2em; border: 2px solid #246d8f;  border-radius: 5px; padding:1em 0 .3em 1em; "
 	>
 		<table style="width: 100%;">
-			<tr style="height: 2.9em; vertical-align: top">
+			<!-- <tr style="height: 2.9em; vertical-align: top">
 				<td style="font-weight: bold;">Airline Ticket(s)-tax included:</td>
 				<td style="width:40%">
 					<ul style="list-style: none; margin: 0; padding: 0">
@@ -92,17 +90,17 @@
 			<tr style="height: 3em; vertical-align: top ">
 				<td style="font-weight: bold">Airhelp + flight delay compensation:</td>
 				<td style="width:40%">0</td>
-			</tr>
-			<tr style="height: 3em; ">
-				<td style="font-weight: bold; padding-top: 1em">Payment made by credit card:</td>
+			</tr> -->
+			<tr style="height: 3em;padding-top: 1em; padding-bottom: 1em ">
+				<td style="font-weight: bold; ">Payment made by credit card:</td>
 				<td
-					style=" border-top: .2em solid black; color: #38c7a3 ;font-size: 1.1em; padding-top: .5em; "
+					style=" /*border-top: .2em solid black; */ color: #38c7a3 "
 				>
-					Total: <%-gross_curr%> <%-gross_price%>
+					Total: <%-curr%> <%-total_fare%>
 				</td>
 				<td style="width: 1em;"></td>
 			</tr>
-			<tr class="explanation-of-services">
+			<!-- <tr class="explanation-of-services">
 				<td colspan="3" style="color: #96a2b6; font-size: .9em">
 					<span style="font-size: 1.1em;">ⓘ</span> You have purchased AirHelp+. In the event that
 					one or more of your flights under the booking that is connected to your AirHelp+ purchase
@@ -112,7 +110,7 @@
 					disruption on the flights in this booking, please contact us at
 					<a href="mailto:info@airhelp.com" target="_blank">info@airhelp.com</a>
 				</td>
-			</tr>
+			</tr> -->
 		</table>
 	</div>
 	<div class="buttons" style="width: 100%; margin: 2em auto; ">

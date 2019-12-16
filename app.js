@@ -32,16 +32,11 @@ mongoose
 	.catch(err => console.log("Your MongoDB setting in the app.js file is not correct. ", err))
 const IP = require("./src/server/models/ip")
 
-// const myIp = new IP({ name: new Date().getSeconds().toString() })
-// myIp
-// 	.save()
-// 	.then(res => console.log(res))
-// 	.catch(err => console.log(err))
 
-// app.use(helmet({
-// 	dnsPrefetchControl: false,
-// 	hsts: false,
-// }))
+app.use(helmet({
+	dnsPrefetchControl: false,
+	hsts: false,
+}))
 // app.use(helmet.contentSecurityPolicy({
 // 	directives: {
 // 		scriptSrc: ["'self'", 'www.google-analytics.com', 'ajax.googleapis.com', 'www.googletagmanager.com' ]
@@ -59,7 +54,7 @@ const cachOptions = {
 	}
 }
 
-app.use(cors())
+// app.use(cors())
 app.use(express.static(join(__dirname, "build"), cachOptions))
 app.use(favicon(join(__dirname, "build", "favicon.ico")))
 
@@ -74,6 +69,7 @@ const airportsArray = memoize(extractToRegex(airports))
 //routes
 app.use(
 	"/graphql",
+	cors(),
 	graphqlHTTP({
 		schema: require("./src/server/graphql/schema"),
 		rootValue: require("./src/server/graphql/resolvers"),

@@ -10,6 +10,8 @@ const customerSchema = new Schema(
 		lname: {type:String , lowercase: true},
 		gross_price: {type:String },
 		gross_cur: {type:String },
+		curr:  {type:String },
+		total_fare: {type:String },
 		data: String, // where all the information is stored as json	
 		emailSent: {type:Boolean, required: true, default: false}
 	},
