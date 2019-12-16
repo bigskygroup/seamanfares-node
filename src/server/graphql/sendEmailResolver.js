@@ -66,9 +66,9 @@ r.sendEmail = async ({ json }) => {
 async function sendEmail(obj) {
 	//console.log("obj:" , obj)
 	const nameFrom = "Sky-tours.com <support@sky-tours.com>"
-	// const emailTo = obj.customer_email
+	const emailTo = obj.customer_email
 	// ------------------------------------------------------Temporary personal email for testing:
-	const emailTo = "mehdi@sky-tours.com"
+	// const emailTo = "mehdi@sky-tours.com"
 	const emailCc = ""
 	const emailBcc = "tickets@sky-tours.com"
 	const emailSubject = `Confirmation for Order #${obj.order}`

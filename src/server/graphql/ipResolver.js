@@ -50,7 +50,8 @@ r.isGodIP = ({ ip }) => {
 		"127.0.0.1",
 		"178.124.172.174",
 		"139.162.234.140",
-		"90.74.0.167"
+		"90.74.0.167",
+		"139.162.248.82"
 	]
 	if (ipGods.includes(ip)) return {result :true}
 		else return {result :false}
