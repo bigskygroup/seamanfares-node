@@ -1,5 +1,5 @@
 {
-
+"BAGGAGE_ASSURANCE": "Baggage Assurance",
 "BOOKFORM_ERROR" : "Please fill out the form with correct information!",
 "EMAILS_MUST_MATCH" : "Both emails must match",
 "PASSENGERS" : "Passengers",
@@ -38,7 +38,6 @@
 "PASSENSGER": "Passenger",
 "TICKET_OPTIONS": "Ticket Options",
 "OPTIONS": "Options",
-
 
 
 	"ABOUT_US": "About Us",
@@ -677,7 +676,7 @@
 	"PLEASE_CHILD_DOB": "Please enter date of birth (2-11 years)",
 	"PLEASE_CITY": "Please enter City",
 	"PLEASE_CITY_CODE": "Please enter area code",
-	"PLEASE_CONTACT_DETAILS": "Please enter the contact details for this booking.",
+	"PLEASE_CONTACT_DETAILS": "Please enter the contact details for this booking",
 	"PLEASE_COUNTRY": "Please select Country",
 	"PLEASE_CPF": "Please enter User's personal identification number",
 	"PLEASE_DATE_ARRIVE": "Please enter return date",
