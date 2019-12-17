@@ -9,12 +9,13 @@ const airports = require("../../data/cities-condensed") //returns an array
 const countries = require("../../data/countries")
 
 
-app.get("*", async (req, res, next) => {
+app.get("*", async (req, res, next) => { 
 	const parseUrl = req.baseUrl.split("/") //e.g  [ '', 'en', 'es-spain.html' ]
 	const lang = parseUrl[1] //en
 	const countryCode = parseUrl[2].split("-")[0] //es
 	let receivedCountry = parseUrl[2].match(/-([^<>\.]*).html\/{0,1}/i)[1]
 	const { name: country } = countries.find(item => item.code === countryCode.toUpperCase()) //Spain
+
 
 	let countryInUrl = country
 	if (/\s|,/gi.test(countryInUrl)) {

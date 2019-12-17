@@ -11,6 +11,7 @@ const favicon = require("serve-favicon")
 const { cachTypes, createIndexEJS, extractToRegex, generateName, morgan } = require("./functions")
 const { memoize } = require("f-tools")
 const airports = require("./data/cities-condensed")
+const countries = require("./data/countries")
 const { dbName, dbPassword, dbAccessIP, NODE_ENV } = require("./config.js")
 const PORT = process.env.PORT || 3070
 process.env.NODE_ENV = NODE_ENV
@@ -65,6 +66,7 @@ app.set("trust proxy", true)
 createIndexEJS(join(__dirname, "build"))
 
 const airportsArray = memoize(extractToRegex(airports))
+const countriesArray = memoize(extractToRegex(countries))
 
 //routes
 app.use(
@@ -93,7 +95,7 @@ app.use(/^\/[A-Za-z]{2}\/all-countries\.html\/{0,1}$/ , require("./src/server/al
 app.use(airportsArray("code", 2), require("./src/server/seo-city"))
 app.use(airportsArray("code", 1), require("./src/server/seo-city-2"))
 
-app.use(airportsArray("cc", 2), require("./src/server/seo-country"))
+app.use(countriesArray("code", 2), require("./src/server/seo-country"))
 
 app.use(/^\/[A-Za-z]{2}\/[A-Za-z_]{2,35}\.htm\/{0,1}$/, require("./src/server/static"))
 
