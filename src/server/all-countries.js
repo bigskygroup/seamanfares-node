@@ -4,32 +4,17 @@ const express = require("express")
 const app = express.Router()
 const { join } = require("path")
 const { getTranslation, removeHTMLTags, t, rtlLangs, ipFields, iplocate } = require("../../functions") //pass paths as if you are in root folder
-const { pipe, memoize, reach } = require("f-tools")
+const { pipe, memoize } = require("f-tools")
 const airports = require("../../data/cities-condensed") //returns an array
 const countries = require("../../data/countries")
 
 app.get("*", async (req, res, next) => {
 	const parseUrl = req.baseUrl.split("/") //e.g  [ '', 'en', 'es-spain.html' ]
 	const lang = parseUrl[1] //en
-	console.log(lang)
 
-	const listOfCountries = (() =>
-		countries
-			.map(item => {
-				return {
-					name: item.name,
-					translatedName: item.reach(`l10n.${lang}`, item.name),
-					code: item.code
-				}
-			})
-			.sort((a, b) => {
-				//sorting them by name
-				const nameA = a.translatedName.toUpperCase() || a.name.toUpperCase()
-				const nameB = b.translatedName.toUpperCase() || b.name.toUpperCase()
-				return nameA < nameB ? -1 : 1
-			})).memoize()() //returns a sorted array
+	const listOfCountries = memoize(createList)(countries, lang)
+	//returns a sorted array
 
-	//console.log(listOfCountries.slice(1, 10))
 	let metaKeyword
 
 	getTranslation(join("build", "locales", "lang", lang + ".json"))
@@ -45,9 +30,9 @@ app.get("*", async (req, res, next) => {
 			string = `<div>${string}</div>`
 			const content = map(listOfCountries, lang)
 
-			const col1 = map(listOfCountries.slice(0, Math.round(listOfCountries.length / 2) + 1), lang) 
-			const col2 =  map(listOfCountries.slice(Math.round(listOfCountries.length / 2) + 1 ), lang)
-	
+			const col1 = map(listOfCountries.slice(0, Math.round(listOfCountries.length / 2) + 1), lang)
+			const col2 = map(listOfCountries.slice(Math.round(listOfCountries.length / 2) + 1), lang)
+
 			const container = `<div class="container"><div class="row">${col1}${col2}</div></div>`
 
 			return `<div class="static"><div>${string}${container}</div></div>`
@@ -98,5 +83,22 @@ const map = ((array, lang) => {
 	)
 	return `<div class="col-12 col-sm-6">${string}</div>`
 }).memoize()
+
+function createList(list, lang) {
+	return list.map(item => {
+		return {
+			name: item.name,
+			translatedName: item.reach(`l10n.${lang}`) ? item.reach(`l10n.${lang}`) : item.name,
+			code: item.code
+		}
+	})
+	.sort((a, b) => { 
+		//sorting them by name
+		const nameA = a.translatedName.toUpperCase()
+		const nameB = b.translatedName.toUpperCase()
+		return nameA < nameB ? -1 : 1
+	})
+}
+
 
 module.exports = app
