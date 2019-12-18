@@ -37,10 +37,11 @@ app.get("*", async (req, res, next) => {
 			return `<div class="static"><div>${string}${container}</div></div>`
 		})
 
-		.then(async content => {
+		.then(async content => { 
 			const titles = await getTranslation(join("build", "locales", "lang", lang + ".json"))
 			const fallBack = await getTranslation(join("build", "locales", "lang", "en" + ".json"))
-			// const detectLocation = await iplocate(req.ip)
+			
+
 			res.render("index", {
 				minHeight: "0",
 				lang: lang,
@@ -68,7 +69,7 @@ app.get("*", async (req, res, next) => {
 				}
 			})
 		})
-		.catch(err => next())
+		.catch(err =>next() )
 })
 
 const map = ((array, lang) => {

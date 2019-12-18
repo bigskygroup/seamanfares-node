@@ -7,7 +7,7 @@ const r = {}
 // a global to store the last request for ip repeatedly
 var lastIpReqTime = Date.now()
 
-r.ip = async ({ ip, refetch }, options) => {  console.log(ip, typeof ip)
+r.ip = async ({ ip, refetch }, options) => {  
 
 //if the ip is local replace it with something for barcelona
 ip = (ip.trim() === "::1") ? "95.127.168.85" : ip

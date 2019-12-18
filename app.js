@@ -91,7 +91,7 @@ app.get("/viewtrip/*", require("./src/server/confirmationEmail"))
 app.get("/confirmation*", require("./src/server/confirmation"))
 app.get("/advertising.html", (req, res) => res.render("pages/advertising.ejs"))
 
-app.use(/^\/[A-Za-z]{2}\/countries\.html\/{0,1}$/ , require("./src/server/all-countries"))
+app.use(/^\/[A-Za-z]{2}\/all-countries\.html\/{0,1}$/ , require("./src/server/all-countries"))
 app.use(airportsArray("code", 2), require("./src/server/seo-city"))
 app.use(airportsArray("code", 1), require("./src/server/seo-city-2"))
 
