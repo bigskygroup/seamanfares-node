@@ -41,7 +41,7 @@ app.get("*", async (req, res, next) => {
 		.then(async content => {
 			const titles = await getTranslation(join("build", "locales", "lang", lang + ".json"))
 			const fallBack = await getTranslation(join("build", "locales", "lang", "en" + ".json"))
-			const detectLocation = await iplocate(req.ip)
+			// const detectLocation = await iplocate(req.ip)
 			res.render("index", {
 				minHeight: "0",
 				lang: lang,
@@ -65,11 +65,11 @@ app.get("*", async (req, res, next) => {
 					OG_URL: `https://${req.get("host")}/${lang}/all-countries.html`,
 					_KEYWORDS: `${metaKeyword}`,
 					CANONICAL: `https://${req.get("host")}/${lang}/all-countries.html`,
-					data_location: JSON.stringify(ipFields(detectLocation))
+					data_location: JSON.stringify({ip: req.ip})
 				}
 			})
 		})
-		.catch(err => next())
+		.catch(err => console.log(err))
 })
 
 const map = ((array, lang) => {
