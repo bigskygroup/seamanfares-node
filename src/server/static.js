@@ -4,7 +4,7 @@ const express = require("express")
 const app = express.Router()
 const fs = require("fs")
 const { join } = require("path")
-const { readContent, getTranslation, t, rtlLangs, ipFields, iplocate } = require("../../functions") //pass paths as if you are in root folder
+const { readContent, getTranslation, t, rtlLangs } = require("../../functions") //pass paths as if you are in root folder
 
 app.get("*", (req, res, next) => {
 	const parseUrl = req.baseUrl.split("/") //e.g  [ '', 'en', 'about.htm' ]
@@ -16,7 +16,6 @@ app.get("*", (req, res, next) => {
 			const titles = await getTranslation(join("build", "locales", "lang", lang + ".json"))
 			const fallBack =
 				lang === "en" ? titles : await getTranslation(join("build", "locales", "lang", "en" + ".json"))
-			const detectLocation = await iplocate(req.ip)
 			res.render("index", {
 				// react: reactHTML,
 				minHeight: "0",
@@ -49,7 +48,7 @@ app.get("*", (req, res, next) => {
 					OG_URL: `https://${req.get("host")}${req.baseUrl}`,
 					_KEYWORDS: titles["KEYWORDS_LATEST_BOOKING"],
 					CANONICAL: `https://${req.get("host")}${req.baseUrl}`,
-					data_location: JSON.stringify(ipFields(detectLocation))
+					data_location: `'${JSON.stringify({ip: req.ip})}'`
 				}
 			})
 		})

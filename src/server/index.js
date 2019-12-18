@@ -1,7 +1,7 @@
 const { join } = require("path")
 const express = require("express")
 const app = express.Router()
-const { getTranslation, t, rtlLangs, ipFields, iplocate } = require("../../functions") //pass paths as if you are in
+const { getTranslation, t, rtlLangs } = require("../../functions") //pass paths as if you are in
 const indexSSR = require("../client/index")
 
 app.get("*", (req, res, next) => {
@@ -12,7 +12,6 @@ app.get("*", (req, res, next) => {
 		.then(async titles => {
 			// const reactHTML = ReactDOMServer.renderToString(Component())
 			const fallBack = await getTranslation(join("build", "locales", "lang", "en" + ".json"))
-			const detectLocation = await iplocate(req.ip)
 			res.render("index", {
 				// react: reactHTML,
 				minHeight: null,

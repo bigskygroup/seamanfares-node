@@ -3,9 +3,8 @@
 const express = require("express")
 const app = express.Router()
 const { join } = require("path")
-const { getTranslation, removeHTMLTags, t, rtlLangs, ipFields, iplocate } = require("../../functions") //pass paths as if you are in root folder
+const { getTranslation, removeHTMLTags, t, rtlLangs } = require("../../functions") //pass paths as if you are in root folder
 const { pipe, memoize } = require("f-tools")
-const airports = require("../../data/cities-condensed") //returns an array
 const countries = require("../../data/countries")
 
 app.get("*", async (req, res, next) => {
@@ -62,14 +61,14 @@ app.get("*", async (req, res, next) => {
 					_DESCRIPTION: removeHTMLTags(content),
 					OG_DESCRIPTION: removeHTMLTags(content),
 					OG_IMAGE: "/images/st-logo.png",
-					OG_URL: `https://${req.get("host")}/${lang}/all-countries.html`,
+					OG_URL: `https://${req.get("host")}/${lang}/countries.html`,
 					_KEYWORDS: `${metaKeyword}`,
-					CANONICAL: `https://${req.get("host")}/${lang}/all-countries.html`,
-					data_location: JSON.stringify({ip: req.ip})
+					CANONICAL: `https://${req.get("host")}/${lang}/countries.html`,
+					data_location: `'${JSON.stringify({ip: req.ip})}'`
 				}
 			})
 		})
-		.catch(err => console.log(err))
+		.catch(err => next())
 })
 
 const map = ((array, lang) => {

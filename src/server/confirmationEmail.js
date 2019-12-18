@@ -5,7 +5,7 @@ const { join } = require("path")
 const express = require("express")
 const app = express.Router()
 
-const { getTranslation, t, rtlLangs, ipFields, iplocate, readContent, ejs } = require("../../functions") //pass paths as if you are in
+const { getTranslation, t, rtlLangs , readContent, ejs } = require("../../functions") //pass paths as if you are in
 
 const json = require("../client/viewtrip")
 
