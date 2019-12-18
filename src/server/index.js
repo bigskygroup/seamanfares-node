@@ -23,8 +23,8 @@ app.get("*", (req, res, next) => {
 				custom: `
 <script>
 ${rtlLangs.includes(lang) ? `changeElementStyle("#footer-ssr")("rtl")` : ""}
-
- window.scrollTo(0, 0)
+window.setTimeout(function(){window.scrollTo(0, 0)} , 500)
+ 
 </script>
 				`,
 				$: {
