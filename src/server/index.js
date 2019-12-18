@@ -22,8 +22,9 @@ app.get("*", (req, res, next) => {
 				static: req.baseUrl.length < 4 ? indexSSR : null,
 				custom: `
 <script>
-${rtlLangs.includes(lang) ? `changeElementStyle("#footer-ssr")("rtl")` : null}
+${rtlLangs.includes(lang) ? `changeElementStyle("#footer-ssr")("rtl")` : ""}
 
+ window.scrollTo(0, 0)
 </script>
 				`,
 				$: {
