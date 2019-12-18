@@ -7,7 +7,8 @@ const r = {}
 // a global to store the last request for ip repeatedly
 var lastIpReqTime = Date.now()
 
-r.ip = async ({ ip, refetch }, options) => {
+r.ip = async ({ ip, refetch }, options) => {  console.log(ip, typeof ip)
+
 	const [part1, part2, part3, part4] = ip.match(/\d+/g)
 	return IP.find({ part1: part1 }).then(async res => {
 		if (!res.length) {
