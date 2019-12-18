@@ -23,7 +23,17 @@ app.get("*", (req, res, next) => {
 				custom: `
 <script>
 ${rtlLangs.includes(lang) ? `changeElementStyle("#footer-ssr")("rtl")` : ""}
-window.setTimeout(function(){window.scrollTo(0, 0)} , 500)
+var intervalCounter = 0
+var intervalTimer = window.setInterval(function(){
+	if(window.scrollY !== 0 && intervalCounter < 3) {
+		window.scrollTo(0, 0)
+	}
+	else if(intervalCounter > 2) window.clearInterval(intervalTimer)
+	else {
+		intervalCounter++
+	}
+
+} , 300)
  
 </script>
 				`,
