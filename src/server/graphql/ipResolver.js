@@ -9,6 +9,9 @@ var lastIpReqTime = Date.now()
 
 r.ip = async ({ ip, refetch }, options) => {  console.log(ip, typeof ip)
 
+//if the ip is local replace it with something for barcelona
+ip = (ip.trim() === "::1") ? "95.127.168.85" : ip
+if(refetch) return  sendIpRequest(ip)
 	const [part1, part2, part3, part4] = ip.match(/\d+/g)
 	return IP.find({ part1: part1 }).then(async res => {
 		if (!res.length) {
