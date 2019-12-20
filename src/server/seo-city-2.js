@@ -2,7 +2,7 @@
 const express = require("express")
 const app = express.Router()
 const { join } = require("path")
-const { getTranslation, removeHTMLTags, t, rtlLangs} = require("../../functions") //pass paths as if you are in root folder
+const { getTranslation, removeHTMLTags, t, rtlLangs, cleanCityName } = require("../../functions") //pass paths as if you are in root folder
 const { pipe, memoize } = require("f-tools")
 const airports = require("../../data/cities-condensed") //returns an array
 const countries = require("../../data/countries")
@@ -23,37 +23,26 @@ app.get("*", async (req, res, next) => {
 
 	const { name: country1 } = countries.find(item => item.code === cc1)
 	const { name: country2 } = countries.find(item => item.code === cc2)
-	const url = `/${lang}-${code1.toLowerCase()}-${code2.toLowerCase()}-${name1
-		.toLowerCase()
-		.replace(/,/g, "")
-		.replace(/\s/g, "-")}-${name2
-		.toLowerCase()
-		.replace(/,/g, "")
-		.replace(/\s/g, "-")}.html`
+	const url = `/${lang}-${code1.toLowerCase()}-${code2.toLowerCase()}-${cleanCityName(name1)}-${cleanCityName(name2)}.html`
 
 	if (req.baseUrl !== url) {
 		res.redirect(url)
 		return
 	}
 
-	let metaTitle, metaKeyword
+
+
 	// console.log(code1, name1, cc1, country1) //BCN Barcelona ES Spain
 	// console.log(code2, name2, cc2, country2)
-	getTranslation(join("build", "locales", "lang", lang + ".json"))
-		.then(object => {
-			metaKeyword = object["KEYWORDS_LATEST_BOOKING"]
-			return [
-				object["CHEAP_FLIGHTS_FROM"],
-				object["SEO_CITY_CONTENT"],
-				object["FLIGHTS_TO_CITIES"],
-				object["FLIGHTS_TO"]
-			]
-		})
-		.then(arr => {
+	Promise.all([
+		getTranslation(join("build", "locales", "lang", lang + ".json")),
+		getTranslation(join("build", "locales", "lang", "en" + ".json"))
+	])
+		.then(([titles, fallBack]) => {
 			let string = ""
-			metaTitle = `${arr[0]}${name1} to ${name2}, ${country2} (${cc2}) ${code2}`
+			const metaTitle = `${titles["CHEAP_FLIGHTS_FROM"]}${name1} to ${name2}, ${country2} (${cc2}) ${code2}`
 			string += `<h1>${metaTitle}</h1>`
-			string += arr[1]
+			string += titles["SEO_CITY_CONTENT"]
 				.replace(/###TO_CITY###/g, `${name2}, (${cc2}) ${code2}`)
 				.replace(/###FROM_CITY###/g, `${name1}, (${cc1}) ${code1}`)
 
@@ -63,19 +52,15 @@ app.get("*", async (req, res, next) => {
 				return array.length < 12 ? array : array.sort((a, b) => 0.5 - Math.random())
 			}
 			const pick = array => array.slice(0, 12)
-			const otherCitiesFn = pipe(
-				getOtherCities,
-				randomize,
-				pick
-			) // an array of objects from airports selected by country code like ES
+			const otherCitiesFn = pipe(getOtherCities, randomize, pick) // an array of objects from airports selected by country code like ES
 			const otherCitiesArray = otherCitiesFn(cc2)
 			const map = array => {
 				if (!array.length) return ""
 				let string = ""
 				const rows = array.forEach(
 					item =>
-						(string += `<p><a href="/${lang}/${item.code.toLowerCase()}-${item.name.toLowerCase()}.html">${
-							arr[3]
+						(string += `<p><a href="/${lang}/${item.code.toLowerCase()}-${cleanCityName(item.name)}.html">${
+							titles["FLIGHTS_TO"]
 						} ${item.name}</a></p>`)
 				)
 				return `<div class="col-12 col-sm-6">${string}</div>`
@@ -85,13 +70,19 @@ app.get("*", async (req, res, next) => {
 
 			const container = `<div class="container"><div class="row">${col1}${col2}</div></div>`
 
-			return `<div class="static"><div>${string}<br><h2>${
-				arr[2]
-			} <b>${country2}</b></h2>${container}</div></div>`
+			const content = `<div class="static">
+			<div>${string}<br><h2>${titles["FLIGHTS_TO_CITIES"]} <b>${country2}</b></h2>${container}<br>
+			<a href="./${lang}/all-countries.html" class="d-block text-right"><button class="secondary font18">${titles["FLIGHTS_TO_COUNTRIES"]} 🠊 </button></a>
+			</div></div>`
+
+			return {
+				titles,
+				fallBack,
+				content,
+				metaTitle
+			}
 		})
-		.then(async content => {
-			const titles = await getTranslation(join("build", "locales", "lang", lang + ".json"))
-			const fallBack = await getTranslation(join("build", "locales", "lang", "en" + ".json"))
+		.then(({ titles, fallBack, content, metaTitle }) => {
 			res.render("index", {
 				minHeight: "0",
 				lang: lang,
@@ -117,9 +108,9 @@ app.get("*", async (req, res, next) => {
 					OG_DESCRIPTION: removeHTMLTags(content),
 					OG_IMAGE: "/images/st-logo.png",
 					OG_URL: `https://${req.get("host")}${url}`,
-					_KEYWORDS: `${metaKeyword}, ${name1}, ${country1}, ${cc1}, ${code1} ${name2}, ${country2}, ${cc2}, ${code2}`,
+					_KEYWORDS: `${titles["KEYWORDS_LATEST_BOOKING"]}, ${name1}, ${country1}, ${cc1}, ${code1} ${name2}, ${country2}, ${cc2}, ${code2}`,
 					CANONICAL: `https://${req.get("host")}${url}`,
-					data_location: `'${JSON.stringify({ip: req.ip})}'`
+					data_location: `'${JSON.stringify({ ip: req.ip })}'`
 				}
 			})
 		})

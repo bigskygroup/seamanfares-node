@@ -170,7 +170,8 @@ f.ipProvider2 = ip => {
 	if (typeof ip !== "string") ip = ip.toString()
 
 	return iplocate(ip)
-		.then(res => { console.log(res)
+		.then(res => {
+			console.log(res)
 			const r = f.removeQuote
 			const response = {
 				ip: r(res.ip) || "",
@@ -179,8 +180,7 @@ f.ipProvider2 = ip => {
 				latitude: res.latitude.toString() || "",
 				longitude: res.longitude.toString() || "",
 				city2: r(res.subdivision) || "",
-				countryCode :r(res.country_code) || ""
-
+				countryCode: r(res.country_code) || ""
 			}
 			// f.ipJsonCreator(path.join("data", "ip"), response)
 			return response
@@ -225,7 +225,7 @@ f.generateName = () => {
 		.concat(".log")
 }
 
- morgan.token("jsonLogs", function(tokens, req, res) {
+morgan.token("jsonLogs", function(tokens, req, res) {
 	const log = JSON.stringify({
 		method: tokens.method(req, res),
 		url: tokens.url(req, res),
@@ -234,12 +234,17 @@ f.generateName = () => {
 		responseTime: tokens["response-time"](req, res) + " ms",
 		userAgent: tokens["user-agent"](req, res),
 		ip: tokens["remote-addr"](req, res),
-		date:  tokens.date(req, res, "iso"),
-		remoteUser: tokens["remote-user"](req, res),
+		date: tokens.date(req, res, "iso"),
+		remoteUser: tokens["remote-user"](req, res)
 	})
 	return log
 })
- f.morgan = morgan
+f.morgan = morgan
 
+f.cleanCityName = name => {
+	name = name.substring(0, name.indexOf("(")) + name.substring(name.indexOf(")") + 1)
+
+	return name.toLowerCase().replace(/\s/g, "-")
+}
 
 module.exports = f
