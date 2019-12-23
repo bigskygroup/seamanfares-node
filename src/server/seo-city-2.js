@@ -24,9 +24,10 @@ app.get("*", async (req, res, next) => {
 	const { name: country1 } = countries.find(item => item.code === cc1)
 	const { name: country2 } = countries.find(item => item.code === cc2)
 	const url = `/${lang}-${code1.toLowerCase()}-${code2.toLowerCase()}-${cleanCityName(name1)}-${cleanCityName(name2)}.html`
-
-	if (req.baseUrl !== url) {
-		res.redirect(url)
+ 
+// console.log(req.baseUrl, url)
+	if (req.baseUrl.toLowerCase() !== encodeURI(url).toLowerCase()) {
+		res.redirect(cleanCityName(url))
 		return
 	}
 

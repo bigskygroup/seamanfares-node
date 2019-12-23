@@ -3,57 +3,40 @@
 const express = require("express")
 const app = express.Router()
 const { join } = require("path")
-const { getTranslation, removeHTMLTags, t, rtlLangs } = require("../../functions") //pass paths as if you are in root folder
+const { getTranslation, removeHTMLTags, t, rtlLangs , cleanCityName} = require("../../functions") //pass paths as if you are in root folder
 const { pipe, memoize } = require("f-tools")
 const airports = require("../../data/cities-condensed") //returns an array
 const countries = require("../../data/countries")
 
-
-app.get("*", async (req, res, next) => {
+app.get("*", async (req, res, next) => { 
 	const parseUrl = req.baseUrl.split("/") //e.g  [ '', 'en', 'about.htm' ]
 	const lang = parseUrl[1]
 	const airportCode = parseUrl[2].split("-")[0]
-	let receivedName = parseUrl[2].match(/-([^<>\.]*).html\/{0,1}/i)[1]
+	let receivedName = cleanCityName(parseUrl[2].match(/-([^<>\.]*).html\/{0,1}/i)[1])
 
 	//code: BCN  //name: Barcelona
 	const { code, name, cc } = airports.find(item => new RegExp(airportCode, "i").test(item.code))
-	let nameInUrl = name
-	if (/\s|,/gi.test(nameInUrl)) {
-		nameInUrl = nameInUrl
-			.replace(/,/g, "")
-			.replace(/\s/g, "-")
-			.replace(/-{2,}/g, "-")
-	}
-	if (/\s|,/gi.test(receivedName)) {
-		receivedName = receivedName
-			.replace(/,/g, "")
-			.replace(/\s/g, "-")
-			.replace(/-{2,}/g, "-")
-	}
+
+	const nameInUrl = cleanCityName(name)
+
 	const { name: country } = countries.find(item => item.code === cc)
 
-	if (nameInUrl.toLowerCase().trim() !== receivedName.toLowerCase().trim()) {
-		res.redirect(`/${lang}/${code.toLowerCase().trim()}-${nameInUrl.toLowerCase().trim()}.html`)
+
+	if (receivedName !== encodeURI(nameInUrl).toLowerCase()) {
+		res.redirect(`/${lang}/${code.toLowerCase().trim()}-${nameInUrl}.html`)
 		return
 	}
 
-	let metaTitle, metaKeyword
 
-	getTranslation(join("build", "locales", "lang", lang + ".json"))
-		.then(object => {
-			metaKeyword = object["KEYWORDS_LATEST_BOOKING"]
-			return [
-				object["CHEAP_FLIGHTS_TO"],
-				object["SEO_CITY_CONTENT"],
-				object["FLIGHTS_TO_CITIES"],
-				object["FLIGHTS_TO"]
-			]
-		})
-		.then(arr => {
+	Promise.all([
+		getTranslation(join("build", "locales", "lang", lang + ".json")),
+		getTranslation(join("build", "locales", "lang", "en" + ".json"))
+	])
+		.then(([titles, fallBack]) => {
 			let string = ""
-			metaTitle = `${arr[0]} ${name}, ${country} (${cc}) ${code}`
+			const metaTitle = `${titles["CHEAP_FLIGHTS_TO"]} ${name}, ${country} (${cc}) ${code}`
 			string += `<h1>${metaTitle}</h1>`
-			string += arr[1].replace(/###TO_CITY###/g, `${name}, (${cc}) ${code}`)
+			string += titles["SEO_CITY_CONTENT"].replace(/###TO_CITY###/g, `${name}, (${cc}) ${code}`)
 			string = `<div>${string}</div>`
 
 			//creating the links for airports in the same country
@@ -62,19 +45,15 @@ app.get("*", async (req, res, next) => {
 				return array.length < 12 ? array : array.sort((a, b) => 0.5 - Math.random())
 			}
 			const pick = array => array.slice(0, 12)
-			const otherCitiesFn = pipe(
-				getOtherCities,
-				randomize,
-				pick
-			) // an array of objects from airports selected by country code like ES
+			const otherCitiesFn = pipe(getOtherCities, randomize, pick) // an array of objects from airports selected by country code like ES
 			const otherCitiesArray = otherCitiesFn(cc)
 			const map = array => {
 				if (!array.length) return ""
 				let string = ""
 				const rows = array.forEach(
 					item =>
-						(string += `<p><a href="/${lang}/${item.code.toLowerCase()}-${item.name.toLowerCase()}.html">${
-							arr[3]
+						(string += `<p><a href="/${lang}/${item.code.toLowerCase()}-${cleanCityName(item.name)}.html">${
+							titles["FLIGHTS_TO"]
 						} ${item.name}</a></p>`)
 				)
 				return `<div class="col-12 col-sm-6">${string}</div>`
@@ -84,14 +63,18 @@ app.get("*", async (req, res, next) => {
 
 			const container = `<div class="container"><div class="row">${col1}${col2}</div></div>`
 
-			return `<div class="static"><div>${string}<br><h2>${
-				arr[2]
-			} <b>${country}</b></h2>${container}</div></div>`
-		})
-		.then(async content => {
-			const titles = await getTranslation(join("build", "locales", "lang", lang + ".json"))
-			const fallBack = await getTranslation(join("build", "locales", "lang", "en" + ".json"))
+			const content = `<div class="static"><div>${string}<br><h2>${titles["FLIGHTS_TO_CITIES"]} <b>${country}</b></h2>${container}<br>
+				<a href="./${lang}/all-countries.html" class="d-block text-right"><button class="secondary font18">${titles["FLIGHTS_TO_COUNTRIES"]} 🠊 </button></a>
+					</div></div>`
 
+			return {
+				titles,
+				fallBack,
+				content,
+				metaTitle
+			}
+		})
+		.then(({ titles, fallBack, content, metaTitle }) => {
 			res.render("index", {
 				minHeight: "0",
 				lang: lang,
@@ -115,15 +98,15 @@ app.get("*", async (req, res, next) => {
 					OG_URL: `https://${req.get(
 						"host"
 					)}/${lang}/${code.toLowerCase().trim()}-${nameInUrl.toLowerCase().trim()}.html`,
-					_KEYWORDS: `${metaKeyword}, ${name}, ${country}, ${cc}, ${code}`,
+					_KEYWORDS: `${titles["KEYWORDS_LATEST_BOOKING"]}, ${name}, ${country}, ${cc}, ${code}`,
 					CANONICAL: `https://${req.get(
 						"host"
 					)}/${lang}/${code.toLowerCase().trim()}-${nameInUrl.toLowerCase().trim()}.html`,
-					data_location: `'${JSON.stringify({ip: req.ip})}'`
+					data_location: `'${JSON.stringify({ ip: req.ip })}'`
 				}
 			})
 		})
-		.catch(err => next())
+		.catch(err => console.log(err) )
 })
 
 module.exports = app
