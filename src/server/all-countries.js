@@ -3,7 +3,7 @@
 const express = require("express")
 const app = express.Router()
 const { join } = require("path")
-const { getTranslation, removeHTMLTags, t, rtlLangs } = require("../../functions") //pass paths as if you are in root folder
+const { getTranslation, removeHTMLTags, t, rtlLangs, cleanCityName } = require("../../functions") //pass paths as if you are in root folder
 const { pipe, memoize } = require("f-tools")
 const countries = require("../../data/countries")
 
@@ -14,34 +14,32 @@ app.get("*", async (req, res, next) => {
 	const listOfCountries = memoize(createList)(countries, lang)
 	//returns a sorted array
 
-	let metaKeyword
-
-	getTranslation(join("build", "locales", "lang", lang + ".json"))
-		.then(object => {
-			metaKeyword = object["KEYWORDS_LATEST_BOOKING"]
-			return [object["FLIGHTS_TO_COUNTRIES"]]
-		})
-		.then(arr => {
+	Promise.all([
+		getTranslation(join("build", "locales", "lang", lang + ".json")),
+		getTranslation(join("build", "locales", "lang", "en" + ".json"))
+	])
+		.then(([titles, fallBack]) => {
 			let string = ""
-			metaTitle = arr[0]
+			const metaTitle = titles["FLIGHTS_TO_COUNTRIES"]
 			string += `<h1>${metaTitle}</h1>`
 
 			string = `<div>${string}</div>`
-			const content = map(listOfCountries, lang)
 
 			const col1 = map(listOfCountries.slice(0, Math.round(listOfCountries.length / 2) + 1), lang)
 			const col2 = map(listOfCountries.slice(Math.round(listOfCountries.length / 2) + 1), lang)
 
 			const container = `<div class="container"><div class="row">${col1}${col2}</div></div>`
 
-			return `<div class="static"><div>${string}${container}</div></div>`
+			const content = `<div class="static"><div>${string}${container}</div></div>`
+			return {
+				titles,
+				fallBack,
+				content,
+				metaTitle
+			}
 		})
 
-		.then(async content => { 
-			const titles = await getTranslation(join("build", "locales", "lang", lang + ".json"))
-			const fallBack = await getTranslation(join("build", "locales", "lang", "en" + ".json"))
-			
-
+		.then(({ titles, fallBack, content, metaTitle }) => {
 			res.render("index", {
 				minHeight: "0",
 				lang: lang,
@@ -63,13 +61,13 @@ app.get("*", async (req, res, next) => {
 					OG_DESCRIPTION: removeHTMLTags(content),
 					OG_IMAGE: "/images/st-logo.png",
 					OG_URL: `https://${req.get("host")}/${lang}/countries.html`,
-					_KEYWORDS: `${metaKeyword}`,
+					_KEYWORDS: `${titles["KEYWORDS_LATEST_BOOKING"]}`,
 					CANONICAL: `https://${req.get("host")}/${lang}/countries.html`,
-					data_location: `'${JSON.stringify({ip: req.ip})}'`
+					data_location: `'${JSON.stringify({ ip: req.ip })}'`
 				}
 			})
 		})
-		.catch(err =>next() )
+		.catch(err => next())
 })
 
 const map = ((array, lang) => {
@@ -77,7 +75,7 @@ const map = ((array, lang) => {
 	let string = ""
 	const rows = array.forEach(
 		item =>
-			(string += `<p><a href="/${lang}/${item.code.toLowerCase()}-${item.name.toLowerCase()}.html">${
+			(string += `<p><a href="/${lang}/${item.code.toLowerCase()}-${cleanCityName(item.name)}.html">${
 				item.translatedName
 			}</a></p>`)
 	)
@@ -85,20 +83,20 @@ const map = ((array, lang) => {
 }).memoize()
 
 function createList(list, lang) {
-	return list.map(item => {
-		return {
-			name: item.name,
-			translatedName: item.reach(`l10n.${lang}`) ? item.reach(`l10n.${lang}`) : item.name,
-			code: item.code
-		}
-	})
-	.sort((a, b) => { 
-		//sorting them by name
-		const nameA = a.translatedName.toUpperCase()
-		const nameB = b.translatedName.toUpperCase()
-		return nameA < nameB ? -1 : 1
-	})
+	return list
+		.map(item => {
+			return {
+				name: item.name,
+				translatedName: item.reach(`l10n.${lang}`) ? item.reach(`l10n.${lang}`) : item.name,
+				code: item.code
+			}
+		})
+		.sort((a, b) => {
+			//sorting them by name
+			const nameA = a.translatedName.toUpperCase()
+			const nameB = b.translatedName.toUpperCase()
+			return nameA < nameB ? -1 : 1
+		})
 }
-
 
 module.exports = app

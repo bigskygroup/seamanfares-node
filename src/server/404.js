@@ -5,9 +5,14 @@ const { getTranslation, t, rtlLangs } = require("../../functions") //pass paths 
 
 app.get("*", (req, res, next) => {
 	let lang = req.originalUrl.split("/")[1]
-	lang = /^[A-Za-z]{2}$/.test(lang) ? lang : "en"
+	getTranslation(join("build", "locales", "lang", lang + ".json"))
+	.then(titles => {
+		res.redirect("/" + lang + "/404")
+	})
+	// if the language does not exist:
+	.catch(err=> res.redirect("/" + "en" + "/404"))
 
-	res.redirect("/" + lang + "/404")
+	
 })
 
 module.exports = app

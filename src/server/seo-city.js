@@ -8,7 +8,7 @@ const { pipe, memoize } = require("f-tools")
 const airports = require("../../data/cities-condensed") //returns an array
 const countries = require("../../data/countries")
 
-app.get("*", async (req, res, next) => { 
+app.get("*", async (req, res, next) => {   
 	const parseUrl = req.baseUrl.split("/") //e.g  [ '', 'en', 'about.htm' ]
 	const lang = parseUrl[1]
 	const airportCode = parseUrl[2].split("-")[0]
@@ -64,7 +64,7 @@ app.get("*", async (req, res, next) => {
 			const container = `<div class="container"><div class="row">${col1}${col2}</div></div>`
 
 			const content = `<div class="static"><div>${string}<br><h2>${titles["FLIGHTS_TO_CITIES"]} <b>${country}</b></h2>${container}<br>
-				<a href="./${lang}/all-countries.html" class="d-block text-right"><button class="secondary font18">${titles["FLIGHTS_TO_COUNTRIES"]} 🠊 </button></a>
+				<a href="./all-countries.html" class="d-block text-right"><button class="secondary font18">${titles["FLIGHTS_TO_COUNTRIES"]} 🠊 </button></a>
 					</div></div>`
 
 			return {
@@ -106,7 +106,7 @@ app.get("*", async (req, res, next) => {
 				}
 			})
 		})
-		.catch(err => console.log(err) )
+		.catch(err => next())
 })
 
 module.exports = app

@@ -244,7 +244,7 @@ f.morgan = morgan
 f.cleanCityName = name => {
 	name = name.substring(0, name.indexOf("(")) + name.substring(name.indexOf(")") + 1)
 
-	return name.toLocaleLowerCase('en-US').replace(/\s/g, "-").replace(/,/g, "").replace(/-{2,}/g, "-").trim()
+	return name.toLocaleLowerCase('en-US').replace(/\s|\//g, "-").replace(/,/g, "").replace(/-{2,}/g, "-").trim()
 }
 
 module.exports = f
