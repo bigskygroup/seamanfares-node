@@ -1,0 +1,9 @@
+<div class="col-xs-12 col-sm-12 col-md-12 well">
+    <h1 class="title_outbound total-price text-center">{$smarty.const.FAQ}</h1>
+    {section name=i loop=$fields}
+    <div class="alert-info bottom-buffer-10 padding-faq">
+        <h5><strong>{$smarty.section.i.index+1}. {$fields[i]['question']}</strong></h5>
+    </div>
+    <div class="bottom-buffer">{$fields[i]['answer']}</div>
+    {/section}
+</div>
