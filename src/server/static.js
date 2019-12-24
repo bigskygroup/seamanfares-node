@@ -4,18 +4,33 @@ const express = require("express")
 const app = express.Router()
 const fs = require("fs")
 const { join } = require("path")
-const { readContent, getTranslation, t, rtlLangs } = require("../../functions") //pass paths as if you are in root folder
+const f = require("f-tools")
+const { readContent, getTranslation, t, rtlLangs, readFolderFiles } = require("../../functions") //pass paths as if you are in root folder
+const countries = require("../../data/countries")
 
 app.get("*", (req, res, next) => {
 	const parseUrl = req.baseUrl.split("/") //e.g  [ '', 'en', 'about.htm' ]
 	const lang = parseUrl[1]
 	const page = parseUrl[2]
 
-	readContent(join("build", "locales", "info", lang, page), "utf8")
-		.then(async content => { 
-			const titles = await getTranslation(join("build", "locales", "lang", lang + ".json"))
-			const fallBack =
-				lang === "en" ? titles : await getTranslation(join("build", "locales", "lang", "en" + ".json"))
+	Promise.all([
+		getTranslation(join("build", "locales", "lang", lang + ".json")),
+		getTranslation(join("build", "locales", "lang", "en" + ".json")),
+		readFolderFiles(join("build", "locales", "info"))
+	])
+		.then(async ([titles, fallBack, languages]) => {
+			const isSiteMap = page.toLowerCase().trim() === "sitemap.htm" // true or false
+			let content
+			if (isSiteMap) content = createSiteMap(titles, fallBack, lang, languages)
+			else content = await readContent(join("build", "locales", "info", lang, page), "utf8")
+
+			return {
+				content,
+				titles,
+				fallBack
+			}
+		})
+		.then(({ titles, fallBack, content, metaTitle }) => {
 			res.render("index", {
 				// react: reactHTML,
 				minHeight: "0",
@@ -48,11 +63,11 @@ app.get("*", (req, res, next) => {
 					OG_URL: `https://${req.get("host")}${req.baseUrl}`,
 					_KEYWORDS: titles["KEYWORDS_LATEST_BOOKING"],
 					CANONICAL: `https://${req.get("host")}${req.baseUrl}`,
-					data_location: `'${JSON.stringify({ip: req.ip})}'`
+					data_location: `'${JSON.stringify({ ip: req.ip })}'`
 				}
 			})
 		})
-		.catch(err =>next())
+		.catch(err => next())
 })
 
 function getTitle(page) {
@@ -74,9 +89,75 @@ function getTitle(page) {
 			return "CANCELLATION"
 		case "luggage_allowance":
 			return "BAGGAGE_ALLOWANCE"
+			case "sitemap":
+			return "SITE_MAP"
 		default:
 			return null
 	}
+}
+
+function createSiteMap(titles, fallBack, lang, languages) {
+	languages = languages.filter(item => item.length === 2)
+	const colSize = Math.ceil(languages.length / 4) + 1
+	const find = word => (titles[word] ? titles[word] : fallBack[word])
+	const findName = code => {
+		const result = countries.find(item => item.code.toLowerCase() === code)
+
+		return result ? result.reach("name", "") : ""
+	}
+
+	createList = array =>
+		array
+			.map(item => {
+				if (findName(item)) {
+					return `<a class="d-block" href="/${item}"><img src="/images/flags/${item}.gif" /> ${findName(
+						item
+					)}</a>`
+				}
+			})
+			.join("")
+
+	const string = `
+    <h1>${find("SITE_MAP")}</h1>
+    <ul style="padding-left: 40px">
+      <li>
+        <a href="./" style="font-weight:bold; color:var(--shadow)">${find("SEARCH_ROUND_WORLD_FLIGHTS")}</a>
+      </li>
+      <li>
+        <a href="./all-countries.html" style="font-weight:bold; color:var(--shadow)"
+        >${find("FLIGHTS_TO_COUNTRIES")}</a
+        >
+      </li>
+      <li style="font-weight:bold; color:var(--shadow)">${find("USEFUL_LINKS")}</li>
+      <ul style="padding-left: 40px">
+        <li><a href="./about.htm">${find("ABOUT_US")}</a></li>
+        <li><a href="./terms.htm">${find("TERMS_CONDITIONS")}</a></li>
+        <li><a href="./privacy.htm">${find("PRIVACY")}</a></li>
+        <li><a href="./rules.htm">${find("RULES_REGULATIONS")}</a></li>
+        <li><a href="./cookies_policy.htm">${find("COOKIES_POLICY_TEXT_LINK")}</a></li>
+        <li><a href="./gdpr.htm">${find("DATA_PROTECTION_LINK")}</a></li>
+        <li><a href="./canxprotect.htm">${find("CANCELLATION")}</a></li>
+      </ul>
+    </ul>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-4 col-md-3">
+          <div>${createList(languages.slice(0, colSize))}</div>
+        </div>
+        <div class=" col-sm-4 col-md-3">
+          <div>${createList(languages.slice(colSize, colSize * 2))}</div>
+        </div>
+        <div class="col-sm-4 col-md-3">
+          <div>${createList(languages.slice(colSize * 2, colSize * 3))}</div>
+        </div>
+        <div class="col-sm-4 col-md-3">
+          <div>${createList(languages.slice(colSize * 3))}</div>
+        </div>
+      </div>
+	`
+
+	return `<div>${string}</div>`
 }
 
 module.exports = app
