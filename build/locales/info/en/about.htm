@@ -19,59 +19,88 @@
 		<style type="text/css">
 			.continents ul {
 				list-style: none;
+				margin-top: 25px;
 			}
 			
 			.continents img {
 				filter: opacity(0.2);
 			}
+			.continents .img{
+				min-width: 225px;
+				margin-top: 15px;
+			}
+			.continents .pad-left-0 {padding-left: 0} 
+		@media (max-width: 570px) {
+			.continents .col-sm-5.col-md-4.pad-left-0 {
+				margin-top: 0
+			}
+		}
 		</style>
 
 		<div class="container continents">
 			<div class="row">
-				<div class="col-6 col-md-3">
-					<img class="svg" src="/images/continents/europe.png" alt="Europe" />
-					<ul>
+				<div class="col-12">
+					<div class="row">
+						<div class="img col-sm-12 col-md-1">
+					<img class="svg " src="/images/continents/europe.png" alt="Europe" />
+					</div>
+					<ul class="col-sm-5 col-md-4 pad-left-0" >
 						<li><b>Spain:</b> +34912171643</li>
 						<li><b>France:</b> +33805089270</li>
 						<li><b>Germany:</b> +493022381742</li>
 						<li><b>Sweden:</b> +46852503806</li>
 						<li><b>Denmark:</b> +4578795401</li>
+
+					</ul><ul  class="col-sm-5 col-md-4 pad-left-0">
 						<li><b>Austria:</b> +43720883400</li>
 						<li><b>Italy:</b> +390694803044</li>
 						<li><b>Switzerland:</b> +41435080332</li>
 						<li><b>UK, Latvia:</b> +442033182504</li>
 						<li><b>Norway:</b> +4780024620</li>
 					</ul>
+					</div>
 				</div>
-				<div class="col-6 col-md-3">
-					<img class="svg" src="/images/continents/america.png" alt="America" />
+				<div class="col-12">
+					<div class="row">
+						<div class="img"><img class="svg" src="/images/continents/america.png" alt="America" />
+						</div>
 					<ul>
 						<li><b>United States:</b> +12027534009</li>
 						<li><b>Canada:</b> +18884089133</li>
 						<li><b>Central &amp; South America:</b> +541159842460</li>
 					</ul>
 				</div>
+				</div>
 
-				<div class="col-6 col-md-3">
-					<img class="svg" src="/images/continents/asia.png" alt="Asia" />
+				<div class="col-12">
+					<div class="row">
+						<div class="img"><img class="svg" src="/images/continents/asia.png" alt="Asia" />
+						</div>
 					<ul>
 						<li><b>India, Vietnam:</b> +910008004404025</li>
 						<li><b>Philippines:</b> +180011161150</li>
 					</ul>
 				</div>
+				</div>
 
-				<div class="col-6 col-md-3">
-					<img class="svg" src="/images/continents/australia.png" alt="Australia" />
+				<div class="col-12">
+					<div class="row">
+						<div class="img"><img class="svg" src="/images/continents/australia.png" alt="Australia" />
+						</div>
 					<ul>
 						<li><b>Australia:</b> +611800875242</li>
 						<li><b>New Zealand:</b> +64800004645</li>
 					</ul>
 				</div>
-				<div class="col-6 col-md-3">
-					<img class="svg" src="/images/continents/africa.png" alt="Africa" />
+				</div>
+				<div class="col-12">
+					<div class="row">
+						<div class="img"><img class="svg" src="/images/continents/africa.png" alt="Africa" />
+						</div>
 					<ul>
 						<li><b>Tunisia, Algeria, Morocco:</b> +33805089270</li>
 					</ul>
+				</div>
 				</div>
 			</div>
 		</div>
