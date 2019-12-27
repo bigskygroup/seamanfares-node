@@ -3,13 +3,11 @@ const express = require("express")
 const app = express.Router()
 const { getTranslation, t, rtlLangs } = require("../../functions") //pass paths as if you are in
 
-app.get("*", (req, res, next) => { 
+app.get("*", (req, res, next) => {
 	const splitedUrl = req.path.split("/")
 	const lang = splitedUrl[2] || "en"
 	getTranslation(join("build", "locales", "lang", lang + ".json"))
 		.then(async titles => {
-
-
 			const fallBack = await getTranslation(join("build", "locales", "lang", "en" + ".json"))
 
 			res.render("index", {
@@ -37,7 +35,7 @@ ${rtlLangs.includes(lang) ? `changeElementStyle("#footer-ssr")("rtl")` : null}
 					OG_URL: `https://${req.get("host")}${req.baseUrl}`,
 					_KEYWORDS: titles["KEYWORDS_LATEST_BOOKING"],
 					CANONICAL: `https://${req.get("host")}${req.baseUrl}`,
-					data_location: `'${JSON.stringify({ip: req.ip})}'`
+					data_location: `'${JSON.stringify({ ip: req.ip, userAgent: req.headers["user-agent"] })}'`
 				}
 			})
 		})

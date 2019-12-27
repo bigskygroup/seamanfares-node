@@ -1,16 +1,22 @@
 const { join } = require("path")
 const express = require("express")
 const app = express.Router()
-const { getTranslation, t, rtlLangs } = require("../../functions") //pass paths as if you are in
+// const morgan = require("morgan")
+const { getTranslation, t, rtlLangs , morgan } = require("../../functions") //pass paths as if you are in
 const indexSSR = require("../client/index")
 
-app.get("*", (req, res, next) => {
+
+app.get("*", (req, res, next) => { 
+
+// const a = morgan("jsonLogs")(req, res, next)
+
+
+
 	const splitedUrl = req.baseUrl.split("/")
 	const lang = splitedUrl[1] && splitedUrl[1].length === 2 ? splitedUrl[1] : "en"
 
 	getTranslation(join("build", "locales", "lang", lang + ".json"))
 		.then(async titles => {
-			// const reactHTML = ReactDOMServer.renderToString(Component())
 			const fallBack = await getTranslation(join("build", "locales", "lang", "en" + ".json"))
 			res.render("index", {
 				// react: reactHTML,
@@ -23,17 +29,17 @@ app.get("*", (req, res, next) => {
 				custom: `
 <script>
 ${rtlLangs.includes(lang) ? `changeElementStyle("#footer-ssr")("rtl")` : ""}
-var intervalCounter = 0
-var intervalTimer = window.setInterval(function(){
-	if(window.scrollY !== 0 && intervalCounter < 3) {
-		window.scrollTo(0, 0)
-	}
-	else if(intervalCounter > 2) window.clearInterval(intervalTimer)
-	else {
-		intervalCounter++
-	}
+// var intervalCounter = 0
+// var intervalTimer = window.setInterval(function(){
+// 	if(window.scrollY !== 0 && intervalCounter < 3) {
+// 		window.scrollTo(0, 0)
+// 	}
+// 	else if(intervalCounter > 2) window.clearInterval(intervalTimer)
+// 	else {
+// 		intervalCounter++
+// 	}
 
-} , 300)
+// } , 300)
  
 </script>
 				`,
@@ -48,7 +54,7 @@ var intervalTimer = window.setInterval(function(){
 					OG_URL: `https://${req.get("host")}${req.baseUrl}`,
 					_KEYWORDS: titles["KEYWORDS_LATEST_BOOKING"],
 					CANONICAL: `https://${req.get("host")}${req.baseUrl}`,
-					data_location: `'${JSON.stringify({ip: req.ip})}'`
+					data_location: `'${JSON.stringify({ip: req.ip, userAgent: req.headers["user-agent"]})}'`
 				}
 			})
 		})

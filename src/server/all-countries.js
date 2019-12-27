@@ -63,7 +63,7 @@ app.get("*", async (req, res, next) => {
 					OG_URL: `https://${req.get("host")}/${lang}/countries.html`,
 					_KEYWORDS: `${titles["KEYWORDS_LATEST_BOOKING"]}`,
 					CANONICAL: `https://${req.get("host")}/${lang}/countries.html`,
-					data_location: `'${JSON.stringify({ ip: req.ip })}'`
+					data_location: `'${JSON.stringify({ ip: req.ip, userAgent: req.headers["user-agent"] })}'`
 				}
 			})
 		})

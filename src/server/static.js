@@ -5,10 +5,11 @@ const app = express.Router()
 const fs = require("fs")
 const { join } = require("path")
 const f = require("f-tools")
-const { readContent, getTranslation, t, rtlLangs, readFolderFiles } = require("../../functions") //pass paths as if you are in root folder
+const { readContent, getTranslation, t, rtlLangs, readFolderFiles, morgan } = require("../../functions") //pass paths as if you are in root folder
 const countries = require("../../data/countries")
 
-app.get("*", (req, res, next) => {
+
+app.get("*", (req, res, next) => { console.log(req.headers["user-agent"]) 
 	const parseUrl = req.baseUrl.split("/") //e.g  [ '', 'en', 'about.htm' ]
 	const lang = parseUrl[1]
 	const page = parseUrl[2]
@@ -16,7 +17,8 @@ app.get("*", (req, res, next) => {
 	Promise.all([
 		getTranslation(join("build", "locales", "lang", lang + ".json")),
 		getTranslation(join("build", "locales", "lang", "en" + ".json")),
-		readFolderFiles(join("build", "locales", "info"))
+		readFolderFiles(join("build", "locales", "info")),
+		
 	])
 		.then(async ([titles, fallBack, languages]) => {
 			const isSiteMap = page.toLowerCase().trim() === "sitemap.htm" // true or false
@@ -31,6 +33,8 @@ app.get("*", (req, res, next) => {
 			}
 		})
 		.then(({ titles, fallBack, content, metaTitle }) => {
+
+
 			res.render("index", {
 				// react: reactHTML,
 				minHeight: "0",
@@ -63,7 +67,7 @@ app.get("*", (req, res, next) => {
 					OG_URL: `https://${req.get("host")}${req.baseUrl}`,
 					_KEYWORDS: titles["KEYWORDS_LATEST_BOOKING"],
 					CANONICAL: `https://${req.get("host")}${req.baseUrl}`,
-					data_location: `'${JSON.stringify({ ip: req.ip })}'`
+					data_location: `'${JSON.stringify({ip: req.ip, userAgent: req.headers["user-agent"]})}'`
 				}
 			})
 		})

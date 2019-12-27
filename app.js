@@ -87,6 +87,7 @@ const accessLogStream = rfs(generateName(), {
 app.use(morgan("jsonLogs", { stream: accessLogStream }))
 
 
+
 app.get("/viewtrip/*", require("./src/server/confirmationEmail"))
 app.get("/confirmation*", require("./src/server/confirmation"))
 app.get("/advertising.html", (req, res) => res.render("pages/advertising.ejs"))

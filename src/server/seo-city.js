@@ -102,7 +102,7 @@ app.get("*", async (req, res, next) => {
 					CANONICAL: `https://${req.get(
 						"host"
 					)}/${lang}/${code.toLowerCase().trim()}-${nameInUrl.toLowerCase().trim()}.html`,
-					data_location: `'${JSON.stringify({ ip: req.ip })}'`
+					data_location: `'${JSON.stringify({ip: req.ip, userAgent: req.headers["user-agent"]})}'`
 				}
 			})
 		})
