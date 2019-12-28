@@ -2,15 +2,11 @@ const { join } = require("path")
 const express = require("express")
 const app = express.Router()
 // const morgan = require("morgan")
-const { getTranslation, t, rtlLangs , morgan } = require("../../functions") //pass paths as if you are in
+const { getTranslation, t, rtlLangs, morgan } = require("../../functions") //pass paths as if you are in
 const indexSSR = require("../client/index")
 
-
-app.get("*", (req, res, next) => { 
-
-// const a = morgan("jsonLogs")(req, res, next)
-
-
+app.get("*", (req, res, next) => {
+	// const a = morgan("jsonLogs")(req, res, next)
 
 	const splitedUrl = req.baseUrl.split("/")
 	const lang = splitedUrl[1] && splitedUrl[1].length === 2 ? splitedUrl[1] : "en"
@@ -29,17 +25,16 @@ app.get("*", (req, res, next) => {
 				custom: `
 <script>
 ${rtlLangs.includes(lang) ? `changeElementStyle("#footer-ssr")("rtl")` : ""}
-// var intervalCounter = 0
-// var intervalTimer = window.setInterval(function(){
-// 	if(window.scrollY !== 0 && intervalCounter < 3) {
-// 		window.scrollTo(0, 0)
-// 	}
-// 	else if(intervalCounter > 2) window.clearInterval(intervalTimer)
-// 	else {
-// 		intervalCounter++
-// 	}
+${
+	lang === "es"
+		? `exposeSequra(window, document, "script", sequraConfigParams, "Sequra", "onLoad")
+Sequra.onLoad(function() {
+	Sequra.refreshComponents()
+})
+`
+		: ""
+}
 
-// } , 300)
  
 </script>
 				`,
@@ -54,11 +49,11 @@ ${rtlLangs.includes(lang) ? `changeElementStyle("#footer-ssr")("rtl")` : ""}
 					OG_URL: `https://${req.get("host")}${req.baseUrl}`,
 					_KEYWORDS: titles["KEYWORDS_LATEST_BOOKING"],
 					CANONICAL: `https://${req.get("host")}${req.baseUrl}`,
-					data_location: `'${JSON.stringify({ip: req.ip, userAgent: req.headers["user-agent"]})}'`
+					data_location: `'${JSON.stringify({ ip: req.ip, userAgent: req.headers["user-agent"] })}'`
 				}
 			})
 		})
-		.catch(err => next())
+		.catch(err => console.log(err))
 })
 
 module.exports = app
