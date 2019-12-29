@@ -101,6 +101,7 @@ app.use(/^\/[A-Za-z]{2}\/[A-Za-z_]{2,35}\.htm\/{0,1}$/, require("./src/server/st
 
 const routeToIndex = [
 	"/book",
+	/^\/book\.php.*/,
 	/^\/[A-Za-z]{2}\/search\/{0,1}/,
 	/^\/[A-Za-z]{2}\/{0,1}$/,
 	/^\/[A-Za-z]{2}\/404$/,

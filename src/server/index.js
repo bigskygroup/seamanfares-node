@@ -6,9 +6,8 @@ const { getTranslation, t, rtlLangs, morgan } = require("../../functions") //pas
 const indexSSR = require("../client/index")
 const sequraFn = require("../client/sequraFn")
 
-app.get("*", (req, res, next) => {
-	// const a = morgan("jsonLogs")(req, res, next)
-
+app.get("*", (req, res, next) => { console.log(req.baseUrl)
+	
 	const splitedUrl = req.baseUrl.split("/")
 	const lang = splitedUrl[1] && splitedUrl[1].length === 2 ? splitedUrl[1] : "en"
 
@@ -26,11 +25,7 @@ app.get("*", (req, res, next) => {
 				custom: `
 <script>
 ${rtlLangs.includes(lang) ? `changeElementStyle("#footer-ssr")("rtl")` : ""}
-${
-	lang === "es"
-		? sequraFn
-		: ""
-}
+${lang === "es"? sequraFn: ""}
 
  
 </script>
