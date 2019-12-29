@@ -42,6 +42,7 @@ module.exports = buildSchema(`
 		# printLogsDates will return an array of strings in json format
 		printLogsDates(count: Int) : Logs!
 		isGodIP(ip:String!) : Bool!
+		timeOnServer : String!
 		}
 
 		type RootMutation {

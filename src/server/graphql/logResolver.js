@@ -18,6 +18,26 @@ r.printErrors = async ({ count = 50 }) => {
 
 	return { logs: content.split(/\n/g).slice(-1 * count) }
 }
+
+
+r.printLogsDates = async ({ count }) => {
+
+	const result = await readFolderFiles(join("data", "logs", "morgan")).then(res => { 
+		res = res.filter(item => /^[\d-]+\.log$/.test(item))
+		res = res.length > count ? res.slice(-1 * count) : res
+		return res.map(item => {
+			const digits = item.match(/\d+/g)
+			const obj = {
+				month: digits[0],
+				day: digits[1],
+				year: digits[2]
+			}
+			return JSON.stringify(obj)
+		})
+	})
+	return { logs: result }
+}
+
 r.printLogs = async ({
 	count = 50,
 	month = new Date().getMonth() + 1,
@@ -25,6 +45,7 @@ r.printLogs = async ({
 	year = new Date().getFullYear()
 }) => {
 
+console.log(count, month, day, year)
 	const fileName = `${month}-${day}-${year}.log`
 	const content = await createStream(join("data", "logs", "morgan", fileName), "read")
 
@@ -33,19 +54,9 @@ r.printLogs = async ({
 
 	return { logs: content.split(/\n/g).slice(-1 * count) }
 }
-r.printLogsDates = async ({ count = 50 }) => {
-	const result = await readFolderFiles(join("data", "logs", "morgan")).then(res => {
-		res = res.length > count ? res.slice(-1 * count) : res
-		return res.map(item => {
-			const digits = item.match(/\d+/g)
-			const obj = {
-				month: digits[0],
-				day: digits[1],
-				year: digits[1]
-			}
-			return JSON.stringify(obj)
-		})
-	})
-	return { logs: result }
-}
+
+
+r.timeOnServer = () => new Date().toString()
+
+
 module.exports = r

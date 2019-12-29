@@ -89,7 +89,7 @@ async function sendEmail(obj) {
 		nameFrom: nameFrom,
 		emailTo: emailTo,
 		emailCc: emailCc,
-		// emailBcc: emailBcc,              //--------------------------off for testing
+		 emailBcc: emailBcc,             
 		emailSubject: emailSubject,
 		emailMessageTxt: emailMessageTxt,
 		emailMessageHtml: emailMessageHtml,

@@ -4,7 +4,7 @@ const express = require("express")
 const app = express.Router()
 const { join } = require("path")
 const { getTranslation, removeHTMLTags, t, rtlLangs, cleanCityName } = require("../../functions") //pass paths as if you are in root folder
-const { pipe, memoize } = require("f-tools")
+const {  memoize } = require("f-tools")
 const countries = require("../../data/countries")
 
 app.get("*", async (req, res, next) => {

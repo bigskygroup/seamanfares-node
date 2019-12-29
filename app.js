@@ -55,7 +55,6 @@ const cachOptions = {
 	}
 }
 
-// app.use(cors())
 app.use(express.static(join(__dirname, "build"), cachOptions))
 app.use(favicon(join(__dirname, "build", "favicon.ico")))
 
