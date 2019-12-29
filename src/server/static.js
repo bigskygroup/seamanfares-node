@@ -7,6 +7,7 @@ const { join } = require("path")
 const f = require("f-tools")
 const { readContent, getTranslation, t, rtlLangs, readFolderFiles, morgan } = require("../../functions") //pass paths as if you are in root folder
 const countries = require("../../data/countries")
+const sequraFn = require("../client/sequraFn")
 
 app.get("*", (req, res, next) => {
 
@@ -50,8 +51,9 @@ app.get("*", (req, res, next) => {
 													const style = document.querySelector("#content-ssr .static").style
 													style.paddingTop = "50px"
 													style.paddingBottom = "50px"
-													${rtlLangs.includes(lang) ? `changeElementStyle("#footer-ssr")("rtl")` : null}
-													${rtlLangs.includes(lang) ? `changeElementStyle("#content-ssr")("rtl")` : null}
+													${rtlLangs.includes(lang) ? `changeElementStyle("#footer-ssr")("rtl")` : ""}
+													${rtlLangs.includes(lang) ? `changeElementStyle("#content-ssr")("rtl")` : ""}
+													${lang === "es"? sequraFn : ""}
 											</script>`,
 
 				$: {

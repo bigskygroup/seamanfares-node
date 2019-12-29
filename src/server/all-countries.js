@@ -6,6 +6,7 @@ const { join } = require("path")
 const { getTranslation, removeHTMLTags, t, rtlLangs, cleanCityName } = require("../../functions") //pass paths as if you are in root folder
 const {  memoize } = require("f-tools")
 const countries = require("../../data/countries")
+const sequraFn = require("../client/sequraFn")
 
 app.get("*", async (req, res, next) => {
 	const parseUrl = req.baseUrl.split("/") //e.g  [ '', 'en', 'es-spain.html' ]
@@ -50,8 +51,10 @@ app.get("*", async (req, res, next) => {
 													style.backgroundImage = "linear-gradient(#f7f7f7, #e6e6e6)"
 													style.paddingBottom = "50px"
 													style.paddingTop = "50px"
-													${rtlLangs.includes(lang) ? `changeElementStyle("#footer-ssr")("rtl")` : null}
-													${rtlLangs.includes(lang) ? `changeElementStyle("#content-ssr")("rtl")` : null}
+													${rtlLangs.includes(lang) ? `changeElementStyle("#footer-ssr")("rtl")` : ""}
+													${rtlLangs.includes(lang) ? `changeElementStyle("#content-ssr")("rtl")` : ""}
+													${lang === "es"? sequraFn : ""}
+
 											</script>`,
 				t: word => t(word, titles, fallBack),
 				$: {

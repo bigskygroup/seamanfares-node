@@ -4,6 +4,7 @@ const app = express.Router()
 // const morgan = require("morgan")
 const { getTranslation, t, rtlLangs, morgan } = require("../../functions") //pass paths as if you are in
 const indexSSR = require("../client/index")
+const sequraFn = require("../client/sequraFn")
 
 app.get("*", (req, res, next) => {
 	// const a = morgan("jsonLogs")(req, res, next)
@@ -27,25 +28,7 @@ app.get("*", (req, res, next) => {
 ${rtlLangs.includes(lang) ? `changeElementStyle("#footer-ssr")("rtl")` : ""}
 ${
 	lang === "es"
-		? `
-			(function(i, s, o, g, r, a, m) {
-			    i["SequraConfiguration"] = g
-			    i["SequraOnLoad"] = []
-			    i[r] = {}
-			    i[r][a] = function(callback) {
-			        i["SequraOnLoad"].push(callback)
-			    }
-			    ;(a = s.createElement(o)), (m = s.getElementsByTagName(o)[0])
-			    a.async = true
-			    a.src = g.scriptUri
-			    m.parentNode.insertBefore(a, m)
-			})(window, document, "script", sequraConfigParams, "Sequra", "onLoad")
-
-			Sequra.onLoad(function() {
-			    Sequra.refreshComponents()
-			})
-
-`
+		? sequraFn
 		: ""
 }
 

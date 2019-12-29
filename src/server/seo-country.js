@@ -7,6 +7,7 @@ const { getTranslation, removeHTMLTags, t, rtlLangs , cleanCityName} = require("
 const { pipe, memoize } = require("f-tools")
 const airports = require("../../data/cities-condensed") //returns an array
 const countries = require("../../data/countries")
+const sequraFn = require("../client/sequraFn")
 
 
 app.get("*", async (req, res, next) => { 
@@ -102,8 +103,9 @@ app.get("*", async (req, res, next) => {
 													style.backgroundImage = "linear-gradient(#f7f7f7, #e6e6e6)"
 													style.paddingBottom = "50px"
 													style.paddingTop = "50px"
-													${rtlLangs.includes(lang) ? `changeElementStyle("#footer-ssr")("rtl")` : null}
-													${rtlLangs.includes(lang) ? `changeElementStyle("#content-ssr")("rtl")` : null}
+													${rtlLangs.includes(lang) ? `changeElementStyle("#footer-ssr")("rtl")` : ""}
+													${rtlLangs.includes(lang) ? `changeElementStyle("#content-ssr")("rtl")` : ""}
+													${lang === "es"? sequraFn : ""}
 											</script>`,
 				t: word => t(word, titles, fallBack),
 				$: {
