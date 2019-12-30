@@ -2,18 +2,20 @@ const { join } = require("path")
 const express = require("express")
 const app = express.Router()
 // const morgan = require("morgan")
-const { getTranslation, t, rtlLangs, morgan } = require("../../functions") //pass paths as if you are in
+const { getTranslation, t, rtlLangs, morgan , ejs } = require("../../functions") //pass paths as if you are in
 const indexSSR = require("../client/index")
 const sequraFn = require("../client/sequraFn")
 
-app.get("*", (req, res, next) => { console.log(req.baseUrl)
+app.get("*", (req, res, next) => { 
 	
 	const splitedUrl = req.baseUrl.split("/")
 	const lang = splitedUrl[1] && splitedUrl[1].length === 2 ? splitedUrl[1] : "en"
 
-	getTranslation(join("build", "locales", "lang", lang + ".json"))
-		.then(async titles => {
-			const fallBack = await getTranslation(join("build", "locales", "lang", "en" + ".json"))
+		Promise.all([
+		getTranslation(join("build", "locales", "lang", lang + ".json")),
+		getTranslation(join("build", "locales", "lang", "en" + ".json"))
+	])
+		.then(async ([titles, fallBack]) => {
 			res.render("index", {
 				// react: reactHTML,
 				minHeight: null,
@@ -21,7 +23,7 @@ app.get("*", (req, res, next) => { console.log(req.baseUrl)
 				t: word => t(word, titles, fallBack),
 
 				//if there is a variable defined in ejs, it must be supplied, although with null:
-				static: req.baseUrl.length < 4 ? indexSSR : null,
+				static: req.baseUrl.length < 4 ?   ejs(indexSSR)({t: word => t(word, titles, fallBack)})  : "",
 				custom: `
 <script>
 ${rtlLangs.includes(lang) ? `changeElementStyle("#footer-ssr")("rtl")` : ""}
@@ -45,7 +47,7 @@ ${lang === "es"? sequraFn: ""}
 				}
 			})
 		})
-		.catch(err => console.log(err))
+		.catch(err =>next())
 })
 
 module.exports = app

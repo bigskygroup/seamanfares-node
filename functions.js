@@ -106,11 +106,11 @@ f.removeHTMLTags = str => str.replace(/<[^>]+>/gi, "")
 
 //takes 2 translation objects and returns one value or the other:
 f.t = (word, translationJSON, defualtTranslation) => {
-	if (translationJSON[word.trim()] && translationJSON[word.trim()] != "null") {
+	if (translationJSON[word.trim()] && translationJSON[word.trim()] !== "null") {
 		return translationJSON[word.trim()]
-	} else {
+	} else if (defualtTranslation[word.trim()] && defualtTranslation[word.trim()] !== "null") {
 		return defualtTranslation[word.trim()]
-	}
+	} else return word
 }
 f.removeQuote = str => (typeof str === "string" ? str.replace(/'/g, " ") : str)
 
@@ -245,7 +245,12 @@ f.morgan = morgan
 f.cleanCityName = name => {
 	name = name.substring(0, name.indexOf("(")) + name.substring(name.indexOf(")") + 1)
 
-	return name.toLocaleLowerCase('en-US').replace(/\s|\//g, "-").replace(/,/g, "").replace(/-{2,}/g, "-").trim()
+	return name
+		.toLocaleLowerCase("en-US")
+		.replace(/\s|\//g, "-")
+		.replace(/,/g, "")
+		.replace(/-{2,}/g, "-")
+		.trim()
 }
 
 module.exports = f

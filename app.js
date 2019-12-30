@@ -31,7 +31,7 @@ mongoose
 		console.log("connected to database", dbName)
 	})
 	.catch(err => console.log("Your MongoDB setting in the app.js file is not correct. ", err))
-const IP = require("./src/server/models/ip")
+
 
 
 app.use(helmet({
@@ -87,8 +87,8 @@ app.use(morgan("jsonLogs", { stream: accessLogStream }))
 
 
 
-app.get("/viewtrip/*", require("./src/server/confirmationEmail"))
-app.get("/confirmation*", require("./src/server/confirmation"))
+// app.get("/viewtrip/*", require("./src/server/confirmationEmail"))
+// app.get("/confirmation*", require("./src/server/confirmation"))
 app.get("/advertising.html", (req, res) => res.render("pages/advertising.ejs"))
 
 app.use(/^\/[A-Za-z]{2}\/all-countries\.html\/{0,1}$/ , require("./src/server/all-countries"))
