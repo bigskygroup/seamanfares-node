@@ -2,6 +2,7 @@
 /node_modules
 /data/ip/**
 /build/locales/lang/*
+/build/images/airlogos
 !/build/locales/lang/en.json
 /data/bigfile.js
 /data/cities.js
