@@ -108,6 +108,7 @@ const routeToIndex = [
 	/^\/[A-Za-z]{2}\/404$/,
 	/^\/$/
 ]
+console.log("testing repo")
 
 app.use(routeToIndex, require("./src/server/index"))
 

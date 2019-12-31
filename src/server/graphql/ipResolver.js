@@ -63,7 +63,6 @@ r.isGodIP = ({ ip }) => {
 
 function ipConstructor(part1, part2, part3, part4, result) {
 	if (part1 && part2 && part3 && part4) {
-		console.log("all parts exist")
 		const obj = {
 			part1: part1,
 			rest: {}
