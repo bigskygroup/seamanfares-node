@@ -8,7 +8,12 @@ r.printConsole = async ({ count = 50 }) => {
 	const content = await createStream(join("data", "logs", "console.log"), "read")
 	if (typeof Number(count) !== "number") return { logs: [`wrong ${count.toString()} parameter in the query`] }
 
-	return { logs: content.split(/\n/g).slice(-1 * count) }
+	return {
+		logs: content
+			.split(/\n/g)
+			.slice(-1 * count)
+			.reverse()
+	}
 }
 
 r.printErrors = async ({ count = 50 }) => {
@@ -16,13 +21,16 @@ r.printErrors = async ({ count = 50 }) => {
 
 	if (typeof Number(count) !== "number") return { logs: [`wrong ${count.toString()} parameter in the query`] }
 
-	return { logs: content.split(/\n/g).slice(-1 * count) }
+	return {
+		logs: content
+			.split(/\n/g)
+			.slice(-1 * count)
+			.reverse()
+	}
 }
 
-
 r.printLogsDates = async ({ count }) => {
-
-	const result = await readFolderFiles(join("data", "logs", "morgan")).then(res => { 
+	const result = await readFolderFiles(join("data", "logs", "morgan")).then(res => {
 		res = res.filter(item => /^[\d-]+\.log$/.test(item))
 		res = res.length > count ? res.slice(-1 * count) : res
 		return res.map(item => {
@@ -44,8 +52,6 @@ r.printLogs = async ({
 	day = new Date().getDate(),
 	year = new Date().getFullYear()
 }) => {
-
-
 	const fileName = `${month}-${day}-${year}.log`
 	const content = await createStream(join("data", "logs", "morgan", fileName), "read")
 
@@ -55,8 +61,6 @@ r.printLogs = async ({
 	return { logs: content.split(/\n/g).slice(-1 * count) }
 }
 
-
 r.timeOnServer = () => new Date().toString()
-
 
 module.exports = r
