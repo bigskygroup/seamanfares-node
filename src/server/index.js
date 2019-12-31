@@ -1,7 +1,6 @@
 const { join } = require("path")
 const express = require("express")
 const app = express.Router()
-// const morgan = require("morgan")
 const { getTranslation, t, rtlLangs, morgan , ejs } = require("../../functions") //pass paths as if you are in
 const indexSSR = require("../client/index")
 const sequraFn = require("../client/sequraFn")

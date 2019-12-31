@@ -7,7 +7,6 @@ const { memoize, curry } = require("f-tools")
 const iplocate = require("node-iplocate")
 const fetch = require("node-fetch")
 const morgan = require("morgan")
-const reactSearchBar = require("./src/client/reactSearchBar")
 
 // f object will hold the functions and export them:
 const f = {}
@@ -40,7 +39,6 @@ f.createIndexEJS = folder => {
 				.replace(
 					`<div id="root">`,
 					`<div id="root" <%- minHeight  ? 'style="min-height:' + minHeight + ' " ' :  '' %> >
-					${reactSearchBar}
 				`
 				)
 				.replace(`<div id="content-ssr">`, `<div id="content-ssr"><%- static ? static : '' %>`)
