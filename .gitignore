@@ -1,14 +1,11 @@
 # dependencies
 /node_modules
 /data/ip/**
-/build/locales/lang/*
+/build/locales/
+#/build/locales/lang/*
 /build/images/airlogos
-!/build/locales/lang/en.json
+#!/build/locales/lang/en.json
 /data/bigfile.js
 /data/cities.js
 /data/logs/*
 /config.js
-
-
-
-
