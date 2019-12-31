@@ -6,6 +6,7 @@
     "start": "pm2 start  ecosystem.config.js",
     "stop": "pm2 stop ecosystem.config.js",
     "delete": "pm2 delete all",
+    "pid" : "lsof -i :3070",
     "status": "pm2 status",
     "dev": "nodemon app.js",
     "logs": "pm2 logs",
