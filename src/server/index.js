@@ -46,7 +46,7 @@ ${lang === "es"? sequraFn: ""}
 				}
 			})
 		})
-		.catch(err =>next())
+		.catch(err =>{ console.log(err); next() })
 })
 
 module.exports = app
