@@ -3,7 +3,7 @@
 const express = require("express")
 const app = express.Router()
 const { join } = require("path")
-const { getTranslation, removeHTMLTags, t, rtlLangs, cleanCityName } = require("../../functions") //pass paths as if you are in root folder
+const { getTranslation, removeHTMLTags, t, rtlLangs, cleanCityName,groupHasLang } = require("../../functions") //pass paths as if you are in root folder
 const {  memoize } = require("f-tools")
 const countries = require("../../data/countries")
 const sequraFn = require("../client/sequraFn")
@@ -54,6 +54,7 @@ app.get("*", async (req, res, next) => {
 													${rtlLangs.includes(lang) ? `changeElementStyle("#footer-ssr")("rtl")` : ""}
 													${rtlLangs.includes(lang) ? `changeElementStyle("#content-ssr")("rtl")` : ""}
 													${lang === "es"? sequraFn : ""}
+													${groupHasLang(lang, "en", true) ? "" : `document.querySelector("#ad-with-us").style.display = "none"`}
 
 											</script>`,
 				t: word => t(word, titles, fallBack),

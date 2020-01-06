@@ -5,7 +5,7 @@ const app = express.Router()
 const fs = require("fs")
 const { join } = require("path")
 const f = require("f-tools")
-const { readContent, getTranslation, t, rtlLangs, readFolderFiles, morgan } = require("../../functions") //pass paths as if you are in root folder
+const { readContent, getTranslation, t, rtlLangs, readFolderFiles, morgan , groupHasLang} = require("../../functions") //pass paths as if you are in root folder
 const countries = require("../../data/countries")
 const sequraFn = require("../client/sequraFn")
 
@@ -54,6 +54,7 @@ app.get("*", (req, res, next) => {
 													${rtlLangs.includes(lang) ? `changeElementStyle("#footer-ssr")("rtl")` : ""}
 													${rtlLangs.includes(lang) ? `changeElementStyle("#content-ssr")("rtl")` : ""}
 													${lang === "es"? sequraFn : ""}
+													${groupHasLang(lang, "en", true) ? "" : `document.querySelector("#ad-with-us").style.display = "none"`}
 											</script>`,
 
 				$: {
