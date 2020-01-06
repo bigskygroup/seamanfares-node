@@ -1,7 +1,7 @@
 const { join } = require("path")
 const express = require("express")
 const app = express.Router()
-const { getTranslation, t, rtlLangs, morgan , ejs } = require("../../functions") //pass paths as if you are in
+const { getTranslation, t, rtlLangs, morgan , ejs, groupHasLang } = require("../../functions") //pass paths as if you are in
 const indexSSR = require("../client/index")
 const sequraFn = require("../client/sequraFn")
 
@@ -27,6 +27,8 @@ app.get("*", (req, res, next) => {
 <script>
 ${rtlLangs.includes(lang) ? `changeElementStyle("#footer-ssr")("rtl")` : ""}
 ${lang === "es"? sequraFn: ""}
+${groupHasLang(lang, "en", true) ? "" : `document.querySelector("#ad-with-us").style.display = "none"`}
+
 
  
 </script>

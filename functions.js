@@ -13,6 +13,8 @@ const f = {}
 
 // right-to-left languages
 f.rtlLangs = ["ae", "eg", "ir", "jo", "lb", "sa", "bh", "kw", "om", "qr"]
+f.LANG_EN_GROUP = ["au","ca","en","gb","id","ie","in","nz","ph","pk","sg"];
+f.LANG_ES_GROUP = ["ar", "bo", "co", "cl", "cr", "do", "ec", "es", "gt",  "hn",  "mx", "ni", "pa", "pe", "pr", "py", "sv", "uy", "ve"]
 f.cachTypes = [
 	"audio/mpeg",
 	"text/css",
@@ -250,5 +252,28 @@ f.cleanCityName = name => {
 		.replace(/-{2,}/g, "-")
 		.trim()
 }
+
+// check if language is in a group of languages or is one of the languages
+// use to display components depending on different languages if needed
+f.groupHasLang =  function(current,compareWith,isGroup=false) {
+  let checkIt = false;
+  if(isGroup) {
+    // if it is inside the language group
+    switch(compareWith) {
+      case 'en':  checkIt = f.LANG_EN_GROUP.includes(current);
+                  break;
+      case 'es':  checkIt =f.LANG_ES_GROUP.includes(current);
+                  break;
+      default:    break;
+    };
+  } else {
+    // if setting is for individual language
+    checkIt = compareWith===current;
+  }
+  return checkIt;
+}
+
+
+
 
 module.exports = f
