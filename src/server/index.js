@@ -25,8 +25,8 @@ app.get("*", (req, res, next) => {
 				static: req.baseUrl.length < 4 ?   ejs(indexSSR)({t: word => t(word, titles, fallBack)})  : "",
 				custom: `
 <script>
-${rtlLangs.includes(lang) ? `changeElementStyle("#footer-ssr")("rtl")` : ""}
 ${lang === "es"? sequraFn: ""}
+${rtlLangs.includes(lang) ? `changeElementStyle("#footer-ssr")("rtl")` : ""}
 ${groupHasLang(lang, "en", true) ? "" : `document.querySelector("#ad-with-us").style.display = "none"`}
 
 

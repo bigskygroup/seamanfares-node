@@ -48,12 +48,12 @@ app.get("*", (req, res, next) => {
 				static: `<div ><div class="static">${content}</div></div>`,
 				t: word => t(word, titles, fallBack),
 				custom: `<script>
+				${lang === "es"? sequraFn : ""}
 													const style = document.querySelector("#content-ssr .static").style
 													style.paddingTop = "50px"
 													style.paddingBottom = "50px"
 													${rtlLangs.includes(lang) ? `changeElementStyle("#footer-ssr")("rtl")` : ""}
 													${rtlLangs.includes(lang) ? `changeElementStyle("#content-ssr")("rtl")` : ""}
-													${lang === "es"? sequraFn : ""}
 													${groupHasLang(lang, "en", true) ? "" : `document.querySelector("#ad-with-us").style.display = "none"`}
 											</script>`,
 

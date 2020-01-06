@@ -93,13 +93,13 @@ app.get("*", async (req, res, next) => {
 				t: word => t(word, titles, fallBack),
 				custom: `
 						<script> 
+						${lang === "es"? sequraFn : ""}
 								const style = document.querySelector("#content-ssr .static").style 
 								style.backgroundImage = "linear-gradient(#f7f7f7, #e6e6e6)"
 								style.paddingBottom = "50px"
 								style.paddingTop = "50px"				
 								${rtlLangs.includes(lang) ? `changeElementStyle("#footer-ssr")("rtl")` : ""}
 								${rtlLangs.includes(lang) ? `changeElementStyle("#content-ssr")("rtl")` : ""}
-								${lang === "es"? sequraFn : ""}
 								${groupHasLang(lang, "en", true) ? "" : `document.querySelector("#ad-with-us").style.display = "none"`}
 
 								
