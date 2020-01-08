@@ -111,8 +111,6 @@ const routeToIndex = [
 	/^\/$/
 ]
 
-console.log("test2")
-
 app.use(routeToIndex, require("./src/server/index"))
 
 //handling wrong requests at the end
