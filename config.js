@@ -1,5 +1,5 @@
 module.exports = {
-	NODE_ENV: "",
+	NODE_ENV: "development",
 	dbName: "",
 	dbPassword: "",
 	dbAccessIP: "",
