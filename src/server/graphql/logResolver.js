@@ -58,7 +58,7 @@ r.printLogs = async ({
 	if (typeof Number(count) !== "number")
 		return { logs: [`wrong ${[...arguments].join()} parameter in the query`] }
 
-	return { logs: content.split(/\n/g).slice(-1 * count) }
+	return { logs: content.split(/\n/g).slice(-1 * count).reverse() }
 }
 
 r.timeOnServer = () => new Date().toString()
