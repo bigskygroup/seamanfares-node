@@ -111,7 +111,7 @@ const routeToIndex = [
 	/^\/$/
 ]
 
-console.log("test")
+console.log("test2")
 
 app.use(routeToIndex, require("./src/server/index"))
 
