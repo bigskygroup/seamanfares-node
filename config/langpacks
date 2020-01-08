@@ -1,0 +1,15 @@
+#!/bin/bash
+# This is a config file for `i18n.sh`
+#
+# Please, preserve syntax correctly:
+# values must be like "targetDir:hash"
+#
+# ARRAY=( "countries:moo"
+#        "dinosaur:roar"
+#        "bird:chirp"
+#        "bash:rock" )
+
+LANGPACKS=( "lang:2b4f033b2d430d83d2d5e46dcad710b0"
+            "mail:6ff69c16cc17c0a492b0bfc77202dac5"
+            "datetime:3a3f52fad91c2c7bbdeff72fb1bbff36"
+            "countries:yZUy3gzMPN8caGpePQ7WGQ==" )
