@@ -14,7 +14,7 @@ const airports = require("./data/cities-condensed")
 const countries = require("./data/countries")
 const { dbName, dbPassword, dbAccessIP, NODE_ENV } = require("./config.js")
 const PORT = process.env.PORT || 3070
-process.env.NODE_ENV = NODE_ENV
+process.env.NODE_ENV = NODE_ENV 
 
 //database connection
 mongoose
@@ -111,6 +111,7 @@ const routeToIndex = [
 	/^\/$/
 ]
 
+console.log("test2")
 
 app.use(routeToIndex, require("./src/server/index"))
 
