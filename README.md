@@ -1,3 +1,4 @@
+Version 1
 In order to connect to the mongodb, the credentials for it should be configured in config.js first.
 
 In order to test and work on the project locally:
