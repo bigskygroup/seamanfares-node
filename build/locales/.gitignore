@@ -1,7 +1,4 @@
-/info/*
-!/info/ae
-!/info/en
 !.gitignore
 !currency.xml
 !lang.xml
-!/lang/en.json
+

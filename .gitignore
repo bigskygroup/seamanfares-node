@@ -1,6 +1,6 @@
 # dependencies
 /node_modules
-/data/ip/**
+/data/ip
 /build/locales/
 /build/images/airlogos
 /data/bigfile.js
