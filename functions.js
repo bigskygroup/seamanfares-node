@@ -296,29 +296,7 @@ f.groupHasLang = function(current, compareWith, isGroup = false) {
 	return checkIt
 }
 
-// f.isGodIP = (req, res, next) => {
-// 	return (req, res, next) => {
-// 		if (process.env.NODE_ENV === "development") return next()
-// 		const ipGods = [
-// 			"82.209.195.19",
-// 			"82.209.195.27",
-// 			"178.124.187.77",
-// 			"82.209.194.15",
-// 			// "::1",
-// 			// "127.0.0.1",
-// 			// "::ffff:127.0.0.1",
-// 			"178.124.172.174",
-// 			"139.162.234.140",
-// 			"90.74.0.167",
-// 			"139.162.248.82"
-// 			// "92.54.212.220"
-// 		]
-// 		console.log(req.ip)
-// 		console.log(ipGods.includes(req.ip))
-// 		if (ipGods.includes(req.ip)) return next()
-// 		else return res.end()
-// 	}
-// }
+
 
 f.isGodIP = ({ ip }) => {
 	if (process.env.NODE_ENV === "development") return true
@@ -334,10 +312,9 @@ f.isGodIP = ({ ip }) => {
 		"139.162.234.140",
 		"90.74.0.167",
 		"139.162.248.82"
-		// "92.54.212.220"
+		"92.54.212.220"
 	]
-	console.log(ip)
-	console.log(ipGods.includes(ip))
+
 	return ipGods.includes(ip)
 }
 
