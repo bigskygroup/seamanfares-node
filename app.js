@@ -8,16 +8,7 @@ const helmet = require("helmet")
 const graphqlHTTP = require("express-graphql")
 var cors = require("cors")
 const favicon = require("serve-favicon")
-const {
-	cachTypes,
-	createIndexEJS,
-	extractToRegex,
-	generateName,
-	morgan,
-	t,
-	getTranslation,
-	isGodIP
-} = require("./functions")
+const {	cachTypes,createIndexEJS,extractToRegex,generateName,morgan,t,getTranslation,isGodIP} = require("./functions")
 const { memoize } = require("f-tools")
 const airports = require("./data/cities-condensed")
 const countries = require("./data/countries")
