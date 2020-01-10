@@ -8,7 +8,16 @@ const helmet = require("helmet")
 const graphqlHTTP = require("express-graphql")
 var cors = require("cors")
 const favicon = require("serve-favicon")
-const {	cachTypes,createIndexEJS,extractToRegex,generateName,morgan,t,getTranslation,isGodIP} = require("./functions")
+const {
+	cachTypes,
+	createIndexEJS,
+	extractToRegex,
+	generateName,
+	morgan,
+	t,
+	getTranslation,
+	isGodIP
+} = require("./functions")
 const { memoize } = require("f-tools")
 const airports = require("./data/cities-condensed")
 const countries = require("./data/countries")
@@ -67,12 +76,11 @@ createIndexEJS(join(__dirname, "build"))
 const airportsArray = memoize(extractToRegex(airports))
 const countriesArray = memoize(extractToRegex(countries))
 
-
 //routes
 app.use(
 	"/graphql",
 	cors(),
-	graphqlHTTP( (request, response, graphQLParams) => ({
+	graphqlHTTP((request, response, graphQLParams) => ({
 		schema: require("./src/server/graphql/schema"),
 		rootValue: require("./src/server/graphql/resolvers"),
 		// graphiql: true,
@@ -80,8 +88,6 @@ app.use(
 		pretty: true
 	}))
 )
-
-
 
 // logger defined after static to avoid static files logged:
 const accessLogStream = rfs(generateName(), {
@@ -111,6 +117,10 @@ const routeToIndex = [
 	/^\/book\.php.*/,
 	/^\/book-wait\.php.*/,
 	/^\/[A-Za-z]{2}\/search\/{0,1}/,
+	/^\/[A-Za-z]{2}\/myreservation.*/,
+	/^\/[A-Za-z]{2}\/viewtrip.*/,
+	/myreservation.*/,
+	/viewtrip.*/,
 	/^\/[A-Za-z]{2}\/{0,1}$/,
 	/^\/[A-Za-z]{2}\/404$/,
 	/^\/$/
