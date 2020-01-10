@@ -8,13 +8,22 @@ const helmet = require("helmet")
 const graphqlHTTP = require("express-graphql")
 var cors = require("cors")
 const favicon = require("serve-favicon")
-const { cachTypes, createIndexEJS, extractToRegex, generateName, morgan, t, getTranslation } = require("./functions")
+const {
+	cachTypes,
+	createIndexEJS,
+	extractToRegex,
+	generateName,
+	morgan,
+	t,
+	getTranslation,
+	isGodIP
+} = require("./functions")
 const { memoize } = require("f-tools")
 const airports = require("./data/cities-condensed")
 const countries = require("./data/countries")
 const { dbName, dbPassword, dbAccessIP, NODE_ENV } = require("./config.js")
 const PORT = process.env.PORT || 3070
-process.env.NODE_ENV = NODE_ENV 
+process.env.NODE_ENV = NODE_ENV
 
 //database connection
 mongoose
@@ -32,12 +41,12 @@ mongoose
 	})
 	.catch(err => console.log("Your MongoDB setting in the app.js file is not correct. ", err))
 
-
-
-app.use(helmet({
-	dnsPrefetchControl: false,
-	hsts: false,
-}))
+app.use(
+	helmet({
+		dnsPrefetchControl: false,
+		hsts: false
+	})
+)
 // app.use(helmet.contentSecurityPolicy({
 // 	directives: {
 // 		scriptSrc: ["'self'", 'www.google-analytics.com', 'ajax.googleapis.com', 'www.googletagmanager.com' ]
@@ -67,16 +76,21 @@ createIndexEJS(join(__dirname, "build"))
 const airportsArray = memoize(extractToRegex(airports))
 const countriesArray = memoize(extractToRegex(countries))
 
+
 //routes
 app.use(
 	"/graphql",
 	cors(),
-	graphqlHTTP({
+	graphqlHTTP(async (request, response, graphQLParams) => ({
 		schema: require("./src/server/graphql/schema"),
 		rootValue: require("./src/server/graphql/resolvers"),
-		graphiql: true
-	})
+		// graphiql: true,
+		graphiql: isGodIP(request.ip),
+		pretty: true
+	}))
 )
+
+
 
 // logger defined after static to avoid static files logged:
 const accessLogStream = rfs(generateName(), {
@@ -85,15 +99,14 @@ const accessLogStream = rfs(generateName(), {
 })
 app.use(morgan("jsonLogs", { stream: accessLogStream }))
 
-
-
 // app.get("/viewtrip/*", require("./src/server/confirmationEmail"))
 // app.get("/confirmation*", require("./src/server/confirmation"))
 app.get("/advertising.html", async (req, res) => {
-const titles = await getTranslation(join("build", "locales", "lang", "en" + ".json"))
-	res.render("pages/advertising.ejs", {lang: "en", t: word => t(word, titles, titles) })})
+	const titles = await getTranslation(join("build", "locales", "lang", "en" + ".json"))
+	res.render("pages/advertising.ejs", { lang: "en", t: word => t(word, titles, titles) })
+})
 
-app.use(/^\/[A-Za-z]{2}\/all-countries\.html\/{0,1}$/ , require("./src/server/all-countries"))
+app.use(/^\/[A-Za-z]{2}\/all-countries\.html\/{0,1}$/, require("./src/server/all-countries"))
 app.use(airportsArray("code", 2), require("./src/server/seo-city"))
 app.use(airportsArray("code", 1), require("./src/server/seo-city-2"))
 
@@ -102,7 +115,7 @@ app.use(countriesArray("code", 2), require("./src/server/seo-country"))
 app.use(/^\/[A-Za-z]{2}\/[A-Za-z_]{2,35}\.htm\/{0,1}$/, require("./src/server/static"))
 
 const routeToIndex = [
-"/confirmation*",
+	"/confirmation*",
 	"/book",
 	/^\/book\.php.*/,
 	/^\/book-wait\.php.*/,

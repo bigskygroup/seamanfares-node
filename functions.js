@@ -274,6 +274,26 @@ f.groupHasLang =  function(current,compareWith,isGroup=false) {
 }
 
 
+f.isGodIP = (ip) => {
+	console.log("ip", ip)
+
+	const ipGods = [
+		"82.209.195.19",
+		"82.209.195.27",
+		"178.124.187.77",
+		"82.209.194.15",
+		"::1",
+		"127.0.0.1",
+		"178.124.172.174",
+		"139.162.234.140",
+		"90.74.0.167",
+		"139.162.248.82",
+		// "92.54.212.220"
+	]
+	console.log(ipGods.includes(ip))
+	if (ipGods.includes(ip)) return {result :true}
+		else return {result :false}
+}
 
 
 module.exports = f
