@@ -336,9 +336,9 @@ f.isGodIP = ({ ip }) => {
 		"139.162.248.82"
 		// "92.54.212.220"
 	]
-	console.log(req.ip)
-	console.log(ipGods.includes(req.ip))
-	return ipGods.includes(req.ip)
+	console.log(ip)
+	console.log(ipGods.includes(ip))
+	return ipGods.includes(ip)
 }
 
 module.exports = f
