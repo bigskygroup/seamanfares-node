@@ -299,6 +299,7 @@ f.groupHasLang = function(current, compareWith, isGroup = false) {
 
 
 f.isGodIP = ({ ip }) => {
+	
 	if (process.env.NODE_ENV === "development") return true
 	const ipGods = [
 		"82.209.195.19",
