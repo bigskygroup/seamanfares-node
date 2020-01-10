@@ -81,11 +81,11 @@ const countriesArray = memoize(extractToRegex(countries))
 app.use(
 	"/graphql",
 	cors(),
-	graphqlHTTP(async (request, response, graphQLParams) => ({
+	graphqlHTTP( (request, response, graphQLParams) => ({
 		schema: require("./src/server/graphql/schema"),
 		rootValue: require("./src/server/graphql/resolvers"),
 		// graphiql: true,
-		graphiql: isGodIP(request.ip),
+		graphiql: isGodIP(request),
 		pretty: true
 	}))
 )
