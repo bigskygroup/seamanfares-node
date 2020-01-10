@@ -112,15 +112,15 @@ app.use(countriesArray("code", 2), require("./src/server/seo-country"))
 app.use(/^\/[A-Za-z]{2}\/[A-Za-z_]{2,35}\.htm\/{0,1}$/, require("./src/server/static"))
 
 const routeToIndex = [
-	"/confirmation*",
+	"/confirmation",
 	"/book",
 	/^\/book\.php.*/,
 	/^\/book-wait\.php.*/,
 	/^\/[A-Za-z]{2}\/search\/{0,1}/,
 	/^\/[A-Za-z]{2}\/myreservation.*/,
 	/^\/[A-Za-z]{2}\/viewtrip.*/,
-	/myreservation.*/,
-	/viewtrip.*/,
+	"/myreservation",
+	"/viewtrip",
 	/^\/[A-Za-z]{2}\/{0,1}$/,
 	/^\/[A-Za-z]{2}\/404$/,
 	/^\/$/
