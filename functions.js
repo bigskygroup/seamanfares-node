@@ -53,7 +53,7 @@ f.cachTypes = [
 f.createIndexEJS = folder => {
 	// need to run this block first time only. to create index.ejs inside "build"
 	const buidDirectoryFiles = fs.readdirSync(folder, "utf8")
-	if (buidDirectoryFiles) {
+	if (!buidDirectoryFiles.includes("index.ejs")) {
 		fs.readFile(path.join(folder, "index.html"), "utf8", (err, data) => {
 			if (err) console.log("Error reading /build/index.html: " + err)
 			let content = data
