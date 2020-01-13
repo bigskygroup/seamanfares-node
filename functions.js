@@ -191,7 +191,6 @@ f.ipProvider2 = ip => {
 
 	return iplocate(ip)
 		.then(res => {
-			console.log(res)
 			const r = f.removeQuote
 			const response = {
 				ip: r(res.ip) || "",

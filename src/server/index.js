@@ -54,7 +54,7 @@ ${groupHasLang(lang, "en", true) ? "" : `document.querySelector("#ad-with-us").s
 				}
 			})
 		})
-		.catch(err => next())
+		.catch(err => {console.log("from index.js: ",  err); next()})
 })
 
 module.exports = app
