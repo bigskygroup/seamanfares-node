@@ -1,16 +1,17 @@
 const { join } = require("path")
 const express = require("express")
 const app = express.Router()
-const { getTranslation, t, rtlLangs, morgan , ejs, groupHasLang } = require("../../functions") //pass paths as if you are in
+const { getTranslation, t, rtlLangs, morgan, ejs, groupHasLang } = require("../../functions") //pass paths as if you are in
+const f = require("f-tools")
 const indexSSR = require("../client/index")
 const sequraFn = require("../client/sequraFn")
 
-app.get("*", (req, res, next) => { 
-	
+app.get("*", (req, res, next) => {
 	const splitedUrl = req.baseUrl.split("/")
 	const lang = splitedUrl[1] && splitedUrl[1].length === 2 ? splitedUrl[1] : "en"
 
-		Promise.all([
+
+	Promise.all([
 		getTranslation(join("build", "locales", "lang", lang + ".json")),
 		getTranslation(join("build", "locales", "lang", "en" + ".json"))
 	])
@@ -22,10 +23,15 @@ app.get("*", (req, res, next) => {
 				t: word => t(word, titles, fallBack),
 
 				//if there is a variable defined in ejs, it must be supplied, although with null:
-				static: req.baseUrl.length < 4 ?   ejs(indexSSR)({t: word => t(word, titles, fallBack)})  : "",
+				static:
+					req.baseUrl.length < 4 ||
+					splitedUrl.reach([1], null).match(/myreservation|viewtrip/gi) ||
+					splitedUrl.reach([2], null).match(/myreservation|viewtrip/gi)
+						? ejs(indexSSR)({ t: word => t(word, titles, fallBack) })
+						: "",
 				custom: `
 <script>
-${lang === "es"? sequraFn: ""}
+${lang === "es" ? sequraFn : ""}
 ${rtlLangs.includes(lang) ? `changeElementStyle("#footer-ssr")("rtl")` : ""}
 ${groupHasLang(lang, "en", true) ? "" : `document.querySelector("#ad-with-us").style.display = "none"`}
 
@@ -48,7 +54,7 @@ ${groupHasLang(lang, "en", true) ? "" : `document.querySelector("#ad-with-us").s
 				}
 			})
 		})
-		.catch(err => next() )
+		.catch(err => next())
 })
 
 module.exports = app
