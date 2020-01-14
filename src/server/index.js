@@ -8,7 +8,8 @@ const sequraFn = require("../client/sequraFn")
 
 app.get("*", (req, res, next) => {
 	const splitedUrl = req.baseUrl.split("/")
-	const lang = splitedUrl[1] && splitedUrl[1].length === 2 ? splitedUrl[1] : "en"
+	let lang = splitedUrl[1] && splitedUrl[1].length === 2 ? splitedUrl[1] : "en"
+	lang = req.query.lang ? req.query.lang : lang
 
 
 	Promise.all([

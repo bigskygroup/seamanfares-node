@@ -113,6 +113,7 @@ app.use(/^\/[A-Za-z]{2}\/[A-Za-z_]{2,35}\.htm\/{0,1}$/, require("./src/server/st
 
 const routeToIndex = [
 	"/confirmation", 
+		/^\/[A-Za-z]{2}\/confirmation\/{0,1}/,
 	"/book",
 	/^\/book\.php.*/,
 	/^\/book-wait\.php.*/,
