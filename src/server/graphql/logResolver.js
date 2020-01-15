@@ -61,18 +61,25 @@ r.printLogs = async ({
 	year = new Date().getFullYear(),
 	length = false
 }) => {
-	const fileName = `${month}-${day}-${year}.log`
-	const content = await createStream(join("data", "logs", "morgan", fileName), "read")
 
-	if (typeof Number(count) !== "number")
-		return { logs: [`wrong ${[...arguments].join()} parameter in the query`] }
-if(length) return { logs: [content.split(/\n/g).length.toString()] }
+	const fileName = `${month}-${day}-${year}.log`
+	var content
+	try {
+		 content = await createStream(join("data", "logs", "morgan", fileName), "read")
+	} catch (err) {
+		return { logs: [] }
+	}
+
+	// if (!content) return { logs: [] }
+	console.log("content ", content)
+
+	if (length) return { logs: [content.split(/\n/g).length.toString()] }
 
 	return {
 		logs: content
 			.split(/\n/g)
-			.reverse()
 			.slice(-1 * count)
+			 .reverse()
 	}
 }
 
@@ -112,7 +119,6 @@ r.captureResponse = ({ type, url }) => {
 					return { error: "The type is not found in switch cases" }
 			}
 
-			
 			return { error: "" }
 		})
 		.catch(err => console.log(err))
