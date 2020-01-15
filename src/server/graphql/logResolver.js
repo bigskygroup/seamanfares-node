@@ -58,13 +58,15 @@ r.printLogs = async ({
 	count = 50,
 	month = new Date().getMonth() + 1,
 	day = new Date().getDate(),
-	year = new Date().getFullYear()
+	year = new Date().getFullYear(),
+	length = false
 }) => {
 	const fileName = `${month}-${day}-${year}.log`
 	const content = await createStream(join("data", "logs", "morgan", fileName), "read")
 
 	if (typeof Number(count) !== "number")
 		return { logs: [`wrong ${[...arguments].join()} parameter in the query`] }
+if(length) return { logs: [content.split(/\n/g).length.toString()] }
 
 	return {
 		logs: content

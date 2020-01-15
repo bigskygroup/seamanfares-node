@@ -38,7 +38,7 @@ module.exports = buildSchema(`
 		ip(ip: String! , refetch: Boolean!) : IP!
 		printConsole(count: Int) : Logs!
 		printErrors(count: Int) : Logs!
-		printLogs(count: Int, month: Int, day: Int, year: Int) : Logs!
+		printLogs(count: Int, month: Int, day: Int, year: Int , length: Boolean) : Logs!
 		# printLogsDates will return an array of strings in json format
 		printLogsDates(count: Int) : Logs!
 		isGodIP(ip:String!) : Bool!
