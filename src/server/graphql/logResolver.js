@@ -7,6 +7,7 @@ const fetch = require("node-fetch")
 
 const Flights_data = require("../models/flights_data")
 const Flight_detail = require("../models/flight_detail")
+const Customer = require("../models/customer")
 
 const r = {}
 
@@ -61,11 +62,10 @@ r.printLogs = async ({
 	year = new Date().getFullYear(),
 	length = false
 }) => {
-
 	const fileName = `${month}-${day}-${year}.log`
 	var content
 	try {
-		 content = await createStream(join("data", "logs", "morgan", fileName), "read")
+		content = await createStream(join("data", "logs", "morgan", fileName), "read")
 	} catch (err) {
 		return { logs: [] }
 	}
@@ -79,7 +79,7 @@ r.printLogs = async ({
 		logs: content
 			.split(/\n/g)
 			.slice(-1 * count)
-			 .reverse()
+			.reverse()
 	}
 }
 
@@ -122,6 +122,20 @@ r.captureResponse = ({ type, url }) => {
 			return { error: "" }
 		})
 		.catch(err => console.log(err))
+}
+
+r.findCustomer = async ({ count = 10, order, email }) => {
+	if (order) {
+		return Customer.findOne({ order: order })
+			.then(result => ({ logs: [result.data] }))
+			.catch(err => ({ logs: [] }))
+	}
+	else if(email) {
+		return Customer.find({ customer_email: email })
+			.then(result => ({ logs: result.map(item=> item.data)  }))
+			.catch(err => ({ logs: [] }))
+	}
+	else return { logs: [] }
 }
 
 module.exports = r

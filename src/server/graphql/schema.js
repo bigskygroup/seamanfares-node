@@ -43,6 +43,7 @@ module.exports = buildSchema(`
 		printLogsDates(count: Int) : Logs!
 		isGodIP(ip:String!) : Bool!
 		timeOnServer : String!
+		findCustomer(count: Int, order: Int, email: String) : Logs!
 		}
 
 		type RootMutation {
