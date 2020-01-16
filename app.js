@@ -90,11 +90,12 @@ app.use(
 )
 
 // logger defined after static to avoid static files logged:
-const accessLogStream = rfs(generateName(), {
+
+try {
+	const accessLogStream = rfs(generateName(), {
 	interval: "1d", // rotate daily
 	path: join(__dirname, "data", "logs", "morgan")
 })
-try {
 	app.use(morgan("jsonLogs", { stream: accessLogStream }))
 } catch (err) {
 	console.error(err)
