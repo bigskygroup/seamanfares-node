@@ -96,7 +96,7 @@ try {
 	interval: "1d", // rotate daily
 	path: join(__dirname, "data", "logs", "morgan")
 })
-	app.use(morgan("jsonLogs", { stream: accessLogStream }))
+	// app.use(morgan("jsonLogs", { stream: accessLogStream }))
 } catch (err) {
 	console.error("->>>>> app.js, line 101: ", err)
 }
