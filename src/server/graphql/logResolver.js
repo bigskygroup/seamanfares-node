@@ -70,8 +70,6 @@ r.printLogs = async ({
 		return { logs: [] }
 	}
 
-	// if (!content) return { logs: [] }
-	console.log("content ", content)
 
 	if (length) return { logs: [content.split(/\n/g).length.toString()] }
 

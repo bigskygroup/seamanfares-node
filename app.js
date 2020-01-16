@@ -94,7 +94,7 @@ const accessLogStream = rfs(generateName(), {
 	interval: "1d", // rotate daily
 	path: join(__dirname, "data", "logs", "morgan")
 })
-// app.use(morgan("jsonLogs", { stream: accessLogStream }))
+app.use(morgan("jsonLogs", { stream: accessLogStream }))
 
 // app.get("/viewtrip/*", require("./src/server/confirmationEmail"))
 // app.get("/confirmation*", require("./src/server/confirmation"))
