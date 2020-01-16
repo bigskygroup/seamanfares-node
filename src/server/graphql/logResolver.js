@@ -133,7 +133,10 @@ r.findCustomer = async ({ count = 10, order, email }) => {
 			.then(result => ({ logs: result.map(item=> item.data)  }))
 			.catch(err => ({ logs: [] }))
 	}
-	else return { logs: [] }
+	else {
+		return Customer.find({})
+			.then(result => ({ logs: result.map(item=> item.data)  }))
+			.catch(err => ({ logs: [] }))
 }
 
 module.exports = r
