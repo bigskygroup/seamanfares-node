@@ -98,7 +98,7 @@ try {
 })
 	app.use(morgan("jsonLogs", { stream: accessLogStream }))
 } catch (err) {
-	console.error(err)
+	console.error("->>>>> app.js, line 101: ", err)
 }
 
 // app.get("/viewtrip/*", require("./src/server/confirmationEmail"))
