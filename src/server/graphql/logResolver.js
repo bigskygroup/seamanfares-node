@@ -70,7 +70,6 @@ r.printLogs = async ({
 		return { logs: [] }
 	}
 
-
 	if (length) return { logs: [content.split(/\n/g).length.toString()] }
 
 	return {
@@ -127,16 +126,15 @@ r.findCustomer = async ({ count = 10, order, email }) => {
 		return Customer.findOne({ order: order })
 			.then(result => ({ logs: [result.data] }))
 			.catch(err => ({ logs: [] }))
-	}
-	else if(email) {
+	} else if (email) {
 		return Customer.find({ customer_email: email })
-			.then(result => ({ logs: result.map(item=> item.data)  }))
+			.then(result => ({ logs: result.map(item => item.data) }))
+			.catch(err => ({ logs: [] }))
+	} else {
+		return Customer.find({})
+			.then(result => ({ logs: result.map(item => item.data) }))
 			.catch(err => ({ logs: [] }))
 	}
-	else {
-		return Customer.find({})
-			.then(result => ({ logs: result.map(item=> item.data)  }))
-			.catch(err => ({ logs: [] }))
 }
 
 module.exports = r
