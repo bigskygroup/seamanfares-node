@@ -2,6 +2,7 @@ const express = require("express")
 const app = express()
 const { join } = require("path")
 const fs = require("fs")
+const stream = require("stream")
 const mongoose = require("mongoose")
 const rfs = require("rotating-file-stream")
 const helmet = require("helmet")
@@ -90,16 +91,18 @@ app.use(
 )
 
 // logger defined after static to avoid static files logged:
-
-try {
-	const accessLogStream = rfs(generateName(), {
+const accessLogStream = rfs(generateName(), {
 	interval: "1d", // rotate daily
 	path: join(__dirname, "data", "logs", "morgan")
 })
-	// app.use(morgan("jsonLogs", { stream: accessLogStream }))
-} catch (err) {
-	console.error("->>>>> app.js, line 101: ", err)
-}
+
+app.use(
+	morgan("jsonLogs", {
+		skip: () =>  !accessLogStream.writable, // write only if write is safe to do
+		stream: accessLogStream
+	})
+)
+
 
 // app.get("/viewtrip/*", require("./src/server/confirmationEmail"))
 // app.get("/confirmation*", require("./src/server/confirmation"))
