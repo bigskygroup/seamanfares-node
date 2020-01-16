@@ -94,7 +94,11 @@ const accessLogStream = rfs(generateName(), {
 	interval: "1d", // rotate daily
 	path: join(__dirname, "data", "logs", "morgan")
 })
-// app.use(morgan("jsonLogs", { stream: accessLogStream }))
+try {
+	app.use(morgan("jsonLogs", { stream: accessLogStream }))
+} catch (err) {
+	console.error(err)
+}
 
 // app.get("/viewtrip/*", require("./src/server/confirmationEmail"))
 // app.get("/confirmation*", require("./src/server/confirmation"))
@@ -112,8 +116,8 @@ app.use(countriesArray("code", 2), require("./src/server/seo-country"))
 app.use(/^\/[A-Za-z]{2}\/[A-Za-z_]{2,35}\.htm\/{0,1}$/, require("./src/server/static"))
 
 const routeToIndex = [
-	"/confirmation", 
-		/^\/[A-Za-z]{2}\/confirmation\/{0,1}/,
+	"/confirmation",
+	/^\/[A-Za-z]{2}\/confirmation\/{0,1}/,
 	"/book",
 	/^\/book\.php.*/,
 	/^\/book-wait\.php.*/,
