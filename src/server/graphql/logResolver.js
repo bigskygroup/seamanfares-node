@@ -132,7 +132,7 @@ r.findCustomer = async ({ count = 10, order, email }) => {
 			.catch(err => ({ logs: [] }))
 	} else {
 		return Customer.find({})
-			.then(result => ({ logs: result.map(item => item.data) }))
+			.then(result => ({ logs: result.map(item => item.data).slice(-1 * count).reverse() }))
 			.catch(err => ({ logs: [] }))
 	}
 }
