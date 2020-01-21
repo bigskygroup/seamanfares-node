@@ -10,7 +10,7 @@ module.exports = {
       // instances: 2,
       autorestart: false,
       watch: true,
-       ignore_watch : ["./node_modules/**", "./data/logs", "./data/logs/err.log","./data/logs/console.log", "./build/images", "./build/data", "./config"],
+       ignore_watch : ["./node_modules/**", "./data/logs", "./data/logs/err.log","./data/logs/console.log", "./build/images", "./build/data", "./config", "./build"],
       out_file: "./data/logs/console.log",
       error_file: "./data/logs/err.log",
       time: true,
