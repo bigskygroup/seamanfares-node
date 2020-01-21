@@ -112,6 +112,9 @@ app.get("/advertising.html", async (req, res) => {
 })
 
 app.use(/^\/[A-Za-z]{2}\/all-countries\.html\/{0,1}$/, require("./src/server/all-countries"))
+app.use([/^\/[A-Za-z]{2}-multiple-destinations.html/, /^\/[A-Za-z]{2}-round-world.html/], require("./src/server/multi"))
+
+
 app.use(airportsArray("code", 2), require("./src/server/seo-city"))
 app.use(airportsArray("code", 1), require("./src/server/seo-city-2"))
 
