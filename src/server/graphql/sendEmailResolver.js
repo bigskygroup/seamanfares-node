@@ -4,6 +4,7 @@ const fs = require("fs")
 const util = require("util")
 const Customer = require("../models/customer")
 const { ejs, readContent } = require("../../../functions")
+const transporter = require("../../../send_mail")
 const r = {}
 
 // const json = require("../../client/viewtrip")
@@ -89,7 +90,7 @@ async function sendEmail(obj) {
 		nameFrom: nameFrom,
 		emailTo: emailTo,
 		emailCc: emailCc,
-		 emailBcc: emailBcc,             
+		emailBcc: emailBcc,
 		emailSubject: emailSubject,
 		emailMessageTxt: emailMessageTxt,
 		emailMessageHtml: emailMessageHtml,
@@ -98,24 +99,22 @@ async function sendEmail(obj) {
 
 	// console.log("email request recieved" , data)
 
-	await fetch("https://email.hotelshop.com/sendemail", {
-		method: "post",
-		body: JSON.stringify(data),
-		headers: { "Content-Type": "application/json" }
-	})
+	// await fetch("https://email.hotelshop.com/sendemail", {
+	// 	method: "post",
+	// 	body: JSON.stringify(data),
+	// 	headers: { "Content-Type": "application/json" }
+	// })
+	await transporter
+		.sendMail(data)
 		.then(res => {
-			if (res.status == 200) {
-				console.log(`✔ confirmation email sent to ${emailTo} at ${new Date().toLocaleString()}`)
+			console.log(`✔ confirmation email sent to ${res.accepted.toString()}`)
 
-				// set the emailSent field true in database
-				Customer.updateOne({ order: obj.order }, { emailSent: true })
-					.then(res => res)
-					.catch(err => console.error(err, `cannot update emailSent to true for order ${obj.order}`))
-			} else {
-				console.error(`✘ confirmation email fail to ${emailTo} at ${new Date().toLocaleString()}`)
-			}
+			// set the emailSent field true in database
+			Customer.updateOne({ order: obj.order }, { emailSent: true })
+				.then(res => res)
+				.catch(err => console.error(err, `cannot update emailSent to true for order ${obj.order}`))
 		})
-		.catch(err => console.error("✘ err was: ", err, new Date().toLocaleString()))
+		.catch(err => console.error(`✘ confirmation email fail to ${emailTo}`))
 }
 
 module.exports = r
