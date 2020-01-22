@@ -18,7 +18,7 @@ transporter.verify((error, success) => {
   if (error) {
     console.log(error)
   } else {
-    console.log("ready")
+    console.log("Nodemailer is ready")
   }
 })
 
