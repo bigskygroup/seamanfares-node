@@ -26,6 +26,21 @@ const { dbName, dbPassword, dbAccessIP, NODE_ENV } = require("./config.js")
 const PORT = process.env.PORT || 3070
 process.env.NODE_ENV = NODE_ENV
 
+const transporter = require("./send_mail")
+transporter.sendMail(
+{
+    from: "support@sky-tours.com",
+    to: "alialipoor1985@yahoo.com",
+    cc: "",
+    bcc: "",
+    subject: "testing nodemailer",
+    text: "testing nodemailer",
+    html: "<h1>testing nodemailer</h1>"
+  }
+
+  ).then(res=> console.log("this is res", res))
+ .catch(err=>console.log("this is err", err) )
+
 //database connection
 mongoose
 	.connect(
