@@ -82,7 +82,7 @@ const countriesArray = memoize(extractToRegex(countries))
 //routes
 app.use(
 	"/graphql",
-	cors(),
+	cors({ origin: /localhost:3030|localhost:3030|sky-tours\.com/gi}),
 	graphqlHTTP((request, response, graphQLParams) => ({
 		schema: require("./src/server/graphql/schema"),
 		rootValue: require("./src/server/graphql/resolvers"),
