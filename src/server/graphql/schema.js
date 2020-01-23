@@ -44,6 +44,7 @@ module.exports = buildSchema(`
 		isGodIP(ip:String!) : Bool!
 		timeOnServer : String!
 		findCustomer(count: Int, order: Int, email: String) : Logs!
+		decrypt(string: String!) : String!
 		}
 
 		type RootMutation {
