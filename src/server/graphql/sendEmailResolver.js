@@ -87,14 +87,13 @@ async function sendEmail(obj) {
 	console.log("email html: " , emailMessageHtml)
 
 	const data = {
-		nameFrom: nameFrom,
-		emailTo: emailTo,
-		emailCc: emailCc,
-		emailBcc: emailBcc,
-		emailSubject: emailSubject,
-		emailMessageTxt: emailMessageTxt,
-		emailMessageHtml: emailMessageHtml,
-		emailConfirmId: obj.order
+		from: nameFrom,
+		to: emailTo,
+		cc: emailCc,
+		bcc: emailBcc,
+		subject: emailSubject,
+		text: emailMessageTxt,
+		html: emailMessageHtml,
 	}
 
 	console.log("email request received" , data)
