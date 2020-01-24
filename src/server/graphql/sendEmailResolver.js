@@ -84,7 +84,7 @@ async function sendEmail(obj) {
 		}
 	)
 
-	// console.log(emailMessageHtml)
+	console.log("email html: " , emailMessageHtml)
 
 	const data = {
 		nameFrom: nameFrom,
@@ -97,7 +97,7 @@ async function sendEmail(obj) {
 		emailConfirmId: obj.order
 	}
 
-	// console.log("email request recieved" , data)
+	console.log("email request received" , data)
 
 	// await fetch("https://email.hotelshop.com/sendemail", {
 	// 	method: "post",
