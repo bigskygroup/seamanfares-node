@@ -10,8 +10,6 @@
     "status": "pm2 status",
     "dev": "nodemon app.js",
     "logs": "pm2 logs",
-    "list": "npm list -depth=0",
-    "list-g": "npm list -g -depth=0",
     "forever": "forever app.js"
   },
   "dependencies": {
