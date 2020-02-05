@@ -79,7 +79,7 @@ createIndexEJS(join(__dirname, "build"))
 const airportsArray = memoize(extractToRegex(airports))
 const countriesArray = memoize(extractToRegex(countries))
 
-//routes
+
 app.use(
 	"/graphql",
 	cors({ origin: /localhost:3030|localhost:3070|sky-tours\.com/gi}),
@@ -91,6 +91,7 @@ app.use(
 		pretty: true
 	}))
 )
+
 
 // logger defined after static to avoid static files logged:
 const accessLogStream = rfs(generateName(), {

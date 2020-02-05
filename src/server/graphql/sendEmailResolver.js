@@ -21,7 +21,7 @@ r.sendEmail = async ({ json }) => {
 		gross_price,
 		gross_curr,
 		total_price,
-		total_fare
+		total_fare,
 		curr
 	} = JSON.parse(json)
 	const customerInformation = {
@@ -32,7 +32,7 @@ r.sendEmail = async ({ json }) => {
 		lname: lname || "",
 		gross_price: gross_price || "",
 		gross_curr: gross_curr || "",
-		// total_fare: total_fare ? total_fare : total_price  || "",
+		total_fare: total_fare ? total_fare : total_price || "",
 		curr: curr || ""
 	}
 
@@ -94,7 +94,7 @@ async function sendEmail(obj) {
 		bcc: emailBcc,
 		subject: emailSubject,
 		text: emailMessageTxt,
-		html: emailMessageHtml,
+		html: emailMessageHtml
 	}
 
 	// console.log("email request received" , data)
