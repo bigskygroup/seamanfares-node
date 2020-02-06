@@ -17,4 +17,4 @@ module.exports = {
       log_type:"format",
     }
   ]
-}
+} 
