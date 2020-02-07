@@ -94,8 +94,8 @@ app.use(
 
 
 // logger defined after static to avoid static files logged:
-const accessLogStream = rfs(generateName(), {
-	interval: "1d", // rotate daily
+const accessLogStream = rfs((Math.random()*1000).toString().slice(0,3) +generateName()  , {
+	interval: "1m", // rotate daily
 	path: join(__dirname, "data", "logs", "morgan")
 })
 
