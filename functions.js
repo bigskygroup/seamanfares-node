@@ -237,8 +237,9 @@ f.createStream = (path, type) => {
 		stream.on("error", err => reject(err))
 	})
 }
-f.generateName = () => {
-	return new Date()
+f.generateName = (a, b) => {
+	const timepoint = new Date().getTime() + 10000 
+	return new Date(timepoint)
 		.toLocaleDateString()
 		.replace(/\//g, "-")
 		.concat(".log")
@@ -295,10 +296,7 @@ f.groupHasLang = function(current, compareWith, isGroup = false) {
 	return checkIt
 }
 
-
-
 f.isGodIP = ({ ip }) => {
-
 	if (process.env.NODE_ENV && process.env.NODE_ENV === "development") return true
 	const ipGods = [
 		"82.209.195.19",
