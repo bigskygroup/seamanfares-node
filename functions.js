@@ -238,7 +238,7 @@ f.createStream = (path, type) => {
 	})
 }
 f.generateName = (a, b) => {
-	const timepoint = new Date().getTime() + 10000 
+	const timepoint = new Date().getTime() - 10000 
 	return new Date(timepoint)
 		.toLocaleDateString()
 		.replace(/\//g, "-")
