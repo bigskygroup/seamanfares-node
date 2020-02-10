@@ -20,6 +20,7 @@ r.sendEmail = async ({ json }) => {
 		lname,
 		gross_price,
 		gross_curr,
+		total_price,
 		total_fare,
 		curr
 	} = JSON.parse(json)
@@ -31,7 +32,7 @@ r.sendEmail = async ({ json }) => {
 		lname: lname || "",
 		gross_price: gross_price || "",
 		gross_curr: gross_curr || "",
-		total_fare: total_fare || "",
+		total_fare: total_fare ? total_fare : total_price || "",
 		curr: curr || ""
 	}
 
@@ -84,20 +85,19 @@ async function sendEmail(obj) {
 		}
 	)
 
-	// console.log(emailMessageHtml)
+	// console.log("email html: " , emailMessageHtml)
 
 	const data = {
-		nameFrom: nameFrom,
-		emailTo: emailTo,
-		emailCc: emailCc,
-		emailBcc: emailBcc,
-		emailSubject: emailSubject,
-		emailMessageTxt: emailMessageTxt,
-		emailMessageHtml: emailMessageHtml,
-		emailConfirmId: obj.order
+		from: nameFrom,
+		to: emailTo,
+		cc: emailCc,
+		bcc: emailBcc,
+		subject: emailSubject,
+		text: emailMessageTxt,
+		html: emailMessageHtml
 	}
 
-	// console.log("email request recieved" , data)
+	// console.log("email request received" , data)
 
 	// await fetch("https://email.hotelshop.com/sendemail", {
 	// 	method: "post",

@@ -10,12 +10,12 @@
     "status": "pm2 status",
     "dev": "nodemon app.js",
     "logs": "pm2 logs",
-    "monit": "pm2 monit",
-    "list": "npm list -depth=0",
-    "list-g": "npm list -g -depth=0",
     "forever": "forever app.js"
   },
   "dependencies": {
+    "babel-preset-react": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "concurrently": "^5.0.2",
     "cors": "^2.8.5",
     "crypto-js": "^3.1.9-1",
     "ejs": "~2.7.4",
@@ -31,7 +31,9 @@
     "node-fetch": "^2.6.0",
     "node-iplocate": "^1.0.1",
     "nodemailer": "^6.4.2",
-    "rotating-file-stream": "^2.0.2",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "rotating-file-stream": "^1.4.6",
     "serve-favicon": "^2.5.0"
   },
   "devDependencies": {

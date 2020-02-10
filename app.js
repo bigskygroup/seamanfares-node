@@ -26,8 +26,6 @@ const { dbName, dbPassword, dbAccessIP, NODE_ENV } = require("./config.js")
 const PORT = process.env.PORT || 3070
 process.env.NODE_ENV = NODE_ENV
 
-
-
 //database connection
 mongoose
 	.connect(
@@ -79,10 +77,9 @@ createIndexEJS(join(__dirname, "build"))
 const airportsArray = memoize(extractToRegex(airports))
 const countriesArray = memoize(extractToRegex(countries))
 
-//routes
 app.use(
 	"/graphql",
-	cors({ origin: /localhost:3030|localhost:3030|sky-tours\.com/gi}),
+	cors({ origin: /localhost:3030|localhost:3070|sky-tours\.com/gi }),
 	graphqlHTTP((request, response, graphQLParams) => ({
 		schema: require("./src/server/graphql/schema"),
 		rootValue: require("./src/server/graphql/resolvers"),
@@ -91,19 +88,24 @@ app.use(
 		pretty: true
 	}))
 )
+console.log("Version control: ", Math.floor(Math.random() * 20))
 
 // logger defined after static to avoid static files logged:
-const accessLogStream = rfs(generateName(), {
+const accessLogStream = rfs.createStream(generateName, {
 	interval: "1d", // rotate daily
+	// intervalBoundary: false,
+	// initialRotation: false,
+	immutable: true,
 	path: join(__dirname, "data", "logs", "morgan")
 })
 
 app.use(
 	morgan("jsonLogs", {
-		skip: () =>  !accessLogStream.writable, // write only if write is safe to do
+		skip: () => !accessLogStream.writable, // write only if write is safe to do
 		stream: accessLogStream
 	})
 )
+
 
 
 // app.get("/viewtrip/*", require("./src/server/confirmationEmail"))
@@ -114,8 +116,10 @@ app.get("/advertising.html", async (req, res) => {
 })
 
 app.use(/^\/[A-Za-z]{2}\/all-countries\.html\/{0,1}$/, require("./src/server/all-countries"))
-app.use([/^\/[A-Za-z]{2}-multiple-destinations.html/, /^\/[A-Za-z]{2}-round-world.html/], require("./src/server/multi"))
-
+app.use(
+	[/^\/[A-Za-z]{2}-multiple-destinations.html/, /^\/[A-Za-z]{2}-round-world.html/],
+	require("./src/server/multi")
+)
 
 app.use(airportsArray("code", 2), require("./src/server/seo-city"))
 app.use(airportsArray("code", 1), require("./src/server/seo-city-2"))

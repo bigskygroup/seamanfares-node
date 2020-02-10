@@ -12,7 +12,7 @@ const morgan = require("morgan")
 const f = {}
 
 // right-to-left languages
-f.rtlLangs = ["ae", "eg", "ir", "jo", "lb", "sa", "bh", "kw", "om", "qr"]
+f.rtlLangs = ["ae", "eg", "ir", "jo", "lb", "sa", "bh", "kw", "om", "qr", "so", "td", "mr"]
 f.LANG_EN_GROUP = ["au", "ca", "en", "gb", "id", "ie", "in", "nz", "ph", "pk", "sg"]
 f.LANG_ES_GROUP = [
 	"ar",
@@ -237,8 +237,13 @@ f.createStream = (path, type) => {
 		stream.on("error", err => reject(err))
 	})
 }
-f.generateName = () => {
-	return new Date()
+f.generateName = (a, b) => {
+// return new Date(a)
+// 		.getMinutes() 
+// 		.toString()
+// 		.concat(".log")
+
+	return new Date(a)
 		.toLocaleDateString()
 		.replace(/\//g, "-")
 		.concat(".log")
@@ -295,10 +300,7 @@ f.groupHasLang = function(current, compareWith, isGroup = false) {
 	return checkIt
 }
 
-
-
 f.isGodIP = ({ ip }) => {
-
 	if (process.env.NODE_ENV && process.env.NODE_ENV === "development") return true
 	const ipGods = [
 		"82.209.195.19",

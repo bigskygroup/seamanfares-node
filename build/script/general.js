@@ -1,4 +1,4 @@
-const rtlLangs = ["ae", "eg", "ir", "jo", "lb", "sa", "bh", "kw", "om", "qr"]
+const rtlLangs = ["ae", "eg", "ir", "jo", "lb", "sa", "bh", "kw", "om", "qr", "so", "td", "mr"]
 
 // applies a style to all the children of the target
 function changeElementStyle(target) {
