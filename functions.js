@@ -12,7 +12,7 @@ const morgan = require("morgan")
 const f = {}
 
 // right-to-left languages
-f.rtlLangs = ["ae", "eg", "ir", "jo", "lb", "sa", "bh", "kw", "om", "qr"]
+f.rtlLangs = ["ae", "eg", "ir", "jo", "lb", "sa", "bh", "kw", "om", "qr", "so", "td", "mr"]
 f.LANG_EN_GROUP = ["au", "ca", "en", "gb", "id", "ie", "in", "nz", "ph", "pk", "sg"]
 f.LANG_ES_GROUP = [
 	"ar",
@@ -238,8 +238,12 @@ f.createStream = (path, type) => {
 	})
 }
 f.generateName = (a, b) => {
-	const timepoint = new Date().getTime() - 10000 
-	return new Date(timepoint)
+// return new Date(a)
+// 		.getMinutes() 
+// 		.toString()
+// 		.concat(".log")
+
+	return new Date(a)
 		.toLocaleDateString()
 		.replace(/\//g, "-")
 		.concat(".log")

@@ -88,10 +88,14 @@ app.use(
 		pretty: true
 	}))
 )
+console.log("Version control: ", Math.floor(Math.random() * 20))
 
 // logger defined after static to avoid static files logged:
 const accessLogStream = rfs.createStream(generateName, {
 	interval: "1d", // rotate daily
+	// intervalBoundary: false,
+	// initialRotation: false,
+	immutable: true,
 	path: join(__dirname, "data", "logs", "morgan")
 })
 
@@ -102,7 +106,7 @@ app.use(
 	})
 )
 
-console.log("Version control: ", Math.floor(Math.random() * 20))
+
 
 // app.get("/viewtrip/*", require("./src/server/confirmationEmail"))
 // app.get("/confirmation*", require("./src/server/confirmation"))
