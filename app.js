@@ -151,3 +151,5 @@ app.use(require("./src/server/404"))
 const date = new Date().toLocaleString()
 app.listen(PORT, console.log(`skytours-node app is listening on ${PORT} at ${date}`))
 module.exports = app
+
+
