@@ -3,14 +3,15 @@ const fetch = require("node-fetch")
 const fs = require("fs")
 const util = require("util")
 const Customer = require("../models/customer")
-const { ejs, readContent } = require("../../../functions")
+const { ejs, readContent, getTranslation, t } = require("../../../functions")
 const transporter = require("../../../send_mail")
 const r = {}
 
-// const json = require("../../client/viewtrip")
+// const json = JSON.stringify(require("../../client/viewtrip"))
 
 r.sendEmail = async ({ json }) => {
-	// console.log(json)
+
+	// console.log(typeof json)
 	// console.log(JSON.parse(json))
 	//incoming customer information, from react, after ticket purchase, for sending email and storing in db:
 	const {
@@ -22,7 +23,8 @@ r.sendEmail = async ({ json }) => {
 		gross_curr,
 		total_price,
 		total_fare,
-		curr
+		curr,
+		reactLang
 	} = JSON.parse(json)
 	const customerInformation = {
 		data: json, // where all the information is stored as json
@@ -33,7 +35,8 @@ r.sendEmail = async ({ json }) => {
 		gross_price: gross_price || "",
 		gross_curr: gross_curr || "",
 		total_fare: total_fare ? total_fare : total_price || "",
-		curr: curr || ""
+		curr: curr || "",
+		lang: reactLang ? reactLang : "en"
 	}
 
 	//error handling:
@@ -76,45 +79,41 @@ async function sendEmail(obj) {
 	const emailSubject = `Confirmation for Order #${obj.order}`
 	const emailMessageTxt = ""
 	const confirmationId = obj.order
+	const lang = obj.lang
 	// all fields are strings
 
-	const emailMessageHtml = await readContent(join("src", "client", "confirmationEmail.html"), "utf8").then(
-		data => {
-			const emailContent = ejs(data)(JSON.parse(obj.data))
-			return emailContent
-		}
-	)
 
-	// console.log("email html: " , emailMessageHtml)
+	Promise.all([
+		getTranslation(join("build", "locales", "lang", lang + ".json")),
+		getTranslation(join("build", "locales", "lang", "en" + ".json")),
+		readContent(join("src", "client", "confirmationEmail.html"), "utf8")
+	])
+		.then(([titles, fallBack, data]) => {
+			const emailMessageHtml = ejs(data)({ ...JSON.parse(obj.data), ...obj, t: word => t(word, titles, fallBack) })
 
-	const data = {
-		from: nameFrom,
-		to: emailTo,
-		cc: emailCc,
-		bcc: emailBcc,
-		subject: emailSubject,
-		text: emailMessageTxt,
-		html: emailMessageHtml
-	}
-
-	// console.log("email request received" , data)
-
-	// await fetch("https://email.hotelshop.com/sendemail", {
-	// 	method: "post",
-	// 	body: JSON.stringify(data),
-	// 	headers: { "Content-Type": "application/json" }
-	// })
-	await transporter
-		.sendMail(data)
-		.then(res => {
-			console.log(`✔ confirmation email sent to ${res.accepted.toString()}`)
-
-			// set the emailSent field true in database
-			Customer.updateOne({ order: obj.order }, { emailSent: true })
-				.then(res => res)
-				.catch(err => console.error(err, `cannot update emailSent to true for order ${obj.order}`))
+			return {
+				from: nameFrom,
+				to: emailTo,
+				cc: emailCc,
+				bcc: emailBcc,
+				subject: emailSubject,
+				text: emailMessageTxt,
+				html: emailMessageHtml
+			}
 		})
-		.catch(err => console.error(`✘ confirmation email fail to ${emailTo}`))
+		.then(async data => { 
+			//fs.writeFileSync("./test.html", data.html)
+			await transporter.sendMail(data).then(res => { 
+				console.log(`✔ confirmation email sent to ${res.accepted.toString()}`)
+
+				// set the emailSent field true in database
+				Customer.updateOne({ order: obj.order }, { emailSent: true })
+					.then(res => res)
+					.catch(err => console.error(`cannot update emailSent to true for order ${obj.order}`, err))
+			})
+		})
+
+		.catch(err => console.error(`✘ confirmation email fail to ${emailTo} , ${err}`))
 }
 
 module.exports = r

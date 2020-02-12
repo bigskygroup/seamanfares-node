@@ -1,9 +1,11 @@
 {
-    "customer_email": "mehdi@key-tours.com",
+    "reactLang": "en",
+    "customer_email": "mehdi@sky-tours.com",
     "customer_name": "Desiree Galleani",
     "record_locator": "4418071",
     "gross_price": "341.45",
     "gross_curr": "EUR",
+    "total_fare": "341.45",
     "curr": "EUR",
     "order": "4418071",
     "query": null,
