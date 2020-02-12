@@ -12,28 +12,24 @@
 		/>
 		<span
 			style="color: white; background-color: #2e8cb8; display: inline-block; padding: .3em .7em; margin-top: .5em; vertical-align: 90%;"
-			>Booking number: <%=record_locator%></span
+			><%= t("RECORD_LOCATOR") %>: <%=record_locator%></span
 		>
 	</div>
 	<div style="clear: both"></div>
-	<p>
-		Thank you for your reservation. Your ticket number and confirmation will follow within 24 hours
-		maximum.
-	</p>
 
-	<div style="margin-bottom: .2em;">
+	<div style="margin: .3em 0;">
 		<table>
 			<% if(full_name.length === 0) { %>
 			<tr>
 				<td style="font-weight: bold;">
-					Passenger(s):
+					<%= t("BOOKING_SECTION") %>
 				</td>
 				<td><%- customer_name %></td>
 			</tr>
 			<% } %> <% if(full_name.length !== 0) full_name.forEach((item, i) => { %>
 			<tr>
 				<td style="font-weight: bold;">
-					<%- i === 0 ? "Passenger(s):" : ""%>
+					<%- i === 0 ? t("PASSENGER_NAME") + ":" : ""%>
 				</td>
 				<td><%- item.replace(/\//g, " ") %></td>
 			</tr>
@@ -45,26 +41,31 @@
 	<%flights.forEach( (item, i) => {%> <%- `
 	<div
 		class="flight"
-		style="background-color:  #ebf5fa; padding: .5em 0; border: 1px solid transparent; border-radius: .5em; margin: 1em 0.2em"
+		style="background-color:  #ebf5fa; padding: .5em 0; border: 1px solid transparent; border-radius: .5em; margin: 1em 0.2em 0 0.2em"
 	>
-		<h1 style="font-size: 1.3em; padding-left:.7em; ">Flight ${i + 1 }</h1>
+		<h1 style="font-size: 1.3em; padding-left:.7em; ">${t("FLIGHT")} ${i + 1 }</h1>
 
 		<div class="details">
 			<p style="background-color: #d6ebf5; padding: .5em 0 .5em 2em; margin: 0 auto">
 				${item.airline} - ${item.lang_data["flight_number"]} ${item.flight_number}
 			</p>
-			<p style=" padding: .5em 0 .5em 2em; margin: 0">
-				<b style="padding: 0">Departing from: </b>${item.dep_airport}, ${item.dep_location}
+			<p style=" padding: .5em 0 0 2em; margin: 0">
+				<b style="padding: 0">${t("DEPARTURE")}: </b>
 			</p>
-			<p style="background-color:  #d6ebf5;  padding: .5em 0 .5em 2em; margin: 0">
-				<b>Departure date: </b>${item.dep_date} at ${item.dep_time}
+			<p style=" padding: .5em 0 .5em 2em; margin: 0">
+				${item.dep_airport}, ${item.dep_location}
+				<br />
+				${item.dep_date}, ${item.dep_time}
 			</p>
 
-			<p style=" padding: .5em 0 .5em 2em; margin: 0">
-				<b style="padding: 0">Arriving at: </b>${item.arr_airport}, ${item.arr_location}
+			<p style="background-color:  #d6ebf5; padding: .5em 0 0 2em; margin: 0">
+				<b style="padding: 0">${t("ARRIVAL")}:</b>
 			</p>
-			<p style="background-color:  #d6ebf5;  padding: .5em 0 .5em 2em; margin: 0">
-				<b>Arrival date: </b>${item.arr_date} at ${item.arr_time}
+			<p style=" background-color:  #d6ebf5; padding: .5em 0 .5em 2em; margin: 0; margin-bottom: -10px;
+    border-radius: 0 0 .5em .5em">
+				${item.arr_airport}, ${item.arr_location}
+				<br />
+				${item.arr_date} at ${item.arr_time}
 			</p>
 			<!-- <p style=" padding: .5em 0 .5em 2em; margin: 0">
 				<b style="padding: 0">Baggage Allowance: </b>Only hand luggage included
@@ -76,7 +77,7 @@
 
 	<div
 		class="airfare"
-		style="margin: 1em .2em; border: 2px solid #246d8f;  border-radius: 5px; padding:1em 0 .3em 1em; "
+		style="margin: 1em .2em; border: 2px solid #246d8f;  border-radius: 5px; padding:.5em "
 	>
 		<table style="width: 100%;">
 			<!-- <tr style="height: 2.9em; vertical-align: top">
@@ -92,11 +93,9 @@
 				<td style="width:40%">0</td>
 			</tr> -->
 			<tr style="height: 3em;padding-top: 1em; padding-bottom: 1em ">
-				<td style="font-weight: bold; ">Payment made by credit card:</td>
-				<td
-					style=" /*border-top: .2em solid black; */ color: #38c7a3 "
-				>
-					Total: <%-curr%> <%-total_price%>
+				<td style="font-weight: bold; "><%= t("TOTAL_BLOCK_PRICE") %> <%= t("PAYMENT") %>:</td>
+				<td style=" /*border-top: .2em solid black; */ color: #38c7a3 ">
+					<%-curr%> <%-total_fare%>
 				</td>
 				<td style="width: 1em;"></td>
 			</tr>
@@ -120,9 +119,9 @@
 			style="text-decoration: none; cursor: pointer;"
 		>
 			<button
-				style="font-family: inherit; font-size: 1.1em; border:2px solid transparent ;border-radius: .2em; min-width:270px; margin: .5em auto; display: block; padding: .6em 1.1em; color: white; background-color: #d14833; border: none; cursor: pointer;"
+				style="font-family: inherit; font-size: 1em; border:2px solid transparent ;border-radius: .2em; min-width:270px; margin: .5em auto; display: block; padding: .6em 1.1em; color: white; background-color: #d14833; border: none; cursor: pointer;"
 			>
-				Your Itinerary
+				<%= t("CLICK_HERE_RESERVATION") %>
 			</button>
 		</a>
 
@@ -132,18 +131,18 @@
 			style="text-decoration: none; cursor: pointer;"
 		>
 			<button
-				style="font-family: inherit;font-size: 1.1em; border:2px solid #d14833 ;border-radius: .2em;  min-width: 270px;  margin: .5em auto; display: block; padding:  .5em 1.1em; background-color: transparent; color: #d14833; cursor: pointer;"
+				style="font-family: inherit;font-size: 1em; border:2px solid #d14833 ;border-radius: .2em;  min-width: 282px;  margin: .5em auto; display: block; padding:  .5em 1.1em; background-color: transparent; color: #d14833; cursor: pointer;"
 			>
-				Frequently Asked Questions
+				<%= t("FAQ") %>
 			</button>
 		</a>
 	</div>
 
 	<div class="ads" style="max-width: 90%; margin: 1em auto">
-		<a href="#"
+		<a href="https://www.hotelshop.com/"
 			><img src="https://i.ibb.co/k0pCyr0/deal1.png" style="max-width: 100%; margin-top: 1em"
 		/></a>
-		<a href="#"
+		<a href="https://cars.sky-tours.com/en/"
 			><img src="https://i.ibb.co/yX1cdDq/deal2.png" style="max-width: 100%;margin-top: 1em "
 		/></a>
 	</div>
