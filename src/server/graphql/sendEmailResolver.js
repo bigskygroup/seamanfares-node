@@ -7,10 +7,10 @@ const { ejs, readContent, getTranslation, t } = require("../../../functions")
 const transporter = require("../../../send_mail")
 const r = {}
 
-const json = JSON.stringify(require("../../client/viewtrip"))
+// const json = JSON.stringify(require("../../client/viewtrip"))
 
-// r.sendEmail = async ({ json }) => {
-r.sendEmail = async () => {
+r.sendEmail = async ({ json }) => {
+
 	// console.log(typeof json)
 	// console.log(JSON.parse(json))
 	//incoming customer information, from react, after ticket purchase, for sending email and storing in db:
@@ -82,12 +82,6 @@ async function sendEmail(obj) {
 	const lang = obj.lang
 	// all fields are strings
 
-	// const emailMessageHtml = await readContent(join("src", "client", "confirmationEmail.html"), "utf8").then(
-	// 	data => {
-	// 		const emailContent = ejs(data)(JSON.parse(obj.data))
-	// 		return emailContent
-	// 	}
-	// )
 
 	Promise.all([
 		getTranslation(join("build", "locales", "lang", lang + ".json")),
