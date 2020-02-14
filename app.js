@@ -88,7 +88,8 @@ app.use(
 		pretty: true
 	}))
 )
-console.log("Version control: ", Math.floor(Math.random() * 20))
+// console.log("Version control: ", Math.floor(Math.random() * 20))
+
 
 // logger defined after static to avoid static files logged:
 const accessLogStream = rfs.createStream(generateName, {
