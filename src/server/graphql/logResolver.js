@@ -8,6 +8,7 @@ const fetch = require("node-fetch")
 const Flights_data = require("../models/flights_data")
 const Flight_detail = require("../models/flight_detail")
 const Customer = require("../models/customer")
+const React_errors = require("../models/react_errors")
 
 const r = {}
 
@@ -132,9 +133,32 @@ r.findCustomer = async ({ count = 10, order, email }) => {
 			.catch(err => ({ logs: [] }))
 	} else {
 		return Customer.find({})
-			.then(result => ({ logs: result.map(item => item.data).slice(-1 * count).reverse() }))
+			.then(result => ({
+				logs: result
+					.map(item => item.data)
+					.slice(-1 * count)
+					.reverse()
+			}))
 			.catch(err => ({ logs: [] }))
 	}
+}
+
+r.reactErrors = ({ json }) => {
+	const newError = new React_errors({ log: json })
+	return (
+		newError
+			.save()
+			.then(res => ({
+				id: res.id,
+				json: res.log,
+				error: ""
+			}))
+			.catch(err => ({
+				error: err,
+				json: "",
+				id: ""
+			}))
+	)
 }
 
 module.exports = r

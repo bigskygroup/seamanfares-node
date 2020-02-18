@@ -50,6 +50,7 @@ module.exports = buildSchema(`
 		type RootMutation {
 			sendEmail(json: String! ) : JSON!
 			captureResponse(type: String!, url: String!) : JSON
+			reactErrors(json: String!) : JSON
 		}
 				
 		schema {
