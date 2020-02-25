@@ -145,7 +145,6 @@ r.reactErrors = ({ json }) => {
 r.trackClient = ({ json }) => {
 	try {
 		json = JSON.parse(json)
-		console.log("a:", json)
 		if (!json.id) {
 			const log = new Track_client()
 			log.json.push({ json: JSON.stringify(json) })
