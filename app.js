@@ -77,9 +77,13 @@ createIndexEJS(join(__dirname, "build"))
 const airportsArray = memoize(extractToRegex(airports))
 const countriesArray = memoize(extractToRegex(countries))
 
+
 app.use(
 	"/graphql",
-	cors({ origin: /localhost:3030|localhost:3070|sky-tours\.com/gi }),
+	cors({origin: (reqUrl, callback) => {
+		if(/localhost:3030|localhost:3070|sky-tours\.com/gi.test(reqUrl)) callback(null, { origin: true } )
+			else callback(null, { origin: false } )
+	}}),
 	graphqlHTTP((request, response, graphQLParams) => ({
 		schema: require("./src/server/graphql/schema"),
 		rootValue: require("./src/server/graphql/resolvers"),
