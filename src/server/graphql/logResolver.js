@@ -9,6 +9,7 @@ const Flights_data = require("../models/flights_data")
 const Flight_detail = require("../models/flight_detail")
 const Customer = require("../models/customer")
 const React_errors = require("../models/react_errors")
+const Track_client = require("../models/track_client")
 
 const r = {}
 
@@ -94,25 +95,7 @@ r.captureResponse = ({ type, url }) => {
 					const newLog = new Flight_detail({ log: log })
 					await newLog.save()
 					return { error: "" }
-				/*	
-				case "flights_data":
-					class Logger extends Readable {
-						constructor(opt) {
-							super(opt)
-							this.log = log
-						}
-						_read() {
-							console.log(log.length, "pushed")
-							this.push(log)
-						}
-					}
-					const read = new Logger()
-					const write = createStream(join("test2"), "write")
-					console.log(read)
-					// read.pipe(write)
 
-					return { error: "" }
-*/
 				default:
 					return { error: "The type is not found in switch cases" }
 			}
@@ -145,20 +128,45 @@ r.findCustomer = async ({ count = 10, order, email }) => {
 
 r.reactErrors = ({ json }) => {
 	const newError = new React_errors({ log: json })
-	return (
-		newError
-			.save()
-			.then(res => ({
-				id: res.id,
-				json: res.log,
-				error: ""
-			}))
-			.catch(err => ({
-				error: err,
-				json: "",
-				id: ""
-			}))
-	)
+	return newError
+		.save()
+		.then(res => ({
+			id: res.id,
+			json: res.log,
+			error: ""
+		}))
+		.catch(err => ({
+			error: err,
+			json: "",
+			id: ""
+		}))
+}
+
+r.trackClient = ({ json }) => {
+	try {
+		json = JSON.parse(json)
+		console.log("a:", json)
+		if (!json.id) {
+			const log = new Track_client()
+			log.json.push({ json: JSON.stringify(json) })
+			return log.save().then(res => ({ id: res._id }))
+		} else {
+			return Track_client.findOne({ _id: json.id })
+				.then(res => {
+					res.json.push({ json: JSON.stringify(json) })
+					res.save()
+					return { id: res._id }
+				})
+				.catch(err => {
+					json.id = undefined
+					return r.trackClient({ json: JSON.stringify(json) })
+				})
+		}
+	} catch (err) {
+		return {
+			id: err.toString
+		}
+	}
 }
 
 module.exports = r

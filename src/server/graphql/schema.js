@@ -33,6 +33,9 @@ module.exports = buildSchema(`
 			error: String
 		}
 		
+		type Id {
+			id: String!
+		}
 
 		type RootQuery {
 		ip(ip: String! , refetch: Boolean!) : IP!
@@ -51,6 +54,7 @@ module.exports = buildSchema(`
 			sendEmail(json: String! ) : JSON!
 			captureResponse(type: String!, url: String!) : JSON
 			reactErrors(json: String!) : JSON
+			trackClient(json: String!) : Id!
 		}
 				
 		schema {
