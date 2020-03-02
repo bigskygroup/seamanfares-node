@@ -7,10 +7,10 @@ const { ejs, readContent, getTranslation, t } = require("../../../functions")
 const transporter = require("../../../send_mail")
 const r = {}
 
-// const json = JSON.stringify(require("../../client/viewtrip"))
+// const jsonTest = JSON.stringify(require("../../client/viewtrip"))
 
 r.sendEmail = async ({ json }) => {
-
+	// json = jsonTest
 	// console.log(typeof json)
 	// console.log(JSON.parse(json))
 	//incoming customer information, from react, after ticket purchase, for sending email and storing in db:
@@ -82,14 +82,20 @@ async function sendEmail(obj) {
 	const lang = obj.lang
 	// all fields are strings
 
-
 	Promise.all([
 		getTranslation(join("build", "locales", "lang", lang + ".json")),
 		getTranslation(join("build", "locales", "lang", "en" + ".json")),
 		readContent(join("src", "client", "confirmationEmail.html"), "utf8")
 	])
-		.then(([titles, fallBack, data]) => {
-			const emailMessageHtml = ejs(data)({ ...JSON.parse(obj.data), ...obj, t: word => t(word, titles, fallBack) })
+		.then(([titles, fallBack, template]) => {
+			const allData = {...JSON.parse(obj.data), ...obj}
+
+			const emailMessageHtml = ejs(template)({
+				...allData,
+				t: word => t(word, titles, fallBack),
+				// a safe way to access object properties for EJS, if does not exist, it will not throw an error
+				reach: property => allData[property] !== undefined ? allData[property] : null 
+			})
 
 			return {
 				from: nameFrom,
@@ -101,9 +107,9 @@ async function sendEmail(obj) {
 				html: emailMessageHtml
 			}
 		})
-		.then(async data => { 
-			//fs.writeFileSync("./test.html", data.html)
-			await transporter.sendMail(data).then(res => { 
+		.then(async data => {
+			// fs.writeFileSync("./test.html", data.html)
+			await transporter.sendMail(data).then(res => {
 				console.log(`✔ confirmation email sent to ${res.accepted.toString()}`)
 
 				// set the emailSent field true in database
