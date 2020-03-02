@@ -47,8 +47,9 @@ r.sendEmail = async ({ json }) => {
 
 	const queryOrder = await Customer.find({ order: order })
 	//console.log("queryOrder", queryOrder)
-	if (queryOrder.length && queryOrder[0].emailSent) {
-		error += `email already has been sent to order:${order} email:${customer_email}`
+
+	if (queryOrder.length) {
+		error += `order:${order} has already been recieved`
 		return {
 			id: order,
 			json: json,
