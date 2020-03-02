@@ -18,11 +18,12 @@
 	<div style="clear: both"></div>
 
 	<div style="margin: .3em 0;">
+		<p><%= t("BOOKING_SECTION") %></p>
 		<table>
 			<% if(full_name.length === 0) { %>
 			<tr>
 				<td style="font-weight: bold;">
-					<%= t("BOOKING_SECTION") %>
+					<%= t("PASSENGER_NAME") %>
 				</td>
 				<td><%- customer_name %></td>
 			</tr>
