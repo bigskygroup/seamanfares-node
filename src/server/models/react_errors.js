@@ -4,7 +4,8 @@ const Schema = mongoose.Schema
 
 const userSchema = new Schema(
 	{
-		log: String
+		log: String,
+		trackingId : String
 	},
 	{ timestamps: true }
 )

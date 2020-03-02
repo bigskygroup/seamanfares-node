@@ -127,7 +127,8 @@ r.findCustomer = async ({ count = 10, order, email }) => {
 }
 
 r.reactErrors = ({ json }) => {
-	const newError = new React_errors({ log: json })
+	const trackingId = JSON.parse(json).id
+	const newError = new React_errors({ log: json, trackingId: trackingId })
 	return newError
 		.save()
 		.then(res => ({
