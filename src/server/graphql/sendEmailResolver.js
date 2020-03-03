@@ -23,7 +23,9 @@ r.sendEmail = async ({ json }) => {
 		gross_curr,
 		total_price,
 		total_fare,
+		total_paid,
 		curr,
+		clientId,
 		reactLang
 	} = JSON.parse(json)
 	const customerInformation = {
@@ -35,8 +37,10 @@ r.sendEmail = async ({ json }) => {
 		gross_price: gross_price || "",
 		gross_curr: gross_curr || "",
 		total_fare: total_fare ? total_fare : total_price || "",
+		total_paid: String(total_paid) || ""  ,
 		curr: curr || "",
-		lang: reactLang ? reactLang : "en"
+		lang: reactLang ? reactLang : "en",
+		clientId: clientId || ""
 	}
 
 	//error handling:
@@ -89,13 +93,13 @@ async function sendEmail(obj) {
 		readContent(join("src", "client", "confirmationEmail.html"), "utf8")
 	])
 		.then(([titles, fallBack, template]) => {
-			const allData = {...JSON.parse(obj.data), ...obj}
+			const allData = { ...JSON.parse(obj.data), ...obj }
 
 			const emailMessageHtml = ejs(template)({
 				...allData,
 				t: word => t(word, titles, fallBack),
 				// a safe way to access object properties for EJS, if does not exist, it will not throw an error
-				reach: property => allData[property] !== undefined ? allData[property] : null 
+				reach: property => (allData[property] !== undefined ? allData[property] : null)
 			})
 
 			return {
