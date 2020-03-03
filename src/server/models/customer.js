@@ -13,6 +13,8 @@ const customerSchema = new Schema(
 		curr:  {type:String },
 		lang: {type:String },
 		total_fare: {type:String },
+		total_paid: {type:String },
+		clientId: {type:String },
 		data: String, // where all the information is stored as json	
 		emailSent: {type:Boolean, required: true, default: false}
 	},

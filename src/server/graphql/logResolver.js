@@ -130,17 +130,19 @@ r.reactErrors = async ({ json }) => {
 	const trackingId = JSON.parse(json).id
 	const now = Date.now()
 
-	const lastHour = now - 1000 * 60 * 60
+	const lastHour = now - (1000 * 60 * 60)
 	const breakPoint = new Date(lastHour).toISOString()
 	const alreadyRegisterredError = await React_errors.findOne({ trackingId: trackingId })
 		.where("createdAt")
 		.gt(breakPoint)
-	if (alreadyRegisterredError)
+	if (alreadyRegisterredError) {
 		return {
 			id: trackingId,
 			json: json,
 			error: "Error already recorded"
 		}
+	}
+
 	const newError = new React_errors({ log: json, trackingId: trackingId })
 	return newError
 		.save()
