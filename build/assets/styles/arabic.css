@@ -1,0 +1,25 @@
+div.pull-left,ul.pull-left,li.pull-left{float:right !important}
+div.pull-right,ul.pull-right,li.pull-right{float:left !important}
+div.pull-right-arabic,ul.pull-right-arabic,li.pull-right-arabic{float:right !important}
+.col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 { float:right !important }
+
+#id_date_depart_view { padding-right:23px !important; }
+#id_date_arrive_view { padding-right:23px !important; }
+div.main-menu .list-group .list-group-item a.icon { padding: 0px 50px 6px 45px !important; }
+div.main-menu .list-group .list-group-item a.icn-flight { background-position: right 4px !important; background-repeat: no-repeat; }
+div.main-menu .list-group .list-group-item a.icn-support { background-position: right -26px !important; background-repeat: no-repeat !important; }
+div.main-menu .list-group .list-group-item a.icn-itenerary { background-position: right -77px !important; height: 24px !important; background-repeat: no-repeat !important; }
+div.main-menu .list-group .list-group-item a.icn-car-rental { background-position: right -150px !important; height: 24px !important; background-repeat: no-repeat !important; }
+div.main-menu .list-group .list-group-item a.icn-hotel { background-position: right -198px !important; height: 24px !important; background-repeat: no-repeat !important; }
+div.main-menu .list-group .list-group-item a.icn-fly-drive { background-position: right -221px !important; height: 26px !important; background-repeat: no-repeat !important; }
+div.main-menu .list-group .list-group-item a.icn-sky-holidays { background-position: right -174px !important; height: 24px !important; background-repeat: no-repeat !important; }
+div.main-menu .list-group .list-group-item a.icn-tickets { background-position: right -251px !important; background-repeat: no-repeat !important; }
+div.main-menu .list-group .list-group-item a.icn-blog { background-position: right -103px !important; background-repeat: no-repeat !important; }
+.list-group{ padding-right: 10px !important; }
+div.flight-form .list-group { margin: 10px !important; font-size: 16px !important; }
+div.flight-form .panel-body{padding-right:0}
+div.flight-form .sky-checkbox-success input[type="checkbox"]:checked + label:before, .sky-radio-success input[type="radio"]:checked + label:before { right: -25px !important; } /*green box*/
+div.flight-form .sky-checkbox input[type="checkbox"]:checked + label:after, .sky-radio input[type="radio"]:checked + label:after { right: -22px !important; } /*check mark*/
+div.flight-form .sky-checkbox label:before, .sky-radio label:before { right: -25px !important; } /*white box*/
+div.flight-form .sky-radio-success { margin-right: 25px !important; } /*full row*/
+div.flight-form .checkbox { padding-right: 25px !important; } /*direct*/

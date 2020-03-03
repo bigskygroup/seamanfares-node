@@ -1,0 +1,362 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,700');
+
+body,
+html {
+    font-family: 'Open Sans', sans-serif;
+    padding: 0;
+    margin: 0;
+    background-image: url(../images/marketing/square-pattern.jpg);
+    overflow-x: hidden;
+    border: none;
+}
+
+section {
+    border: none;
+}
+
+.font-14 {
+    font-size: 14px;
+}
+
+.font-16 {
+    font-size: 16px;
+}
+
+.line-1-5 {
+    line-height: 1.5;
+}
+
+section.header {
+    min-height: 100vh;
+    width: 200%;
+    margin-left: -50%;
+    margin-right: -50%;
+    padding-left: 50%;
+    padding-right: 50%;
+    border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 50%;
+    z-index: 100 !important;
+}
+
+.header-background {
+    min-height: 100vh;
+    background-color: #f1f1f1;
+    background-image: url(../images/marketing/header-bg-advertising.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+section.pattern-back {
+
+    background-position: top;
+    background-repeat: repeat;
+}
+
+section.section-how {
+    color: #ffffff;
+}
+
+section.section-partners {
+    margin-top: -10px;
+    background-color: #ffffff;
+}
+
+section.section-numbers {
+    background-image: url(../images/marketing/numbers.svg);
+    background-position: center;
+    background-size: cover;
+    height: 620px;
+    width: 100%;
+}
+
+@media screen and (max-width: 1120px) {
+    section.section-numbers {
+        height: 500px;
+    }
+}
+
+@media screen and (max-width: 920px) {
+    section.section-numbers {
+        height: 420px;
+    }
+}
+
+.title-large {
+    font-weight: 300;
+    font-size: 48px;
+}
+
+section.section-why {
+    min-height: 70vh;
+    background-image: url(../images/marketing/why-add.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+}
+
+.padding-lr0 {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.padding-lr-8 {
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.padding-8 {
+    padding: 8px;
+}
+
+.margin-top-10 {
+    margin-top: 10px;
+}
+
+.margin-top-15 {
+    margin-top: 15px;
+}
+
+.margin-top-20 {
+    margin-top: 20px;
+}
+
+.margin-top-50 {
+    margin-top: 50px;
+}
+
+.margin-top-100 {
+    margin-top: 100px;
+}
+
+.margin-bottom-10 {
+    margin-bottom: 10px;
+}
+
+.margin-bottom-20 {
+    margin-bottom: 20px;
+}
+
+.margin-bottom-100 {
+    margin-bottom: 100px;
+}
+
+.margin-lr-auto {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.line-divider {
+    width: 40px;
+    height: 4px;
+    border-radius: 2px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.back-white {
+    background-color: #ffffff;
+}
+
+.back-blue {
+    background-color: #2f99e2;
+}
+
+.clear-all {
+    clear: both;
+}
+
+.hr-1 {
+    border-color: #dfdfdf;
+}
+
+.hr-2 {
+    border-color: #4aaaec;
+}
+
+.button-primary {
+    background-color: #1a8ad8;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 15px 10px 15px;
+}
+
+.button-primary:hover,
+.button-primary:focus,
+.button-primary:active {
+    background-color: #3394d7;
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.button-secondary {
+    background-color: #ffffff;
+    text-transform: uppercase;
+    font-weight: 300;
+    color: #888888;
+    border: 1px solid #dddddd;
+    border-radius: 6px;
+    padding: 10px 15px 10px 15px;
+}
+
+.button-secondary:hover,
+.button-secondary:focus,
+.button-secondary:active {
+    background-color: #1a8ad8;
+    text-decoration: none;
+    color: #ffffff;
+    border: 1px solid #1a8ad8;
+}
+
+footer {
+    background-color: #2f99e2;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    color: #ffffff;
+}
+
+footer a,
+footer a:hover {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.partner-box {
+    border: 1px solid #eeeeee;
+    border-radius: 10px;
+    width: 100%;
+    min-height: 280px;
+    text-align: center;
+}
+
+.partner-box:hover {
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+}
+
+.logo-partner {
+    max-height: 100%;
+    max-width: 60%;
+    width: auto;
+}
+
+.logo-partner-wrap {
+    position: relative;
+    height: 70px;
+    width: 100%;
+    background-color: #f8f8f8;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.logo-partner-hold {
+    position: absolute;
+    bottom: 15px;
+    height: 40px;
+    width: 100%;
+}
+
+.txt-partners {
+    min-height: 80px;
+    color: #aaaaaa;
+    font-size: 16px;
+    padding: 5px 10px 30px 10px;
+}
+
+.transition-all {
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+.shadow-box {
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+}
+
+.button-partners {
+    position: absolute;
+    bottom: 30px;
+    width: calc(100% - 20px);
+}
+
+/* CIRCULAR INFO */
+
+.circle-info {
+    width: 140px;
+    height: 140px;
+    border-style: double;
+    border-width: 12px;
+    border-color: #ffffff;
+    background-color: #2f99e2;
+    border-radius: 50%;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 120px;
+    font-size: 28px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ICONS */
+
+.social-buttons-back {
+    background-color: #ffffff;
+    border-radius: 10px;
+}
+
+.fa {
+    padding: 10px;
+    font-size: 30px;
+    width: 35px;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px 2px;
+    color: #ffffff;
+}
+
+.fa:hover {
+    color: #ffffff;
+    text-decoration: none;
+    opacity: 0.8;
+}
+
+.fa-facebook {
+    background: #3B5998;
+    color: white;
+}
+
+.fa-twitter {
+    background: #55ACEE;
+    color: white;
+}
+
+.fa-google {
+    background: #dd4b39;
+    color: white;
+}
+
+.fa-linkedin {
+    background: #007bb5;
+    color: white;
+}
+
+.fa-instagram {
+    background: #125688;
+    color: white;
+}
+
+.fa-pinterest {
+    background: #cb2027;
+    color: white;
+}
