@@ -1,0 +1,132 @@
+.wapp-content {
+
+  .waiting-box.active {
+    width: 100%;
+    display: flex;
+  }
+
+  .waiting-box {
+    width: 100%;
+    display: none;
+    justify-content: center;
+    margin-top: 20px;
+    flex-wrap: wrap;
+
+    span {
+      margin-right: 18px;
+    }
+  }
+
+  .live-camera-wrapper {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+
+    .live-camera.flash {
+      width: unset;
+      height: unset;
+    }
+
+    .live-camera.video-html5 {
+      width: 100% !important;
+      height: auto !important;
+      position: relative !important;
+
+      video {
+        display: block;
+        width: 100% !important;
+        height: auto !important;
+      }
+    }
+
+    .mask.active {
+      width: 100%;
+      height: 100%;
+    }
+
+    .mask {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+  }
+
+  .buttons-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+
+    .send-button {
+      color: #fff;
+      background-color: #28a745;
+      border-color: #28a745;
+
+      &:hover {
+        background-color: #2ab44a;
+      }
+    }
+
+    .reset-button {
+      color: #447dd4;
+
+      &:hover {
+        color: #4385e9;
+      }
+    }
+
+    .camera-button.disable {
+      background-color: #7d848a;
+
+      &:hover {
+        background-color: #7d848a;
+        cursor: not-allowed;
+      }
+    }
+
+    .camera-button {
+      color: #fff;
+      background-color: #343a40;
+      border-color: #343a40;
+
+      &:hover {
+        background-color: #3d444b;
+      }
+    }
+
+    .wa-btn.active {
+      display: inline-flex;
+    }
+
+    .wa-btn {
+      display: none;
+      padding: 5px 20px;
+      border-radius: 5px;
+      font-size: 1.7rem;
+      margin-top: 14px;
+      justify-content: center;
+      align-items: center;
+      transition: 0.3s background-color ease-in-out;
+      margin-right: 15px;
+      border: 1px solid;
+
+      &:last-child {
+        margin-right: 0;
+      }
+
+      &:hover,
+      &:focus {
+        text-decoration: none;
+      }
+
+      span {
+        margin-left: 9px;
+        font-size: 1.4rem;
+      }
+    }
+  }
+}

@@ -1,0 +1,21 @@
+.carousel {
+    height:280px;
+}
+.carousel-caption {
+    bottom:0;
+    padding-top:0;
+    padding-bottom:0;
+    color:#333;
+}
+.carousel .item {
+    margin-top:0px;
+    height:280px;
+}
+.carousel-control.left {
+    background:none;
+    color:#428BCA;
+}
+.carousel-control.right {
+    background:none;
+    color:#428BCA;
+}

@@ -1,0 +1,19 @@
+// Resolutions
+$screen-lg-min: 1200px;
+$screen-md-max: 1199px;
+$screen-md-min: 992px;
+$screen-sm-max: 991px;
+$screen-sm-min: 768px;
+$screen-xs-max: 767px;
+$screen-xs-min: 480px;
+$screen-xxs-max: 479px;
+$screen-xxs-min: 384px;
+$screen-tn-max: 383px;
+$screen-tn-min: 0px;
+
+// Dev
+$border: 1px solid red;
+
+html, body {
+  height: 100%;
+}

@@ -1,0 +1,1534 @@
+/* common */
+/* font-family: 'Montserrat', sans-serif;
+ */
+ * {
+     margin: 0px;
+     padding: 0px;
+     -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+     box-sizing: border-box;
+}
+ html, body {
+     font-family: 'Montserrat', sans-serif;
+     font-size: 16px;
+}
+ input, select, textarea {
+     font-family: 'Montserrat', sans-serif;
+     font-size: 14px;
+}
+ body {
+     background: #fff;
+}
+ img {
+     border: 0px;
+}
+ a, input {
+     outline: none;
+}
+ .clearfix:after {
+     visibility: hidden;
+     display: block;
+     font-size: 0;
+     content: " ";
+     clear: both;
+     height: 0;
+}
+ .clearfix {
+     display: inline-block;
+}
+ * html .clearfix {
+     height: 1%;
+}
+ .clearfix {
+     display: block;
+}
+ h1, h2, h3, h4, h5, h6 {
+     font-weight: normal;
+}
+h2 {
+	font-size: 35px;
+	font-weight: 600;
+	color: #242424;
+}
+ ul, ol {
+     list-style: none;
+}
+ p {
+     font-size: 16px;
+}
+ a, a:hover {
+     text-decoration: none;
+}
+ .container {
+     width: 100%;
+     max-width: 1200px;
+     padding-left: 15px;
+     padding-right: 15px;
+     margin: 0 auto;
+}
+.f-icon {
+	display: inline-block;
+	vertical-align: middle;
+	width: 30px;
+	height: 28px;
+}
+.f-icon.f-icon-book {
+	background: url(../assets/images/military/book-icon.png)no-repeat center/22px;
+}
+.f-icon.f-icon-rent {
+	background: url(../assets/images/military/rent-icon.png)no-repeat center/25px;
+}
+.f-icon.f-icon-help {
+	background: url(../assets/images/military/help-icon.png)no-repeat center/22px;
+}
+
+.primarybtn{
+	width: 100%;
+	max-width: 170px;
+	min-height: 47px;
+	border: 0;
+	background: #185cb6;
+	color: #fff;
+	text-transform: uppercase;
+	font-size: 13.29px;
+    line-height: 47px;
+	border-radius: 6px;
+	margin: 0 auto;
+	display: block;
+	text-align: center;
+	outline:0;
+	cursor:pointer;
+}
+/* section */
+ #section {
+     position: relative;
+     display: block;
+     width: 100%;
+     min-height: 100%;
+     overflow: hidden;
+}
+/* page wrap */
+ #page-wrap {
+     margin: 0 auto;
+     width: 100%;
+}
+/* header */
+ #header-wrap {
+     position: relative;
+     width: 100%;
+}
+.top-header {
+	background: #eeeeee;
+}
+.top-header .support-caption {
+	float: left;
+	border-right: solid 1px #dddddd;
+}
+.support-caption {
+	padding: 10px 20px;
+}
+.support-caption p {
+	font-size: 12px;
+	font-weight: 400;
+	color: #000000;
+	margin-bottom: 0px;
+}
+.support-caption p b {
+    font-weight: 700;
+    letter-spacing: -0.4px;
+}
+.top-header .social-links {
+	float: left;
+    padding: 0px 17px;
+    margin-bottom: 0;
+	border-right: solid 1px #dddddd;
+}
+.social-links li {
+	float: left;
+    padding: 7px 4px 6px;
+}
+.social-links li a {
+	display: block;
+	width: 22px;
+	border: solid 1px #dddddd;
+	background: #ffffff;
+	border-radius: 50%;
+	color: #bbbbbb;
+}
+.social-links li a i {
+	display: block;
+	line-height: 20px;
+	font-size: 11px;
+	text-align: center;
+}
+.social-links li a:hover {
+	border: solid 1px #1e1e1e;
+	color: #1e1e1e;
+}
+.top-header .top-links {
+	float: right;
+}
+.top-links ul li {
+	float: left;
+	border-left: solid 1px #dddddd;
+}
+.top-links ul li:last-child {
+	border-right: solid 1px #dddddd;
+}
+.top-links ul li a {
+    font-size: 12px;
+    color: #000000;
+    padding: 10px 24px;
+    display: block;
+}
+/* nav-header */
+.nav-header {
+	background: #fff;
+	box-shadow: 0px 2px 5px rgba(0,0,0,0.2);
+}
+.nav-header .logo {
+    float: left;
+    padding: 7px 55px 0px 55px;
+}
+.nav-header .nav-block {
+	float: right;
+    padding: 22px 0px;
+}
+.nav-block ul li {
+	float: left;
+    margin-left: 36px;
+}
+.nav-block ul li a {
+	display: block;
+	font-size: 13px;
+	text-transform: uppercase;
+	color: #000000;
+	font-weight: 500;
+	line-height: 30px;
+}
+.nav-block ul li a i {
+	position: relative;
+	margin-top:-2px;
+}
+
+#banner-wrap {
+	min-height: 790px;
+	position: relative;
+}
+.caption {
+	max-width: 1170px;
+	width: 100%;
+	position: absolute;
+    bottom: 94px;
+	left: 50%;
+	transform: translate(-50%, 0%);
+}
+.m-form-position {
+	position: relative;
+	max-width: 1170px;
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: -700px;
+}
+@media (max-width: 1400px) {
+	.m-form-position {
+		margin-top: -650px;
+	}
+}
+@media (max-width: 767px) {
+	.m-form-position {
+		margin-top: -470px;
+	}
+}
+.caption.mobileshow {
+	display: none;
+} 
+.m-logo-position {
+	max-width: 85%;
+}
+.m-logo {
+    letter-spacing: -2px;
+    font-size: 45px;
+    color: #0c4da2;
+    font-weight: 900;
+	text-transform: uppercase;
+	text-align: center;
+}
+.m-head-background {
+	background: url(../assets/images/military/mf-back2.jpg) no-repeat top; 
+	background-size: 100% auto !important; 
+	background-color: #ebdece;
+}
+@media (min-width: 1920px) {
+	.m-head-background {
+		background: url(../assets/images/military/mf-back2.jpg) no-repeat top;
+		background-size: 1700px auto !important; 
+		background-color: #ebdece;
+	}
+}
+@media (max-width: 1500px) {
+	.m-head-background {
+		background: url(../assets/images/military/mf-back2.jpg) no-repeat top;
+		background-size: 1200px auto !important; 
+		background-color: #ebdece;
+	}
+}
+.m-logo span {
+	color: #ed1c24;
+}
+.m-logo span.tagline {
+	font-size: 18px;
+	color: #000000;
+	text-transform: uppercase;
+	font-weight: 500;
+    letter-spacing: 3px;
+}
+.m-form {
+    margin-top: 20px;
+	padding: 10px;
+	background: transparent;
+	box-shadow: 0px 5px 20px rgba(0,0,0,0.2);
+	border-radius: 5px;
+}
+.m-form .inner {
+	background: #fff;
+	box-shadow: 0px 0px 20px rgba(0,0,0,0.2);
+	min-height: 126px;
+	padding: 28px 28px 20px;
+	border-radius: 5px;
+}
+.m-form .inner .box {
+    float: left;
+}
+.m-form .inner .box label {
+	display: block;
+	font-weight: 600;
+	font-size: 13px;
+	text-transform: uppercase;
+	color: #0c4da2;
+    margin-bottom: 11px;
+}
+.m-form .inner .box:nth-child(1) {
+    width: 37%;
+	position: relative;
+    margin-right: 8%;
+}
+.m-form .inner .box:nth-child(1):after {
+	position: absolute;
+    top: 25px;
+    right: -70px;
+    width: 50px;
+    height: 50px;
+    content: "";
+    background: url(../assets/images/military/shape-1.png)no-repeat center;
+}
+.m-form .inner .box:nth-child(2) {
+    width: 37%;
+    margin-right: 2%;
+}
+.m-form .inner .box:nth-child(3){
+	width: 16%;
+}
+.m-form .inner .inputtext {
+	border-radius: 3px;
+    width: 100%;
+    border: solid 1px #dddddd;
+    height: 50px;
+    padding: 0px 37px;
+    font-size: 13px;
+    background: url(../assets/images/military/location-icon.png)no-repeat center left 15px;
+}
+.m-form .inner .mainbutton {
+    display: block;
+    width: 100%;
+    height: 75px;
+    border: 0px;
+    border-radius: 5px;
+    margin-top: 3px;
+	background: url(../assets/images/military/arrow-right.png)no-repeat center/20px, linear-gradient(#1b60ba, #0c4da2);
+}
+.scrollbtn {
+    display: inline-block;
+    font-size: 12px;
+    letter-spacing: 3px;
+    color: #000000;
+    text-transform: uppercase;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, 0%);
+	bottom: -66px;
+}
+.scrollbtn i {
+    width: 30px;
+    height: 30px;
+    display: block;
+    background: url(../assets/images/military/arrow-bottom.png)no-repeat center/20px;
+    margin: 0 auto;
+}
+
+/* bootstrap fade slider */
+#banner-wrap .carousel-inner .item {
+	min-height: 784px;
+}
+.carousel-fade .carousel-inner .item {
+  transition-property: opacity; }
+.carousel-fade .carousel-inner .item,
+.carousel-fade .carousel-inner .active.left,
+.carousel-fade .carousel-inner .active.right {
+  opacity: 0; }
+.carousel-fade .carousel-inner .active,
+.carousel-fade .carousel-inner .next.left,
+.carousel-fade .carousel-inner .prev.right {
+  opacity: 1; }
+.carousel-fade .carousel-inner .next,
+.carousel-fade .carousel-inner .prev,
+.carousel-fade .carousel-inner .active.left,
+.carousel-fade .carousel-inner .active.right {
+  left: 0;
+  transform: translate3d(0, 0, 0); }
+.carousel-fade .carousel-control {
+  z-index: 2; }
+  
+.carousel,
+.carousel-inner,
+.carousel-inner .item {
+  height: 100%; }
+
+#banner-wrap .carousel-control.left {
+	width: 28px;
+	height: 60px;
+	top: 50%;
+	transform: translate(0, -50%);
+	background: rgba(0,0,0,0.3) url(../assets/images/military/angle-left.svg)no-repeat center/10px;
+	opacity: 1;
+}
+#banner-wrap .carousel-control.right {
+	width: 28px;
+	height: 60px;
+	top: 50%;
+	transform: translate(0, -50%);
+	background: rgba(0,0,0,0.3) url(../assets/images/military/angle-right.svg)no-repeat center/10px;
+	opacity: 1;
+}
+#banner-wrap .carousel-control.left:hover {
+	background: rgba(237,28,36,0.5) url(../assets/images/military/angle-left.svg)no-repeat center/10px;
+}
+#banner-wrap .carousel-control.right:hover {
+	background: rgba(237,28,36,0.5) url(../assets/images/military/angle-right.svg)no-repeat center/10px;
+}
+
+/* content */
+ #content-wrap {
+     width: 100%;
+}
+.f-big-icon {
+	width: 80px;
+	height: 80px;
+	display: inline-block;
+} 
+.f-big-icon.big-icon-flight {
+	background: url(../assets/images/military/icon-1.png)no-repeat center;
+}
+.f-big-icon.big-icon-livechat {
+	background: url(../assets/images/military/icon-2.png)no-repeat center;
+}
+.f-big-icon.big-icon-secure {
+	background: url(../assets/images/military/icon-3.png)no-repeat center;
+}
+.f-big-icon.big-icon-flex {
+	background: url(../assets/images/military/icon-4.png)no-repeat center;
+}
+.support-block h2.centerheadline {
+	text-transform: uppercase;
+	text-align: center;
+	padding: 34px 0px 30px;
+	letter-spacing: -1px;
+	position: relative;
+}
+.support-block h2.centerheadline:before {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    width: 60px;
+    height: 2px;
+    content: "";
+    background: #ed1c24;
+    transform: translate(-50%, 0%);
+}
+.support-block h2.centerheadline:after {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    width: 60px;
+    height: 2px;
+    content: "";
+    background: #1f41a7;
+    transform: translate(-50%, 0%);
+}
+.centerheadline span {
+	display: block;
+	font-weight: 300;
+	font-size: 25px;
+	text-transform: capitalize;
+	margin-bottom: 5px;
+	letter-spacing: 0px;
+}
+.support-block .inner {
+	display: flex;
+    padding: 40px 0px 65px;
+	background: url(../assets/images/military/bg-1.png)center;
+}
+.support-block .support-pannel {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.support-pannel {
+	border-radius: 5px;
+	text-align: center;
+	min-height: 288px;
+	padding: 15px;
+	cursor: pointer;
+	transition: all 300ms ease-in-out 0s;
+}
+.support-pannel i {
+	margin-bottom: 5px;
+}
+.support-pannel label {
+	display: block;
+	font-size: 19px;
+	color: #666666;
+	text-transform: uppercase;
+	font-weight: 500;
+	margin-bottom: 15px;
+	transition: all 300ms ease-in-out 0s;
+}
+.support-pannel p {
+	font-size: 14px;
+	line-height: 22px;
+	color: #666666;
+	font-weight: 300;
+	max-height: 0;
+	overflow: hidden;
+	opacity: 0;
+	min-height: 161px;
+	transition: all 300ms ease-in-out 0s;
+}
+.support-info {
+	font-size: 12px;
+	width: 100px;
+	display: inline-block;
+}
+.support-pannel:hover {
+	background: #f8f8f8;
+	box-shadow: 0px 3px 5px rgba(0,0,0,0.4);
+}
+.support-pannel:hover label {
+	color: #0c4ea3;
+}
+.support-pannel:hover p {
+	max-height: 110px;
+	opacity: 1;
+}
+.support-pannel:hover i.f-big-icon.big-icon-flight {
+	background: url(../assets/images/military/icon-1-hover.png)no-repeat center;
+}
+.support-pannel:hover i.f-big-icon.big-icon-livechat {
+	background: url(../assets/images/military/icon-2-hover.png)no-repeat center;
+}
+.support-pannel:hover i.f-big-icon.big-icon-secure {
+	background: url(../assets/images/military/icon-3-hover.png)no-repeat center;
+}
+.support-pannel:hover i.f-big-icon.big-icon-flex {
+	background: url(../assets/images/military/icon-4-hover.png)no-repeat center;
+}
+/* ours-block */
+.ours-block {
+	overflow: hidden;
+    padding: 40px 0px 65px;
+	background: url(../assets/images/military/bg-2.png)repeat-x center/auto 100%;
+}
+.ours-block .container {
+	max-width: 1268px;
+}
+.ours-block .title-panel h2 {
+	position: relative;
+    color: #fff;
+    letter-spacing: -1px;
+    padding-bottom: 25px;
+    margin-bottom: 43px;
+}
+.ours-block .title-panel h2 span {
+	display: block;
+	font-weight: 300;
+	font-size: 25px;
+	margin-bottom: 5px;
+	letter-spacing: 0px;
+}
+.ours-block .title-panel h2:before {
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    width: 60px;
+    height: 2px;
+    content: "";
+    background: #fff;
+}
+.ours-block .title-panel h2:after {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    width: 60px;
+    height: 2px;
+    content: "";
+    background: #fff;
+}
+.owl-carousel {
+	position: relative;
+}
+.owl-carousel .captiontext {
+	padding: 0px 18px;
+	width: 100%;
+	background: #fff;
+}
+.owl-carousel .captiontext i {
+	float: left;
+	width: 80px;
+	height: 80px;
+	position: relative;
+}
+.owl-carousel .captiontext i img {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	/* right: 0px; */
+	bottom: 0px;
+	margin: auto;
+}
+.owl-carousel .captiontext span {
+	display: inline-block;
+	float: left;
+	font-size: 18px;
+	font-weight: 500;
+	color: #2c2c2c;
+    padding: 29px 0px;
+}
+.owl-carousel .owl-item .captiontext i img {
+    width: auto;
+}
+.owl-carousel .owl-stage-outer {
+    overflow: inherit;
+}
+.owl-carousel.owl-drag .owl-item {
+	opacity: 0.5;
+	box-shadow: 0px 0px 20px rgba(0,0,0,0.6);
+}
+.owl-carousel.owl-drag .owl-item.active {
+	opacity: 1;
+}
+.ours-block .owl-carousel .owl-nav.disabled {
+    display: block;
+    position: absolute;
+    top: -100px;
+    right: 0px;
+}
+.ours-block .owl-carousel .owl-nav button {
+    display: inline-block;
+    width: 38px;
+    height: 38px;
+    background: #fff;
+    border-radius: 3px;
+    font-size: 0px;
+    line-height: 36px;
+    color: #185db6;
+    font-weight: 600;
+    margin-left: 8px;
+    position: relative;
+}
+.ours-block .owl-carousel .owl-nav button:hover {
+	background: #ed1c24;
+}
+.ours-block .owl-carousel .owl-nav button:after {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	line-height: 40px;
+	content: "\f104";
+	font-size: 20px;
+	font-family:"Font Awesome 5 Free";
+}
+.ours-block .owl-carousel .owl-nav button.owl-next:after {
+	content: "\f105";
+}
+.ours-block .owl-carousel .owl-nav button:hover:after {
+	color: #fff;
+}
+/* destination-panel */
+.destination-panel {
+    width: 100%;
+    min-height: 338px;
+    margin-bottom: 22px;
+    position: relative;
+}
+.destination-panel:nth-child(3n) {
+	margin-right: 0px;
+}
+.destination-block {
+    padding: 108px 0px 66px;
+}
+.destination-panel.title {
+	text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0px 0px 20px rgba(0,0,0,0.3);
+	transform: scale(1.2);
+	position: relative;
+	z-index: 9;
+	background: #fff;
+}
+.destination-panel.title h2 span {
+	display: block;
+	font-weight: 300;
+    font-size: 22px;
+	text-transform: capitalize;
+	margin-bottom: 5px;
+	letter-spacing: 0px;
+    color: #242424;
+    margin-bottom: 10px;
+}
+.destination-panel.title h2 {
+	position: relative;
+    letter-spacing: -1px;
+    text-transform: uppercase;
+	color: #0e4fa5;
+    font-size: 33px;
+    padding-bottom: 30px;
+}
+.destination-panel.title h2:before,.testimonials-block .title h2:before,.blog-sec-block .float-right h4:before {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    width: 50px;
+    height: 2px;
+    content: "";
+    background: #ed1c24;
+    transform: translate(-50%, 0%);
+}
+.destination-panel.title h2:after,.testimonials-block .title h2:after, .blog-sec-block .float-right h4:after {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    width: 50px;
+    height: 2px;
+    content: "";
+    background: #1f41a7;
+    transform: translate(-50%, 0%);
+}
+.destination-panel .rating-icon {
+    width: 98px;
+    display: inline-block;
+    background: url(../assets/images/military/star-icon.png)no-repeat center/100%;
+	height: 20px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.destination-panel .in {
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	width: 100%;
+	padding: 15px 30px;
+}
+.destination-panel .in h3 {
+	font-size: 20px;
+	color: #fff;
+	font-weight: 600;
+	position: relative;
+	z-index: 2;
+}
+.destination-panel .in .rating-icon {
+	width: 70px;
+	position: relative;
+	z-index: 2;
+	margin-left: auto;
+	margin-right: auto;
+}
+.destination-panel .in i {
+	z-index: 2;
+	right: 26px;
+	bottom: 26px;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: url(../assets/images/military/arrow-1.png)no-repeat center;
+}
+.destination-panel .in:after {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    height: 150%;
+    content: "";
+    background: linear-gradient(rgba(0,0,0,0) 15%, rgba(0,0,0,0.5) 70%);
+}
+.destination-block .inner-panel{
+	margin-bottom:24px;
+}
+
+/* testimonials-block */
+.testimonials-block {
+	width:100%;
+	text-align:center;
+    padding: 78px 0px 85px;
+	position:relative;
+	z-index:99;
+	background: url(../assets/images/military/content-bg.png)no-repeat center/cover;
+}
+.testimonials-block:before {
+    width: 115px;
+    height: 115px;
+    left: 50%;
+	bottom:-8%;
+	position:absolute;
+	content:"";
+	background: url(../assets/images/military/award-icon.png)no-repeat center;
+	z-index: 0;
+	transform: translate(-50%,0%);
+}
+.testimonials-block .title{
+	padding-bottom:71px;
+	z-index:99;
+	position:relative;
+}
+.testimonials-block .title span {
+	font-size:25px;
+	line-height:37px;
+	display:block;
+	color:#242424;
+	font-weight:300;
+}
+.testimonials-block .title h2 {
+	text-transform:uppercase;
+	position:relative;
+    margin: 0px;
+}
+.testimonials-block .title h2:after{
+	bottom: -8px;
+}
+.testimonials-block .title h2:before{
+	bottom: -12px;
+}
+.testimonials-block figure img {
+	display: inline-block;
+}
+.testimonials-block .inner-content {
+	padding: 25px 0px;
+	 position: relative;
+	 z-index:99;
+}
+.testimonials-block .inner-content p {
+	font-size:31px;
+	line-height:44px;
+	color:#515151;
+	font-style:italic;
+	display:block;
+}
+.testimonials-block .inner-content img {
+	display:inline-block;
+}
+.testimonials-block .inner-content label {
+    padding: 6px 0px 10px;
+	display: block;
+}
+.testimonials-block .inner-content span {
+	display: block;
+	font-size: 16px;
+	line-height: 16px;
+	color: #000;
+	padding-bottom: 13px;
+}
+.testimonials-block .inner-content a,.readmore {
+	display:block;
+	color:#ed1c24;
+	font-weight:600;
+	font-size:14px;
+}
+.testimonials-block .carousel {
+    max-width: 940px;
+	margin: 0 auto;
+}
+.testimonials-block .carousel-control.right {
+	position: absolute;
+	top: 94px;
+	right: 0px;
+	width: 60px;
+	height: 45px;
+	background: transparent;
+}
+.testimonials-block .carousel-control.right:after {
+	width: 2px;
+	height: 100%;
+	left: 0px;
+	position: absolute;
+	content: "";
+	background: url(../assets/images/military/ellipse.png)no-repeat center;
+}
+.testimonials-block .carousel-control.right:before {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	content: "";
+	opacity: 0.5;
+	background: url(../assets/images/military/arrow-left1.png)no-repeat center;
+}
+.testimonials-block .carousel-control.left {
+	position: absolute;
+	top: 94px;
+	left: 0px;
+	width: 60px;
+	height: 45px;
+	background: transparent;
+}
+.testimonials-block .carousel-control.left:after {
+	width: 2px;
+	height: 100%;
+	right: 0px;
+	position: absolute;
+	content: "";
+	background: url(../assets/images/military/ellipse.png)no-repeat center;
+}
+.testimonials-block .carousel-control.left:before {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	content: "";
+	opacity: 0.5;
+	background: url(../assets/images/military/arrow-right1.png)no-repeat center;
+}
+.testimonials-block .carousel-control, 
+.testimonials-block .carousel-control:hover, 
+.testimonials-block .carousel-control:focus {
+	opacity: 1;
+}
+.testimonials-block .carousel-control.left:hover:before {
+	opacity: 1;
+}
+.testimonials-block .carousel-control.right:hover:before {
+	opacity: 1;
+}
+.testimonials-block .carousel-inner {
+	padding: 0px 70px; 
+}
+.inner-content .top{
+	position:relative;
+	display:inline-block!important;
+}  
+.blog-sec-block {
+	width:100%;
+	position:relative;
+	padding-bottom: 53px;
+}
+.blog-sec-block .inner{
+    padding: 100px 30px 0px 50px;
+}
+.blog-sec-block .float-left{
+	width:100%;
+    max-width: 388px;
+	background:url(../assets/images/military/abt-img.png)no-repeat center;
+	min-height:460px;
+	padding: 15px 15px;
+} 
+.blog-sec-block .float-left .about-panel {
+	background:#fff;
+    padding: 76px 25px 15px;
+}
+.blog-sec-block .float-left .about-panel h3 {
+	font-size:20px;
+	line-height:28px;
+	color:#333333;
+	padding-bottom: 16px;
+}
+.blog-sec-block .float-left .about-panel p {
+	font-size:13px;
+	line-height:20.8px;
+	color:#4c4c4c;
+    padding-bottom: 20px;
+}
+.blog-sec-block .float-left .about-panel a {
+    margin-bottom: 68px;
+    font-size: 12px;
+    display: inline-block;
+}
+.blog-sec-block .float-left .about-panel span {
+	font-size:13px;
+	line-height:20.8px;
+	color:#4c4c4c;
+    display: block;
+}
+.blog-sec-block .float-right{
+	width:100%;
+	max-width:100%;
+    padding: 0px 0px 0px 10px;
+}
+.blog-sec-block .float-right h4 {
+	font-size:32px;
+	color:#333333;
+	line-height: 28px;
+	letter-spacing: -0.8px;
+	position:relative;
+	margin: 0;
+    padding-bottom: 30px;
+    margin-bottom: 32px;
+}
+.blog-sec-block .float-right h4:after{
+    left: 0px;
+    bottom: 0px;
+    right: inherit;
+    transform: inherit;
+}
+.blog-sec-block .float-right h4:before{
+	left: 0px;
+    bottom: 5px;
+	transform: inherit;
+}
+.blog-sec-block .float-right .row {
+    padding: 0px 0px 5px;
+	margin-right: -35px;
+}
+.blog-sec-block .float-right .row .col {
+    width: 100%;
+    margin-bottom: 28px;
+	overflow: hidden;
+}
+.blog-sec-block .float-right .row .col:nth-child(2n){
+	margin-right:0;
+}
+.blog-sec-block .float-right .row .col figure {
+	float:left;
+	width:81px;
+	height:81px;
+}
+.blog-sec-block .float-right .row .col figure img {
+	border-radius:6px;
+}
+.blog-sec-block .float-right .row .col .inner-cnt {
+	float:right;
+	width: calc(100% - 119px);
+	padding: 10px 0px 0px;
+} 
+.blog-sec-block .float-right .row .col .inner-cnt p {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 16px;
+} 
+.blog-sec-block .float-right .row .col .inner-cnt a {
+    font-size: 12px;
+	line-height:20.8px;
+	display: inline-block;
+}  
+.blog-sec-block .float-right .vall {
+	font-weight:600;
+	font-size:13px;
+	line-height:20.8px;
+	color:#959494;
+	background:#dadada;
+	border-radius:6px;
+	float:right;
+	padding: 7px 20px;
+}
+ 
+/* footer wrap */
+ #footer-wrap {
+     width: 100%;
+	 position:relative;
+}
+.footer-block {
+	width:100%;
+	background:#195eb6;
+	height:100%;
+    padding: 44px 0px 10px;
+	position:relative;
+}
+.footer-block .panel {
+    float: none;
+    width: 100%;
+    background: initial;
+    box-shadow: initial;
+    margin-bottom: 0px;
+}
+.footer-block .inner{
+    border-bottom: solid 1px #1858ab;
+	padding-bottom: 20px;
+	position: relative;
+}
+.footer-block .inner:after {
+	position: absolute;
+	bottom: -2px;
+	left: 0px;
+	width: 100%;
+	height: 1px;
+	content: "";
+	background: #2168c2;
+}
+.footer-block .panel h2 {
+	color: #fff;
+	position: relative;
+	font-size: 17px;
+	text-transform: uppercase;
+	padding-bottom: 20px;
+	margin-bottom: 22px;
+}
+.footer-block .panel h2:after{
+	position:absolute;
+	left:0;
+	bottom:0;
+	width:30px;
+	height:2px;
+	background:#fff;
+	content:"";
+}
+.footer-block .panel ul li a {
+	color:#fff;
+	display:inline-block;
+	font-size:13px;
+	line-height:27px;
+	font-weight: 300;	
+}
+.footer-block .social-panel ul {
+	padding: 12px 0px;
+}
+.footer-block .social-panel ul li { 
+   margin-bottom: 35px;
+}
+.footer-block .social-panel ul li:nth-child(2n){ 
+   margin-bottom: 15px;
+}
+.footer-block .social-panel ul li a.f-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #fff;
+    text-align: center;
+    margin-right: 12px;
+    line-height: 36px;
+}
+.footer-block .social-panel ul li a img {
+	display:inline-block;
+}
+.bottom-panel {
+    padding: 8px 0px;
+}
+.bottom-panel .card-panel{
+	float:left;
+	width:22.5%;
+}
+.bottom-panel .card-panel ul li {
+	float:left;
+	margin-right: 20px;
+}
+.bottom-panel .card-panel ul li:last-child{
+	margin-right:0;
+}
+.bottom-panel .card-panel h3  {
+	font-size: 14px;
+	line-height: 20px;
+	color: #fff;
+	font-weight: 300;
+	margin: 0;
+	padding: 10px 0px;
+}
+.copyright-panel {
+	float:left;
+	width:95%;
+	text-align:left;
+	padding: 40px 0px 10px;
+}
+.copyright-panel p {
+	font-size:12px;
+	line-height:27px;
+	color:#c4ddfe;
+}
+.bottom-panel .card-panel.partner,.bottom-panel .card-panel.partner ul {
+	float:right;
+}
+.bottom-panel .card-panel.partner h3 {
+	text-align:center;
+}
+.online-chat {
+	background:#f62e36;
+	border: solid 2px #ffffff;
+    border-bottom: 0;
+    width: 100%;
+    max-width: 180px;
+	position: absolute;
+	right: 15px;
+    bottom: 0;
+    padding: 12px 20px 8px;
+	border-radius: 4px 4px 0px 0px;
+	text-align:center;
+}
+.online-chat span {
+	display:block;
+	color:#fff;
+	font-size:13px;
+	text-transform:uppercase;
+}
+.online-chat span img {
+	display:inline-block;
+	margin-right: 10px;
+	vertical-align: middle;
+}
+.mobiletoggle {
+    display: none;
+    cursor: pointer;
+    float: right;
+    margin: 30px 0px 0px;
+}
+.bar1, .bar2, .bar3 {
+    width: 35px;
+    height: 5px;
+    background-color: #333;
+    margin: 6px 0;
+    transition: 0.4s;
+}
+.change .bar1 {
+    -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+    transform: rotate(-45deg) translate(-9px, 6px);
+}
+.change .bar2 {opacity: 0;}
+.change .bar3 {
+    -webkit-transform: rotate(45deg) translate(-8px, -8px);
+    transform: rotate(45deg) translate(-8px, -8px);
+}
+
+/* responsive */
+@media (max-width: 1589px) {
+	.footer-block {
+		padding: 44px 0px 60px;
+	}
+}
+@media (max-width: 1359px) {
+	.m-logo {
+		font-size: 35px;
+	}
+}
+@media (max-width: 1279px) {
+	.top-header .support-caption {
+		padding-left: 0px;
+	}
+	.nav-header .logo {
+		padding-left: 0px;
+		padding-right: 10px;
+	}
+	.m-form {
+		width: 96%;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	.blog-sec-block .float-right .row .col .inner-cnt p {
+		min-height: 50px;
+	}
+}
+@media (max-width: 1023px) {
+	.m-logo {
+		font-size: 35px;
+	}
+	.m-logo span.tagline {
+		font-size: 15px;
+	}
+	h2 {
+		font-size: 33px;
+	}
+	.centerheadline span {
+		font-size: 23px;
+	}
+	.support-block .row.inner {
+		padding: 0px 15px;
+	}
+	.support-block .row.inner > div {
+		padding: 0px;
+	}
+	.support-block {
+		padding-bottom: 40px;
+	}
+	.support-pannel label {
+		font-size: 18px;
+	}
+	.testimonials-block .inner-content p {
+		font-size: 28px;
+		margin-bottom: 0px;
+		line-height: 34px;
+	}
+	.m-form .inner .box:nth-child(1):after {
+		right: -57px;
+	}
+}
+@media (max-width: 991px) { 
+	.nav-header .nav-block {
+		display: none;
+		position: absolute;
+		top: 100%;
+		left: 0px;
+		width: 100%;
+		background: #f2f2f2;
+		z-index: 99;
+	    padding-bottom: 0px;
+		padding-top: 5px;
+	}
+	.nav-block ul li {
+		float: none;
+		margin-left: 0;
+	}
+	.nav-block ul li a {
+		padding: 10px 15px;
+		border-bottom: solid 1px #fff;
+	}
+	.nav-block ul li:last-child a {
+		border-bottom: 0px;
+	}
+	.mobiletoggle { 
+		display: inline-block;
+	}
+	.support-block .inner {
+		display: block;
+	}
+	.support-pannel {
+		min-height: 200px;
+	}
+	.testimonials-block .inner-content p {
+		font-size: 22px;
+		line-height: 30px;
+	}
+	.blog-sec-block .inner {
+		padding: 100px 15px 0px 15px;
+	}
+	.blog-sec-block .float-left {
+		margin: 0 auto;
+		margin-bottom: 40px;
+	}
+	.blog-sec-block .float-right {
+		width: 100%;
+		max-width: 100%;
+		padding: 0px;
+	}
+	.blog-sec-block .float-right .row {
+		padding: 0px;
+		margin-right: -15px;
+	}
+	.bottom-panel .card-panel, .copyright-panel, .bottom-panel .card-panel {
+		float: none;
+		width: 100%;
+	}
+	.bottom-panel .card-panel h3 {
+		text-align: center;
+	}
+	.bottom-panel .card-panel ul {
+		display: block;
+		text-align: center;
+		overflow: hidden;
+	}
+	.bottom-panel .card-panel ul li {
+		float: none;
+		display: inline-block;
+		margin: 0px 5px;
+	}
+	.copyright-panel {
+		padding: 10px 0px 10px;
+	}
+	.bottom-panel .card-panel.partner, .bottom-panel .card-panel.partner ul {
+		float: none;
+		width: 100%;
+	}
+	.footer-block .panel h2 {
+		text-align: center;
+	}
+	.footer-block .panel h2:after {
+		left: 50%;
+		transform: translate(-50%, 0%);
+	}
+	.footer-block .panel {
+		text-align: center;
+	}
+	.footer-block .panel ul {
+		display: inline-block;
+	}
+	.footer-block .social-panel ul li {
+		margin-bottom: 0;
+	}
+	.destination-panel.title h2 {
+		font-size: 30px;
+	}
+	.footer-block .social-panel ul li:first-child {
+		margin-bottom: 20px;
+	}
+}
+@media (max-width: 767px) { 
+	.blog-sec-block .float-right .row .col .inner-cnt p {
+		min-height: 1px;
+	}
+	.top-header .support-caption {
+		padding-left: 0px;
+		float: none;
+		width: 100%;
+		text-align: center;
+		border-right: 0px;
+		border-bottom: solid 1px #dddddd;
+	}
+	.top-header .social-links {
+		border-left: solid 1px #dddddd;
+	}
+	#banner-wrap .carousel-inner .item {
+		background-size: auto 100% !important;
+	}
+	.m-form .inner .box:nth-child(3) {
+		width: 100%;
+		float: none;
+		margin-top: 15px;
+	}
+	.m-form .inner .box:nth-child(1) {
+		width: 45%;
+		position: relative;
+		margin-right: 10%;
+	    margin-bottom: 15px;
+	}
+	.m-form .inner .box:nth-child(2) {
+		width: 45%;
+		margin-right: 0;
+	    margin-bottom: 15px;
+	}
+	.m-form .inner .box:nth-child(1):after {
+		right: -52px;
+	}
+	.m-form .inner .mainbutton {
+		height: 40px;
+	}
+	.caption .m-form {
+		display: none;
+	}
+	.caption.mobileshow {
+		display: block;
+		position: relative;
+		left: inherit;
+		bottom: inherit;
+		transform: inherit;
+	}
+	.caption.mobileshow .m-form {
+		display: block;
+	}
+	#banner-wrap .carousel-inner .item {
+		min-height: 540px;
+	}
+	#banner-wrap {
+		min-height: 1px;
+	}
+	.m-form .inner .box:nth-child(1):after {
+		display: none;
+	}
+}
+@media (max-width: 639px) { 
+	.m-form .inner .box:nth-child(1) {
+		float: none;
+		width: 100%;
+	}
+	.m-form .inner .box:nth-child(2) {
+		float: none;
+		width: 100%;
+	}
+}
+@media (max-width: 479px) { 
+	.top-header .social-links {
+		display: none;
+	}
+	.top-header .top-links {
+		float: none;
+		margin: 0 auto;
+		overflow: hidden;
+		border-right: solid 1px #dddddd;
+	}
+	.top-header .top-links ul li:last-child {
+		border-right: 0px;
+	}
+	.m-form .inner {
+		padding: 28px 15px 20px;
+	}
+	.testimonials-block .carousel-control.right {
+		right: -22px;
+	}
+	.testimonials-block .carousel-control.left {
+		left: -22px;
+	}
+	.testimonials-block .inner-content p {
+		font-size: 18px;
+		line-height: 22px;
+	}
+	.testimonials-block .carousel-inner {
+		padding: 0px 35px;
+	}
+	.m-logo {
+		font-size: 30px;
+		line-height: 50px;
+	}
+}
+
+@media (max-width: 359px) { 
+	h2 {
+		font-size: 28px;
+	}
+	.ours-block .title-panel h2 span {
+		font-size: 20px;
+	}
+	.top-links ul li a {
+		padding: 10px 19px;
+	}
+	
+	
+}
+
+.clear-left-side {
+    clear: left;
+}
+.clear-right-side {
+    clear: right;
+}
+
+.margin-tb5 {
+	margin-top: 5px !important;
+	margin-bottom: 5px !important;
+}
+
+.margin-lr5 {
+	margin-left: 5px !important;
+	margin-right: 5px !important;
+}
+
+.font-size-trips {
+	font-size: 14px !important;
+	font-weight: bolder !important;
+}
+
+@media (max-width: 350px) {
+	.font-size-trips {
+		font-size: 13px !important;
+	}
+}
+
+.button-txt-white a,
+.button-txt-white a:hover {
+	color: #FFF !important;
+}
+
+.hotel-panel-title {
+	font-size: 35px;
+	font-weight: 600;
+	color: #242424;
+}

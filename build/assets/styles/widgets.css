@@ -1,0 +1,33 @@
+/* WIDGETS */
+.cover-aeromex {
+  background-image: url(/assets/images/aeromexico/aeromexico-background.jpg);
+  background-size: cover;
+  background-position: top right;
+  background-repeat: no-repeat;
+  display: table;
+  width: 100%;
+  padding: 0;
+  box-shadow: inset 0 0 200px #222; 
+}
+.height-cover {
+  height: auto;
+  min-height: 100vh;
+}
+@media(max-width: 800px) {
+  .cover-aeromex {
+      background-color: #799bc4;
+      background-image: url(/assets/images/aeromexico/aeromexico-background_m.jpg);
+      background-position: bottom right;
+      background-size: contain;
+      display: table;
+      width: 100%;
+      padding: 0;
+      box-shadow: inset 0 0 100px #444;
+  }
+  .height-cover {
+      height: auto;
+      min-height: 135vh;
+  }
+}
+  
+  /* WIDGETS END */

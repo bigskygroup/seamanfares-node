@@ -1,0 +1,500 @@
+
+
+.mil-bottom-nav{background-color:#eff1f3;width:100%;box-shadow:0 2px 2px #d4c2c2}
+mil-bottom-nav .nav li a{color:#fe0303}
+.mil-bottom-nav .nav li{float:left}
+.mil-bottom-nav .nav li a:hover{color:#eee;background-color:#fe0303}
+.mil-bottom-nav a{color:#fa0303;padding:10px;display:block;line-height:30px;font-size:18px}
+.mil-bottom-nav a:hover{color:#fff;background-color:#fa0303;text-decoration:none;text-shadow:0 2px 5px #000}
+div.modal-footer {
+    background-color: #2e2e2e;
+}
+.text-link a {
+    color: #E4DBDB;
+    text-align: left;
+}
+div.modal-footer h3 {
+    color: #fff;
+    text-align: left;
+}
+.mil-pp-logos{background:url(../assets/images/mil-pp-logos.png)}
+.visa{background-position:0 0;width:48px;height:48px}
+.mst{background-position:0 -42px;width:48px;height:48px}
+.amex{background-position:0 -139px;width:48px;height:48px}
+.discover{background-position:0 -91px;width:48px;height:48px}
+.arc_logo{background-position:0 -174px;width:37px;height:68px}
+.asta_logo{background-position:0 -252px;width:76px;height:68px}
+.iata_logo{background-position:0 -363px;width:118px;height:68px}
+.us_travel_logo{background-position:0 -474px;width:110px;height:68px}
+.srf_logo{background-position:0 -441px;width:22px;height:23px}
+.drv_logo{background-position:0 -330px;width:45px;height:23px}
+.modal-footer-color ul li {
+    list-style-type: none;
+    text-align: center;
+    color: #CFB8B8;
+}
+.font-size-16{font-size:16px}
+.font-size-18{font-size:18px}
+.font-size-20{font-size:20px}
+.font-size-24{font-size:24px}
+.font-size-31{font-size:31px}
+.font-size-45{font-size:45px}
+
+.align-bottom{vertical-align:middle;vertical-align:-webkit-baseline-middle}
+.border-radius-4{border-radius:4px}
+.dropdown-menu{min-width:256px;padding:10px 14px}
+
+.wrapper-bg-mil{
+    background:url(../assets/images/skin01/mil-bg.jpg); background-size:cover;width:100%
+}
+
+.column {
+    background: #1E3EAE;
+    height: 230px;
+    display: inline-block;
+    margin: 5px;
+    text-align: center;
+    padding: 15px;
+    color: #ffffff;
+    overflow: hidden;
+}
+@media all and (max-width:768px) and (orientation:landscape){
+    .column {
+        height: 150px;
+    }
+}
+@media all and (min-width:768px) and (max-width:1024px){
+    .column {
+        height: 150px;
+    }
+}
+@media all and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape) {
+    .column {
+        height: 280px;
+    }
+}
+
+.heading {
+    font-weight: 100;
+    color: #1E3EAE;
+}
+.col-head {
+    margin-bottom: 15px;
+    font-size: 13px;
+}
+
+/* LOADER */
+
+.loader1,
+.loader1:before,
+.loader1:after {
+  border-radius: 50%;
+  width: 2.5em;
+  height: 2.5em;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation: load1 1.8s infinite ease-in-out;
+  animation: load1 1.8s infinite ease-in-out;
+}
+.loader1 {
+  color: #315e97;
+  font-size: 10px;
+  margin: 0 auto 20px auto;
+  position: relative;
+  text-indent: -9999em;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+.loader1:before,
+.loader1:after {
+  content: '';
+  position: absolute;
+  top: 0;
+}
+.loader1:before {
+  left: -3.5em;
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+.loader1:after {
+  left: 3.5em;
+}
+@-webkit-keyframes load1 {
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 2.5em 0 -1.3em;
+  }
+  40% {
+    box-shadow: 0 2.5em 0 0;
+  }
+}
+@keyframes load1 {
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 2.5em 0 -1.3em;
+  }
+  40% {
+    box-shadow: 0 2.5em 0 0;
+  }
+}
+
+.button-style1 {
+  background-color: #eeeeee;
+  color: #428bca;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 15px;
+  margin: 10px 5px;
+  transition: all 0.5s;
+}
+.button-style1:hover {
+  background-color: #e3e3e3;
+  color: #333333;
+}
+
+/* BOOTCAMP MAP */
+
+.bootcamp-map {
+  cursor:pointer;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 20px;
+  height:400px;
+  width: 100%;
+  max-width:650px;
+  background-position: center;
+  background-size: cover;
+  border-radius: 10px;
+}
+.fortbenning-map {
+  background-image:url(/assets/images/bootcamp/maps/fortbenning.png);
+}
+.fortjackson-map {
+  background-image:url(/assets/images/bootcamp/maps/fortjackson.png);
+}
+.fortleonard-map {
+  background-image:url(/assets/images/bootcamp/maps/fortleonard.png);
+}
+.fortsill-map {
+  background-image:url(/assets/images/bootcamp/maps/fortsill.png);
+}
+.parrisisland-map {
+  background-image:url(/assets/images/bootcamp/maps/parrisisland.png);
+}
+.sandiego-map {
+  background-image:url(/assets/images/bootcamp/maps/sandiego.png);
+}
+.camplejeune-map {
+  background-image:url(/assets/images/bootcamp/maps/camplejeune.png);
+}
+.camppendleton-map {
+  background-image:url(/assets/images/bootcamp/maps/camppendleton.png);
+}
+.quantico-map {
+  background-image:url(/assets/images/bootcamp/maps/quantico.png);
+}
+.greatlakes-map {
+  background-image:url(/assets/images/bootcamp/maps/greatlakes.png);
+}
+.lackland-map {
+  background-image:url(/assets/images/bootcamp/maps/lackland.png);
+}
+.capemay-map {
+  background-image:url(/assets/images/bootcamp/maps/capemay.png);
+}
+@media(max-width: 650px) {
+  .bootcamp-map {
+      margin-left:-30px;
+      margin-right:-30px;
+      height:400px;
+      width: calc(100% + 60px);
+      border-radius: 0;
+  }
+}
+
+/* BEST PRICE */
+
+.best-price-holder {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.best-price-title {
+  color: #1f41a7;
+  font-size: 20px;
+  line-height: 25px;
+  border-left: 3px solid #ed1c24;
+  padding-left: 10px;
+  margin-left: 15px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+.best-price-title span {
+  color: #ed1c24;
+  font-size: 24px;
+}
+.best-price-holder p {
+  color: #5f5f5f;
+  padding-left: 40px;
+  font-size: 14px;
+}
+.best-price-holder .best-price-p {
+  padding-left: 0px;
+}
+.best-price-holder img {
+  width: 100%;
+  max-width: 200px;
+}
+.best-price-holder .glyph-icon {
+  color: #1f41a7;
+  font-size: 25px;
+  width: 25px;
+  position: absolute;
+  left: 15px;
+  top: 10px;
+}
+.best-price-holder .coupon-code {
+  border: 3px dashed #bebebe;
+  background-color: #f0f4f7;
+  padding: 10px 15px 10px 15px;
+  border-radius: 10px;
+  font-size: 16px;
+  color: #ed1c24;
+  font-weight: bold;
+}
+.best-price-holder .margin-tb {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+#modal-best-price .modal-footer {
+  background-color: transparent !important;
+  text-align: center;
+}
+#modal-best-price .btn-primary {
+  padding: 10px;
+  width: 100px;
+  font-size: 16px;
+}
+
+.best-price-holder a {
+  text-decoration: underline;
+}
+
+/* BEST PRICE END */
+
+/*   CSS BANNER CALLUS START  */
+.banner-stripe-mil {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  width: 830px;
+  margin-left: -415px;
+  left: 50%;
+  z-index: 1000;
+}
+.banner-stripe-mil #callus-banner {
+  height: 110px !important;
+}
+.banner-stripe-mil .btn-toggle-banner-mil {
+  position: absolute;
+  cursor: pointer;
+  margin-top: 0px;
+  background-color: #B0292E;
+  color: #FFFFFF !important;
+  border-width: 0;
+  margin-left: 80px;
+  width: 25px;
+  height: 20px;
+  border-top-left-radius: 50%;
+  border-top-right-radius: 50%;
+  z-index: 101;
+  text-align: center;
+  padding: 5px 0 0 0;
+  font-size: 14px !important;
+  z-index: 1050;
+}
+.banner-stripe-mil .btn-toggle-banner-mil.glyphicon {
+  font-size: 10px !important;
+}
+.banner-stripe-mil .banner-mil {
+  position: relative;
+  background-image: url(../assets/images/callus-mil.png);
+  width: 830px;
+  height: 110px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: 1021;
+}
+.banner-stripe-mil .banner-inner-mil {
+  position: absolute;
+  background-color: transparent !important;
+  margin-top: 20px;
+  margin-left: 5px;
+  width: 820px;
+  height: 90px;
+  z-index: 1020;
+}
+.banner-stripe-mil .contact-us-mil {
+  color: #FFFFFF !important;
+  text-shadow: 1px 1px #5E5E5E;
+  text-decoration: none !important;
+  font-size: 14px !important;
+  /* font-weight: bold !important; */
+  z-index: 1051;
+}
+.banner-stripe-mil .contact-us-mil-0 {
+  position: absolute;
+  top: 40px;
+  right: 50px;
+}
+.banner-stripe-mil .contact-us-mil-1 {
+  position: absolute;
+  top: 62px;
+  right: 50px;
+}
+.banner-stripe-mil .contact-us-mil-2 {
+  position: absolute;
+  top: 84px;
+  right: 50px;
+  letter-spacing: 1px;
+}
+.banner-stripe-mil .banner-txt-small-mil {
+  position: absolute;
+  color: #DDD !important;
+  text-decoration: none !important;
+  font-size: 14px;
+  font-weight: bold !important;
+  left: 200px;
+  top: 30px;
+  z-index: 1052;
+}
+.banner-stripe-mil .banner-txt-small-mil-1 {
+  margin-left: 0;
+  margin-top: 0;
+}
+.banner-stripe-mil .banner-txt-small-mil-2 {
+  margin-left: 0;
+  margin-top: 0;
+}
+.banner-stripe-mil .banner-txt-large-mil {
+  position: absolute;
+  left: 230px;
+  top: 50px;
+  color: #FFFFFF !important;
+  text-shadow: 1px 1px #5E5E5E;
+  text-decoration: none !important;
+  font-size: 28px;
+  font-weight: bolder !important;
+  z-index: 1051;
+}
+@media(max-width: 850px) {
+  .banner-stripe-mil #callus-banner {
+      height: 125px !important;
+  }
+  .banner-stripe-mil {
+      position: relative;
+      background-color: #33b8ff;
+      width: 100%;
+      height: 125px;
+      padding-right: 0px;
+      padding-left: 0px;
+      margin-left: 0;
+      left: 0;
+  }
+  .banner-stripe-mil .btn-toggle-banner-mil {
+      display: none;
+      opacity: 0;
+  }
+  .banner-stripe-mil .banner-mil {
+      background-image: url(../assets/images/callus-mob-mil.png);
+      width: 100%;
+      height: 125px !important;
+      background-position: right;
+      background-size: cover;
+      margin: auto;
+  }
+  .banner-stripe-mil .banner-inner-mil {
+      display: none;
+      opacity: 0;
+  }
+  .banner-stripe-mil .phone-num {
+      font-size: 24px;
+      bottom: 2px;
+      right: 12px;
+  }
+  .banner-stripe-mil .banner-txt-small-mil {
+    font-size: 16px;
+    left: 60px;
+    top: 20px;
+  }
+  .banner-stripe-mil .banner-txt-small-mil-1 {
+    margin-left: 0;
+    margin-top: 0;
+  }
+  .banner-stripe-mil .banner-txt-small-mil-2 {
+    margin-left: 0;
+    margin-top: 0;
+  }
+  .banner-stripe-mil .banner-txt-large-mil {
+    left: 100px;
+    top: 35px;
+    font-size: 30px;
+  }
+  .banner-stripe-mil .contact-us-mil-0 {
+    position: absolute;
+    top: 45px;
+    right: 20px;
+  }
+  .banner-stripe-mil .contact-us-mil-1 {
+    position: absolute;
+    top: 71px;
+    right: 20px;
+  }
+  .banner-stripe-mil .contact-us-mil-2 {
+    position: absolute;
+    top: 97px;
+    right: 20px;
+  }
+}
+@media(max-width: 620px) {
+  .banner-stripe-mil .banner-mil {
+      width: 100%;
+      background-position: right;
+      background-size: cover;
+  }
+  .banner-stripe-mil .banner-txt-small-mil {
+      font-size: 14px;
+      left: 12px;
+      top: 5px;
+  }
+  .banner-stripe-mil .banner-txt-small-mil-1 {
+      margin-left: 0;
+      margin-top: 0;
+  }
+  .banner-stripe-mil .banner-txt-small-mil-2 {
+      margin-left: 0;
+      margin-top: 0;
+  }
+  .banner-stripe-mil .banner-txt-large-mil {
+      left: 12px;
+      top: 24px;
+      font-size: 22px;
+  }
+}
+@media(max-width: 420px) {
+  .banner-stripe-mil .banner-txt-small-mil {
+      display: block;
+  }
+  /* .banner-stripe-mil .banner-txt-large-mil {
+      top: 5px;
+      width: 250px;
+  } */
+}
+/*   CSS BANNER CALLUS END  */

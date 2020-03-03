@@ -1,0 +1,70 @@
+#ajax_listOfOptions,.ui-autocomplete{
+	position:absolute;
+	min-width:225px;
+	max-width:500px;
+	height:auto;
+	overflow:auto;
+	list-style:none;
+	border:1px solid #fff;
+	background-color:#fff;
+	text-align:left;
+	z-index:10000;
+	border-left-color:#d0d0d0;
+	box-shadow:.11em .2em .3em #66afe9;
+	-webkit-border-radius:7px;
+	-moz-border-radius:3px;
+	border-radius:7px;
+	margin-top:1px;
+	padding:0;
+	list-style:none;
+}
+@media (max-width:768px){
+	#ajax_listOfOptions,.ui-autocomplete{
+		width:78%;
+	}
+}
+@media (min-width:769px) and (max-width:991px){
+	#ajax_listOfOptions,.ui-autocomplete{
+		width:30%;
+	}
+}
+@media (min-width:992px) and (max-width:1200px){
+	#ajax_listOfOptions,.ui-autocomplete{
+		width:41%;
+	}
+}
+#ajax_listOfOptions div,.ui-autocomplete li{
+	margin:6px;
+	padding:1px;
+	cursor:pointer;
+}
+.ui-autocomplete li a{
+	display:block;
+}
+#ajax_listOfOptions .optionDivSelected,.ui-autocomplete .ui-state-focus {
+	background-color:#ecfcff;
+	border:0 !important;
+	color:#054597!important;
+	text-decoration:underline;
+}
+#ajax_listOfOptions_iframe{
+	background-color:#ecfcff;
+	position:absolute;
+	z-index:5;
+}
+
+.ui-autocomplete .ui-state-disabled,
+.ui-autocomplete .ui-state-focus.ui-state-disabled{
+	color: black!important;
+	background: none!important;
+	margin:6px!important;
+	padding:1px !important;
+	text-decoration: none!important;
+	cursor:not-allowed;
+}
+
+.ui-autocomplete-loading{
+	background-position: 98% center;
+	background-repeat: no-repeat;
+	background-image: url(/assets/images/input-loader.gif);
+}

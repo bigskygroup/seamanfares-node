@@ -1,0 +1,13 @@
+.border-none{border:0;border-radius:0}
+.title-landing{border-bottom:none}
+.top-description{padding: 5px 25px 30px 25px}
+.wrapper-bkg {padding-bottom: 20px}
+.flight-form-seo{background: none repeat scroll 0 0 padding-box rgba(9,44,117,.6);padding:0;border-radius:.352941em}
+.landing-img{padding:0px 10px 0px 0px;width:300px;height:215px;float:left}
+.landing-no-image{width:98%;clear:both;padding:0 25px}
+.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: none
+}
