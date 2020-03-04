@@ -120,6 +120,15 @@ app.get("/advertising.html", async (req, res) => {
 	res.render("pages/advertising.ejs", { lang: "en", t: word => t(word, titles, titles) })
 })
 
+
+// http://localhost:3070/xml.php?trip=round&D1=1&D2=0&D3=0&lang=br&a=skyscanner&multi=0&T1=BUE&T2=SCL&outdate1=2020-04-09&outhour1=12%3A00&T3=SCL&T4=BUE&outdate2=2020-04-14&outhour2=12%3A00&
+
+
+app.get(/^\/xml\.php/, (req, res) => {
+	// console.log("https://xml.sky-tours.com" + req.url)
+	res.redirect("https://xml.sky-tours.com" + req.url)
+} )
+
 app.use(/^\/[A-Za-z]{2}\/all-countries\.html\/{0,1}$/, require("./src/server/all-countries"))
 app.use(
 	[/^\/[A-Za-z]{2}-multiple-destinations.html/, /^\/[A-Za-z]{2}-round-world.html/],
