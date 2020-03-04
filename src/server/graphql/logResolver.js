@@ -102,7 +102,11 @@ r.captureResponse = ({ type, url }) => {
 
 			return { error: "" }
 		})
-		.catch(err => console.log(err))
+		.catch(err =>
+			console.error(
+				`in captureResponse in /graphql/logResolver.js >>>> error: ${err} type: ${type} url: ${url}`
+			)
+		)
 }
 
 r.findCustomer = async ({ count = 10, order, email }) => {
@@ -130,7 +134,7 @@ r.reactErrors = async ({ json }) => {
 	const trackingId = JSON.parse(json).id
 	const now = Date.now()
 
-	const lastHour = now - (1000 * 60 * 60)
+	const lastHour = now - 1000 * 60 * 60
 	const breakPoint = new Date(lastHour).toISOString()
 	const alreadyRegisterredError = await React_errors.findOne({ trackingId: trackingId })
 		.where("createdAt")
