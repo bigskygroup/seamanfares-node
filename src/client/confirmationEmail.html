@@ -18,7 +18,6 @@
 	<div style="clear: both"></div>
 
 	<div style="margin: .3em 0;">
-		<p><%= t("BOOKING_SECTION") %></p>
 		<table>
 			<% if(full_name.length === 0) { %>
 			<tr>
@@ -38,9 +37,9 @@
 		</table>
 	</div>
 
+	<p><b><%= t("BOOKING_STATUS") %></b></p>
 	<!-- multi -->
 	<% if(reach("multi") == '1' || reach("is_multi") == '1') {%>
-	<br />
 	<p><%= t("MULTI_PROTECTION") %></p>
 	<img
 		style="vertical-align:middle"
@@ -50,7 +49,7 @@
 	/>
 	<% } %>
 
-	<!-- flight 2 -->
+	<!-- flight  -->
 	<%flights.forEach( (item, i) => {%> <%- `
 	<div
 		class="flight"
