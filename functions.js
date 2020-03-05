@@ -238,10 +238,10 @@ f.createStream = (path, type) => {
 	})
 }
 f.generateName = (a, b) => {
-// return new Date(a)
-// 		.getMinutes() 
-// 		.toString()
-// 		.concat(".log")
+	// return new Date(a)
+	// 		.getMinutes()
+	// 		.toString()
+	// 		.concat(".log")
 
 	return new Date(a)
 		.toLocaleDateString()

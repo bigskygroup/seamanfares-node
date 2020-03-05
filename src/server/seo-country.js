@@ -23,7 +23,7 @@ app.get("*", async (req, res, next) => {
 	let receivedCountry = parseUrl[2].match(/-([^<>\.]*).html\/{0,1}/i)[1]
 
 	const countryObject = countries.find(item => item.code === countryCode.toUpperCase()) //Spain
-	const country = countryObject.name || ""
+	const country = countryObject && countryObject.name ? countryObject.name  : ""
 
 	let countryInUrl = cleanCityName(country)
 

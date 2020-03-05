@@ -24,14 +24,14 @@ app.get("*", async (req, res, next) => {
 
 	//code: BCN  //name: Barcelona
 	const foundObject = airports.find(item => new RegExp(airportCode, "i").test(item.code))
-	const code = foundObject.code || ""
-	const name = foundObject.name || ""
-	const cc = foundObject.cc || ""
+	const code = foundObject &&  foundObject.code ? foundObject.code : ""
+	const name = foundObject && foundObject.name ? foundObject.name: ""
+	const cc = foundObject && foundObject.cc ? foundObject.cc: ""
 
 	const nameInUrl = cleanCityName(name)
 
 	const findCountry = countries.find(item => item.code === cc)
-	const country = findCountry.name ? findCountry.name : ""
+	const country = findCountry && findCountry.name ? findCountry.name : ""
 
 	if (receivedName !== encodeURI(nameInUrl).toLowerCase()) {
 		res.redirect(`/${lang}/${code.toLowerCase().trim()}-${nameInUrl}.html`)
