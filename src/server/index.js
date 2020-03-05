@@ -11,6 +11,7 @@ app.get("*", (req, res, next) => {
 	let lang = splitedUrl[1] && splitedUrl[1].length === 2 ? splitedUrl[1] : "en"
 	lang = req.query.lang ? req.query.lang : lang
 
+console.log(splitedUrl[1], splitedUrl[2])
 
 	Promise.all([
 		getTranslation(join("build", "locales", "lang", lang + ".json")),
@@ -27,7 +28,8 @@ app.get("*", (req, res, next) => {
 				static:
 					req.baseUrl.length < 4 ||
 					(splitedUrl[1] && splitedUrl[1].match(/myreservation|viewtrip/gi)) ||
-					(splitedUrl[2] && splitedUrl[2].match(/myreservation|viewtrip/gi))
+					(splitedUrl[2] && splitedUrl[2].match(/myreservation|viewtrip/gi)) ||
+					(splitedUrl[1] && splitedUrl[1].match(/index\.php/gi)) 
 						? ejs(indexSSR)({ t: word => t(word, titles, fallBack) })
 						: "",
 				custom: `
