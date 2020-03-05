@@ -158,6 +158,9 @@ const routeToIndex = [
 
 app.use(routeToIndex, require("./src/server/index"))
 
+//all redirects
+// app.use(require("./src/server/redirects"))
+
 //handling wrong requests at the end
 app.use(require("./src/server/404"))
 const date = new Date().toLocaleString()
