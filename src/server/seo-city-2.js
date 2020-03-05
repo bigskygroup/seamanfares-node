@@ -2,7 +2,14 @@
 const express = require("express")
 const app = express.Router()
 const { join } = require("path")
-const { getTranslation, removeHTMLTags, t, rtlLangs, cleanCityName, groupHasLang } = require("../../functions") //pass paths as if you are in root folder
+const {
+	getTranslation,
+	removeHTMLTags,
+	t,
+	rtlLangs,
+	cleanCityName,
+	groupHasLang
+} = require("../../functions") //pass paths as if you are in root folder
 const { pipe, memoize } = require("f-tools")
 const airports = require("../../data/cities-condensed") //returns an array
 const countries = require("../../data/countries")
@@ -15,24 +22,29 @@ app.get("*", async (req, res, next) => {
 	const airportCode2 = parseUrl[2]
 
 	//code: BCN  //name: Barcelona
-	const { code: code1, name: name1, cc: cc1 } = airports.find(item =>
-		new RegExp(airportCode1, "i").test(item.code)
-	)
-	const { code: code2, name: name2, cc: cc2 } = airports.find(item =>
-		new RegExp(airportCode2, "i").test(item.code)
-	)
+	const fromObject = airports.find(item => new RegExp(airportCode1, "i").test(item.code))
+	const code1 = fromObject.code || ""
+	const name1 = fromObject.name || ""
+	const cc1 = fromObject.cc || ""
 
-	const { name: country1 } = countries.find(item => item.code === cc1)
-	const { name: country2 } = countries.find(item => item.code === cc2)
-	const url = `/${lang}-${code1.toLowerCase()}-${code2.toLowerCase()}-${cleanCityName(name1)}-${cleanCityName(name2)}.html`
- 
-// console.log(req.baseUrl, url)
+	const toObject = airports.find(item => new RegExp(airportCode2, "i").test(item.code))
+	const code2 = toObject.code || ""
+	const name2 = toObject.name || ""
+	const cc2 = toObject.cc || ""
+
+
+	const country1 = countries.find(item => item.code === cc1).name || ""
+	const country2 = countries.find(item => item.code === cc2).name || ""
+
+	const url = `/${lang}-${code1.toLowerCase()}-${code2.toLowerCase()}-${cleanCityName(name1)}-${cleanCityName(
+		name2
+	)}.html`
+
+	// console.log(req.baseUrl, url)
 	if (req.baseUrl.toLowerCase() !== encodeURI(url).toLowerCase()) {
 		res.redirect(cleanCityName(url))
 		return
 	}
-
-
 
 	// console.log(code1, name1, cc1, country1) //BCN Barcelona ES Spain
 	// console.log(code2, name2, cc2, country2)
@@ -93,7 +105,7 @@ app.get("*", async (req, res, next) => {
 				t: word => t(word, titles, fallBack),
 				custom: `
 						<script> 
-						${lang === "es"? sequraFn : ""}
+						${lang === "es" ? sequraFn : ""}
 								const style = document.querySelector("#content-ssr .static").style 
 								style.backgroundImage = "linear-gradient(#f7f7f7, #e6e6e6)"
 								style.paddingBottom = "50px"
@@ -114,7 +126,7 @@ app.get("*", async (req, res, next) => {
 					OG_URL: `https://${req.get("host")}${url}`,
 					_KEYWORDS: `${titles["KEYWORDS_LATEST_BOOKING"]}, ${name1}, ${country1}, ${cc1}, ${code1} ${name2}, ${country2}, ${cc2}, ${code2}`,
 					CANONICAL: `https://${req.get("host")}${url}`,
-					data_location: `'${JSON.stringify({ip: req.ip, userAgent: req.headers["user-agent"]})}'`
+					data_location: `'${JSON.stringify({ ip: req.ip, userAgent: req.headers["user-agent"] })}'`
 				}
 			})
 		})

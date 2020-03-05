@@ -149,6 +149,7 @@ const routeToIndex = [
 	/^\/book\.php.*/,
 	/^\/book-wait\.php.*/,
 	/^\/[A-Za-z]{2}\/search\/{0,1}/,
+	/^\/search\.php.*/,
 	/^\/[A-Za-z]{2}\/myreservation.*/,
 	/^\/[A-Za-z]{2}\/viewtrip.*/,
 	"/myreservation",

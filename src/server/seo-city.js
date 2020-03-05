@@ -3,31 +3,40 @@
 const express = require("express")
 const app = express.Router()
 const { join } = require("path")
-const { getTranslation, removeHTMLTags, t, rtlLangs , cleanCityName  , groupHasLang} = require("../../functions") //pass paths as if you are in root folder
+const {
+	getTranslation,
+	removeHTMLTags,
+	t,
+	rtlLangs,
+	cleanCityName,
+	groupHasLang
+} = require("../../functions") //pass paths as if you are in root folder
 const { pipe, memoize } = require("f-tools")
 const airports = require("../../data/cities-condensed") //returns an array
 const countries = require("../../data/countries")
 const sequraFn = require("../client/sequraFn")
 
-app.get("*", async (req, res, next) => {   
+app.get("*", async (req, res, next) => {
 	const parseUrl = req.baseUrl.split("/") //e.g  [ '', 'en', 'about.htm' ]
 	const lang = parseUrl[1]
 	const airportCode = parseUrl[2].split("-")[0]
 	let receivedName = cleanCityName(parseUrl[2].match(/-([^<>\.]*).html\/{0,1}/i)[1])
 
 	//code: BCN  //name: Barcelona
-	const { code, name, cc } = airports.find(item => new RegExp(airportCode, "i").test(item.code))
+	const foundObject = airports.find(item => new RegExp(airportCode, "i").test(item.code))
+	const code = foundObject.code || ""
+	const name = foundObject.name || ""
+	const cc = foundObject.cc || ""
 
 	const nameInUrl = cleanCityName(name)
 
-	const { name: country } = countries.find(item => item.code === cc)
-
+	const findCountry = countries.find(item => item.code === cc)
+	const country = findCountry.name ? findCountry.name : ""
 
 	if (receivedName !== encodeURI(nameInUrl).toLowerCase()) {
 		res.redirect(`/${lang}/${code.toLowerCase().trim()}-${nameInUrl}.html`)
 		return
 	}
-
 
 	Promise.all([
 		getTranslation(join("build", "locales", "lang", lang + ".json")),
@@ -83,7 +92,7 @@ app.get("*", async (req, res, next) => {
 				static: content,
 				t: word => t(word, titles, fallBack),
 				custom: `<script> 
-				${lang === "es"? sequraFn : ""}
+				${lang === "es" ? sequraFn : ""}
 													const style = document.querySelector("#content-ssr .static").style 
 													style.backgroundImage = "linear-gradient(#f7f7f7, #e6e6e6)"
 													style.paddingBottom = "50px"
@@ -105,7 +114,7 @@ app.get("*", async (req, res, next) => {
 					CANONICAL: `https://${req.get(
 						"host"
 					)}/${lang}/${code.toLowerCase().trim()}-${nameInUrl.toLowerCase().trim()}.html`,
-					data_location: `'${JSON.stringify({ip: req.ip, userAgent: req.headers["user-agent"]})}'`
+					data_location: `'${JSON.stringify({ ip: req.ip, userAgent: req.headers["user-agent"] })}'`
 				}
 			})
 		})
