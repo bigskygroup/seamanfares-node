@@ -11,7 +11,7 @@ app.get("*", (req, res, next) => {
 	let lang = splitedUrl[1] && splitedUrl[1].length === 2 ? splitedUrl[1] : "en"
 	lang = req.query.lang ? req.query.lang : lang
 
-console.log(splitedUrl[1], splitedUrl[2])
+
 
 	Promise.all([
 		getTranslation(join("build", "locales", "lang", lang + ".json")),
