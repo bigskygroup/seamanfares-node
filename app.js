@@ -77,13 +77,14 @@ createIndexEJS(join(__dirname, "build"))
 const airportsArray = memoize(extractToRegex(airports))
 const countriesArray = memoize(extractToRegex(countries))
 
-
 app.use(
 	"/graphql",
-	cors({origin: (reqUrl, callback) => {
-		if(/localhost:3030|localhost:3070|sky-tours\.com/gi.test(reqUrl)) callback(null, { origin: true } )
-			else callback(null, { origin: false } )
-	}}),
+	cors({
+		origin: (reqUrl, callback) => {
+			if (/localhost:3030|localhost:3070|sky-tours\.com/gi.test(reqUrl)) callback(null, { origin: true })
+			else callback(null, { origin: false })
+		}
+	}),
 	graphqlHTTP((request, response, graphQLParams) => ({
 		schema: require("./src/server/graphql/schema"),
 		rootValue: require("./src/server/graphql/resolvers"),
@@ -93,7 +94,6 @@ app.use(
 	}))
 )
 // console.log("Version control: ", Math.floor(Math.random() * 20))
-
 
 // logger defined after static to avoid static files logged:
 const accessLogStream = rfs.createStream(generateName, {
@@ -111,8 +111,6 @@ app.use(
 	})
 )
 
-
-
 // app.get("/viewtrip/*", require("./src/server/confirmationEmail"))
 // app.get("/confirmation*", require("./src/server/confirmation"))
 app.get("/advertising.html", async (req, res) => {
@@ -120,14 +118,12 @@ app.get("/advertising.html", async (req, res) => {
 	res.render("pages/advertising.ejs", { lang: "en", t: word => t(word, titles, titles) })
 })
 
-
 // http://localhost:3070/xml.php?trip=round&D1=1&D2=0&D3=0&lang=br&a=skyscanner&multi=0&T1=BUE&T2=SCL&outdate1=2020-04-09&outhour1=12%3A00&T3=SCL&T4=BUE&outdate2=2020-04-14&outhour2=12%3A00&
-
 
 app.get(/^\/xml\.php/, (req, res) => {
 	// console.log("https://xml.sky-tours.com" + req.url)
 	res.redirect("https://xml.sky-tours.com" + req.url)
-} )
+})
 
 app.use(/^\/[A-Za-z]{2}\/all-countries\.html\/{0,1}$/, require("./src/server/all-countries"))
 app.use(
@@ -150,6 +146,7 @@ const routeToIndex = [
 	/^\/book-wait\.php.*/,
 	/^\/[A-Za-z]{2}\/search\/{0,1}/,
 	/^\/search\.php.*/,
+	/^\/index\.php.*/,
 	/^\/[A-Za-z]{2}\/myreservation.*/,
 	/^\/[A-Za-z]{2}\/viewtrip.*/,
 	"/myreservation",
@@ -166,5 +163,3 @@ app.use(require("./src/server/404"))
 const date = new Date().toLocaleString()
 app.listen(PORT, console.log(`skytours-node app is listening on ${PORT} at ${date}`))
 module.exports = app
-
-

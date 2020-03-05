@@ -23,26 +23,28 @@ app.get("*", async (req, res, next) => {
 
 	//code: BCN  //name: Barcelona
 	const fromObject = airports.find(item => new RegExp(airportCode1, "i").test(item.code))
-	const code1 = fromObject.code || ""
-	const name1 = fromObject.name || ""
-	const cc1 = fromObject.cc || ""
+	const code1 = fromObject && fromObject.code ? fromObject.code : ""
+	const name1 = fromObject && fromObject.name ? fromObject.name : ""
+	const cc1 = fromObject && fromObject.cc ? fromObject.cc : ""
 
 	const toObject = airports.find(item => new RegExp(airportCode2, "i").test(item.code))
-	const code2 = toObject.code || ""
-	const name2 = toObject.name || ""
-	const cc2 = toObject.cc || ""
+	const code2 = toObject && toObject.code ? toObject.code : ""
+	const name2 = toObject && toObject.name ? toObject.name : ""
+	const cc2 = toObject && toObject.cc ? toObject.cc : ""
 
+	const lookUpCountry1 = countries.find(item => item.code === cc1)
+	const country1 = lookUpCountry1 && lookUpCountry1.name ? lookUpCountry1.name : ""
 
-	const country1 = countries.find(item => item.code === cc1).name || ""
-	const country2 = countries.find(item => item.code === cc2).name || ""
+	const lookUpCountry2 = countries.find(item => item.code === cc2)
+	const country2 = lookUpCountry2 && lookUpCountry2.name ? lookUpCountry2.name : ""
 
 	const url = `/${lang}-${code1.toLowerCase()}-${code2.toLowerCase()}-${cleanCityName(name1)}-${cleanCityName(
 		name2
 	)}.html`
 
-	// console.log(req.baseUrl, url)
+
 	if (req.baseUrl.toLowerCase() !== encodeURI(url).toLowerCase()) {
-		res.redirect(cleanCityName(url))
+		res.redirect(url)
 		return
 	}
 
