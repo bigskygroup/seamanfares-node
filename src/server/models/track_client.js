@@ -7,10 +7,7 @@ const trackClient = new Schema(
 		json: [
 			{
 				json: String,
-				date: {
-					type: Date,
-					default: Date.now()
-				}
+				date: Date
 			}
 		]
 	},

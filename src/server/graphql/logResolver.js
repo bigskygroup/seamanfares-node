@@ -167,12 +167,12 @@ r.trackClient = ({ json }) => {
 		json = JSON.parse(json)
 		if (!json.id) {
 			const log = new Track_client()
-			log.json.push({ json: JSON.stringify(json) })
+			log.json.push({ json: JSON.stringify(json), date: new Date().toISOString() })
 			return log.save().then(res => ({ id: res._id }))
 		} else {
 			return Track_client.findOne({ _id: json.id })
 				.then(res => {
-					res.json.push({ json: JSON.stringify(json) })
+					res.json.push({ json: JSON.stringify(json), date: new Date().toISOString() })
 					res.save()
 					return { id: res._id }
 				})
