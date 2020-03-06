@@ -68,6 +68,8 @@ f.createIndexEJS = folder => {
 				.replace(
 					`</body>`,
 					`<script src="/script/general.js"></script>
+					<script async type="text/javascript" src="https://secure.rezserver.com/sdk/v1/7546/client.js"></script>
+					<script src="/script/forter_beacon.js" id="836eb2229862" ></script>
 					<%- custom ? custom : '' %> </body>`
 				)
 				.replace(

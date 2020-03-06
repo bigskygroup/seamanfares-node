@@ -1,5 +1,4 @@
-< script type = "text/javascript"
-id = "836eb2229862" > (function () {
+ (function () {
     var siteId = "836eb2229862";
 
     function t(t, e) {
@@ -181,4 +180,4 @@ id = "836eb2229862" > (function () {
             n(T.mLd)
         }
     } catch (F) {}
-})() < /script>
+})() 
