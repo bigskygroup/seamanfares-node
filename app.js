@@ -120,7 +120,7 @@ app.get("/advertising.html", async (req, res) => {
 
 // http://localhost:3070/xml.php?trip=round&D1=1&D2=0&D3=0&lang=br&a=skyscanner&multi=0&T1=BUE&T2=SCL&outdate1=2020-04-09&outhour1=12%3A00&T3=SCL&T4=BUE&outdate2=2020-04-14&outhour2=12%3A00&
 
-app.get(/^\/xml\.php/, (req, res) => {
+app.get(/^\/xml\.php/, cors(), (req, res) => {
 	// console.log("https://xml.sky-tours.com" + req.url)
 	res.redirect("https://xml.sky-tours.com" + req.url)
 })
@@ -159,7 +159,7 @@ const routeToIndex = [
 app.use(routeToIndex, require("./src/server/index"))
 
 //all redirects
-// app.use(require("./src/server/redirects"))
+app.use(require("./src/server/redirects"))
 
 //handling wrong requests at the end
 app.use(require("./src/server/404"))
