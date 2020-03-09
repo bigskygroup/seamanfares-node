@@ -17,7 +17,8 @@ const {
 	morgan,
 	t,
 	getTranslation,
-	isGodIP
+	isGodIP,
+	isGodIpMiddleware
 } = require("./functions")
 const { memoize } = require("f-tools")
 const airports = require("./data/cities-condensed")
@@ -156,6 +157,9 @@ const routeToIndex = [
 ]
 
 app.use(routeToIndex, require("./src/server/index"))
+
+//html files of the order confirmation page:
+app.use(/^\/confhtml\/\d{1,10}\.html/i,  isGodIpMiddleware, require("./src/server/confhtml"))
 
 //all redirects
 app.use(require("./src/server/redirects"))

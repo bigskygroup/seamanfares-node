@@ -1,5 +1,5 @@
 // pages like https://www.sky-tours.com/en-multiple-destinations.html
-// https://www.sky-tours.com/en-multiple-destinations.html
+
 
 const express = require("express")
 const app = express.Router()
@@ -11,7 +11,6 @@ const indexSSR = require("../client/index")
 app.get("*", async (req, res, next) => {
 	const parseUrl = req.baseUrl.split("-") //e.g [ '/en', 'multiple', 'destinations.html' ]
 	const lang = parseUrl[0].match(/\w+/)[0]
-
 
 	Promise.all([
 		getTranslation(join("build", "locales", "lang", lang + ".json")),
@@ -26,7 +25,7 @@ app.get("*", async (req, res, next) => {
 
 				//if there is a variable defined in ejs, it must be supplied, although with null:
 				static: ejs(indexSSR)({ t: word => t(word, titles, fallBack) }),
-					
+
 				custom: `
 <script>
 ${lang === "es" ? sequraFn : ""}
@@ -52,7 +51,7 @@ ${groupHasLang(lang, "en", true) ? "" : `document.querySelector("#ad-with-us").s
 				}
 			})
 		})
-		.catch(err => {console.log("from src/server/multi.js: ",  err); next()})
+		.catch(err => next())
 })
 
 module.exports = app

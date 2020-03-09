@@ -322,4 +322,11 @@ f.isGodIP = ({ ip }) => {
 	return ipGods.includes(ip)
 }
 
+f.writeIfNotExist = (path, data) => fsPromise.writeFile(path, data, { encoding: "utf8", flag: "wx" })
+
+f.isGodIpMiddleware = (req, res, next) => {
+	if (f.isGodIP(req)) next()
+	else res.redirect("/404")
+}
+
 module.exports = f

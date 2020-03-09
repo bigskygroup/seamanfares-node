@@ -55,6 +55,7 @@ module.exports = buildSchema(`
 			captureResponse(type: String!, url: String!) : JSON
 			reactErrors(json: String!) : JSON
 			trackClient(json: String!) : Id!
+			storeOrderHtml(json: String!) : Id!
 		}
 				
 		schema {
