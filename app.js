@@ -3,6 +3,7 @@ const app = express()
 const { join } = require("path")
 const fs = require("fs")
 const stream = require("stream")
+const bodyParser = require('body-parser')
 const mongoose = require("mongoose")
 const rfs = require("rotating-file-stream")
 const helmet = require("helmet")
@@ -78,6 +79,7 @@ createIndexEJS(join(__dirname, "build"))
 const airportsArray = memoize(extractToRegex(airports))
 const countriesArray = memoize(extractToRegex(countries))
 
+app.use(bodyParser.json({limit: '1mb'}));
 app.use(
 	"/graphql",
 	cors({

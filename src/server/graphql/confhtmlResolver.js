@@ -5,7 +5,7 @@ const { writeIfNotExist } = require("../../../functions")
 const mkdirPromise = util.promisify(fs.mkdir)
 const r = {}
 
-r.storeOrderHtml = ({ json }) => {
+r.storeOrderHtml = ({ json }) => { 
 	json = JSON.parse(json)
 	const { order, html } = json
 
