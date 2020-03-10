@@ -3,7 +3,7 @@ const app = express()
 const { join } = require("path")
 const fs = require("fs")
 const stream = require("stream")
-const bodyParser = require('body-parser')
+const bodyParser = require("body-parser")
 const mongoose = require("mongoose")
 const rfs = require("rotating-file-stream")
 const helmet = require("helmet")
@@ -79,7 +79,7 @@ createIndexEJS(join(__dirname, "build"))
 const airportsArray = memoize(extractToRegex(airports))
 const countriesArray = memoize(extractToRegex(countries))
 
-app.use(bodyParser.json({limit: '1mb'}));
+app.use(bodyParser.json({ limit: "1mb" }))
 app.use(
 	"/graphql",
 	cors({
@@ -161,7 +161,7 @@ const routeToIndex = [
 app.use(routeToIndex, require("./src/server/index"))
 
 //html files of the order confirmation page:
-app.use(/^\/confhtml\/\d{1,10}\.html/i,  isGodIpMiddleware, require("./src/server/confhtml"))
+app.use(/^\/confhtml\/\d{1,10}\.html/i, require("./src/server/confhtml"))
 
 //all redirects
 app.use(require("./src/server/redirects"))
