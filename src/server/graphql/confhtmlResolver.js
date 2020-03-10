@@ -5,7 +5,7 @@ const { writeIfNotExist } = require("../../../functions")
 const mkdirPromise = util.promisify(fs.mkdir)
 const r = {}
 
-r.storeOrderHtml = ({ json }) => { 
+r.storeOrderHtml = ({ json }) => {
 	json = JSON.parse(json)
 	const { order, html } = json
 
@@ -15,7 +15,7 @@ r.storeOrderHtml = ({ json }) => {
 
 	// writing html files folder, from root folder:
 	const destination = join("data", "logs", "confhtml", `${order}.html`)
-	return writeIfNotExist(destination, html)
+	return writeIfNotExist(destination, html.replace('id="root"', ""))
 		.then(() => ({ id: order }))
 		.catch(async err => {
 			if (err.code === "ENOENT") {
