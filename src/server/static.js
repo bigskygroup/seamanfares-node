@@ -5,12 +5,19 @@ const app = express.Router()
 const fs = require("fs")
 const { join } = require("path")
 const f = require("f-tools")
-const { readContent, getTranslation, t, rtlLangs, readFolderFiles, morgan , groupHasLang} = require("../../functions") //pass paths as if you are in root folder
+const {
+	readContent,
+	getTranslation,
+	t,
+	rtlLangs,
+	readFolderFiles,
+	morgan,
+	groupHasLang
+} = require("../../functions") //pass paths as if you are in root folder
 const countries = require("../../data/countries")
 const sequraFn = require("../client/sequraFn")
 
 app.get("*", (req, res, next) => {
-
 	const parseUrl = req.baseUrl.split("/") //e.g  [ '', 'en', 'about.htm' ]
 	const lang = parseUrl[1]
 	const page = parseUrl[2]
@@ -22,8 +29,13 @@ app.get("*", (req, res, next) => {
 	])
 		.then(async ([titles, fallBack, languages]) => {
 			const isSiteMap = page.toLowerCase().trim() === "sitemap.htm" // true or false
+			const isLuggage = page.toLowerCase().trim() === "luggage_allowance.htm" // true or false
 			let content
 			if (isSiteMap) content = createSiteMap(titles, fallBack, lang, languages)
+			else if (isLuggage)
+				content =
+					(await readContent(join("build", "locales", "info", lang, page), "utf8")) +
+					"</td></tr></table></div>"
 			else content = await readContent(join("build", "locales", "info", lang, page), "utf8")
 
 			//remove php smarty consts and replace with locales
@@ -48,7 +60,7 @@ app.get("*", (req, res, next) => {
 				static: `<div ><div class="static">${content}</div></div>`,
 				t: word => t(word, titles, fallBack),
 				custom: `<script>
-				${lang === "es"? sequraFn : ""}
+				${lang === "es" ? sequraFn : ""}
 													const style = document.querySelector("#content-ssr .static").style
 													style.paddingTop = "50px"
 													style.paddingBottom = "50px"
@@ -110,7 +122,7 @@ function getTitle(page) {
 function createSiteMap(titles, fallBack, lang, languages) {
 	languages = languages.filter(item => item.length === 2)
 	const colSize = Math.ceil(languages.length / 4) + 1
-		const find = word => (titles[word] && titles[word] !== "null" ? titles[word] : fallBack[word])
+	const find = word => (titles[word] && titles[word] !== "null" ? titles[word] : fallBack[word])
 	const findName = code => {
 		const result = countries.find(item => item.code.toLowerCase() === code)
 
