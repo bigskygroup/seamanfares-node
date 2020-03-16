@@ -21,13 +21,13 @@ app.get("*", async (req, res, next) => {
 	const lang = parseUrl[1]
 	const airportCode = parseUrl[2].split("-")[0]
 	let receivedName = parseUrl[2].match(/-([^<>\.]*).html\/{0,1}/i)
-	receivedName = receivedName[1] ? cleanCityName(receivedName[1]) : ""
+	receivedName = receivedName && receivedName[1] ? cleanCityName(receivedName[1]) : ""
 
 	//code: BCN  //name: Barcelona
 	const foundObject = airports.find(item => new RegExp(airportCode, "i").test(item.code))
-	const code = foundObject &&  foundObject.code ? foundObject.code : ""
-	const name = foundObject && foundObject.name ? foundObject.name: ""
-	const cc = foundObject && foundObject.cc ? foundObject.cc: ""
+	const code = foundObject && foundObject.code ? foundObject.code : ""
+	const name = foundObject && foundObject.name ? foundObject.name : ""
+	const cc = foundObject && foundObject.cc ? foundObject.cc : ""
 
 	const nameInUrl = cleanCityName(name)
 

@@ -5,6 +5,10 @@ const { writeIfNotExist } = require("../../../functions")
 const mkdirPromise = util.promisify(fs.mkdir)
 const r = {}
 
+const scriptToFix = `<script defer src="https://devel5.prod.sky-tours.com/script/urlPatch.js"></script>
+</body>
+`
+
 r.storeOrderHtml = ({ json }) => {
 	json = JSON.parse(json)
 	const { order, html } = json
@@ -15,7 +19,7 @@ r.storeOrderHtml = ({ json }) => {
 
 	// writing html files folder, from root folder:
 	const destination = join("data", "logs", "confhtml", `${order}.html`)
-	return writeIfNotExist(destination, html.replace('id="root"', ""))
+	return writeIfNotExist(destination, html.replace('id="root"', "").replace("</body>", scriptToFix))
 		.then(() => ({ id: order }))
 		.catch(async err => {
 			if (err.code === "ENOENT") {
