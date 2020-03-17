@@ -14,6 +14,7 @@ const { emailUsername, emailPassword } = require("./config")
 const transport = {
   host: "127.0.0.1",
   port: 25,
+  tls: false,
   secure: false,
 
 }
