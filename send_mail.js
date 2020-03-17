@@ -16,6 +16,8 @@ const transport = {
   port: 25,
   tls: false,
   secure: false,
+  ignoreTLS : true
+
 
 }
 
