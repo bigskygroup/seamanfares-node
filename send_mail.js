@@ -11,6 +11,14 @@ const transport = {
   }
 }
 
+// const transport = {
+//  host: "94.237.56.167",
+//   port: 25,
+//   secure: false,
+
+// }
+
+
 const transporter = nodemailer.createTransport(transport)
 
 transporter.verify((error, success) => { 
