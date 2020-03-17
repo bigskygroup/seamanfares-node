@@ -36,7 +36,7 @@ transporter.verify((error, success) => {
 // test email
 const data = {
   from: "Sky-tours.com <support@sky-tours.com>",
-  to: "Mehdi test-82ask6hpl@mail-tester.com",
+  to: "Mehdi  test-ehdjwr76h@mail-tester.com",
   subject: "test",
   text: "test",
   html: "<h2>test</h2>"
