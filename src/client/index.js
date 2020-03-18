@@ -59,7 +59,7 @@ module.exports = `		<div>
 				<div class="container">
 					<div class="align-items-center justify-content-center row">
 						<div class="trust-pilot d-flex flex-grow-0 flex-column maxw400 col-lg-6 col-12" style="max-width: 430px">
-							<div class="float-left padding-tb15">
+							<div class="float-left">
 								<img
 									src="/images/trustpilot-4-stars.png"
 									alt="Trustpilot logo"
@@ -72,9 +72,7 @@ module.exports = `		<div>
 									<%= t("REVIEWS") %></button
 								>
 								</a>
-								<a href="https://www.trustpilot.com/evaluate/www.sky-tours.com" target="_blank" style="color: transparent">
-								<button type="button" class="m-2 btn btn-danger"><%= t("HOTEL_TRIPADVISOR_LEAVE_YOUR_REVIEW") %></button>
-								</a>
+								
 							</div>
 						</div>
 						<div class="col-lg-6 col-12">
