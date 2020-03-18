@@ -21,7 +21,7 @@ app.get("*", async (req, res, next) => {
 	const lang = parseUrl[1] //en
 	const countryCode = parseUrl[2].split("-")[0] //es
 	let receivedCountry = parseUrl[2].match(/-([^<>\.]*).html\/{0,1}/i)
-	receivedCountry = receivedCountry[1] ? receivedCountry[1] : ""
+	receivedCountry = receivedCountry && receivedCountry[1] ? receivedCountry[1] : ""
 	const countryObject = countries.find(item => item.code === countryCode.toUpperCase()) //Spain
 	const country = countryObject && countryObject.name ? countryObject.name : ""
 
