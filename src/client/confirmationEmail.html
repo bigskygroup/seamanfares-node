@@ -42,11 +42,13 @@
 	<% if(reach("multi") == '1' || reach("is_multi") == '1') {%>
 	<p><%= t("MULTI_PROTECTION") %></p>
 	<img
-		style="vertical-align:middle"
+		style="vertical-align:middle; margin-right: 10px"
 		alt="multi_pro"
 		title="multi_pro"
-		src="https://test.sky-tours.com/images/multi_protection.png"
-	/>
+		src="https://sky-tours.com/assets/images/multi_protection.png"
+	/><a href="https://support.sky-tours.com/en/kb/articles/the-sky-tours-multi-connection-guarantee"
+		><%= t("MORE_DETAILS") %></a
+	>
 	<% } %>
 
 	<!-- flight  -->
