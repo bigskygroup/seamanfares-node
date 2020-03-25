@@ -5,7 +5,7 @@ const { writeIfNotExist } = require("../../../functions")
 const mkdirPromise = util.promisify(fs.mkdir)
 const r = {}
 
-const scriptToFix = `<script defer src="https://devel5.prod.sky-tours.com/script/urlPatch.js"></script>
+const scriptToFix = `<script defer src="https://sky-tours.com/script/urlPatch.js"></script>
 </body>
 `
 

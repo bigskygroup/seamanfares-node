@@ -39,7 +39,8 @@
 
 	<p><b><%= t("BOOKING_STATUS") %></b></p>
 	<!-- multi -->
-	<% if(reach("multi") == '1' || reach("is_multi") == '1') {%>
+	<% if((reach("multi") == '1' || reach("is_multi") == '1') && reach("affiliate").includes("skyscanner") )
+	{%>
 	<p><%= t("MULTI_PROTECTION") %></p>
 	<img
 		style="vertical-align:middle; margin-right: 10px"
