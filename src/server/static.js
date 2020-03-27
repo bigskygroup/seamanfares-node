@@ -32,11 +32,12 @@ app.get("*", (req, res, next) => {
 			const isLuggage = page.toLowerCase().trim() === "luggage_allowance.htm" // true or false
 			let content
 			if (isSiteMap) content = createSiteMap(titles, fallBack, lang, languages)
-			else if (isLuggage)
+			else if (isLuggage) {
 				content =
 					(await readContent(join("build", "locales", "info", lang, page), "utf8")) +
 					"</td></tr></table></div>"
-			else content = await readContent(join("build", "locales", "info", lang, page), "utf8")
+					content =  content.replace(/<td>\s+flybe\s+<\/td>/ig, "<td>TUI Airways</td>").replace("https://fi-en.flybe.com/flightInfo/baggage.htm#Holdbaggage" , "https://www.tui.co.uk/destinations/info/faq/luggage-allowance").replace(/<td>\s+<a href="https:\/\/www\.flybe\.com\/cam\/initCheckIn\.do"[.\s\w=">]+<\/a>\s*<\/td>/ig, "")
+			} else content = await readContent(join("build", "locales", "info", lang, page), "utf8")
 
 			//remove php smarty consts and replace with locales
 			content = content.replace(/{\$smarty.const.(.+)}/gi, (a, b, c, e) => {
