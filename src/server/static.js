@@ -36,7 +36,7 @@ app.get("*", (req, res, next) => {
 				content =
 					(await readContent(join("build", "locales", "info", lang, page), "utf8")) +
 					"</td></tr></table></div>"
-					content =  content.replace(/<td>\s+flybe\s+<\/td>/ig, "<td>TUI Airways</td>").replace("https://fi-en.flybe.com/flightInfo/baggage.htm#Holdbaggage" , "https://www.tui.co.uk/destinations/info/faq/luggage-allowance").replace(/<td>\s+<a href="https:\/\/www\.flybe\.com\/cam\/initCheckIn\.do"[.\s\w=">]+<\/a>\s*<\/td>/ig, "")
+					content =  content.replace(/<td>\s+flybe\s+<\/td>/ig, "<td>TUI Airways</td>").replace("https://fi-en.flybe.com/flightInfo/baggage.htm#Holdbaggage" , "https://www.tui.co.uk/destinations/info/faq/luggage-allowance").replace(/<td>\s+<a href="https:\/\/www\.flybe\.com\/cam\/initCheckIn\.do"[.\s\w=">]+<\/a>\s*<\/td>/ig, "<td></td>")
 			} else content = await readContent(join("build", "locales", "info", lang, page), "utf8")
 
 			//remove php smarty consts and replace with locales
