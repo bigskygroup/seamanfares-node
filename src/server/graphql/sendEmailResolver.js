@@ -81,7 +81,7 @@ async function sendEmail(obj) {
 	// const emailTo = "mehdi@sky-tours.com"
 	const emailCc = ""
 	const emailBcc = "tickets@sky-tours.com"
-	const emailSubject = `Confirmation for Order #${obj.order}`
+	const emailSubject = `Your order #${obj.order}`
 	const emailMessageTxt = ""
 	const confirmationId = obj.order
 	const lang = obj.lang
