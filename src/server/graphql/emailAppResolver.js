@@ -52,6 +52,8 @@ r.emailApp = async ({ json }) => {
 				json: JSON.stringify(json),
 				error: error
 			}
+		default:
+			return { error: "emailType not found!" }
 	}
 }
 
