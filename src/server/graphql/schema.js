@@ -56,6 +56,7 @@ module.exports = buildSchema(`
 			reactErrors(json: String!) : JSON
 			trackClient(json: String!) : Id!
 			storeOrderHtml(json: String!) : Id!
+			emailApp(json: String! ) : JSON!
 		}
 				
 		schema {
