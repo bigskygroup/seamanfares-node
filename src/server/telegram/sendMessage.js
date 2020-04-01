@@ -5,7 +5,7 @@ const botName = "sky_8d4h_bot"
 const bot = new TelegramBot(token, {polling: true});
 
 bot.on('message', (msg) => { 
-    if(msg.text === "ping") bot.sendMessage(msg.chat.id,"pong");
+    if(msg.text.toLowerCase() === "ping") bot.sendMessage(msg.chat.id,"pong");
    
      
 });
