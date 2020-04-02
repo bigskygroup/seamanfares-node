@@ -42,7 +42,6 @@ app.get("*", async (req, res, next) => {
 		name2
 	)}.html`
 
-
 	if (req.baseUrl.toLowerCase() !== encodeURI(url).toLowerCase()) {
 		res.redirect(url)
 		return
@@ -59,6 +58,7 @@ app.get("*", async (req, res, next) => {
 			const metaTitle = `${titles["CHEAP_FLIGHTS_FROM"]}${name1} to ${name2}, ${country2} (${cc2}) ${code2}`
 			string += `<h1>${metaTitle}</h1>`
 			string += titles["SEO_CITY_CONTENT"]
+				.replace(/###\sTO_CITY\s###/g, "###TO_CITY###")
 				.replace(/###TO_CITY###/g, `${name2}, (${cc2}) ${code2}`)
 				.replace(/###FROM_CITY###/g, `${name1}, (${cc1}) ${code1}`)
 

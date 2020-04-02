@@ -47,7 +47,7 @@ app.get("*", async (req, res, next) => {
 			let string = ""
 			const metaTitle = `${titles["CHEAP_FLIGHTS_TO"]} ${name}, ${country} (${cc}) ${code}`
 			string += `<h1>${metaTitle}</h1>`
-			string += titles["SEO_CITY_CONTENT"].replace(/###TO_CITY###/g, `${name}, (${cc}) ${code}`)
+			string += titles["SEO_CITY_CONTENT"].replace(/###\sTO_CITY\s###/g, "###TO_CITY###" ).replace(/###TO_CITY###/g, `${name}, (${cc}) ${code}`)
 			string = `<div>${string}</div>`
 
 			//creating the links for airports in the same country
