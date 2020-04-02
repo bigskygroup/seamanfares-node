@@ -268,9 +268,9 @@ morgan.token("jsonLogs", function(tokens, req, res) {
 })
 f.morgan = morgan
 
-f.cleanCityName = name => {
+f.cleanCityName = name => { 
 	name = name.substring(0, name.indexOf("(")) + name.substring(name.indexOf(")") + 1)
-
+	name = f.replaceSpecialChars(name)
 	return name
 		.toLocaleLowerCase("en-US")
 		.replace(/\s|\//g, "-")
@@ -328,5 +328,27 @@ f.isGodIpMiddleware = (req, res, next) => {
 	if (f.isGodIP(req)) next()
 	else res.redirect("/404")
 }
+
+f.replaceSpecialChars = (string) =>  {
+   return string
+      .replace(/`|´|\^|~|¨|ª|º|©|®/g, "_")
+      .replace(/à|á|â|ã|ä|å|æ/g, "a")
+      .replace(/è|é|ê|ë/g, "e")
+      .replace(/ì|í|î|ĩ|ï/g, "i")
+      .replace(/ò|ó|ô|õ|ö|ø/g, "o")
+      .replace(/ù|ú|û|ű|ü|ů/g, "u")
+      .replace(/À|Á|Â|Ã|Ä|Å|Æ/g, "A")
+      .replace(/È|É|Ê|Ë/g, "E")
+      .replace(/Ì|Í|Î|Ĩ|Ï/g, "I")
+      .replace(/Ò|Ó|Ô|Õ|Ö|Ø/g, "O")
+      .replace(/Ù|Ú|Û|Ũ|Ü|Ů/g, "U")
+      .replace(/ć|ĉ|ç/g, "c")
+      .replace(/Ć|Ĉ|Ç/g, "C")
+      .replace(/ñ/g, "n")
+      .replace(/Ñ/g, "N")
+      .replace(/ý|ŷ|ÿ/g, "y")
+      .replace(/Ý|Ŷ|Ÿ/g, "Y")
+}
+
 
 module.exports = f

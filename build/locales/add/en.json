@@ -1,9 +1,26 @@
 {
+    "CORONA_PROTECTION_TITLE": "SKYTOURS CORONAVIRUS PROTECTION GUARANTEE",
+    "CORONA_PROTECTION_SUBTITLE": "Book Your Flights NOW with Peace of Mind!",
+    "CORONA_PROTECTION_TEXT_1": "In these unprecedented times, we have taken all the risk out of your future travel planning. Book your vacation <strong>NOW</strong> knowing your fare is fully protected! If you’re concerned about flight restrictions or cancellations and unable to fly to your destination you may cancel, delay, or make changes to add a new destination.",
+    "CORONA_PROTECTION_TEXT_2": "The <strong>Skytours Coronavirus Protection Guarantee</strong> is valid for bookings starting now until further notice, and is valid for 365 days from the date of your booking. This protection includes:",
+    "CORONA_PROTECTION_OPTION_0": "FREE destination change",
+    "CORONA_PROTECTION_OPTION_1": "FREE departure change",
+    "CORONA_PROTECTION_OPTION_2": "FREE date change",
+    "CORONA_PROTECTION_OPTION_3": "FREE airline or airline combination change",
+    "CORONA_PROTECTION_OPTION_4": "FREE routing change",
+    "CORONA_PROTECTION_OPTION_5": "Assisted Refund",
+    "CORONA_PROTECTION_OPTION_5_1": "We will contact the carrier(s) on your behalf and recover any available refund. We will then return the full refundable amount to you. Please realize that refunds are subject to regulations and policies of carriers. If the carrier does not adhere, we will take action on your behalf. This refund assistance is free of charge for all travelers who book with the Skytours Corona Virus Protection Guarantee. All other travelers will be charged a non-refundable fee of $25.00 USD or EUR 20.00",
+    "CORONA_PROTECTION_TEXT_3": "Take advantage of these low fares with no risk. Plan your trip now and be assured that you can postpone travel anytime within the next 365 days.",
+    "CORONA_PROTECTION_BOOK_NOW": "Book <strong>NOW</strong> with Peace of Mind at historically LOW prices!",
+
     "IMPORTANT_NOTICE_HEADER": "<strong>Travel Alert - Coronavirus-19: </strong>For all requests regarding a change or cancellation for US travel, please contact us using this <a href='https://support.sky-tours.com/en/new-ticket' target='_blank' rel='noopener noreferrer'><strong>Contact Form</strong></a>. We will reply to all requests within 24-48 hours. Our chat is temporarily disabled due to the unusual high volume of requests.<br />We are helping passengers with imminent travel first. If your trip is not within a 72 hour window, please wait to call our customer service department if possible. For additional steps that you can take now: <a href='https://support.sky-tours.com/en/kb/articles/coronavirus-disease-covid-19' target='_blank' rel='noopener noreferrer'>Find out more</a>",
 
     "FLIGHT_REQUEST_PAGE_TITLE": "Emergency Flight Request",
     "FLIGHT_REQUEST_PAGE_SUBTITLE": "fill out the form and we'll do the rest",
     "FLIGHT_REQUEST_LINK": "Let us help you get home! Click here if you are stranded outside of your home country.",
     "FLIGHT_REQUEST_TITLE": "Let our team help get you home!",
-    "FLIGHT_REQUEST_TEXT": "<p>1. Fill out our form.</p><p>2. Enter your credit card. You will ONLY be charged a fee of EUR 25/US$ 30 if we successfully find a flight.</p><p>3. Our worldwide customer support team is working around the clock to help our customers with possible alternatives. </p><p>4. If we find a flight, we will offer you one or more to choose from. Should you decline all of our suggestions, we will keep the non-refundable service fee.</p>"
+    "FLIGHT_REQUEST_TEXT": "<p>1. Fill out our form.</p><p>2. Enter your credit card. You will ONLY be charged a fee of EUR 25/US$ 30 if we successfully find a flight.</p><p>3. Our worldwide customer support team is working around the clock to help our customers with possible alternatives. </p><p>4. If we find a flight, we will offer you one or more to choose from. Should you decline all of our suggestions, we will keep the non-refundable service fee.</p>",
+
+    "READ_MORE": "Read more",
+    "CLOSE": "close"
 }
