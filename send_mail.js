@@ -12,7 +12,7 @@ const { emailUsername, emailPassword } = require("./config")
 // }
 
 const transport = { 
-  host: "94.237.56.167",
+  host: "94.237.61.10",
   port: 25,
   tls: false,
   secure: false,
@@ -34,20 +34,20 @@ transporter.verify((error, success) => {
 })
 
 // test email
-// const data = {
-//   from: "Sky-tours.com <support@sky-tours.com>",
-//   to: "Mehdi  test-ehdjwr76h@mail-tester.com",
-//   subject: "test",
-//   text: "test",
-//   html: "<h2>test</h2>"
-// }
+const data = {
+  from: "Sky-tours.com <support@sky-tours.com>",
+  to: "Mehdi   test-q3j3oy5pz@mail-tester.com",
+  subject: "test",
+  text: "test",
+  html: "<h2>test</h2>"
+}
 
-// transporter
-//   .sendMail(data)
-//   .then(res => {
-//     console.log(`✔ confirmation email sent to ${res.accepted.toString()}`)
-//   })
-//   .catch(err => console.error(`cannot update emailSent to true for order `, err))
+transporter
+  .sendMail(data)
+  .then(res => {
+    console.log(`✔ test email sent to ${res.accepted.toString()}`)
+  })
+  .catch(err => console.error(`test email fail `, err))
 
 
 
