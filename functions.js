@@ -239,7 +239,7 @@ f.createStream = (path, type) => {
 		stream.on("error", err => reject(err))
 	})
 }
-f.generateName = (a, b) => {
+f.generateName = (a, b) => { 
 	// return new Date(a)
 	// 		.getMinutes()
 	// 		.toString()
