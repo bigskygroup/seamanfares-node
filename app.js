@@ -19,7 +19,7 @@ const {
 	t,
 	getTranslation,
 	isGodIP,
-	isGodIpMiddleware
+	isGodIpMiddleware,
 } = require("./functions")
 const { memoize } = require("f-tools")
 const airports = require("./data/cities-condensed")
@@ -36,18 +36,18 @@ mongoose
 		}:27017/${dbName}`,
 		{
 			useNewUrlParser: true,
-			useUnifiedTopology: true
+			useUnifiedTopology: true,
 		}
 	)
-	.then(res => {
+	.then((res) => {
 		console.log("connected to database", dbName)
 	})
-	.catch(err => console.log("Your MongoDB setting in the app.js file is not correct. ", err))
+	.catch((err) => console.log("Your MongoDB setting in the app.js file is not correct. ", err))
 
 app.use(
 	helmet({
 		dnsPrefetchControl: false,
-		hsts: false
+		hsts: false,
 	})
 )
 // app.use(helmet.contentSecurityPolicy({
@@ -64,7 +64,7 @@ const cachOptions = {
 			// Custom Cache-Control for above files
 			res.setHeader("Cache-Control", cachPolicy)
 		}
-	}
+	},
 }
 
 app.use(express.static(join(__dirname, "build"), cachOptions))
@@ -86,14 +86,14 @@ app.use(
 		origin: (reqUrl, callback) => {
 			if (/localhost:3030|localhost:3070|sky-tours\.com/gi.test(reqUrl)) callback(null, { origin: true })
 			else callback(null, { origin: false })
-		}
+		},
 	}),
 	graphqlHTTP((request, response, graphQLParams) => ({
 		schema: require("./src/server/graphql/schema"),
 		rootValue: require("./src/server/graphql/resolvers"),
 		// graphiql: true,
 		graphiql: isGodIP(request),
-		pretty: true
+		pretty: true,
 	}))
 )
 
@@ -103,13 +103,13 @@ const accessLogStream = rfs.createStream(generateName, {
 	// intervalBoundary: false,
 	// initialRotation: false,
 	immutable: true,
-	path: join(__dirname, "data", "logs", "morgan")
+	path: join(__dirname, "data", "logs", "morgan"),
 })
 
 app.use(
 	morgan("jsonLogs", {
 		skip: () => !accessLogStream.writable, // write only if write is safe to do
-		stream: accessLogStream
+		stream: accessLogStream,
 	})
 )
 
@@ -117,7 +117,7 @@ app.use(
 // app.get("/confirmation*", require("./src/server/confirmation"))
 app.get("/advertising.html", async (req, res) => {
 	const titles = await getTranslation(join("build", "locales", "lang", "en" + ".json"))
-	res.render("pages/advertising.ejs", { lang: "en", t: word => t(word, titles, titles) })
+	res.render("pages/advertising.ejs", { lang: "en", t: (word) => t(word, titles, titles) })
 })
 
 // http://localhost:3070/xml.php?trip=round&D1=1&D2=0&D3=0&lang=br&a=skyscanner&multi=0&T1=BUE&T2=SCL&outdate1=2020-04-09&outhour1=12%3A00&T3=SCL&T4=BUE&outdate2=2020-04-14&outhour2=12%3A00&
@@ -157,7 +157,7 @@ const routeToIndex = [
 	"/viewtrip",
 	/^\/[A-Za-z]{2}\/{0,1}$/,
 	/^\/[A-Za-z]{2}\/404$/,
-	/^\/$/
+	/^\/$/,
 ]
 
 app.use(routeToIndex, require("./src/server/index"))
@@ -171,15 +171,14 @@ app.use(require("./src/server/redirects"))
 //handling wrong requests at the end
 app.use(require("./src/server/404"))
 
-
 // cron jobs
-if(dbAccessIP === "94.237.61.10" && NODE_ENV === "development") {
+if (
+	dbAccessIP === "94.237.61.10"
+	// && NODE_ENV === "development"
+) {
 	require("./src/server/telegram/sendMessage")
 	require("./src/server/crons/allCrons")
 }
-
-
-
 
 const date = new Date().toLocaleString()
 app.listen(PORT, console.log(`skytours-node app is listening on ${PORT} at ${date}`))
