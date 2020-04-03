@@ -6,10 +6,10 @@ const token = "932179659:AAECwJlr21x_O_8iBWcr90-ksTN_3T0BMxI"
 const botName = "sky_8d4h_bot"
 const bot = new TelegramBot(token, { polling: true })
 
-const admins = [121560955, 828504249]
+const admins = [121560955, 828504249, -429772334]
 
-bot.on("message", async msg => {  console.log(msg)
-	if (!admins.includes(msg.chat.id)) return
+bot.on("message", async msg => {  
+	if (!admins.includes(msg.chat.id) ) return
 
 	switch (msg.text.toLowerCase().trim()) {
 		case "ping":
@@ -37,5 +37,5 @@ bot.on("message", async msg => {  console.log(msg)
 
 // call this function with a chat id and the msg and it will send it:
 module.exports = function(id, msg) {
-	bot.sendMessage(id, msg)
+	bot.sendMessage(id, msg,  { parse_mode: "HTML" })
 }
