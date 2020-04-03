@@ -55,7 +55,7 @@ module.exports = `		<div>
 				</div>
 			</div>
 			<div class="plane-image row"></div>
-			<h1 class="padding-tb100">
+			<!--<h1 class="padding-tb100">
 				<div class="container">
 					<div class="align-items-center justify-content-center row">
 						<div class="trust-pilot d-flex flex-grow-0 flex-column maxw400 col-lg-6 col-12" style="max-width: 430px">
@@ -84,7 +84,7 @@ module.exports = `		<div>
 						</div>
 					</div>
 				</div>
-			</h1>
+			</h1>-->
 		</div>`
 
 

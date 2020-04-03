@@ -34,20 +34,20 @@ transporter.verify((error, success) => {
 })
 
 // test email
-const data = {
-  from: "Sky-tours.com <support@sky-tours.com>",
-  to: "Mehdi  mehdi@sky-tours.com",
-  subject: "test",
-  text: "test",
-  html: "<h2>test</h2>"
-}
+// const data = {
+//   from: "Sky-tours.com <support@sky-tours.com>",
+//   to: "Mehdi  mehdi@sky-tours.com",
+//   subject: "test",
+//   text: "test",
+//   html: "<h2>test</h2>"
+// }
 
-transporter
-  .sendMail(data)
-  .then(res => {
-    console.log(`✔ test email sent to ${res.accepted.toString()}`)
-  })
-  .catch(err => console.error(`test email fail `, err))
+// transporter
+//   .sendMail(data)
+//   .then(res => {
+//     console.log(`✔ test email sent to ${res.accepted.toString()}`)
+//   })
+//   .catch(err => console.error(`test email fail `, err))
 
 
 
