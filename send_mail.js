@@ -12,7 +12,7 @@ const { emailUsername, emailPassword } = require("./config")
 // }
 
 const transport = { 
-  host: "94.237.61.10",
+  host: "94.237.56.31",
   port: 25,
   tls: false,
   secure: false,
