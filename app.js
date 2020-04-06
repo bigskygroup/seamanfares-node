@@ -172,10 +172,7 @@ app.use(require("./src/server/redirects"))
 app.use(require("./src/server/404"))
 
 // cron jobs
-if (
-	dbAccessIP === "94.237.61.10"
-	// && NODE_ENV === "development"
-) {
+if (dbAccessIP === "94.237.56.31" && NODE_ENV === "production") {
 	require("./src/server/telegram/sendMessage")
 	require("./src/server/crons/allCrons")
 }

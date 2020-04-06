@@ -5,7 +5,7 @@ const { generateName, createStream } = require("../../../functions")
 const sendMessage = require("../telegram/sendMessage")
 const transporter = require("../../../send_mail")
 
-async function failTest() { 
+async function failTest() {
 	// name for the log file in use today
 	const fileName = generateName(new Date().toISOString())
 
@@ -60,13 +60,14 @@ async function failTest() {
 	total = content.length
 	startIndex = content.length
 	control = newLogs.length ? [...control, newLogs[0]] : control
-	failSample = array404.length ? [...failSample, array404[Math.floor(Math.random() * array404.length)]] : failSample
+	failSample = array404.length
+		? [...failSample, array404[Math.floor(Math.random() * array404.length)]]
+		: failSample
 
 	SiteFail.updateOne(
 		{ _id: entry._id },
 		{ total: total, startIndex: startIndex, control: control, failSample: failSample }
 	).catch((err) => console.error(err))
-
 }
 
 function alarmMessage(percent) {
@@ -77,10 +78,10 @@ function alarmMessage(percent) {
 
 function alarmEmail(percent, logs) {
 	logs = JSON.stringify(logs, null, 2)
-	
+
 	const data = {
 		from: "Sky-tours.com <support@sky-tours.com>",
-		to: "mehdi@sky-tours.com, mehdibeethoven@gmail.com",
+		to: "mehdi@sky-tours.com, eliq@sky-tours.com, darko@sky-tours.com",
 		subject: "Too many 404 pages",
 		html: `Within last 20 minutes, <b>${percent}%</b> of incoming requests on sky-tours.com have been redirected to 404 page. This can mean a failure in the app.
 	A complete log has been emailed to admins.`,
