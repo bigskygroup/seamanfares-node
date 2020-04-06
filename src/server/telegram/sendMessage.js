@@ -10,6 +10,7 @@ const admins = [121560955, 828504249, 589417804, -429772334]
 
 bot.on("message", async msg => {  
 	if (!admins.includes(msg.chat.id) ) return
+	if(!msg || !msg.text) return
 
 	switch (msg.text.toLowerCase().trim()) {
 		case "ping":
