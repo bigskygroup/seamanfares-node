@@ -6,10 +6,11 @@ const token = "932179659:AAECwJlr21x_O_8iBWcr90-ksTN_3T0BMxI"
 const botName = "sky_8d4h_bot"
 const bot = new TelegramBot(token, { polling: true })
 
-const admins = [121560955, 828504249, -429772334]
+const admins = [121560955, 828504249, 589417804, -429772334]
 
 bot.on("message", async msg => {  
 	if (!admins.includes(msg.chat.id) ) return
+	if(!msg || !msg.text) return
 
 	switch (msg.text.toLowerCase().trim()) {
 		case "ping":
