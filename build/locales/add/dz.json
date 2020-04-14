@@ -1,0 +1,38 @@
+{
+  "CORONA_PROTECTION_TITLE": "Coronavirus 100 % garantie!",
+  "CORONA_PROTECTION_SUBTITLE": "Book Your Flights NOW with Peace of Mind!",
+  "CORONA_PROTECTION_TEXT_1": "En ce temps sans précédent, nous avons pris tous les risques de la planification de votre futur voyage. Réservez vos vacances MAINTENANT, sachant que votre tarif est entièrement protégé! Si vous êtes préoccupé par les restrictions ou les annulations de vols et que vous ne pouvez pas vous rendre à votre destination, vous pouvez annuler, reporter la date ou faire des modifications pour choisir une nouvelle destination.",
+  "CORONA_PROTECTION_TEXT_2": "Sky-tours vous garantit une protection contre les effets indésirés de Coronoavirus et est valable pour les réservations débutant dès maintenant et jusqu'à nouvel ordre, valable 365 jours à compter de la date de votre réservation. Cette protection comprend:",
+  "CORONA_PROTECTION_OPTION_0": "Changement de destination GRATUIT",
+  "CORONA_PROTECTION_OPTION_0_1": "Vous pouvez modifier votre destination si le vol vers votre destination d'origine est annulé.",
+  "CORONA_PROTECTION_OPTION_1": "Changement de départ GRATUIT",
+  "CORONA_PROTECTION_OPTION_1_1": "Vous pouvez changer votre aéroport de départ pour atteindre votre destination d'origine.",
+  "CORONA_PROTECTION_OPTION_2": "Changement de date GRATUIT",
+  "CORONA_PROTECTION_OPTION_2_1": "Vous pouvez modifier votre date en cas d'annulation du vol aux dates réservées.",
+  "CORONA_PROTECTION_OPTION_3": "Changement de compagnie aérienne ou combinaison de compagnies aériennes GRATUIT",
+  "CORONA_PROTECTION_OPTION_3_1": "Vous pouvez changer pour une autre compagnie aérienne si le vol avec votre compagnie aérienne d'origine est annulé.",
+  "CORONA_PROTECTION_OPTION_4": "Changement d’itinéraire GRATUIT",
+  "CORONA_PROTECTION_OPTION_4_1": "Vous pouvez modifier votre itinéraire si celui réservé à l’origine n'est plus possible.",
+  "CORONA_PROTECTION_OPTION_5": "Remboursement assisté",
+  "CORONA_PROTECTION_OPTION_5_1": "Nous contacterons le (s) transporteur (s) en votre nom et récupérerons tout remboursement disponible. Nous vous reverserons ensuite l'intégralité du montant remboursable. Veuillez noter que les remboursements sont soumis aux réglementations et politiques des transporteurs. Si le transporteur n'adhère pas, nous prendrons des mesures en votre nom. Cette aide au remboursement est gratuite pour tous les voyageurs qui réservent avec cette garantie de protection. Tous les autres voyageurs seront facturés des frais non remboursables de 25,00 $ US (20,00 EUR)",
+
+  "CORONA_PROTECTION_TEXT_3": "Profitez de ces tarifs bas et sans risque. Planifiez votre voyage maintenant et soyez assuré que vous pouvez reporter votre voyage à tout moment au cours des 365 prochains jours.",
+  "CORONA_PROTECTION_BOOK_NOW": "Réservez MAINTENANT l'esprit tranquille à des prix historiquement BAS!",
+
+  "IMPORTANT_NOTICE_HEADER": "<strong>Travel Alert - Coronavirus-19: </strong>For all requests regarding a change or cancellation for US travel, please contact us using this <a href='https://support.sky-tours.com/en/new-ticket' target='_blank' rel='noopener noreferrer'><strong>Contact Form</strong></a>. We will reply to all requests within 24-48 hours. Our chat is temporarily disabled due to the unusual high volume of requests.<br />We are helping passengers with imminent travel first. If your trip is not within a 72 hour window, please wait to call our customer service department if possible. For additional steps that you can take now: <a href='https://support.sky-tours.com/kb/articles/285' target='_blank' rel='noopener noreferrer'>Find out more</a>",
+
+  "FLIGHT_REQUEST_PAGE_TITLE": "Emergency Flight Request",
+  "FLIGHT_REQUEST_PAGE_SUBTITLE": "fill out the form and we'll do the rest",
+  "FLIGHT_REQUEST_LINK": "Let us help you get home! Click here if you are stranded outside of your home country.",
+  "FLIGHT_REQUEST_TITLE": "Let our team help get you home!",
+  "FLIGHT_REQUEST_TEXT": "<p>1. Fill out our form.</p><p>2. Enter your credit card. You will ONLY be charged a fee of EUR 25/US$ 30 if we successfully find a flight.</p><p>3. Our worldwide customer support team is working around the clock to help our customers with possible alternatives. </p><p>4. If we find a flight, we will offer you one or more to choose from. Should you decline all of our suggestions, we will keep the non-refundable service fee.</p>",
+
+  "READ_MORE": "Read more",
+  "CLOSE": "close",
+
+  "FLIGHTS_FOUND": "flights found",
+  "NO_THANKS": "No, thanks!",
+  "SUPPORT_LEVEL": "Support Level",
+  "CHOOSE_SUPPORT_PACKAGE": "Choose the customer support package which is best for you!",
+  "KOALA": "Koala Insurance"
+}
