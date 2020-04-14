@@ -1,0 +1,37 @@
+{
+  "CORONA_PROTECTION_TITLE": "¡Garantía de Protección Coronavirus Sky-tours con el 100% de protección del pago!",
+  "CORONA_PROTECTION_SUBTITLE": "Book Your Flights NOW with Peace of Mind!",
+  "CORONA_PROTECTION_TEXT_1": "En estos tiempos sin precedentes, hemos eliminado todo el riesgo en la planificación de su viaje. ¡Reserve sus vacaciones AHORA sabiendo que su tarifa está totalmente protegido! Si le preocupan las restricciones o cancelaciones de vuelos y no puede volar a su destino, puede cancelar, retrasar o hacer cambios para viajar a un nuevo destino.",
+  "CORONA_PROTECTION_TEXT_2": "La Garantía de protección contra el coronavirus de Sky-tours es válida para reservas que comienzan ahora hasta nuevo aviso, y es válida por 365 días a partir de la fecha de su reserva. Esta protección incluye:",
+  "CORONA_PROTECTION_OPTION_0": "Cambio de destino GRATUITO",
+  "CORONA_PROTECTION_OPTION_0_1": "Puede cambiar su destino si se cancela el vuelo a su destino original.",
+  "CORONA_PROTECTION_OPTION_1": "Cambio de salida GRATUITO",
+  "CORONA_PROTECTION_OPTION_1_1": "Puede cambiar el aeropuerto de salida para llegar a su destino original.",
+  "CORONA_PROTECTION_OPTION_2": "Cambio de fecha GRATIS",
+  "CORONA_PROTECTION_OPTION_2_1": "Puede cambiar su fecha si se cancela el vuelo en las fechas reservadas.",
+  "CORONA_PROTECTION_OPTION_3": "Cambio de combinación de aerolínea o aerolínea GRATIS",
+  "CORONA_PROTECTION_OPTION_3_1": "Puede cambiar a otra aerolínea si se cancela el vuelo con la aerolínea original.",
+  "CORONA_PROTECTION_OPTION_4": "Cambio de ruta GRATUITO",
+  "CORONA_PROTECTION_OPTION_4_1": "Puede cambiar la ruta si la original reservada no está permitida.",
+  "CORONA_PROTECTION_OPTION_5": "Reembolso asistido",
+  "CORONA_PROTECTION_OPTION_5_1": "Nos pondremos en contacto con los transportistas en su nombre y recuperaremos cualquier reembolso disponible. Luego le devolveremos el monto reembolsable completo. Tenga en cuenta que los reembolsos están sujetos a las regulaciones y políticas de los transportistas. Si el transportista no se adhiere, tomaremos medidas en su nombre. Esta asistencia de reembolso es gratuita para todos los viajeros que reserven la Garantía de Protección Coronavirus Sky-tours. A todos los demás viajeros se les cobrará una tarifa no reembolsable de $US25.00 (20.00€)",
+  "CORONA_PROTECTION_TEXT_3": "Aproveche estas tarifas bajas sin riesgo. Planifique su viaje ahora y tenga la seguridad de que puede posponer el viaje en cualquier momento dentro de los próximos 365 días.",
+  "CORONA_PROTECTION_BOOK_NOW": "¡Reserve AHORA con tranquilidad a precios históricamente bajos!",
+
+  "IMPORTANT_NOTICE_HEADER": "<strong>Travel Alert - Coronavirus-19: </strong>For all requests regarding a change or cancellation for US travel, please contact us using this <a href='https://support.sky-tours.com/en/new-ticket' target='_blank' rel='noopener noreferrer'><strong>Contact Form</strong></a>. We will reply to all requests within 24-48 hours. Our chat is temporarily disabled due to the unusual high volume of requests.<br />We are helping passengers with imminent travel first. If your trip is not within a 72 hour window, please wait to call our customer service department if possible. For additional steps that you can take now: <a href='https://support.sky-tours.com/kb/articles/285' target='_blank' rel='noopener noreferrer'>Find out more</a>",
+
+  "FLIGHT_REQUEST_PAGE_TITLE": "Emergency Flight Request",
+  "FLIGHT_REQUEST_PAGE_SUBTITLE": "fill out the form and we'll do the rest",
+  "FLIGHT_REQUEST_LINK": "Let us help you get home! Click here if you are stranded outside of your home country.",
+  "FLIGHT_REQUEST_TITLE": "Let our team help get you home!",
+  "FLIGHT_REQUEST_TEXT": "<p>1. Fill out our form.</p><p>2. Enter your credit card. You will ONLY be charged a fee of EUR 25/US$ 30 if we successfully find a flight.</p><p>3. Our worldwide customer support team is working around the clock to help our customers with possible alternatives. </p><p>4. If we find a flight, we will offer you one or more to choose from. Should you decline all of our suggestions, we will keep the non-refundable service fee.</p>",
+
+  "READ_MORE": "Read more",
+  "CLOSE": "close",
+
+  "FLIGHTS_FOUND": "flights found",
+  "NO_THANKS": "No, thanks!",
+  "SUPPORT_LEVEL": "Support Level",
+  "CHOOSE_SUPPORT_PACKAGE": "Choose the customer support package which is best for you!",
+  "KOALA": "Koala Insurance"
+}

@@ -12,7 +12,7 @@ const {
 	rtlLangs,
 	readFolderFiles,
 	morgan,
-	groupHasLang
+	groupHasLang,
 } = require("../../functions") //pass paths as if you are in root folder
 const countries = require("../../data/countries")
 const sequraFn = require("../client/sequraFn")
@@ -25,23 +25,34 @@ app.get("*", (req, res, next) => {
 	Promise.all([
 		getTranslation(join("build", "locales", "lang", lang + ".json")),
 		getTranslation(join("build", "locales", "lang", "en" + ".json")),
-		readFolderFiles(join("build", "locales", "info"))
+		readFolderFiles(join("build", "locales", "info")),
 	])
 		.then(async ([titles, fallBack, languages]) => {
 			const isSiteMap = page.toLowerCase().trim() === "sitemap.htm" // true or false
 			const isLuggage = page.toLowerCase().trim() === "luggage_allowance.htm" // true or false
+			const isSupport = page.toLowerCase().trim() === "support_levels.htm" // true or false
 			let content
 			if (isSiteMap) content = createSiteMap(titles, fallBack, lang, languages)
 			else if (isLuggage) {
 				content =
 					(await readContent(join("build", "locales", "info", lang, page), "utf8")) +
 					"</td></tr></table></div>"
-					content =  content.replace(/<td>\s+flybe\s+<\/td>/ig, "<td>TUI Airways</td>").replace("https://fi-en.flybe.com/flightInfo/baggage.htm#Holdbaggage" , "https://www.tui.co.uk/destinations/info/faq/luggage-allowance").replace(/<td>\s+<a href="https:\/\/www\.flybe\.com\/cam\/initCheckIn\.do"[.\s\w=">]+<\/a>\s*<\/td>/ig, "<td></td>")
-			} else content = await readContent(join("build", "locales", "info", lang, page), "utf8")
+				content = content
+					.replace(/<td>\s+flybe\s+<\/td>/gi, "<td>TUI Airways</td>")
+					.replace(
+						"https://fi-en.flybe.com/flightInfo/baggage.htm#Holdbaggage",
+						"https://www.tui.co.uk/destinations/info/faq/luggage-allowance"
+					)
+					.replace(
+						/<td>\s+<a href="https:\/\/www\.flybe\.com\/cam\/initCheckIn\.do"[.\s\w=">]+<\/a>\s*<\/td>/gi,
+						"<td></td>"
+					)
+			} else if (isSupport) content = await readContent(join("build", "locales", "info", "en", page), "utf8")
+			else content = await readContent(join("build", "locales", "info", lang, page), "utf8")
 
 			//remove php smarty consts and replace with locales
 			content = content.replace(/{\$smarty.const.(.+)}/gi, (a, b, c, e) => {
-				const find = word => (titles[word] && titles[word] !== "null" ? titles[word] : fallBack[word])
+				const find = (word) => (titles[word] && titles[word] !== "null" ? titles[word] : fallBack[word])
 				const replacement = find(b)
 				return replacement
 			})
@@ -49,7 +60,7 @@ app.get("*", (req, res, next) => {
 			return {
 				content,
 				titles,
-				fallBack
+				fallBack,
 			}
 		})
 		.then(({ titles, fallBack, content, metaTitle }) => {
@@ -59,7 +70,7 @@ app.get("*", (req, res, next) => {
 				lang: lang,
 				//if there is a variable defined in ejs, it must be supplied, although with null:
 				static: `<div ><div class="static">${content}</div></div>`,
-				t: word => t(word, titles, fallBack),
+				t: (word) => t(word, titles, fallBack),
 				custom: `<script>
 				${lang === "es" ? sequraFn : ""}
 													const style = document.querySelector("#content-ssr .static").style
@@ -87,11 +98,11 @@ app.get("*", (req, res, next) => {
 					OG_URL: `https://${req.get("host")}${req.baseUrl}`,
 					_KEYWORDS: titles["KEYWORDS_LATEST_BOOKING"],
 					CANONICAL: `https://${req.get("host")}${req.baseUrl}`,
-					data_location: `'${JSON.stringify({ ip: req.ip, userAgent: req.headers["user-agent"] })}'`
-				}
+					data_location: `'${JSON.stringify({ ip: req.ip, userAgent: req.headers["user-agent"] })}'`,
+				},
 			})
 		})
-		.catch(err => next())
+		.catch((err) => next())
 })
 
 function getTitle(page) {
@@ -121,18 +132,18 @@ function getTitle(page) {
 }
 
 function createSiteMap(titles, fallBack, lang, languages) {
-	languages = languages.filter(item => item.length === 2)
+	languages = languages.filter((item) => item.length === 2)
 	const colSize = Math.ceil(languages.length / 4) + 1
-	const find = word => (titles[word] && titles[word] !== "null" ? titles[word] : fallBack[word])
-	const findName = code => {
-		const result = countries.find(item => item.code.toLowerCase() === code)
+	const find = (word) => (titles[word] && titles[word] !== "null" ? titles[word] : fallBack[word])
+	const findName = (code) => {
+		const result = countries.find((item) => item.code.toLowerCase() === code)
 
 		return result ? result.reach("name", "") : ""
 	}
 
-	createList = array =>
+	createList = (array) =>
 		array
-			.map(item => {
+			.map((item) => {
 				if (findName(item)) {
 					return `<a class="d-block" href="/${item}"><img src="/images/flags/${item}.gif" /> ${findName(
 						item
