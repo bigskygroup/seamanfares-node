@@ -1,0 +1,38 @@
+{
+    "CORONA_PROTECTION_TITLE": "خدمه حماية 100%  للاموال من تداعيات فيروس كورونا!",
+    "CORONA_PROTECTION_SUBTITLE": "Book Your Flights NOW with Peace of Mind!",
+    "CORONA_PROTECTION_TEXT_1": "في هذه الأوقات غير المسبوقة ، أخرجنا كل المخاطر من تخطيط سفرك المستقبلي. احجز عطلتك الآن مع العلم أن نقودك محمية بالكامل! إذا كنت قلقًا بشأن قيود الطيران أو إلغائه ولم تتمكن من السفر إلى وجهتك ، فيمكنك الإلغاء أو التأخير أو إجراء تغييرات لإضافة وجهة جديدة",
+    "CORONA_PROTECTION_TEXT_2": "يسري ضمان الحماية ضد الفيروسات كورونا  منسكاي تورز للحجوزات بدءًا من الآن وحتى إشعار آخر ، وهو صالح لمدة 365 يومًا من تاريخ الحجز. تشمل هذه الحماية:",
+    "CORONA_PROTECTION_OPTION_0": "غيير وجهة مجاني",
+     "CORONA_PROTECTION_OPTION_0_1": "يمكنك تغيير وجهتك إذا تم إلغاء الرحلة إلى وجهتك الأصلية.",
+    "CORONA_PROTECTION_OPTION_1": "تغيير المغادرة مجانًا",
+    "CORONA_PROTECTION_OPTION_1_1": "يمكنك تغيير مطار المغادرة للوصول إلى وجهتك الأصلية.",
+    "CORONA_PROTECTION_OPTION_2": "تغيير تاريخ مجاني",
+    "CORONA_PROTECTION_OPTION_2_1": "يمكنك تغيير تاريخك إذا تم إلغاء الرحلة في التواريخ المحجوزة.",
+    "CORONA_PROTECTION_OPTION_3": "تغيير شركة طيران أو خليط شركات  طيران مجاني",
+    "CORONA_PROTECTION_OPTION_3_1": "يمكنك التغيير إلى شركة طيران أخرى إذا تم إلغاء الرحلة مع شركة الطيران الأصلية الخاصة بك.",
+    "CORONA_PROTECTION_OPTION_4": "اعاده تغيير مسار الرحله",
+    "CORONA_PROTECTION_OPTION_4_1": "يمكنك تغيير مسارك إذا لم يعد المسار الأصلي المحجوز ممكنًا.",
+    "CORONA_PROTECTION_OPTION_5": "المساعده في استرداد الاموال",
+    "CORONA_PROTECTION_OPTION_5_1": "سوف نتصل بشركة الطيران نيابة عنك ونسترد أي مبلغ متاح. ثم سنعيد لك كامل المبلغ القابل للاسترداد. يرجى إدراك أن المبالغ المستردة تخضع للوائح وسياسات شركات الطيران. إذا لم يلتزم ، فسنتخذ إجراء نيابةً عنك. مساعدة استرداد الأموال هذه مجانية لجميع المسافرين الذين يحجزون مع خدمه  الحماية ضد الفيروسات .على جميع المسافرين الآخرين سيتم فرض رسوم غير قابلة للاسترداد  بقيمة 25.00 دولار أمريكي (20.00 يورو).",
+    
+    "CORONA_PROTECTION_TEXT_3": "استفاد من هذه الأسعار المخفضة بدون اي  مخاطره. خطط لرحلتك الآن وتأكد من أنه يمكنك تأجيل السفر في أي وقت خلال 365 يومًا القادمة.",
+    "CORONA_PROTECTION_BOOK_NOW": "احجز الآن براحة بال وبأسعار مخفضة!",
+
+    "IMPORTANT_NOTICE_HEADER": "<strong>Travel Alert - Coronavirus-19: </strong>For all requests regarding a change or cancellation for US travel, please contact us using this <a href='https://support.sky-tours.com/en/new-ticket' target='_blank' rel='noopener noreferrer'><strong>Contact Form</strong></a>. We will reply to all requests within 24-48 hours. Our chat is temporarily disabled due to the unusual high volume of requests.<br />We are helping passengers with imminent travel first. If your trip is not within a 72 hour window, please wait to call our customer service department if possible. For additional steps that you can take now: <a href='https://support.sky-tours.com/kb/articles/285' target='_blank' rel='noopener noreferrer'>Find out more</a>",
+
+    "FLIGHT_REQUEST_PAGE_TITLE": "Emergency Flight Request",
+    "FLIGHT_REQUEST_PAGE_SUBTITLE": "fill out the form and we'll do the rest",
+    "FLIGHT_REQUEST_LINK": "Let us help you get home! Click here if you are stranded outside of your home country.",
+    "FLIGHT_REQUEST_TITLE": "Let our team help get you home!",
+    "FLIGHT_REQUEST_TEXT": "<p>1. Fill out our form.</p><p>2. Enter your credit card. You will ONLY be charged a fee of EUR 25/US$ 30 if we successfully find a flight.</p><p>3. Our worldwide customer support team is working around the clock to help our customers with possible alternatives. </p><p>4. If we find a flight, we will offer you one or more to choose from. Should you decline all of our suggestions, we will keep the non-refundable service fee.</p>",
+
+    "READ_MORE": "Read more",
+    "CLOSE": "close",
+
+    "FLIGHTS_FOUND": "flights found",
+    "NO_THANKS": "No, thanks!",
+    "SUPPORT_LEVEL": "Support Level",
+    "CHOOSE_SUPPORT_PACKAGE": "Choose the customer support package which is best for you!",
+    "KOALA" : "Koala Insurance"
+}
