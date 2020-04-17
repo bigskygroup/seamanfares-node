@@ -34,5 +34,8 @@
     "NO_THANKS": "No, thanks!",
     "SUPPORT_LEVEL": "Support Level",
     "CHOOSE_SUPPORT_PACKAGE": "Choose the customer support package which is best for you!",
-    "KOALA" : "Koala Insurance"
+    "KOALA" : "Koala Insurance",
+    "UPSELL_SUPPORT_1": "Do you want a better support from us?",
+    "UPSELL_SUPPORT_2": "With only ---- per person you can have:",
+    "SEE_SUPPORT" : "Let me see my support options again…"
 }
