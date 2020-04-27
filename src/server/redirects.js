@@ -16,7 +16,22 @@ const with_dash = /^\/-([a-z]{2})-([a-z]{3})-([a-z]{3}).+/i
 
 const trip_to_viewtrip = /^\/trip\/get\.php/i
 //eg: /trip/get.php?rnumber=BK2JWT&tname=Kimes&lang=en
- 
+
+const unavailable_lang = /^\/[A-Za-z]{2}\/{0,1}$/i
+// eg: /zh
+
+const unavailable_lang_json = /^\/locales\/lang\/[A-Za-z]{2}\.json\/{0,1}$/i
+//eg: /locales/lang/zh.json
+
+const unavailable_lang_country = /^\/locales\/countries\/[A-Za-z]{2}\.json\/{0,1}$/i
+//eg: /locales/countries/zh.json
+
+const unavailable_lang_add = /^\/locales\/add\/[A-Za-z]{2}\.json\/{0,1}$/i
+//eg: /locales/add/zh.json
+
+const unavailable_static = /^\/[A-Za-z]{2}\/([A-Za-z_]{2,35})\.htm\/{0,1}$/i
+//eg: /zh/about.htm
+
 app.get(trip_lang_city1_city2, (req, res) => {
 	const dissect = req.originalUrl.match(trip_lang_city1_city2)
 	const lang = dissect[1]
@@ -54,6 +69,27 @@ app.get("/support", (req, res) => {
 app.get(trip_to_viewtrip, (req, res) => {
 	const { rnumber, tname, lang } = req.query
 	res.redirect(`https://viewtrip.sky-tours.com/get.php?rnumber=${rnumber}&tname=${tname}&lang=${lang}`)
+})
+
+app.get(unavailable_lang, (req, res) => {
+	res.redirect("/en")
+})
+
+app.get(unavailable_lang_json, (req, res) => {
+	res.redirect("/locales/lang/en.json")
+})
+
+app.get(unavailable_lang_country, (req, res) => {
+	res.redirect("/locales/countries/en.json")
+})
+
+app.get(unavailable_lang_add, (req, res) => {
+	res.redirect("/locales/add/en.json")
+})
+
+app.get(unavailable_static, (req, res) => {
+	const dissect = req.originalUrl.match(unavailable_static)
+	res.redirect(`/en/${dissect[1]}.htm`)
 })
 
 module.exports = app
