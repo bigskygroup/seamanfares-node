@@ -3,7 +3,6 @@
 /data/ip
 /build/locales/*
 !/build/locales/add
-!/build/locales/info/en/support_levels.htm
 /build/images/airlogos
 /data/bigfile.js
 /data/cities.js
