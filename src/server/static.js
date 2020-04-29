@@ -30,7 +30,7 @@ app.get("*", (req, res, next) => {
 		.then(async ([titles, fallBack, languages]) => {
 			const isSiteMap = page.toLowerCase().trim() === "sitemap.htm" // true or false
 			const isLuggage = page.toLowerCase().trim() === "luggage_allowance.htm" // true or false
-			const isSupport = page.toLowerCase().trim() === "support_levels.htm" // true or false
+		
 			let content
 			if (isSiteMap) content = createSiteMap(titles, fallBack, lang, languages)
 			else if (isLuggage) {
@@ -47,7 +47,7 @@ app.get("*", (req, res, next) => {
 						/<td>\s+<a href="https:\/\/www\.flybe\.com\/cam\/initCheckIn\.do"[.\s\w=">]+<\/a>\s*<\/td>/gi,
 						"<td></td>"
 					)
-			} else if (isSupport) content = await readContent(join("build", "locales", "info", "en", page), "utf8")
+			}
 			else content = await readContent(join("build", "locales", "info", lang, page), "utf8")
 
 			//remove php smarty consts and replace with locales
