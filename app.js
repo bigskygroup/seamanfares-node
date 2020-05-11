@@ -27,7 +27,7 @@ const countries = require("./data/countries")
 const { dbName, dbPassword, dbAccessIP, NODE_ENV } = require("./config.js")
 const PORT = process.env.PORT || 3070
 process.env.NODE_ENV = NODE_ENV
- 
+  
 //database connection
 mongoose
 	.connect(
