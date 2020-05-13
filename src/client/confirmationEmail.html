@@ -39,8 +39,8 @@
 
 	<p><b><%= t("BOOKING_STATUS") %></b></p>
 	<!-- multi -->
-	<% if((reach("multi") == '1' || reach("is_multi") == '1') && reach("affiliate").includes("skyscanner") )
-	{%>
+	<% if((reach("multi") == '1' || reach("is_multi") == '1') && reach("affiliate").includes("skyscanner")
+	) {%>
 	<p><%= t("MULTI_PROTECTION") %></p>
 	<img
 		style="vertical-align:middle; margin-right: 10px"
@@ -64,8 +64,21 @@
 			<p style="background-color: #d6ebf5; padding: .5em 0 .5em 2em; margin: 0 auto">
 				${item.airline} - ${item.lang_data["flight_number"]} ${item.flight_number}
 
-				<br/>
-				${item.baggage_info ? (item.lang_data.baggage_allowance + ": " + item.baggage_info.included.pc ) : "" }
+				<br />
+				${item.baggage_info ? item.lang_data.baggage_allowance + ": " +
+				Object.entries(item.baggage_info.included).reduce((acc, curr) => { if(curr[1])
+				acc += curr[1] + ", " return acc }, "") : "" }
+				<br />
+
+				${item.baggage_info.cabin.toLowerCase().trim() === "yes" &&
+				item.baggage_info.hand.toLowerCase().trim() === "yes" ? "Cabin bag included +
+				Small hand bag" : ""} 
+				${item.baggage_info.cabin.toLowerCase().trim() === "yes"
+				&& item.baggage_info.hand.toLowerCase().trim() !== "yes" ? "Cabin bag
+				included" : ""} 
+				${item.baggage_info.cabin.toLowerCase().trim() !== "yes" &&
+				item.baggage_info.hand.toLowerCase().trim() === "yes" ? "Small hand bag
+				included" : ""}
 			</p>
 			<p style=" padding: .5em 0 0 2em; margin: 0">
 				<b style="padding: 0">${t("DEPARTURE")}: </b>
@@ -113,7 +126,9 @@
 				<td style="width:40%">0</td>
 			</tr> -->
 			<tr style="height: 3em;padding-top: 1em; padding-bottom: 1em ">
-				<td style="font-weight: bold; "><%= t("TOTAL_BLOCK_PRICE") %> <%= t("PAYMENT") %>:</td>
+				<td style="font-weight: bold; ">
+					<%= t("TOTAL_BLOCK_PRICE") %> <%= t("PAYMENT") %>:
+				</td>
 				<td style=" /*border-top: .2em solid black; */ color: #38c7a3 ">
 					<%-curr%> <%-total_paid%>
 				</td>
@@ -160,10 +175,14 @@
 
 	<div class="ads" style="max-width: 90%; margin: 1em auto">
 		<a href="https://www.hotelshop.com/"
-			><img src="https://i.ibb.co/k0pCyr0/deal1.png" style="max-width: 100%; margin-top: 1em"
+			><img
+				src="https://i.ibb.co/k0pCyr0/deal1.png"
+				style="max-width: 100%; margin-top: 1em"
 		/></a>
 		<a href="https://cars.sky-tours.com/en/"
-			><img src="https://i.ibb.co/yX1cdDq/deal2.png" style="max-width: 100%;margin-top: 1em "
+			><img
+				src="https://i.ibb.co/yX1cdDq/deal2.png"
+				style="max-width: 100%;margin-top: 1em "
 		/></a>
 	</div>
 </div>
