@@ -65,9 +65,9 @@
 				${item.airline} - ${item.lang_data["flight_number"]} ${item.flight_number}
 
 				<br />
-				${item.baggage_info ? item.lang_data.baggage_allowance + ": " +
+				<!-- ${item.baggage_info ? item.lang_data.baggage_allowance + ": " +
 				Object.entries(item.baggage_info.included).reduce(function(acc, curr) { if(curr[1]) {acc += curr[1] + ", "}
-				; return acc }, "") : "" }
+				; return acc }, "") : "" } -->
 				<br />
 
 				<!-- ${item.baggage_info.cabin.toLowerCase().trim() === "yes" &&
