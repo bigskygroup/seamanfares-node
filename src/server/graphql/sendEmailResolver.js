@@ -5,6 +5,7 @@ const util = require("util")
 const Customer = require("../models/customer")
 const { ejs, readContent, getTranslation, t } = require("../../../functions")
 const transporter = require("../../../send_mail")
+const { reach } = require("f-tools")
 const r = {}
 
 // const jsonTest = JSON.stringify(require("../../client/viewtrip"))
@@ -130,8 +131,6 @@ async function sendEmail(obj) {
 
 function processFlight(obj) {
 	obj.flights = obj.flights.map((item) => {
-
-		console.log(">> item.baggage_info ", item.baggage_info)
 		item.baggageInfo = `${
 			item.baggage_info
 				? item.lang_data.baggage_allowance +
@@ -144,24 +143,35 @@ function processFlight(obj) {
 				  }, "")
 				: ""
 		}`
-console.log("** item.baggageInfo ", item.baggageInfo)
+
 		item.cabinBaggageInfo = `${
-			item.baggage_info.cabin.toLowerCase().trim() === "yes" &&
-			item.baggage_info.hand.toLowerCase().trim() === "yes"
+			reach(item, "baggage_info.cabin", "")
+				.toLowerCase()
+				.trim() === "yes" &&
+			reach(item, "baggage_info.hand", "")
+				.toLowerCase()
+				.trim() === "yes"
 				? "Cabin bag included + Small hand bag"
 				: ""
 		}${
-			item.baggage_info.cabin.toLowerCase().trim() === "yes" &&
-			item.baggage_info.hand.toLowerCase().trim() !== "yes"
+			reach(item, "baggage_info.cabin", "")
+				.toLowerCase()
+				.trim() === "yes" &&
+			reach(item, "baggage_info.hand", "")
+				.toLowerCase()
+				.trim() !== "yes"
 				? "Cabin bag included"
 				: ""
 		} ${
-			item.baggage_info.cabin.toLowerCase().trim() !== "yes" &&
-			item.baggage_info.hand.toLowerCase().trim() === "yes"
+			reach(item, "baggage_info.cabin", "")
+				.toLowerCase()
+				.trim() !== "yes" &&
+			reach(item, "baggage_info.hand", "")
+				.toLowerCase()
+				.trim() === "yes"
 				? "Small hand bag included"
 				: ""
 		}`
-		console.log("** item.cabinBaggageInfo ", item.cabinBaggageInfo)
 		return item
 	})
 
