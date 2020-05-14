@@ -65,9 +65,10 @@
 				${item.airline} - ${item.lang_data["flight_number"]} ${item.flight_number}
 
 				<br />
-				
+				${item.baggageInfo ? item.lang_data.baggage_allowance + ": " +  item.baggageInfo }
 				<br />
-
+				${item.cabinBaggageInfo }
+		
 			</p>
 			<p style=" padding: .5em 0 0 2em; margin: 0">
 				<b style="padding: 0">${t("DEPARTURE")}: </b>

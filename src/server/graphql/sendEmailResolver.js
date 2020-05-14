@@ -26,7 +26,7 @@ r.sendEmail = async ({ json }) => {
 		total_paid,
 		curr,
 		clientId,
-		reactLang
+		reactLang,
 	} = JSON.parse(json)
 	const customerInformation = {
 		data: json, // where all the information is stored as json
@@ -37,15 +37,15 @@ r.sendEmail = async ({ json }) => {
 		gross_price: gross_price || "",
 		gross_curr: gross_curr || "",
 		total_fare: total_fare ? total_fare : total_price || "",
-		total_paid: String(total_paid) || ""  ,
+		total_paid: String(total_paid) || "",
 		curr: curr || "",
 		lang: reactLang ? reactLang : "en",
-		clientId: clientId || ""
+		clientId: clientId || "",
 	}
 
 	//error handling:
 	let error = ""
-	Object.entries(customerInformation).forEach(item => {
+	Object.entries(customerInformation).forEach((item) => {
 		if (item[1] === "") error += `${item[0]} field was empty. \n`
 	})
 
@@ -57,7 +57,7 @@ r.sendEmail = async ({ json }) => {
 		return {
 			id: order,
 			json: json,
-			error: error
+			error: error,
 		}
 	}
 	const newCustomer = new Customer(customerInformation)
@@ -69,7 +69,7 @@ r.sendEmail = async ({ json }) => {
 	return {
 		id: order,
 		json: json,
-		error: error
+		error: error,
 	}
 }
 
@@ -90,16 +90,17 @@ async function sendEmail(obj) {
 	Promise.all([
 		getTranslation(join("build", "locales", "lang", lang + ".json")),
 		getTranslation(join("build", "locales", "lang", "en" + ".json")),
-		readContent(join("src", "client", "confirmationEmail.html"), "utf8")
+		readContent(join("src", "client", "confirmationEmail.html"), "utf8"),
 	])
 		.then(([titles, fallBack, template]) => {
-			const allData = { ...JSON.parse(obj.data), ...obj }
+			const flightsData = processFlight(JSON.parse(obj.data))
+			const allData = { ...flightsData, ...obj }
 
 			const emailMessageHtml = ejs(template)({
 				...allData,
-				t: word => t(word, titles, fallBack),
+				t: (word) => t(word, titles, fallBack),
 				// a safe way to access object properties for EJS, if does not exist, it will not throw an error
-				reach: property => (allData[property] !== undefined ? allData[property] : null)
+				reach: (property) => (allData[property] !== undefined ? allData[property] : null),
 			})
 
 			return {
@@ -109,22 +110,59 @@ async function sendEmail(obj) {
 				bcc: emailBcc,
 				subject: emailSubject,
 				text: emailMessageTxt,
-				html: emailMessageHtml
+				html: emailMessageHtml,
 			}
 		})
-		.then(async data => {
+		.then(async (data) => {
 			// fs.writeFileSync("./test.html", data.html)
-			await transporter.sendMail(data).then(res => {
+			await transporter.sendMail(data).then((res) => {
 				console.log(`✔ confirmation email sent to ${res.accepted.toString()}`)
 
 				// set the emailSent field true in database
 				Customer.updateOne({ order: obj.order }, { emailSent: true })
-					.then(res => res)
-					.catch(err => console.error(`cannot update emailSent to true for order ${obj.order}`, err))
+					.then((res) => res)
+					.catch((err) => console.error(`cannot update emailSent to true for order ${obj.order}`, err))
 			})
 		})
 
-		.catch(err => console.error(`✘ confirmation email fail to ${emailTo} , ${err}`))
+		.catch((err) => console.error(`✘ confirmation email fail to ${emailTo} , ${err}`))
+}
+
+function processFlight(obj) {
+	obj.flights = obj.flights.map((item) => {
+		item.baggageInfo = `${
+			item.baggage_info
+				? item.lang_data.baggage_allowance +
+				  ": " +
+				  Object.entries(item.baggage_info.included).reduce(function(acc, curr) {
+						if (curr[1]) {
+							acc += curr[1] + ", "
+						}
+						return acc
+				  }, "")
+				: ""
+		}`
+
+		item.cabinBaggageInfo = `${
+			item.baggage_info.cabin.toLowerCase().trim() === "yes" &&
+			item.baggage_info.hand.toLowerCase().trim() === "yes"
+				? "Cabin bag included + Small hand bag"
+				: ""
+		} ${
+			item.baggage_info.cabin.toLowerCase().trim() === "yes" &&
+			item.baggage_info.hand.toLowerCase().trim() !== "yes"
+				? "Cabin bag included"
+				: ""
+		}  ${
+			item.baggage_info.cabin.toLowerCase().trim() !== "yes" &&
+			item.baggage_info.hand.toLowerCase().trim() === "yes"
+				? "Small hand bag included"
+				: ""
+		}`
+		return item
+	})
+
+	return obj
 }
 
 module.exports = r
