@@ -66,8 +66,8 @@
 
 				<br />
 				${item.baggage_info ? item.lang_data.baggage_allowance + ": " +
-				Object.entries(item.baggage_info.included).reduce((acc, curr) => { if(curr[1])
-				acc += curr[1] + ", "; return acc }, "") : "" }
+				Object.entries(item.baggage_info.included).reduce(function(acc, curr) { if(curr[1]) {acc += curr[1] + ", "}
+				; return acc }, "") : "" }
 				<br />
 
 				<!-- ${item.baggage_info.cabin.toLowerCase().trim() === "yes" &&
