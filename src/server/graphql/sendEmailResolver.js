@@ -144,8 +144,8 @@ function processFlight(obj) {
 				: ""
 		}`
 
-		item.baggage_info.cabin = reach(item, "baggage_info.cabin", "")  === null ? "" : item.baggage_info.cabin
-		item.baggage_info.hand = reach(item, "baggage_info.hand", "") === null ?  "" : item.baggage_info.hand
+		item.baggage_info.cabin = reach(item, "baggage_info.cabin", "") === null ? "" : item.baggage_info.cabin
+		item.baggage_info.hand = reach(item, "baggage_info.hand", "") === null ? "" : item.baggage_info.hand
 		item.cabinBaggageInfo = `${
 			reach(item, "baggage_info.cabin", "")
 				.toLowerCase()
