@@ -65,20 +65,9 @@
 				${item.airline} - ${item.lang_data["flight_number"]} ${item.flight_number}
 
 				<br />
-				<!-- ${item.baggage_info ? item.lang_data.baggage_allowance + ": " +
-				Object.entries(item.baggage_info.included).reduce(function(acc, curr) { if(curr[1]) {acc += curr[1] + ", "}
-				; return acc }, "") : "" } -->
+				
 				<br />
 
-				<!-- ${item.baggage_info.cabin.toLowerCase().trim() === "yes" &&
-				item.baggage_info.hand.toLowerCase().trim() === "yes" ? "Cabin bag included +
-				Small hand bag" : ""} 
-				${item.baggage_info.cabin.toLowerCase().trim() === "yes"
-				&& item.baggage_info.hand.toLowerCase().trim() !== "yes" ? "Cabin bag
-				included" : ""} 
-				${item.baggage_info.cabin.toLowerCase().trim() !== "yes" &&
-				item.baggage_info.hand.toLowerCase().trim() === "yes" ? "Small hand bag
-				included" : ""} -->
 			</p>
 			<p style=" padding: .5em 0 0 2em; margin: 0">
 				<b style="padding: 0">${t("DEPARTURE")}: </b>
