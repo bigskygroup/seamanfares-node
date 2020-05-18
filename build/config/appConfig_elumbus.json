@@ -1,7 +1,7 @@
 {
     "prod" : {
         "cabinClass"    : false,
-        "showCars"      : true
+        "showCars"      : false
     },
     "devel" : {
         "cabinClass"    : true,
