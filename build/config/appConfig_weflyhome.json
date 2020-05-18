@@ -1,0 +1,14 @@
+{
+    "prod" : {
+        "cabinClass"    : false,
+        "showCars"      : true
+    },
+    "devel" : {
+        "cabinClass"    : true,
+        "showCars"      : true
+    },
+    "local" : {
+        "cabinClass"    : true,
+        "showCars"      : true
+    }
+}
