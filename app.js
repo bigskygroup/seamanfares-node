@@ -25,7 +25,7 @@ const { memoize } = require("f-tools")
 const airports = require("./data/cities-condensed")
 const countries = require("./data/countries")
 const { dbName, dbPassword, dbAccessIP, NODE_ENV } = require("./config.js")
-const PORT = process.env.PORT || 3073
+const PORT = process.env.PORT || 3075
 process.env.NODE_ENV = NODE_ENV
   
 //database connection
@@ -84,7 +84,7 @@ app.use(
 	"/graphql",
 	cors({
 		origin: (reqUrl, callback) => {
-			if (/localhost:3030|localhost:3070|sky-tours\.com/gi.test(reqUrl)) callback(null, { origin: true })
+			if (/localhost:3030|localhost:3075|sky-tours\.com/gi.test(reqUrl)) callback(null, { origin: true })
 			else callback(null, { origin: false })
 		},
 	}),
