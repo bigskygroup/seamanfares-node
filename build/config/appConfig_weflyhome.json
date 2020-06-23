@@ -1,14 +1,23 @@
 {
     "prod" : {
         "cabinClass"    : false,
-        "showCars"      : false
+        "showCars"      : false,
+        "tagManager"    : false,
+        "regula"        : true,
+        "upa"           : false
     },
     "devel" : {
-        "cabinClass"    : true,
-        "showCars"      : true
+        "cabinClass"    : false,
+        "showCars"      : false,
+        "tagManager"    : false,
+        "regula"        : false,
+        "upa"           : false
     },
     "local" : {
-        "cabinClass"    : true,
-        "showCars"      : true
+        "cabinClass"    : false,
+        "showCars"      : false,
+        "tagManager"    : false,
+        "regula"        : false,
+        "upa"           : false
     }
 }

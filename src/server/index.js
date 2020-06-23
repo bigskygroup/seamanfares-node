@@ -24,12 +24,13 @@ app.get("*", (req, res, next) => {
 
 				//if there is a variable defined in ejs, it must be supplied, although with null:
 				static:
-					req.baseUrl.length < 4 ||
-					(splitedUrl[1] && splitedUrl[1].match(/myreservation|viewtrip/gi)) ||
-					(splitedUrl[2] && splitedUrl[2].match(/myreservation|viewtrip/gi)) ||
-					(splitedUrl[1] && splitedUrl[1].match(/index\.php/gi))
-						? ejs(indexSSR)({ t: word => t(word, titles, fallBack) })
-						: "",
+					// req.baseUrl.length < 4 ||
+					// (splitedUrl[1] && splitedUrl[1].match(/myreservation|viewtrip/gi)) ||
+					// (splitedUrl[2] && splitedUrl[2].match(/myreservation|viewtrip/gi)) ||
+					// (splitedUrl[1] && splitedUrl[1].match(/index\.php/gi))
+					// 	? ejs(indexSSR)({ t: word => t(word, titles, fallBack) })
+					// 	: 
+						"",
 				custom: `
 <script>
 ${lang === "es" ? sequraFn : ""}
