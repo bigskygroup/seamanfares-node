@@ -1,4 +1,4 @@
-test14
+test15
 ## Connection to mongodb
 In order to connect to the mongodb, the credentials for it should be configured in config.js first.
 
