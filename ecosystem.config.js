@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: "app",
+      name: "app-seamenfares",
       script: "app.js",
       // pid: "./data/logs/",
       maxRestarts: 2,
